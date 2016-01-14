@@ -1,5 +1,7 @@
 package lepartycious.daos.implementations;
 
+import java.util.Optional;
+
 import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
@@ -25,5 +27,11 @@ public class UserDAOImpl extends BaseDAOImpl implements UserDAO {
 
 	private Class<User> getDataClass(){
 		return User.class;
+	}
+
+	@Override
+	public Optional<User> findOneByEmail(String email) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
