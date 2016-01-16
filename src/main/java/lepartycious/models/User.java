@@ -1,6 +1,9 @@
 package lepartycious.models;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -13,43 +16,57 @@ import javax.validation.constraints.Size;
 public class User {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false, updatable = false)
+    private Long id;
 
-	@NotNull
-	@Size(min = 3, max = 80)
-	private String email;
+    @Column(name = "email", nullable = false, unique = true)
+    private String email;
 
-	@NotNull
-	@Size(min = 2, max = 80)
-	private String name;
+    @Column(name = "password_hash", nullable = false)
+    private String passwordHash;
 
-	public User() { }
+    @Column(name = "role", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
-	public User(long id) { 
-		this.id = id;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public User(String email, String name) {
-		this.email = email;
-		this.name = name;
-	}
+    public String getEmail() {
+        return email;
+    }
 
-	public String getEmail() {
-		return email;
-	}
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    public String getPasswordHash() {
+        return passwordHash;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public void setPasswordHash(String passwordHash) {
+        this.passwordHash = passwordHash;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", email='" + email.replaceFirst("@.*", "@***") +
+                ", passwordHash='" + passwordHash.substring(0, 10) +
+                ", role=" + role +
+                '}';
+    }
 
 
 }
