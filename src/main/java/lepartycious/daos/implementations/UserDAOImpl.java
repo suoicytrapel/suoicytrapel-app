@@ -1,13 +1,13 @@
 package lepartycious.daos.implementations;
 
+import lepartycious.daos.UserDAO;
+import lepartycious.models.User;
+
 import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
-import lepartycious.daos.UserDAO;
-import lepartycious.models.User;
 
 @Repository
 public class UserDAOImpl extends BaseDAOImpl implements UserDAO {
@@ -26,4 +26,5 @@ public class UserDAOImpl extends BaseDAOImpl implements UserDAO {
 	private Class<User> getDataClass(){
 		return User.class;
 	}
+
 }

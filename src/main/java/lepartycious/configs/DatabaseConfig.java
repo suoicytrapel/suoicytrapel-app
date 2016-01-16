@@ -1,10 +1,13 @@
 package lepartycious.configs;
 
+import java.util.EnumSet;
 import java.util.Properties;
 
+import javax.servlet.DispatcherType;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.embedded.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
@@ -70,6 +73,15 @@ public class DatabaseConfig {
         new HibernateTransactionManager();
     transactionManager.setSessionFactory(sessionFactory().getObject());
     return transactionManager;
+  }
+  
+  @Bean
+  public FilterRegistrationBean shallowEtagHeaderFilter() {
+      FilterRegistrationBean registration = new FilterRegistrationBean();
+      registration.setFilter(new CORSFilter());
+      registration.setDispatcherTypes(EnumSet.allOf(DispatcherType.class));
+      registration.addUrlPatterns("/*");
+      return registration;
   }
 
 }
