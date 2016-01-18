@@ -6,6 +6,8 @@ import java.util.Properties;
 import javax.servlet.DispatcherType;
 import javax.sql.DataSource;
 
+import liquibase.integration.spring.SpringLiquibase;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.embedded.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
@@ -63,7 +65,6 @@ public class DatabaseConfig {
     hibernateProperties.put("hibernate.show_sql", HIBERNATE_SHOW_SQL);
     hibernateProperties.put("hibernate.hbm2ddl.auto", HIBERNATE_HBM2DDL_AUTO);
     sessionFactoryBean.setHibernateProperties(hibernateProperties);
-    
     return sessionFactoryBean;
   }
 
@@ -82,6 +83,16 @@ public class DatabaseConfig {
       registration.setDispatcherTypes(EnumSet.allOf(DispatcherType.class));
       registration.addUrlPatterns("/*");
       return registration;
+  }
+  
+  @Bean
+  public SpringLiquibase liquibase() {
+      SpringLiquibase liquibase = new SpringLiquibase();
+      //LiquibaseProperties properties = new LiquibaseProperties();
+      liquibase.setChangeLog("classpath:/db/changelog/master-changelog.xml");
+      liquibase.setDataSource(dataSource());
+      liquibase.setShouldRun(true);
+      return liquibase;
   }
 
 }
