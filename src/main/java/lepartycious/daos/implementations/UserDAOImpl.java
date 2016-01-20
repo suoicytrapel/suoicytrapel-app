@@ -1,15 +1,15 @@
 package lepartycious.daos.implementations;
 
-import java.util.Optional;
+import java.util.List;
+
+import lepartycious.daos.UserDAO;
+import lepartycious.models.Caterer;
+import lepartycious.models.Venue;
 
 import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
-import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
-import lepartycious.daos.UserDAO;
-import lepartycious.models.User;
 
 @Repository
 public class UserDAOImpl extends BaseDAOImpl implements UserDAO {
@@ -18,20 +18,17 @@ public class UserDAOImpl extends BaseDAOImpl implements UserDAO {
 	private SessionFactory sessionFactory;
 
 	@Override
-	public User loadUserByUsername(String username) {
-		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(getDataClass());
-		criteria.add(Restrictions.eq("email", username));
-		User user = (User) criteria.list().get(0);
-		return user;
-	}
-
-	private Class<User> getDataClass(){
-		return User.class;
+	public List<Venue> getVenue() {
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Venue.class);
+		List ls =  criteria.list();
+		return ls;
 	}
 
 	@Override
-	public Optional<User> findOneByEmail(String email) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Caterer> getCaterer() {
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Caterer.class);
+		List ls =  criteria.list();
+		return ls;
 	}
+
 }

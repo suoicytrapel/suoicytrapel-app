@@ -1,15 +1,100 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<databaseChangeLog
-  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
-         
-	<changeSet author="msingla" id="1.1">
-        <createTable tableName="cart">
-            <column name="id" type="bigserial"/>
-            <column name="desc" type="varchar(255)"/>
-        </createTable>
-    </changeSet>
+
+	<changeSet author="msingla" id="1.0">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<sequenceExists sequenceName="hibernate_sequence" />
+			</not>
+		</preConditions>
+		<sql>
+			CREATE SEQUENCE hibernate_sequence START 1;
+		</sql>
+	</changeSet>
+
+	<!-- <changeSet author="msingla" id="1.1">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<tableExists tableName="city" />
+			</not>
+		</preConditions>
+		<sql>
+			CREATE TABLE city (
+			id bigint PRIMARY KEY,
+			name varchar (25) NOT
+			NULL,
+			state varchar (25),
+			added_on timestamp without time zone NOT NULL
+			DEFAULT now()
+			);
+		</sql>
+	</changeSet> -->
+
+	<changeSet author="msingla" id="1.2">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<tableExists tableName="attachment" />
+			</not>
+		</preConditions>
+		<sql>
+			CREATE TABLE attachment (
+			id bigint PRIMARY KEY,
+			name varchar (25)
+			NOT NULL,
+			image_url varchar (255),
+			entity_id bigint,
+			added_on timestamp,
+			version bigint,
+			without time zone NOT NULL DEFAULT now()
+			);
+		</sql>
+	</changeSet>
+
+	<changeSet author="msingla" id="1.3">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<tableExists tableName="caterer" />
+			</not>
+		</preConditions>
+		<sql>
+			CREATE TABLE caterer (
+			id bigint PRIMARY KEY,
+			name varchar (25) NOT
+			NULL,
+			description varchar (255),
+			comments varchar (3000),
+			rating float,
+			version bigint,
+			added_on timestamp without time zone NOT NULL DEFAULT
+			now()
+			);
+		</sql>
+	</changeSet>
+
+	<changeSet author="msingla" id="1.4">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<tableExists tableName="venue" />
+			</not>
+		</preConditions>
+		<sql>
+			CREATE TABLE venue (
+			id bigint PRIMARY KEY,
+			name varchar (255) NOT
+			NULL,
+			description varchar (255),
+			type varchar(20) NOT NULL,
+			comments varchar (3000),
+			rating float,
+			version bigint,
+			added_on timestamp without time
+			zone NOT NULL DEFAULT now()
+			);
+		</sql>
+	</changeSet>
+
 </databaseChangeLog>

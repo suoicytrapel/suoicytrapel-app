@@ -7,6 +7,18 @@
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
          
 	<changeSet author="msingla" id="1.1">
-        <sql>insert into cart values (1, 'Description');</sql>
+        <sql>insert into venue (id, name, description, type, comments, rating, added_on) values ((select nextval('hibernate_sequence')), 'Sample', 'descript', 'PALACE', 'Comment', '4.5', now());</sql>
+    </changeSet>
+    
+    <changeSet author="msingla" id="1.2">
+        <sql>insert into attachment (id, name, image_url, entity_id, added_on) values ((select nextval('hibernate_sequence')), 'Sample', 'sample url', (select id from venue where name = 'Sample'), now());</sql>
+    </changeSet>
+    
+    <changeSet author="msingla" id="1.3">
+        <sql>insert into caterer (id, name, description, comments, rating, added_on) values ((select nextval('hibernate_sequence')), 'Sample', 'descript', 'Comment', '4.5', now());</sql>
+    </changeSet>
+    
+    <changeSet author="msingla" id="1.4">
+        <sql>insert into attachment (id, name, image_url, entity_id, added_on) values ((select nextval('hibernate_sequence')), 'Sample', 'sample url', (select id from caterer where name = 'Sample'), now());</sql>
     </changeSet>
 </databaseChangeLog>

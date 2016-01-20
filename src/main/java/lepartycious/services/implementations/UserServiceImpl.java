@@ -1,11 +1,15 @@
 package lepartycious.services.implementations;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import java.util.ArrayList;
+import java.util.List;
 
 import lepartycious.daos.UserDAO;
-import lepartycious.models.User;
+import lepartycious.models.Caterer;
+import lepartycious.models.Venue;
 import lepartycious.services.UserService;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 @Service
 public class UserServiceImpl implements UserService{
@@ -14,15 +18,19 @@ public class UserServiceImpl implements UserService{
 	private UserDAO userDAO;
 
 	@Override
-	public void delete(Long id) {
-		// TODO Auto-generated method stub
-		
+	public List<Venue> getVenue() {
+		List<Venue> v = new ArrayList<Venue>();
+		v = userDAO.getVenue();
+		System.out.println("size is:" + v.get(0).getAttachments());
+		return v;
 	}
 
 	@Override
-	public User loadUserByUsername(String username) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Caterer> getCaterer() {
+		List<Caterer> c = new ArrayList<Caterer>();
+		c = userDAO.getCaterer();
+		System.out.println("size is:" + c.get(0).getAttachments());
+		return c;
 	}
 
 }

@@ -2,7 +2,6 @@ package lepartycious.controllers;
 
 import lepartycious.dtos.requestDTOs.HomeRequestDTO;
 import lepartycious.dtos.responseDTOs.HomeResponseDTO;
-import lepartycious.models.User;
 import lepartycious.services.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +9,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController

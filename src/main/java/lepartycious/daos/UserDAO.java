@@ -1,13 +1,14 @@
 package lepartycious.daos;
 
-import java.util.Optional;
+import java.util.List;
 
-import lepartycious.models.User;
+import lepartycious.models.Caterer;
+import lepartycious.models.Venue;
 
 public interface UserDAO extends BaseDAO{
 	
-	public User loadUserByUsername(String username);
+	public List<Venue> getVenue();
 	
-	Optional<User> findOneByEmail(String email);
+	public List<Caterer> getCaterer();
 	
 }
