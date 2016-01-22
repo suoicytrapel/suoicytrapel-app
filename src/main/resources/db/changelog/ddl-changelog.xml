@@ -16,23 +16,21 @@
 		</sql>
 	</changeSet>
 
-	<!-- <changeSet author="msingla" id="1.1">
-		<preConditions onFail="MARK_RAN">
-			<not>
-				<tableExists tableName="city" />
-			</not>
-		</preConditions>
-		<sql>
-			CREATE TABLE city (
-			id bigint PRIMARY KEY,
-			name varchar (25) NOT
-			NULL,
-			state varchar (25),
-			added_on timestamp without time zone NOT NULL
-			DEFAULT now()
-			);
-		</sql>
-	</changeSet> -->
+	<changeSet author="msingla" id="1.1"> 
+		<preConditions onFail="MARK_RAN"> 
+			<not> 
+				<tableExists tableName="city" /> 
+			</not> 
+		</preConditions> 
+		<sql> 
+			CREATE TABLE city ( 
+			id bigint PRIMARY KEY, 
+			name varchar (25) NOT NULL, 
+			state varchar (25), 
+			added_on timestamp without time zone NOT NULL DEFAULT now() 
+			); 
+		</sql> 
+	</changeSet>
 
 	<changeSet author="msingla" id="1.2">
 		<preConditions onFail="MARK_RAN">
@@ -43,13 +41,11 @@
 		<sql>
 			CREATE TABLE attachment (
 			id bigint PRIMARY KEY,
-			name varchar (25)
-			NOT NULL,
+			name varchar (25) NOT NULL,
 			image_url varchar (255),
 			entity_id bigint,
-			added_on timestamp,
 			version bigint,
-			without time zone NOT NULL DEFAULT now()
+			added_on timestamp without time zone NOT NULL DEFAULT now()
 			);
 		</sql>
 	</changeSet>
@@ -63,14 +59,22 @@
 		<sql>
 			CREATE TABLE caterer (
 			id bigint PRIMARY KEY,
-			name varchar (25) NOT
-			NULL,
+			name varchar (25) NOT NULL,
 			description varchar (255),
 			comments varchar (3000),
 			rating float,
 			version bigint,
-			added_on timestamp without time zone NOT NULL DEFAULT
-			now()
+			veg_menu varchar (5000),
+			non_veg_menu varchar(5000),
+			only_veg boolean,
+			min_veg_plate_charges float,
+			min_nonveg_plate_charges float,
+			waiters boolean,
+			crockery boolean,
+			counters boolean,
+			added_on timestamp without time zone NOT NULL DEFAULT now(),
+			city_id bigint,
+			FOREIGN KEY (city_id) REFERENCES city (id)
 			);
 		</sql>
 	</changeSet>
@@ -84,15 +88,283 @@
 		<sql>
 			CREATE TABLE venue (
 			id bigint PRIMARY KEY,
-			name varchar (255) NOT
-			NULL,
+			name varchar (255) NOT NULL,
 			description varchar (255),
 			type varchar(20) NOT NULL,
 			comments varchar (3000),
 			rating float,
 			version bigint,
-			added_on timestamp without time
-			zone NOT NULL DEFAULT now()
+			added_on timestamp without time	zone NOT NULL DEFAULT now(),
+			city_id bigint,
+			FOREIGN KEY (city_id) REFERENCES city (id)
+			);
+		</sql>
+	</changeSet>
+
+	<changeSet author="msingla" id="1.5">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<tableExists tableName="photographer" />
+			</not>
+		</preConditions>
+		<sql>
+			CREATE TABLE photographer (
+			id bigint PRIMARY KEY,
+			name varchar(25) NOT NULL,
+			description varchar (255),
+			comments varchar (3000),
+			rating float,
+			version bigint,
+			normal_photography boolean,
+			min_normal_photography_charges float,
+			candid_photography boolean,
+			min_candid_photography_charges float,
+			pre_wedding_shoot boolean,
+			pre_wedding_shoot_charges float,
+			album_making boolean,
+			album_making_charges float,
+			dvd_making boolean,
+			dvd_making_charges float,
+			added_on timestamp without time zone NOT NULL DEFAULT now(),
+			city_id bigint,
+			FOREIGN KEY (city_id) REFERENCES city (id)
+			);
+		</sql>
+	</changeSet>
+
+	<changeSet author="msingla" id="1.6">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<tableExists tableName="decorater" />
+			</not>
+		</preConditions>
+		<sql>
+			CREATE TABLE decorater (
+			id bigint PRIMARY KEY,
+			name varchar (25) NOT NULL,
+			description varchar (255),
+			comments varchar (3000),
+			rating float,
+			version bigint,
+			tent_availability boolean,
+			min_tent_charges float,
+			lighting_availability boolean,
+			min_lighting_charges float,
+			floral_works_availability boolean,
+			min_floral_works_charges float,
+			added_on timestamp without time zone NOT NULL DEFAULT now(),
+			city_id bigint,
+			FOREIGN KEY (city_id) REFERENCES city (id)
+			);
+		</sql>
+	</changeSet>
+
+	<changeSet author="msingla" id="1.7">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<tableExists tableName="rental" />
+			</not>
+		</preConditions>
+		<sql>
+			CREATE TABLE rental (
+			id bigint PRIMARY KEY,
+			name varchar (25) NOT NULL,
+			description varchar (255),
+			car_model varchar (3000),
+			comments varchar (3000),
+			rating float,
+			version bigint,
+			sedan_availability boolean,
+			min_sedan_charges_per_hour float,
+			min_sedan_charges_per_km float,
+			hatchback_availability boolean,
+			min_hatchback_charges_per_hour float,
+			min_hatchback_charges_per_km float,
+			suv_availability boolean,
+			min_suv_charges_per_hour float,
+			min_suv_charges_per_km float,
+			min_driver_night_rate float,
+			toll_cahrges_included boolean,
+			parking_charges_included boolean,
+			waiting_charges float,
+			added_on timestamp without time zone NOT NULL DEFAULT now(),
+			city_id bigint,
+			FOREIGN KEY (city_id) REFERENCES city (id)
+			);
+		</sql>
+	</changeSet>
+
+	<changeSet author="msingla" id="1.8">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<tableExists tableName="band" />
+			</not>
+		</preConditions>
+		<sql>
+			CREATE TABLE band (
+			id bigint PRIMARY KEY,
+			name varchar (25) NOT NULL,
+			description varchar (255),
+			comments varchar (3000),
+			rating float,
+			version bigint,
+			simple_band_availability boolean,
+			min_simple_band_charges float,
+			crew_band_availability boolean,
+			min_crew_band_charges float,
+			military_band_availability boolean,
+			min_military_band_charges float,
+			dj_sound_band_availability boolean,
+			min_dj_sound_band_charges float,
+			bhaggi_availability boolean,
+			min_bhaggi_charges float,
+			ghodi_availability boolean,
+			min_ghodi_charges float,
+			rath_availability boolean,
+			min_rath_charges float,
+			added_on timestamp without time zone NOT NULL DEFAULT now(),
+			city_id bigint,
+			FOREIGN KEY (city_id) REFERENCES city (id)
+			);
+		</sql>
+	</changeSet>
+
+	<changeSet author="msingla" id="1.9">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<tableExists tableName="room" />
+			</not>
+		</preConditions>
+		<sql>
+			CREATE TABLE room (
+			id bigint PRIMARY KEY,
+			room_type varchar (50) NOT NULL,
+			description varchar (255),
+			room_dimensions varchar (255),
+			added_on timestamp without time zone NOT NULL DEFAULT now()
+			);
+		</sql>
+	</changeSet>
+
+	<changeSet author="msingla" id="1.10">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<tableExists tableName="service" />
+			</not>
+		</preConditions>
+		<sql>
+			CREATE TABLE service (
+			id bigint PRIMARY KEY,
+			service_type varchar (500) NOT NULL,
+			description varchar (255),
+			added_on timestamp without time zone NOT NULL DEFAULT now()
+			);
+		</sql>
+	</changeSet>
+
+	<changeSet author="msingla" id="1.11">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<tableExists tableName="amenities" />
+			</not>
+		</preConditions>
+		<sql>
+			CREATE TABLE amenities (
+			id bigint PRIMARY KEY,
+			amenity_type varchar (500) NOT NULL,
+			description varchar (255),
+			is_indoor_amenity boolean,
+			amenity_dimensions varchar (500),
+			added_on timestamp without time zone NOT NULL DEFAULT now()
+			);
+		</sql>
+	</changeSet>
+	
+	<changeSet author="msingla" id="1.12">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<tableExists tableName="address" />
+			</not>
+		</preConditions>
+		<sql>
+			CREATE TABLE address (
+			id bigint PRIMARY KEY,
+			address_line_1 varchar (255) NOT NULL,
+			address_line_2 varchar (255),
+			city varchar(25),
+			state varchar(25),
+			pincode bigint,
+			primary_phone bigint,
+			secondary_phone bigint,
+			email varchar(50),
+			entity_id bigint,
+			version bigint,
+			added_on timestamp without time zone NOT NULL DEFAULT now()
+			);
+		</sql>
+	</changeSet>
+	
+	<changeSet author="msingla" id="1.13">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<tableExists tableName="venue_rooms" />
+			</not>
+		</preConditions>
+		<sql>
+			CREATE TABLE venue_rooms (
+			id bigint PRIMARY KEY,
+			venue_id bigint,
+			room_id bigint,
+			min_cost float,
+			ac_availability boolean,
+			fridge_availability boolean,
+			locker_availability boolean,
+			led_availability boolean,
+			attached_bathroom_availability boolean,
+			version bigint,
+			added_on timestamp without time zone NOT NULL DEFAULT now(),
+			FOREIGN KEY (venue_id) REFERENCES venue (id),
+			FOREIGN KEY (room_id) REFERENCES room (id)
+			);
+		</sql>
+	</changeSet>
+	
+	<changeSet author="msingla" id="1.14">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<tableExists tableName="venue_services" />
+			</not>
+		</preConditions>
+		<sql>
+			CREATE TABLE venue_services(
+			id bigint PRIMARY KEY,
+			venue_id bigint,
+			service_id bigint,
+			min_cost float,
+			version bigint,
+			added_on timestamp without time zone NOT NULL DEFAULT now(),
+			FOREIGN KEY (venue_id) REFERENCES venue (id),
+			FOREIGN KEY (service_id) REFERENCES service (id)
+			);
+		</sql>
+	</changeSet>
+	
+	<changeSet author="msingla" id="1.15">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<tableExists tableName="venue_amenities" />
+			</not>
+		</preConditions>
+		<sql>
+			CREATE TABLE venue_amenities(
+			id bigint PRIMARY KEY,
+			venue_id bigint,
+			amenities_id bigint,
+			min_cost float,
+			version bigint,
+			added_on timestamp without time zone NOT NULL DEFAULT now(),
+			FOREIGN KEY (venue_id) REFERENCES venue (id),
+			FOREIGN KEY (amenities_id) REFERENCES amenities (id)
 			);
 		</sql>
 	</changeSet>

@@ -1,5 +1,6 @@
 package lepartycious.models;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -14,7 +15,12 @@ import javax.persistence.Version;
 
 @Entity
 @Table(name="caterer")
-public class Caterer {
+public class Caterer implements Serializable{
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 14656929090876090L;
 	
 	@Id
 	@Column(name="id")
@@ -30,6 +36,9 @@ public class Caterer {
 	@OneToMany(mappedBy="entityId")
 	private List<Attachment> attachments;
 	
+	@OneToMany(mappedBy="entityId")
+	private List<Address> addresses;
+	
 	@Column(name = "comments")
 	private String comments;
 	
@@ -38,6 +47,33 @@ public class Caterer {
 	
 	@Column(name = "added_on")
 	private Date addedOn;
+	
+	@Column(name = "veg_menu")
+	private String vegMenu;
+	
+	@Column(name = "non_veg_menu")
+	private String nonVegMenu;
+	
+	@Column(name = "only_veg")
+	private boolean onlyVeg;
+	
+	@Column(name = "waiters")
+	private boolean waiters;
+	
+	@Column(name = "crockery")
+	private boolean crockery;
+	
+	@Column(name = "counters")
+	private boolean counters;
+	
+	@Column(name = "min_veg_plate_charges")
+	private float minVegPlateCharges;
+	
+	@Column(name = "min_nonveg_plate_charges")
+	private float minNonvegPlateCharges;
+	
+	@Column(name = "city_id")
+	private City cityId;
 	
 	@Version
 	private long version;

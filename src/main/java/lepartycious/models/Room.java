@@ -12,27 +12,27 @@ import javax.persistence.Table;
 import javax.persistence.Version;
 
 @Entity
-@Table(name="attachment")
-public class Attachment implements Serializable{
+@Table(name="room")
+public class Room implements Serializable{
 	
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 14623547681309090L;
-	
+	private static final long serialVersionUID = 14656908521333423L;
+
 	@Id
 	@Column(name="id")
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long attachment_id;
+	private long roomId;
 	
-	@Column(name="entity_id")
-	private long entityId;
+	@Column(name = "room_type", nullable=false)
+	private String roomType;
 	
-	@Column(name="name", nullable=false)
-	private String name;
+	@Column(name = "description")
+	private String description;
 	
-	@Column(name="image_url")
-	private String imageURL;
+	@Column(name = "room_dimensions")
+	private String roomDimensions;
 	
 	@Column(name = "added_on")
 	private Date addedOn;
@@ -40,28 +40,28 @@ public class Attachment implements Serializable{
 	@Version
 	private long version;
 
-	public long getEntityId() {
-		return entityId;
+	public String getRoomType() {
+		return roomType;
 	}
 
-	public void setEntityId(long entityId) {
-		this.entityId = entityId;
+	public void setRoomType(String roomType) {
+		this.roomType = roomType;
 	}
 
-	public String getName() {
-		return name;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
-	public String getImageURL() {
-		return imageURL;
+	public String getRoomDimensions() {
+		return roomDimensions;
 	}
 
-	public void setImageURL(String imageURL) {
-		this.imageURL = imageURL;
+	public void setRoomDimensions(String roomDimensions) {
+		this.roomDimensions = roomDimensions;
 	}
 
 	public Date getAddedOn() {
@@ -79,5 +79,5 @@ public class Attachment implements Serializable{
 	public void setVersion(long version) {
 		this.version = version;
 	}
-	
+
 }

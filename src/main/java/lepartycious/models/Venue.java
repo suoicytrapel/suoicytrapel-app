@@ -1,5 +1,6 @@
 package lepartycious.models;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -14,7 +15,12 @@ import javax.persistence.Version;
 
 @Entity
 @Table(name="venue")
-public class Venue {
+public class Venue implements Serializable{
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 14326788521309090L;
 	
 	@Id
 	@Column(name="id")
@@ -41,6 +47,12 @@ public class Venue {
 	
 	@OneToMany(mappedBy="entityId")
 	private List<Attachment> attachments;
+	
+	@OneToMany(mappedBy="entityId")
+	private List<Address> addresses;
+	
+	@Column(name = "city_id")
+	private City cityId;
 	
 	@Version
 	private long version;
