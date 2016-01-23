@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
@@ -25,21 +27,20 @@ public class VenueServices implements Serializable{
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	
-	@Column(name="venue_id")
+	@ManyToOne
+	@JoinColumn(name="venue_id")
 	private Venue venueId;
 	
-	@Column(name="service_id")
+	@ManyToOne
+	@JoinColumn(name="service_id")
 	private Service serviceId;
 	
 	@Column(name="min_cost")
-	private float minCost;
+	private Float minCost;
 	
 	@Column(name = "added_on")
 	private Date addedOn;
 	
-	@Version
-	private long version;
-
 	public Venue getVenueId() {
 		return venueId;
 	}
@@ -56,11 +57,11 @@ public class VenueServices implements Serializable{
 		this.serviceId = serviceId;
 	}
 
-	public float getMinCost() {
+	public Float getMinCost() {
 		return minCost;
 	}
 
-	public void setMinCost(float minCost) {
+	public void setMinCost(Float minCost) {
 		this.minCost = minCost;
 	}
 

@@ -2,12 +2,14 @@ package lepartycious.models;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
@@ -37,9 +39,9 @@ public class Room implements Serializable{
 	@Column(name = "added_on")
 	private Date addedOn;
 	
-	@Version
-	private long version;
-
+	@OneToMany(mappedBy="roomId")
+	private List<VenueRooms> venueRooms;
+	
 	public String getRoomType() {
 		return roomType;
 	}
@@ -72,12 +74,11 @@ public class Room implements Serializable{
 		this.addedOn = addedOn;
 	}
 
-	public long getVersion() {
-		return version;
+	public List<VenueRooms> getVenueRooms() {
+		return venueRooms;
 	}
 
-	public void setVersion(long version) {
-		this.version = version;
+	public void setVenueRooms(List<VenueRooms> venueRooms) {
+		this.venueRooms = venueRooms;
 	}
-
 }

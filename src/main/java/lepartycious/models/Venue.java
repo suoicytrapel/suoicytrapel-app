@@ -9,6 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Version;
@@ -40,7 +42,7 @@ public class Venue implements Serializable{
 	private String comments;
 	
 	@Column(name = "rating")
-	private float rating;
+	private Float rating;
 	
 	@Column(name = "added_on")
 	private Date addedOn;
@@ -51,11 +53,18 @@ public class Venue implements Serializable{
 	@OneToMany(mappedBy="entityId")
 	private List<Address> addresses;
 	
-	@Column(name = "city_id")
-	private City cityId;
+	@ManyToOne
+	@JoinColumn(name = "city_id")
+	private City city;
 	
-	@Version
-	private long version;
+	@OneToMany(mappedBy="venueId")
+	private List<VenueAmenities> venueamenities;
+	
+	@OneToMany(mappedBy="venueId")
+	private List<VenueServices> venueServices;
+	
+	@OneToMany(mappedBy="venueId")
+	private List<VenueRooms> venueRooms;
 
 	public String getName() {
 		return name;
@@ -89,11 +98,11 @@ public class Venue implements Serializable{
 		this.comments = comments;
 	}
 
-	public float getRating() {
+	public Float getRating() {
 		return rating;
 	}
 
-	public void setRating(float rating) {
+	public void setRating(Float rating) {
 		this.rating = rating;
 	}
 
@@ -113,12 +122,43 @@ public class Venue implements Serializable{
 		this.attachments = attachments;
 	}
 
-	public long getVersion() {
-		return version;
+	public List<Address> getAddresses() {
+		return addresses;
 	}
 
-	public void setVersion(long version) {
-		this.version = version;
+	public void setAddresses(List<Address> addresses) {
+		this.addresses = addresses;
 	}
-	
+
+	public List<VenueAmenities> getVenueamenities() {
+		return venueamenities;
+	}
+
+	public void setVenueamenities(List<VenueAmenities> venueamenities) {
+		this.venueamenities = venueamenities;
+	}
+
+	public List<VenueServices> getVenueServices() {
+		return venueServices;
+	}
+
+	public void setVenueServices(List<VenueServices> venueServices) {
+		this.venueServices = venueServices;
+	}
+
+	public List<VenueRooms> getVenueRooms() {
+		return venueRooms;
+	}
+
+	public void setVenueRooms(List<VenueRooms> venueRooms) {
+		this.venueRooms = venueRooms;
+	}
+
+	public City getCity() {
+		return city;
+	}
+
+	public void setCity(City city) {
+		this.city = city;
+	}
 }

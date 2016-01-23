@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
@@ -25,35 +27,42 @@ public class VenueRooms implements Serializable{
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	
-	@Column(name="venue_id")
+	@ManyToOne
+	@JoinColumn(name="venue_id")
 	private Venue venueId;
 	
-	@Column(name="room_id")
+	@ManyToOne
+	@JoinColumn(name="room_id")
 	private Room roomId;
 	
 	@Column(name="min_cost")
-	private float minCost;
+	private Float minCost;
 	
 	@Column(name="ac_availability")
-	private boolean acAvailability;
+	private Boolean acAvailability;
 	
 	@Column(name = "fridge_availability")
-	private boolean fridgeAvailability;
+	private Boolean fridgeAvailability;
 	
 	@Column(name="locker_availability")
-	private boolean lockerAvailability;
+	private Boolean lockerAvailability;
 	
 	@Column(name = "led_availability")
-	private boolean ledAvailability;
+	private Boolean ledAvailability;
 	
 	@Column(name = "attached_bathroom_availability")
-	private boolean attachedBathroomAvailability;
+	private Boolean attachedBathroomAvailability;
 	
 	@Column(name = "added_on")
 	private Date addedOn;
 	
-	@Version
-	private long version;
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
 
 	public Venue getVenueId() {
 		return venueId;
@@ -71,51 +80,51 @@ public class VenueRooms implements Serializable{
 		this.roomId = roomId;
 	}
 
-	public float getMinCost() {
+	public Float getMinCost() {
 		return minCost;
 	}
 
-	public void setMinCost(float minCost) {
+	public void setMinCost(Float minCost) {
 		this.minCost = minCost;
 	}
 
-	public boolean isAcAvailability() {
+	public Boolean getAcAvailability() {
 		return acAvailability;
 	}
 
-	public void setAcAvailability(boolean acAvailability) {
+	public void setAcAvailability(Boolean acAvailability) {
 		this.acAvailability = acAvailability;
 	}
 
-	public boolean isFridgeAvailability() {
+	public Boolean getFridgeAvailability() {
 		return fridgeAvailability;
 	}
 
-	public void setFridgeAvailability(boolean fridgeAvailability) {
+	public void setFridgeAvailability(Boolean fridgeAvailability) {
 		this.fridgeAvailability = fridgeAvailability;
 	}
 
-	public boolean isLockerAvailability() {
+	public Boolean getLockerAvailability() {
 		return lockerAvailability;
 	}
 
-	public void setLockerAvailability(boolean lockerAvailability) {
+	public void setLockerAvailability(Boolean lockerAvailability) {
 		this.lockerAvailability = lockerAvailability;
 	}
 
-	public boolean isLedAvailability() {
+	public Boolean getLedAvailability() {
 		return ledAvailability;
 	}
 
-	public void setLedAvailability(boolean ledAvailability) {
+	public void setLedAvailability(Boolean ledAvailability) {
 		this.ledAvailability = ledAvailability;
 	}
 
-	public boolean isAttachedBathroomAvailability() {
+	public Boolean getAttachedBathroomAvailability() {
 		return attachedBathroomAvailability;
 	}
 
-	public void setAttachedBathroomAvailability(boolean attachedBathroomAvailability) {
+	public void setAttachedBathroomAvailability(Boolean attachedBathroomAvailability) {
 		this.attachedBathroomAvailability = attachedBathroomAvailability;
 	}
 

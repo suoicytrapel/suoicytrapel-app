@@ -9,6 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Version;
@@ -37,7 +39,7 @@ public class Band implements Serializable{
 	private String comments;
 	
 	@Column(name = "rating")
-	private float rating;
+	private Float rating;
 	
 	@Column(name = "added_on")
 	private Date addedOn;
@@ -48,53 +50,59 @@ public class Band implements Serializable{
 	@OneToMany(mappedBy="entityId")
 	private List<Address> addresses;
 	
-	@Column(name = "city_id")
-	private City cityId;
+	@ManyToOne
+	@JoinColumn(name = "city_id")
+	private City city;
 	
 	@Column(name = "simple_band_availability")
-	private boolean simpleBandAvailability;
+	private Boolean simpleBandAvailability;
 	
 	@Column(name = "min_simple_band_charges")
-	private float minSimpleBandCharges;
+	private Float minSimpleBandCharges;
 	
 	@Column(name = "crew_band_availability")
-	private boolean crewBandAvailability;
+	private Boolean crewBandAvailability;
 	
 	@Column(name = "min_crew_band_charges")
-	private float minCrewBandCharges;
+	private Float minCrewBandCharges;
 	
 	@Column(name = "military_band_availability")
-	private boolean militaryBandAvailability;
+	private Boolean militaryBandAvailability;
 	
 	@Column(name = "min_military_band_charges")
-	private float minMilitaryBandCharges;
+	private Float minMilitaryBandCharges;
 	
 	@Column(name = "dj_sound_band_availability")
-	private boolean djSoundBandAvailability;
+	private Boolean djSoundBandAvailability;
 	
 	@Column(name = "min_dj_sound_band_charges")
-	private float minDjSoundBandCharges;
+	private Float minDjSoundBandCharges;
 	
 	@Column(name = "bhaggi_availability")
-	private boolean bhaggiAvailability;
+	private Boolean bhaggiAvailability;
 	
 	@Column(name = "min_bhaggi_charges")
-	private float minBhaggiCharges;
+	private Float minBhaggiCharges;
 	
 	@Column(name = "ghodi_availability")
-	private boolean ghodiAvailability;
+	private Boolean ghodiAvailability;
 	
 	@Column(name = "min_ghodi_charges")
-	private float minGhodiCharges;
+	private Float minGhodiCharges;
 	
 	@Column(name = "rath_availability")
-	private boolean rathAvailability;
+	private Boolean rathAvailability;
 	
 	@Column(name = "min_rath_charges")
-	private float minRathCharges;
-	
-	@Version
-	private long version;
+	private Float minRathCharges;
+
+	public long getBandId() {
+		return bandId;
+	}
+
+	public void setBandId(long bandId) {
+		this.bandId = bandId;
+	}
 
 	public String getName() {
 		return name;
@@ -120,11 +128,11 @@ public class Band implements Serializable{
 		this.comments = comments;
 	}
 
-	public float getRating() {
+	public Float getRating() {
 		return rating;
 	}
 
-	public void setRating(float rating) {
+	public void setRating(Float rating) {
 		this.rating = rating;
 	}
 
@@ -152,131 +160,124 @@ public class Band implements Serializable{
 		this.addresses = addresses;
 	}
 
-	public City getCityId() {
-		return cityId;
+	public City getCity() {
+		return city;
 	}
 
-	public void setCityId(City cityId) {
-		this.cityId = cityId;
+	public void setCity(City city) {
+		this.city = city;
 	}
 
-	public boolean isSimpleBandAvailability() {
+	public Boolean getSimpleBandAvailability() {
 		return simpleBandAvailability;
 	}
 
-	public void setSimpleBandAvailability(boolean simpleBandAvailability) {
+	public void setSimpleBandAvailability(Boolean simpleBandAvailability) {
 		this.simpleBandAvailability = simpleBandAvailability;
 	}
 
-	public float getMinSimpleBandCharges() {
+	public Float getMinSimpleBandCharges() {
 		return minSimpleBandCharges;
 	}
 
-	public void setMinSimpleBandCharges(float minSimpleBandCharges) {
+	public void setMinSimpleBandCharges(Float minSimpleBandCharges) {
 		this.minSimpleBandCharges = minSimpleBandCharges;
 	}
 
-	public boolean isCrewBandAvailability() {
+	public Boolean getCrewBandAvailability() {
 		return crewBandAvailability;
 	}
 
-	public void setCrewBandAvailability(boolean crewBandAvailability) {
+	public void setCrewBandAvailability(Boolean crewBandAvailability) {
 		this.crewBandAvailability = crewBandAvailability;
 	}
 
-	public float getMinCrewBandCharges() {
+	public Float getMinCrewBandCharges() {
 		return minCrewBandCharges;
 	}
 
-	public void setMinCrewBandCharges(float minCrewBandCharges) {
+	public void setMinCrewBandCharges(Float minCrewBandCharges) {
 		this.minCrewBandCharges = minCrewBandCharges;
 	}
 
-	public boolean isMilitaryBandAvailability() {
+	public Boolean getMilitaryBandAvailability() {
 		return militaryBandAvailability;
 	}
 
-	public void setMilitaryBandAvailability(boolean militaryBandAvailability) {
+	public void setMilitaryBandAvailability(Boolean militaryBandAvailability) {
 		this.militaryBandAvailability = militaryBandAvailability;
 	}
 
-	public float getMinMilitaryBandCharges() {
+	public Float getMinMilitaryBandCharges() {
 		return minMilitaryBandCharges;
 	}
 
-	public void setMinMilitaryBandCharges(float minMilitaryBandCharges) {
+	public void setMinMilitaryBandCharges(Float minMilitaryBandCharges) {
 		this.minMilitaryBandCharges = minMilitaryBandCharges;
 	}
 
-	public boolean isDjSoundBandAvailability() {
+	public Boolean getDjSoundBandAvailability() {
 		return djSoundBandAvailability;
 	}
 
-	public void setDjSoundBandAvailability(boolean djSoundBandAvailability) {
+	public void setDjSoundBandAvailability(Boolean djSoundBandAvailability) {
 		this.djSoundBandAvailability = djSoundBandAvailability;
 	}
 
-	public float getMinDjSoundBandCharges() {
+	public Float getMinDjSoundBandCharges() {
 		return minDjSoundBandCharges;
 	}
 
-	public void setMinDjSoundBandCharges(float minDjSoundBandCharges) {
+	public void setMinDjSoundBandCharges(Float minDjSoundBandCharges) {
 		this.minDjSoundBandCharges = minDjSoundBandCharges;
 	}
 
-	public boolean isBhaggiAvailability() {
+	public Boolean getBhaggiAvailability() {
 		return bhaggiAvailability;
 	}
 
-	public void setBhaggiAvailability(boolean bhaggiAvailability) {
+	public void setBhaggiAvailability(Boolean bhaggiAvailability) {
 		this.bhaggiAvailability = bhaggiAvailability;
 	}
 
-	public float getMinBhaggiCharges() {
+	public Float getMinBhaggiCharges() {
 		return minBhaggiCharges;
 	}
 
-	public void setMinBhaggiCharges(float minBhaggiCharges) {
+	public void setMinBhaggiCharges(Float minBhaggiCharges) {
 		this.minBhaggiCharges = minBhaggiCharges;
 	}
 
-	public boolean isGhodiAvailability() {
+	public Boolean getGhodiAvailability() {
 		return ghodiAvailability;
 	}
 
-	public void setGhodiAvailability(boolean ghodiAvailability) {
+	public void setGhodiAvailability(Boolean ghodiAvailability) {
 		this.ghodiAvailability = ghodiAvailability;
 	}
 
-	public float getMinGhodiCharges() {
+	public Float getMinGhodiCharges() {
 		return minGhodiCharges;
 	}
 
-	public void setMinGhodiCharges(float minGhodiCharges) {
+	public void setMinGhodiCharges(Float minGhodiCharges) {
 		this.minGhodiCharges = minGhodiCharges;
 	}
 
-	public boolean isRathAvailability() {
+	public Boolean getRathAvailability() {
 		return rathAvailability;
 	}
 
-	public void setRathAvailability(boolean rathAvailability) {
+	public void setRathAvailability(Boolean rathAvailability) {
 		this.rathAvailability = rathAvailability;
 	}
 
-	public float getMinRathCharges() {
+	public Float getMinRathCharges() {
 		return minRathCharges;
 	}
 
-	public void setMinRathCharges(float minRathCharges) {
+	public void setMinRathCharges(Float minRathCharges) {
 		this.minRathCharges = minRathCharges;
 	}
-
-	public long getVersion() {
-		return version;
-	}
-
-	public void setVersion(long version) {
-		this.version = version;
-	}
+	
 }

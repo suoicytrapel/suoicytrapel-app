@@ -9,6 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Version;
@@ -37,7 +39,7 @@ public class Rental implements Serializable{
 	private String comments;
 	
 	@Column(name = "rating")
-	private float rating;
+	private Float rating;
 	
 	@Column(name = "added_on")
 	private Date addedOn;
@@ -48,50 +50,56 @@ public class Rental implements Serializable{
 	@OneToMany(mappedBy="entityId")
 	private List<Address> addresses;
 	
-	@Column(name = "city_id")
-	private City cityId;
+	@ManyToOne
+	@JoinColumn(name = "city_id")
+	private City city;
 	
 	@Column(name = "sedan_availability")
-	private boolean sedanAvailability;
+	private Boolean sedanAvailability;
 	
 	@Column(name = "min_sedan_charges_per_hour")
-	private float minSedanChargesPerHour;
+	private Float minSedanChargesPerHour;
 	
 	@Column(name = "min_sedan_charges_per_km")
-	private float minSedanChargesPerKm;
+	private Float minSedanChargesPerKm;
 	
 	@Column(name = "hatchback_availability")
-	private boolean hatchbackAvailability;
+	private Boolean hatchbackAvailability;
 	
 	@Column(name = "min_hatchback_charges_per_hour")
-	private float minHatchbackChargesPerHour;
+	private Float minHatchbackChargesPerHour;
 	
 	@Column(name = "min_hatchback_charges_per_km")
-	private float minHatchbackChargesPerKm;
+	private Float minHatchbackChargesPerKm;
 	
 	@Column(name = "suv_availability")
-	private boolean suvAvailability;
+	private Boolean suvAvailability;
 	
 	@Column(name = "min_suv_charges_per_hour")
-	private float minSuvChargesPerHour;
+	private Float minSuvChargesPerHour;
 	
 	@Column(name = "min_suv_charges_per_km")
-	private float minSuvChargesPerKm;
+	private Float minSuvChargesPerKm;
 	
 	@Column(name = "toll_cahrges_included")
-	private boolean tollCahrgesIncluded;
+	private Boolean tollCahrgesIncluded;
 	
 	@Column(name = "min_driver_night_rate")
-	private float minDriverNightRate;
+	private Float minDriverNightRate;
 	
 	@Column(name = "waiting_charges")
-	private float waitingCharges;
+	private Float waitingCharges;
 	
 	@Column(name = "parking_charges_included")
-	private boolean parkingChargesIncluded;
-	
-	@Version
-	private long version;
+	private Boolean parkingChargesIncluded;
+
+	public long getRentalId() {
+		return rentalId;
+	}
+
+	public void setRentalId(long rentalId) {
+		this.rentalId = rentalId;
+	}
 
 	public String getName() {
 		return name;
@@ -117,11 +125,11 @@ public class Rental implements Serializable{
 		this.comments = comments;
 	}
 
-	public float getRating() {
+	public Float getRating() {
 		return rating;
 	}
 
-	public void setRating(float rating) {
+	public void setRating(Float rating) {
 		this.rating = rating;
 	}
 
@@ -149,123 +157,115 @@ public class Rental implements Serializable{
 		this.addresses = addresses;
 	}
 
-	public City getCityId() {
-		return cityId;
+	public City getCity() {
+		return city;
 	}
 
-	public void setCityId(City cityId) {
-		this.cityId = cityId;
+	public void setCity(City city) {
+		this.city = city;
 	}
 
-	public boolean isSedanAvailability() {
+	public Boolean getSedanAvailability() {
 		return sedanAvailability;
 	}
 
-	public void setSedanAvailability(boolean sedanAvailability) {
+	public void setSedanAvailability(Boolean sedanAvailability) {
 		this.sedanAvailability = sedanAvailability;
 	}
 
-	public float getMinSedanChargesPerHour() {
+	public Float getMinSedanChargesPerHour() {
 		return minSedanChargesPerHour;
 	}
 
-	public void setMinSedanChargesPerHour(float minSedanChargesPerHour) {
+	public void setMinSedanChargesPerHour(Float minSedanChargesPerHour) {
 		this.minSedanChargesPerHour = minSedanChargesPerHour;
 	}
 
-	public float getMinSedanChargesPerKm() {
+	public Float getMinSedanChargesPerKm() {
 		return minSedanChargesPerKm;
 	}
 
-	public void setMinSedanChargesPerKm(float minSedanChargesPerKm) {
+	public void setMinSedanChargesPerKm(Float minSedanChargesPerKm) {
 		this.minSedanChargesPerKm = minSedanChargesPerKm;
 	}
 
-	public boolean isHatchbackAvailability() {
+	public Boolean getHatchbackAvailability() {
 		return hatchbackAvailability;
 	}
 
-	public void setHatchbackAvailability(boolean hatchbackAvailability) {
+	public void setHatchbackAvailability(Boolean hatchbackAvailability) {
 		this.hatchbackAvailability = hatchbackAvailability;
 	}
 
-	public float getMinHatchbackChargesPerHour() {
+	public Float getMinHatchbackChargesPerHour() {
 		return minHatchbackChargesPerHour;
 	}
 
-	public void setMinHatchbackChargesPerHour(float minHatchbackChargesPerHour) {
+	public void setMinHatchbackChargesPerHour(Float minHatchbackChargesPerHour) {
 		this.minHatchbackChargesPerHour = minHatchbackChargesPerHour;
 	}
 
-	public float getMinHatchbackChargesPerKm() {
+	public Float getMinHatchbackChargesPerKm() {
 		return minHatchbackChargesPerKm;
 	}
 
-	public void setMinHatchbackChargesPerKm(float minHatchbackChargesPerKm) {
+	public void setMinHatchbackChargesPerKm(Float minHatchbackChargesPerKm) {
 		this.minHatchbackChargesPerKm = minHatchbackChargesPerKm;
 	}
 
-	public boolean isSuvAvailability() {
+	public Boolean getSuvAvailability() {
 		return suvAvailability;
 	}
 
-	public void setSuvAvailability(boolean suvAvailability) {
+	public void setSuvAvailability(Boolean suvAvailability) {
 		this.suvAvailability = suvAvailability;
 	}
 
-	public float getMinSuvChargesPerHour() {
+	public Float getMinSuvChargesPerHour() {
 		return minSuvChargesPerHour;
 	}
 
-	public void setMinSuvChargesPerHour(float minSuvChargesPerHour) {
+	public void setMinSuvChargesPerHour(Float minSuvChargesPerHour) {
 		this.minSuvChargesPerHour = minSuvChargesPerHour;
 	}
 
-	public float getMinSuvChargesPerKm() {
+	public Float getMinSuvChargesPerKm() {
 		return minSuvChargesPerKm;
 	}
 
-	public void setMinSuvChargesPerKm(float minSuvChargesPerKm) {
+	public void setMinSuvChargesPerKm(Float minSuvChargesPerKm) {
 		this.minSuvChargesPerKm = minSuvChargesPerKm;
 	}
 
-	public boolean isTollCahrgesIncluded() {
+	public Boolean getTollCahrgesIncluded() {
 		return tollCahrgesIncluded;
 	}
 
-	public void setTollCahrgesIncluded(boolean tollCahrgesIncluded) {
+	public void setTollCahrgesIncluded(Boolean tollCahrgesIncluded) {
 		this.tollCahrgesIncluded = tollCahrgesIncluded;
 	}
 
-	public float getMinDriverNightRate() {
+	public Float getMinDriverNightRate() {
 		return minDriverNightRate;
 	}
 
-	public void setMinDriverNightRate(float minDriverNightRate) {
+	public void setMinDriverNightRate(Float minDriverNightRate) {
 		this.minDriverNightRate = minDriverNightRate;
 	}
 
-	public float getWaitingCharges() {
+	public Float getWaitingCharges() {
 		return waitingCharges;
 	}
 
-	public void setWaitingCharges(float waitingCharges) {
+	public void setWaitingCharges(Float waitingCharges) {
 		this.waitingCharges = waitingCharges;
 	}
 
-	public boolean isParkingChargesIncluded() {
+	public Boolean getParkingChargesIncluded() {
 		return parkingChargesIncluded;
 	}
 
-	public void setParkingChargesIncluded(boolean parkingChargesIncluded) {
+	public void setParkingChargesIncluded(Boolean parkingChargesIncluded) {
 		this.parkingChargesIncluded = parkingChargesIncluded;
-	}
-
-	public long getVersion() {
-		return version;
-	}
-
-	public void setVersion(long version) {
-		this.version = version;
 	}
 }

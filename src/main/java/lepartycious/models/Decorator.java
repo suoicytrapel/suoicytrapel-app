@@ -9,6 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Version;
@@ -37,7 +39,7 @@ public class Decorator implements Serializable{
 	private String comments;
 	
 	@Column(name = "rating")
-	private float rating;
+	private Float rating;
 	
 	@Column(name = "added_on")
 	private Date addedOn;
@@ -48,29 +50,35 @@ public class Decorator implements Serializable{
 	@OneToMany(mappedBy="entityId")
 	private List<Address> addresses;
 	
-	@Column(name = "city_id")
-	private City cityId;
+	@ManyToOne
+	@JoinColumn(name = "city_id")
+	private City city;
 	
 	@Column(name = "tent_availability")
-	private boolean tentAvailability;
+	private Boolean tentAvailability;
 	
 	@Column(name = "min_tent_charges")
-	private float minTentCharges;
+	private Float minTentCharges;
 	
 	@Column(name = "lighting_availability")
-	private boolean lightingAvailability;
+	private Boolean lightingAvailability;
 	
 	@Column(name = "min_lighting_charges")
-	private float minLightingCharges;
+	private Float minLightingCharges;
 	
 	@Column(name = "floral_works_availability")
-	private boolean floralWorksAvailability;
+	private Boolean floralWorksAvailability;
 	
 	@Column(name = "min_floral_works_charges")
-	private float minFloralWorksCharges;
-	
-	@Version
-	private long version;
+	private Float minFloralWorksCharges;
+
+	public long getDecoratorId() {
+		return decoratorId;
+	}
+
+	public void setDecoratorId(long decoratorId) {
+		this.decoratorId = decoratorId;
+	}
 
 	public String getName() {
 		return name;
@@ -96,11 +104,11 @@ public class Decorator implements Serializable{
 		this.comments = comments;
 	}
 
-	public float getRating() {
+	public Float getRating() {
 		return rating;
 	}
 
-	public void setRating(float rating) {
+	public void setRating(Float rating) {
 		this.rating = rating;
 	}
 
@@ -128,67 +136,60 @@ public class Decorator implements Serializable{
 		this.addresses = addresses;
 	}
 
-	public City getCityId() {
-		return cityId;
+	public City getCity() {
+		return city;
 	}
 
-	public void setCityId(City cityId) {
-		this.cityId = cityId;
+	public void setCity(City city) {
+		this.city = city;
 	}
 
-	public boolean isTentAvailability() {
+	public Boolean getTentAvailability() {
 		return tentAvailability;
 	}
 
-	public void setTentAvailability(boolean tentAvailability) {
+	public void setTentAvailability(Boolean tentAvailability) {
 		this.tentAvailability = tentAvailability;
 	}
 
-	public float getMinTentCharges() {
+	public Float getMinTentCharges() {
 		return minTentCharges;
 	}
 
-	public void setMinTentCharges(float minTentCharges) {
+	public void setMinTentCharges(Float minTentCharges) {
 		this.minTentCharges = minTentCharges;
 	}
 
-	public boolean isLightingAvailability() {
+	public Boolean getLightingAvailability() {
 		return lightingAvailability;
 	}
 
-	public void setLightingAvailability(boolean lightingAvailability) {
+	public void setLightingAvailability(Boolean lightingAvailability) {
 		this.lightingAvailability = lightingAvailability;
 	}
 
-	public float getMinLightingCharges() {
+	public Float getMinLightingCharges() {
 		return minLightingCharges;
 	}
 
-	public void setMinLightingCharges(float minLightingCharges) {
+	public void setMinLightingCharges(Float minLightingCharges) {
 		this.minLightingCharges = minLightingCharges;
 	}
 
-	public boolean isFloralWorksAvailability() {
+	public Boolean getFloralWorksAvailability() {
 		return floralWorksAvailability;
 	}
 
-	public void setFloralWorksAvailability(boolean floralWorksAvailability) {
+	public void setFloralWorksAvailability(Boolean floralWorksAvailability) {
 		this.floralWorksAvailability = floralWorksAvailability;
 	}
 
-	public float getMinFloralWorksCharges() {
+	public Float getMinFloralWorksCharges() {
 		return minFloralWorksCharges;
 	}
 
-	public void setMinFloralWorksCharges(float minFloralWorksCharges) {
+	public void setMinFloralWorksCharges(Float minFloralWorksCharges) {
 		this.minFloralWorksCharges = minFloralWorksCharges;
 	}
 
-	public long getVersion() {
-		return version;
-	}
-
-	public void setVersion(long version) {
-		this.version = version;
-	}
 }

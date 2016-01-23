@@ -2,12 +2,16 @@ package lepartycious.models;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
@@ -25,21 +29,20 @@ public class VenueAmenities implements Serializable{
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	
-	@Column(name="venue_id")
+	@ManyToOne
+	@JoinColumn(name="venue_id")
 	private Venue venueId;
 	
-	@Column(name="amenities_id")
+	@ManyToOne
+	@JoinColumn(name="amenities_id")
 	private Amenities amenitiesId;
 	
 	@Column(name="min_cost")
-	private float minCost;
+	private Float minCost;
 	
 	@Column(name = "added_on")
 	private Date addedOn;
 	
-	@Version
-	private long version;
-
 	public Venue getVenueId() {
 		return venueId;
 	}
@@ -56,11 +59,11 @@ public class VenueAmenities implements Serializable{
 		this.amenitiesId = amenitiesId;
 	}
 
-	public float getMinCost() {
+	public Float getMinCost() {
 		return minCost;
 	}
 
-	public void setMinCost(float minCost) {
+	public void setMinCost(Float minCost) {
 		this.minCost = minCost;
 	}
 

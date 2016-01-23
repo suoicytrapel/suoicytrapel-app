@@ -9,6 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Version;
@@ -37,7 +39,7 @@ public class Photographer implements Serializable{
 	private String comments;
 	
 	@Column(name = "rating")
-	private float rating;
+	private Float rating;
 	
 	@Column(name = "added_on")
 	private Date addedOn;
@@ -48,41 +50,47 @@ public class Photographer implements Serializable{
 	@OneToMany(mappedBy="entityId")
 	private List<Address> addresses;
 	
-	@Column(name = "city_id")
-	private City cityId;
+	@ManyToOne
+	@JoinColumn(name = "city_id")
+	private City city;
 	
 	@Column(name = "normal_photography")
-	private boolean normalPhotography;
+	private Boolean normalPhotography;
 	
 	@Column(name = "min_normal_photography_charges")
-	private float minNormalPhotographyCharges;
+	private Float minNormalPhotographyCharges;
 	
 	@Column(name = "candid_photography")
-	private boolean candidPhotography;
+	private Boolean candidPhotography;
 	
 	@Column(name = "min_candid_photography_charges")
-	private float minCandidPhotographyCharges;
+	private Float minCandidPhotographyCharges;
 	
 	@Column(name = "pre_wedding_shoot")
-	private boolean preWeddingShoot;
+	private Boolean preWeddingShoot;
 	
 	@Column(name = "pre_wedding_shoot_charges")
-	private float preWeddingShootCharges;
+	private Float preWeddingShootCharges;
 	
 	@Column(name = "album_making")
-	private boolean albumMaking;
+	private Boolean albumMaking;
 	
 	@Column(name = "album_making_charges")
-	private float albumMakingCharges;
+	private Float albumMakingCharges;
 	
 	@Column(name = "dvd_making")
-	private boolean dvdMaking;
+	private Boolean dvdMaking;
 	
 	@Column(name = "dvd_making_charges")
-	private float dvdMakingCharges;
+	private Float dvdMakingCharges;
 	
-	@Version
-	private long version;
+	public long getPhotographerId() {
+		return photographerId;
+	}
+
+	public void setPhotographerId(long photographerId) {
+		this.photographerId = photographerId;
+	}
 
 	public String getName() {
 		return name;
@@ -108,11 +116,11 @@ public class Photographer implements Serializable{
 		this.comments = comments;
 	}
 
-	public float getRating() {
+	public Float getRating() {
 		return rating;
 	}
 
-	public void setRating(float rating) {
+	public void setRating(Float rating) {
 		this.rating = rating;
 	}
 
@@ -140,100 +148,91 @@ public class Photographer implements Serializable{
 		this.addresses = addresses;
 	}
 
-	public City getCityId() {
-		return cityId;
+	public City getCity() {
+		return city;
 	}
 
-	public void setCityId(City cityId) {
-		this.cityId = cityId;
+	public void setCity(City city) {
+		this.city = city;
 	}
 
-	public boolean isNormalPhotography() {
+	public Boolean getNormalPhotography() {
 		return normalPhotography;
 	}
 
-	public void setNormalPhotography(boolean normalPhotography) {
+	public void setNormalPhotography(Boolean normalPhotography) {
 		this.normalPhotography = normalPhotography;
 	}
 
-	public float getMinNormalPhotographyCharges() {
+	public Float getMinNormalPhotographyCharges() {
 		return minNormalPhotographyCharges;
 	}
 
-	public void setMinNormalPhotographyCharges(float minNormalPhotographyCharges) {
+	public void setMinNormalPhotographyCharges(Float minNormalPhotographyCharges) {
 		this.minNormalPhotographyCharges = minNormalPhotographyCharges;
 	}
 
-	public boolean isCandidPhotography() {
+	public Boolean getCandidPhotography() {
 		return candidPhotography;
 	}
 
-	public void setCandidPhotography(boolean candidPhotography) {
+	public void setCandidPhotography(Boolean candidPhotography) {
 		this.candidPhotography = candidPhotography;
 	}
 
-	public float getMinCandidPhotographyCharges() {
+	public Float getMinCandidPhotographyCharges() {
 		return minCandidPhotographyCharges;
 	}
 
-	public void setMinCandidPhotographyCharges(float minCandidPhotographyCharges) {
+	public void setMinCandidPhotographyCharges(Float minCandidPhotographyCharges) {
 		this.minCandidPhotographyCharges = minCandidPhotographyCharges;
 	}
 
-	public boolean isPreWeddingShoot() {
+	public Boolean getPreWeddingShoot() {
 		return preWeddingShoot;
 	}
 
-	public void setPreWeddingShoot(boolean preWeddingShoot) {
+	public void setPreWeddingShoot(Boolean preWeddingShoot) {
 		this.preWeddingShoot = preWeddingShoot;
 	}
 
-	public float getPreWeddingShootCharges() {
+	public Float getPreWeddingShootCharges() {
 		return preWeddingShootCharges;
 	}
 
-	public void setPreWeddingShootCharges(float preWeddingShootCharges) {
+	public void setPreWeddingShootCharges(Float preWeddingShootCharges) {
 		this.preWeddingShootCharges = preWeddingShootCharges;
 	}
 
-	public boolean isAlbumMaking() {
+	public Boolean getAlbumMaking() {
 		return albumMaking;
 	}
 
-	public void setAlbumMaking(boolean albumMaking) {
+	public void setAlbumMaking(Boolean albumMaking) {
 		this.albumMaking = albumMaking;
 	}
 
-	public float getAlbumMakingCharges() {
+	public Float getAlbumMakingCharges() {
 		return albumMakingCharges;
 	}
 
-	public void setAlbumMakingCharges(float albumMakingCharges) {
+	public void setAlbumMakingCharges(Float albumMakingCharges) {
 		this.albumMakingCharges = albumMakingCharges;
 	}
 
-	public boolean isDvdMaking() {
+	public Boolean getDvdMaking() {
 		return dvdMaking;
 	}
 
-	public void setDvdMaking(boolean dvdMaking) {
+	public void setDvdMaking(Boolean dvdMaking) {
 		this.dvdMaking = dvdMaking;
 	}
 
-	public float getDvdMakingCharges() {
+	public Float getDvdMakingCharges() {
 		return dvdMakingCharges;
 	}
 
-	public void setDvdMakingCharges(float dvdMakingCharges) {
+	public void setDvdMakingCharges(Float dvdMakingCharges) {
 		this.dvdMakingCharges = dvdMakingCharges;
 	}
-
-	public long getVersion() {
-		return version;
-	}
-
-	public void setVersion(long version) {
-		this.version = version;
-	}
-	
 }

@@ -9,6 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Version;
@@ -43,7 +45,7 @@ public class Caterer implements Serializable{
 	private String comments;
 	
 	@Column(name = "rating")
-	private float rating;
+	private Float rating;
 	
 	@Column(name = "added_on")
 	private Date addedOn;
@@ -55,28 +57,34 @@ public class Caterer implements Serializable{
 	private String nonVegMenu;
 	
 	@Column(name = "only_veg")
-	private boolean onlyVeg;
+	private Boolean onlyVeg;
 	
 	@Column(name = "waiters")
-	private boolean waiters;
+	private Boolean waiters;
 	
 	@Column(name = "crockery")
-	private boolean crockery;
+	private Boolean crockery;
 	
 	@Column(name = "counters")
-	private boolean counters;
+	private Boolean counters;
 	
 	@Column(name = "min_veg_plate_charges")
-	private float minVegPlateCharges;
+	private Float minVegPlateCharges;
 	
 	@Column(name = "min_nonveg_plate_charges")
-	private float minNonvegPlateCharges;
+	private Float minNonvegPlateCharges;
 	
-	@Column(name = "city_id")
-	private City cityId;
-	
-	@Version
-	private long version;
+	@ManyToOne
+	@JoinColumn(name = "city_id")
+	private City city;
+
+	public long getCaterer_id() {
+		return caterer_id;
+	}
+
+	public void setCaterer_id(long caterer_id) {
+		this.caterer_id = caterer_id;
+	}
 
 	public String getName() {
 		return name;
@@ -102,6 +110,14 @@ public class Caterer implements Serializable{
 		this.attachments = attachments;
 	}
 
+	public List<Address> getAddresses() {
+		return addresses;
+	}
+
+	public void setAddresses(List<Address> addresses) {
+		this.addresses = addresses;
+	}
+
 	public String getComments() {
 		return comments;
 	}
@@ -110,11 +126,11 @@ public class Caterer implements Serializable{
 		this.comments = comments;
 	}
 
-	public float getRating() {
+	public Float getRating() {
 		return rating;
 	}
 
-	public void setRating(float rating) {
+	public void setRating(Float rating) {
 		this.rating = rating;
 	}
 
@@ -126,12 +142,75 @@ public class Caterer implements Serializable{
 		this.addedOn = addedOn;
 	}
 
-	public long getVersion() {
-		return version;
+	public String getVegMenu() {
+		return vegMenu;
 	}
 
-	public void setVersion(long version) {
-		this.version = version;
+	public void setVegMenu(String vegMenu) {
+		this.vegMenu = vegMenu;
 	}
-	
+
+	public String getNonVegMenu() {
+		return nonVegMenu;
+	}
+
+	public void setNonVegMenu(String nonVegMenu) {
+		this.nonVegMenu = nonVegMenu;
+	}
+
+	public Boolean getOnlyVeg() {
+		return onlyVeg;
+	}
+
+	public void setOnlyVeg(Boolean onlyVeg) {
+		this.onlyVeg = onlyVeg;
+	}
+
+	public Boolean getWaiters() {
+		return waiters;
+	}
+
+	public void setWaiters(Boolean waiters) {
+		this.waiters = waiters;
+	}
+
+	public Boolean getCrockery() {
+		return crockery;
+	}
+
+	public void setCrockery(Boolean crockery) {
+		this.crockery = crockery;
+	}
+
+	public Boolean getCounters() {
+		return counters;
+	}
+
+	public void setCounters(Boolean counters) {
+		this.counters = counters;
+	}
+
+	public Float getMinVegPlateCharges() {
+		return minVegPlateCharges;
+	}
+
+	public void setMinVegPlateCharges(Float minVegPlateCharges) {
+		this.minVegPlateCharges = minVegPlateCharges;
+	}
+
+	public Float getMinNonvegPlateCharges() {
+		return minNonvegPlateCharges;
+	}
+
+	public void setMinNonvegPlateCharges(Float minNonvegPlateCharges) {
+		this.minNonvegPlateCharges = minNonvegPlateCharges;
+	}
+
+	public City getCity() {
+		return city;
+	}
+
+	public void setCity(City city) {
+		this.city = city;
+	}
 }

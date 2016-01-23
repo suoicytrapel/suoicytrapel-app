@@ -1,10 +1,10 @@
-package lepartycious.controllers;
+/*package lepartycious.controllers;
 
 import java.util.List;
 
 import lepartycious.models.Caterer;
 import lepartycious.models.Venue;
-import lepartycious.services.UserService;
+import lepartycious.services.SearchService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class TestController {
 	
 	@Autowired
-	private UserService userService;
+	private SearchService userService;
 
 	@RequestMapping(method=RequestMethod.GET, value="/venue")
 	public String getVenue() {
@@ -34,3 +34,4 @@ public class TestController {
 	}
 	
 }
+*/

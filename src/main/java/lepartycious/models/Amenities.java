@@ -2,12 +2,14 @@ package lepartycious.models;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
@@ -35,13 +37,21 @@ public class Amenities implements Serializable{
 	private String amenityDimensions;
 	
 	@Column(name = "is_indoor_amenity")
-	private boolean isIndoorAmenity;
+	private Boolean isIndoorAmenity;
 	
 	@Column(name = "added_on")
 	private Date addedOn;
 	
-	@Version
-	private long version;
+	@OneToMany(mappedBy="amenitiesId")
+	private List<VenueAmenities> venueamenities;
+
+	public long getAmenitiesId() {
+		return amenitiesId;
+	}
+
+	public void setAmenitiesId(long amenitiesId) {
+		this.amenitiesId = amenitiesId;
+	}
 
 	public String getAmenityType() {
 		return amenityType;
@@ -67,11 +77,11 @@ public class Amenities implements Serializable{
 		this.amenityDimensions = amenityDimensions;
 	}
 
-	public boolean isIndoorAmenity() {
+	public Boolean getIsIndoorAmenity() {
 		return isIndoorAmenity;
 	}
 
-	public void setIndoorAmenity(boolean isIndoorAmenity) {
+	public void setIsIndoorAmenity(Boolean isIndoorAmenity) {
 		this.isIndoorAmenity = isIndoorAmenity;
 	}
 
@@ -83,4 +93,11 @@ public class Amenities implements Serializable{
 		this.addedOn = addedOn;
 	}
 
+	public List<VenueAmenities> getVenueamenities() {
+		return venueamenities;
+	}
+
+	public void setVenueamenities(List<VenueAmenities> venueamenities) {
+		this.venueamenities = venueamenities;
+	}
 }

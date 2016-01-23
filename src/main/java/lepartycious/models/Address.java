@@ -40,19 +40,24 @@ public class Address implements Serializable{
 	private String email;
 	
 	@Column(name="pincode")
-	private long pincode;
+	private Long pincode;
 	
 	@Column(name="primary_phone")
-	private long primaryPhone;
+	private Long primaryPhone;
 	
 	@Column(name="secondary_phone")
-	private long secondaryPhone;
+	private Long secondaryPhone;
 	
 	@Column(name="entity_id")
-	private long entityId;
-	
-	@Version
-	private long version;
+	private Long entityId;
+
+	public long getAddressId() {
+		return addressId;
+	}
+
+	public void setAddressId(long addressId) {
+		this.addressId = addressId;
+	}
 
 	public String getAddressLine1() {
 		return addressLine1;
@@ -94,43 +99,35 @@ public class Address implements Serializable{
 		this.email = email;
 	}
 
-	public long getPincode() {
+	public Long getPincode() {
 		return pincode;
 	}
 
-	public void setPincode(long pincode) {
+	public void setPincode(Long pincode) {
 		this.pincode = pincode;
 	}
 
-	public long getPrimaryPhone() {
+	public Long getPrimaryPhone() {
 		return primaryPhone;
 	}
 
-	public void setPrimaryPhone(long primaryPhone) {
+	public void setPrimaryPhone(Long primaryPhone) {
 		this.primaryPhone = primaryPhone;
 	}
 
-	public long getSecondaryPhone() {
+	public Long getSecondaryPhone() {
 		return secondaryPhone;
 	}
 
-	public void setSecondaryPhone(long secondaryPhone) {
+	public void setSecondaryPhone(Long secondaryPhone) {
 		this.secondaryPhone = secondaryPhone;
 	}
 
-	public long getEntityId() {
+	public Long getEntityId() {
 		return entityId;
 	}
 
-	public void setEntityId(long entityId) {
+	public void setEntityId(Long entityId) {
 		this.entityId = entityId;
-	}
-
-	public long getVersion() {
-		return version;
-	}
-
-	public void setVersion(long version) {
-		this.version = version;
 	}
 }

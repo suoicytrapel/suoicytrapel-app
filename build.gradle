@@ -32,6 +32,7 @@ dependencies {
     "org.springframework:spring-orm:4.2.4.RELEASE",
 	"org.springframework:spring-tx:4.2.4.RELEASE",
 	"org.springframework:spring-jdbc:4.2.4.RELEASE",
-	"org.liquibase:liquibase-core"
+	"org.liquibase:liquibase-core",
+	"org.apache.commons:commons-lang3:3.0"
 }
 
