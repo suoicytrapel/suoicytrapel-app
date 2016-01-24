@@ -1,4 +1,4 @@
-package lepartycious.daos;
+/*package lepartycious.daos;
 
 import java.util.List;
 
@@ -35,5 +35,8 @@ public interface SearchDAO extends BaseDAO{
 	public Long getRentalCount(Long cityid, String searchString);
 	
 	public Long getDecoratorCount(Long cityid, String searchString);
+
+	public List<Venue> loadList(Long cityId, String searchString);
 	
 }
+*/

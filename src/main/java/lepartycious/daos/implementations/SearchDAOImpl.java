@@ -1,4 +1,4 @@
-package lepartycious.daos.implementations;
+/*package lepartycious.daos.implementations;
 
 import java.util.List;
 
@@ -41,7 +41,7 @@ public class SearchDAOImpl extends BaseDAOImpl implements SearchDAO {
 		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Venue.class);
 		criteria.add(Restrictions.eq("city.cityId", cityId));
 		if(StringUtils.isNotBlank(searchString)){
-			criteria.add(Restrictions.ilike("name", searchString));
+			criteria.add(Restrictions.ilike("name", "%" + searchString + "%"));
 		}
 		return criteria;
 	}
@@ -118,4 +118,12 @@ public class SearchDAOImpl extends BaseDAOImpl implements SearchDAO {
 		return null;
 	}
 
+	@Override
+	public List<Venue> loadList(Long cityId, String searchString) {
+		Criteria criteria = createVenueSearchCriteria(cityId, searchString);
+		List ls =  criteria.list();
+		return ls;
+	}
+
 }
+*/

@@ -1,4 +1,4 @@
-package lepartycious.services.implementations;
+/*package lepartycious.services.implementations;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,4 +57,17 @@ public class SearchServiceImpl implements SearchService{
 		}
 	}
 
+	@Override
+	public List<String> loadList(SearchRequestDTO searchRequestDTO) {
+		List<String> list = new ArrayList<String>();
+		if(SearchTypeEnum.VENUE.toString().equals(searchRequestDTO.getSearchType())){
+			List<Venue> venues = searchDAO.loadList(searchRequestDTO.getCityId(), searchRequestDTO.getSearchString());
+			for(Venue venue : venues){
+				list.add(venue.getName());
+			}
+		}
+		return list;
+	}
+
 }
+*/
