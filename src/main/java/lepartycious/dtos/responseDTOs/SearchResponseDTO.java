@@ -6,6 +6,7 @@ public class SearchResponseDTO {
 	
 	private String name;
 	private List<String> attachmentURL;
+	private String mainImagerURL;
 	
 	public SearchResponseDTO() {
 		super();
@@ -28,5 +29,10 @@ public class SearchResponseDTO {
 	public void setAttachmentURL(List<String> attachmentURL) {
 		this.attachmentURL = attachmentURL;
 	}
-	
+	public String getMainImagerURL() {
+		return mainImagerURL;
+	}
+	public void setMainImagerURL(String mainImagerURL) {
+		this.mainImagerURL = mainImagerURL;
+	}
 }

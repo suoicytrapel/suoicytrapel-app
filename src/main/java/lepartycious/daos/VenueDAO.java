@@ -12,5 +12,7 @@ public interface VenueDAO extends BaseDAO{
 
 	public Long getVenueCount(Long cityid, String searchString);
 
+	public Venue fetchVenueDetails(Long cityId, String name);
+
 
 }

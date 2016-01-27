@@ -10,6 +10,7 @@ import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.util.CollectionUtils;
 
 import lepartycious.daos.VenueDAO;
 import lepartycious.models.Venue;
@@ -51,6 +52,20 @@ public class VenueDAOImpl extends BaseDAOImpl implements VenueDAO {
 			criteria.add(Restrictions.ilike("name", "%" + searchString + "%"));
 		}
 		return criteria;
+	}
+
+	@Override
+	public Venue fetchVenueDetails(Long cityId, String name) {
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Venue.class);
+		criteria.add(Restrictions.eq("city.cityId", cityId));
+		criteria.add(Restrictions.eq("name", name));
+		List<Venue> venues = criteria.list();
+		if(CollectionUtils.isEmpty(venues)){
+			return null;
+		}
+		else{
+			return venues.get(0);
+		}
 	}
 
 

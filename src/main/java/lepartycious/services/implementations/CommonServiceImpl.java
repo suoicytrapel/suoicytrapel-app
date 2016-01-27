@@ -3,7 +3,9 @@ package lepartycious.services.implementations;
 import java.util.List;
 
 import lepartycious.Enums.SearchTypeEnum;
+import lepartycious.dtos.requestDTOs.DataRequestDTO;
 import lepartycious.dtos.requestDTOs.SearchRequestDTO;
+import lepartycious.dtos.responseDTOs.DetailResponseDTO;
 import lepartycious.dtos.responseDTOs.SearchResponseDTOWrapper;
 import lepartycious.services.BandService;
 import lepartycious.services.CatererService;
@@ -83,6 +85,31 @@ public class CommonServiceImpl implements CommonService {
 		else if(SearchTypeEnum.RENTAL.toString().equals(searchDTO.getSearchType())){
 			return rentalService.loadRentalList(searchDTO);
 		}
+		else{
+			return null;
+		}
+	}
+
+	@Override
+	public DetailResponseDTO fetchDetails(DataRequestDTO dataRequestDTO) {
+		if(SearchTypeEnum.VENUE.toString().equals(dataRequestDTO.getSearchType())){
+			return venueService.fetchVenueDetails(dataRequestDTO);
+		}
+		/*else if(SearchTypeEnum.CATERER.toString().equals(dataRequestDTO.getSearchType())){
+			//return catererService.getCaterers(searchDTO);
+		}
+		else if(SearchTypeEnum.BAND.toString().equals(dataRequestDTO.getSearchType())){
+			//return bandService.getBands(searchDTO);
+		}
+		else if(SearchTypeEnum.PHOTOGRAPHER.toString().equals(dataRequestDTO.getSearchType())){
+			//return photographerService.getPhotographers(searchDTO);
+		}
+		else if(SearchTypeEnum.DECORATOR.toString().equals(dataRequestDTO.getSearchType())){
+			//return decoratorService.getDecorators(searchDTO);
+		}
+		else if(SearchTypeEnum.RENTAL.toString().equals(dataRequestDTO.getSearchType())){
+			//return rentalService.getRentals(searchDTO);
+		}*/
 		else{
 			return null;
 		}
