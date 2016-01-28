@@ -22,7 +22,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class VenueServiceImpl implements VenueService {
-	
+
 	@Autowired
 	private VenueDAO venueDAO;
 
@@ -46,15 +46,13 @@ public class VenueServiceImpl implements VenueService {
 	@Override
 	public List<String> loadVenueList(SearchRequestDTO searchRequestDTO) {
 		List<String> list = new ArrayList<String>();
-		if(SearchTypeEnum.VENUE.toString().equals(searchRequestDTO.getSearchType())){
-			List<Venue> venues = venueDAO.loadVenueList(searchRequestDTO.getCityId(), searchRequestDTO.getSearchString());
-			for(Venue venue : venues){
-				list.add(venue.getName());
-			}
+		List<Venue> venues = venueDAO.loadVenueList(searchRequestDTO.getCityId(), searchRequestDTO.getSearchString());
+		for(Venue venue : venues){
+			list.add(venue.getName());
 		}
 		return list;
 	}
-	
+
 	private void populateVenueResults(
 			List<SearchResponseDTO> searchResponseDTOList, SearchRequestDTO searchDTO) {
 		List<Venue> venues = venueDAO.getVenues(searchDTO.getCityId(), searchDTO.getSearchString(), searchDTO.getOffset(), searchDTO.getLimit(), searchDTO.getSortField(), searchDTO.getSortOrder());

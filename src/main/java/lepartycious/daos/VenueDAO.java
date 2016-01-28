@@ -14,5 +14,4 @@ public interface VenueDAO extends BaseDAO{
 
 	public Venue fetchVenueDetails(Long cityId, String name);
 
-
 }
