@@ -54,6 +54,10 @@ public class Photographer implements Serializable{
 	@JoinColumn(name = "city_id")
 	private City city;
 	
+	@ManyToOne
+	@JoinColumn(name = "locality_id")
+	private Locality locality;
+	
 	@Column(name = "normal_photography")
 	private Boolean normalPhotography;
 	
@@ -234,5 +238,13 @@ public class Photographer implements Serializable{
 
 	public void setDvdMakingCharges(Float dvdMakingCharges) {
 		this.dvdMakingCharges = dvdMakingCharges;
+	}
+
+	public Locality getLocality() {
+		return locality;
+	}
+
+	public void setLocality(Locality locality) {
+		this.locality = locality;
 	}
 }

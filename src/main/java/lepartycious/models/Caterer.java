@@ -77,6 +77,10 @@ public class Caterer implements Serializable{
 	@ManyToOne
 	@JoinColumn(name = "city_id")
 	private City city;
+	
+	@ManyToOne
+	@JoinColumn(name = "locality_id")
+	private Locality locality;
 
 	public long getCaterer_id() {
 		return caterer_id;
@@ -212,5 +216,13 @@ public class Caterer implements Serializable{
 
 	public void setCity(City city) {
 		this.city = city;
+	}
+
+	public Locality getLocality() {
+		return locality;
+	}
+
+	public void setLocality(Locality locality) {
+		this.locality = locality;
 	}
 }

@@ -13,7 +13,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Version;
 
 @Entity
 @Table(name="venue")
@@ -56,6 +55,10 @@ public class Venue implements Serializable{
 	@ManyToOne
 	@JoinColumn(name = "city_id")
 	private City city;
+	
+	@ManyToOne
+	@JoinColumn(name = "locality_id")
+	private Locality locality;
 	
 	@OneToMany(mappedBy="venueId")
 	private List<VenueAmenities> venueamenities;
@@ -160,5 +163,21 @@ public class Venue implements Serializable{
 
 	public void setCity(City city) {
 		this.city = city;
+	}
+
+	public long getVenueId() {
+		return venueId;
+	}
+
+	public void setVenueId(long venueId) {
+		this.venueId = venueId;
+	}
+
+	public Locality getLocality() {
+		return locality;
+	}
+
+	public void setLocality(Locality locality) {
+		this.locality = locality;
 	}
 }

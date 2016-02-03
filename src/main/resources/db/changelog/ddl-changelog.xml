@@ -31,6 +31,24 @@
 			); 
 		</sql> 
 	</changeSet>
+	
+	<changeSet author="msingla" id="1.1.1">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<tableExists tableName="locality" />
+			</not>
+		</preConditions>
+		<sql>
+			CREATE TABLE locality (
+			id bigint PRIMARY KEY,
+			name varchar (25) NOT NULL,
+			description varchar (255),
+			added_on timestamp without time zone NOT NULL DEFAULT now(),
+			city_id bigint,
+			FOREIGN KEY (city_id) REFERENCES city (id)
+			);
+		</sql>
+	</changeSet>
 
 	<changeSet author="msingla" id="1.2">
 		<preConditions onFail="MARK_RAN">
@@ -74,7 +92,9 @@
 			counters boolean,
 			added_on timestamp without time zone NOT NULL DEFAULT now(),
 			city_id bigint,
-			FOREIGN KEY (city_id) REFERENCES city (id)
+			FOREIGN KEY (city_id) REFERENCES city (id),
+			locality_id bigint,
+			FOREIGN KEY (locality_id) REFERENCES locality (id)
 			);
 		</sql>
 	</changeSet>
@@ -96,7 +116,9 @@
 			version bigint,
 			added_on timestamp without time	zone NOT NULL DEFAULT now(),
 			city_id bigint,
-			FOREIGN KEY (city_id) REFERENCES city (id)
+			FOREIGN KEY (city_id) REFERENCES city (id),
+			locality_id bigint,
+			FOREIGN KEY (locality_id) REFERENCES locality (id)
 			);
 		</sql>
 	</changeSet>
@@ -127,7 +149,9 @@
 			dvd_making_charges float,
 			added_on timestamp without time zone NOT NULL DEFAULT now(),
 			city_id bigint,
-			FOREIGN KEY (city_id) REFERENCES city (id)
+			FOREIGN KEY (city_id) REFERENCES city (id),
+			locality_id bigint,
+			FOREIGN KEY (locality_id) REFERENCES locality (id)
 			);
 		</sql>
 	</changeSet>
@@ -154,7 +178,9 @@
 			min_floral_works_charges float,
 			added_on timestamp without time zone NOT NULL DEFAULT now(),
 			city_id bigint,
-			FOREIGN KEY (city_id) REFERENCES city (id)
+			FOREIGN KEY (city_id) REFERENCES city (id),
+			locality_id bigint,
+			FOREIGN KEY (locality_id) REFERENCES locality (id)
 			);
 		</sql>
 	</changeSet>
@@ -189,7 +215,9 @@
 			waiting_charges float,
 			added_on timestamp without time zone NOT NULL DEFAULT now(),
 			city_id bigint,
-			FOREIGN KEY (city_id) REFERENCES city (id)
+			FOREIGN KEY (city_id) REFERENCES city (id),
+			locality_id bigint,
+			FOREIGN KEY (locality_id) REFERENCES locality (id)
 			);
 		</sql>
 	</changeSet>
@@ -224,7 +252,9 @@
 			min_rath_charges float,
 			added_on timestamp without time zone NOT NULL DEFAULT now(),
 			city_id bigint,
-			FOREIGN KEY (city_id) REFERENCES city (id)
+			FOREIGN KEY (city_id) REFERENCES city (id),
+			locality_id bigint,
+			FOREIGN KEY (locality_id) REFERENCES locality (id)
 			);
 		</sql>
 	</changeSet>

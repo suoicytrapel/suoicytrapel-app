@@ -54,6 +54,10 @@ public class Band implements Serializable{
 	@JoinColumn(name = "city_id")
 	private City city;
 	
+	@ManyToOne
+	@JoinColumn(name = "locality_id")
+	private Locality locality;
+	
 	@Column(name = "simple_band_availability")
 	private Boolean simpleBandAvailability;
 	
@@ -279,5 +283,12 @@ public class Band implements Serializable{
 	public void setMinRathCharges(Float minRathCharges) {
 		this.minRathCharges = minRathCharges;
 	}
-	
+
+	public Locality getLocality() {
+		return locality;
+	}
+
+	public void setLocality(Locality locality) {
+		this.locality = locality;
+	}
 }

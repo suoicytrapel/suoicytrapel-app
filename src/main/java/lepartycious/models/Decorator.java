@@ -54,6 +54,10 @@ public class Decorator implements Serializable{
 	@JoinColumn(name = "city_id")
 	private City city;
 	
+	@ManyToOne
+	@JoinColumn(name = "locality_id")
+	private Locality locality;
+	
 	@Column(name = "tent_availability")
 	private Boolean tentAvailability;
 	
@@ -192,4 +196,11 @@ public class Decorator implements Serializable{
 		this.minFloralWorksCharges = minFloralWorksCharges;
 	}
 
+	public Locality getLocality() {
+		return locality;
+	}
+
+	public void setLocality(Locality locality) {
+		this.locality = locality;
+	}
 }

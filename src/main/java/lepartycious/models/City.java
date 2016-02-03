@@ -53,6 +53,9 @@ public class City implements Serializable{
 	
 	@OneToMany(mappedBy="city")
 	private List<Band> bands;
+	
+	@OneToMany(mappedBy="city")
+	private List<Locality> localities;
 
 	public String getName() {
 		return name;
@@ -134,4 +137,11 @@ public class City implements Serializable{
 		this.cityId = cityId;
 	}
 
+	public List<Locality> getLocalities() {
+		return localities;
+	}
+
+	public void setLocalities(List<Locality> localities) {
+		this.localities = localities;
+	}
 }

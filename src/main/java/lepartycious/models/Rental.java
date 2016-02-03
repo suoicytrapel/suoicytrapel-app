@@ -54,6 +54,10 @@ public class Rental implements Serializable{
 	@JoinColumn(name = "city_id")
 	private City city;
 	
+	@ManyToOne
+	@JoinColumn(name = "locality_id")
+	private Locality locality;
+	
 	@Column(name = "sedan_availability")
 	private Boolean sedanAvailability;
 	
@@ -267,5 +271,13 @@ public class Rental implements Serializable{
 
 	public void setParkingChargesIncluded(Boolean parkingChargesIncluded) {
 		this.parkingChargesIncluded = parkingChargesIncluded;
+	}
+
+	public Locality getLocality() {
+		return locality;
+	}
+
+	public void setLocality(Locality locality) {
+		this.locality = locality;
 	}
 }
