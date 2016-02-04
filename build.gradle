@@ -18,6 +18,7 @@ jar {
 }
 
 repositories {
+	maven { url "https://maven.java.net/content/groups/public#sthash.GJUqQLaX.dpuf" }
     mavenCentral()
 }
 
@@ -33,6 +34,8 @@ dependencies {
 	"org.springframework:spring-tx:4.2.4.RELEASE",
 	"org.springframework:spring-jdbc:4.2.4.RELEASE",
 	"org.liquibase:liquibase-core",
-	"org.apache.commons:commons-lang3:3.0"
+	"org.apache.commons:commons-lang3:3.0",
+	"org.springframework:spring-context-support:4.1.1.RELEASE",
+	"javax.mail:mail:1.4.7"
 }
 
