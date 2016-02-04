@@ -5,6 +5,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import lepartycious.dtos.requestDTOs.ContactRequestDTO;
@@ -20,6 +21,7 @@ public class EmailServiceImpl implements EmailService {
 	private SimpleMailMessage custommessage;
 
 	@Override
+	@Async
 	public void sendMail(ContactRequestDTO emailContent) {
 		SimpleMailMessage message = new SimpleMailMessage(custommessage);
 		message.setFrom("no-reply@gmail.com");
