@@ -64,8 +64,8 @@ public class BandServiceImpl implements BandService {
 	@Override
 	public DetailResponseDTO fetchBandDetails(DataRequestDTO dataRequestDTO) {
 		Band Band = bandDAO.fetchBandDetails(dataRequestDTO.getCityId(), dataRequestDTO.getName());
-		List<String> serviceList = new ArrayList<>();
-		List<String> amenitiesList = new ArrayList<>();
+		List<String> serviceList = new ArrayList<String>();
+		List<String> amenitiesList = new ArrayList<String>();
 		Address address = Band.getAddresses().get(0);
 		DetailResponseDTO detailResponseDTO = new DetailResponseDTO();
 		detailResponseDTO.setName(Band.getName());

@@ -63,7 +63,7 @@ public class RentalServiceImpl implements RentalService {
 	@Override
 	public DetailResponseDTO fetchRentalDetails(DataRequestDTO dataRequestDTO) {
 		Rental Rental = rentalDAO.fetchRentalDetails(dataRequestDTO.getCityId(), dataRequestDTO.getName());
-		List<String> serviceList = new ArrayList<>();
+		List<String> serviceList = new ArrayList<String>();
 		Address address = Rental.getAddresses().get(0);
 		DetailResponseDTO detailResponseDTO = new DetailResponseDTO();
 		detailResponseDTO.setName(Rental.getName());

@@ -67,8 +67,8 @@ public class VenueServiceImpl implements VenueService {
 	@Override
 	public DetailResponseDTO fetchVenueDetails(DataRequestDTO dataRequestDTO) {
 		Venue venue = venueDAO.fetchVenueDetails(dataRequestDTO.getCityId(), dataRequestDTO.getName());
-		List<String> serviceList = new ArrayList<>();
-		List<String> amenitiesList = new ArrayList<>();
+		List<String> serviceList = new ArrayList<String>();
+		List<String> amenitiesList = new ArrayList<String>();
 		Address address = venue.getAddresses().get(0);
 		for(VenueServices venueService : venue.getVenueServices()){
 			serviceList.add(venueService.getServiceId().getDescription());

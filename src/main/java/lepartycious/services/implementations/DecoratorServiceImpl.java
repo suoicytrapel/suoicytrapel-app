@@ -63,8 +63,8 @@ public class DecoratorServiceImpl implements DecoratorService {
 	@Override
 	public DetailResponseDTO fetchDecoratorDetails(DataRequestDTO dataRequestDTO) {
 		Decorator Decorator = decoratorDAO.fetchDecoratorDetails(dataRequestDTO.getCityId(), dataRequestDTO.getName());
-		List<String> serviceList = new ArrayList<>();
-		List<String> amenitiesList = new ArrayList<>();
+		List<String> serviceList = new ArrayList<String>();
+		List<String> amenitiesList = new ArrayList<String>();
 		Address address = Decorator.getAddresses().get(0);
 		DetailResponseDTO detailResponseDTO = new DetailResponseDTO();
 		detailResponseDTO.setName(Decorator.getName());

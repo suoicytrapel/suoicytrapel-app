@@ -64,8 +64,8 @@ public class PhotographerServiceImpl implements PhotographerService {
 	@Override
 	public DetailResponseDTO fetchPhotographerDetails(DataRequestDTO dataRequestDTO) {
 		Photographer Photographer = photographerDAO.fetchPhotographerDetails(dataRequestDTO.getCityId(), dataRequestDTO.getName());
-		List<String> serviceList = new ArrayList<>();
-		List<String> amenitiesList = new ArrayList<>();
+		List<String> serviceList = new ArrayList<String>();
+		List<String> amenitiesList = new ArrayList<String>();
 		Address address = Photographer.getAddresses().get(0);
 		DetailResponseDTO detailResponseDTO = new DetailResponseDTO();
 		detailResponseDTO.setName(Photographer.getName());

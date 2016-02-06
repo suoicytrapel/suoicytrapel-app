@@ -43,7 +43,7 @@ public class HomeSearchController {
 	
 	@RequestMapping(method=RequestMethod.GET, value="/city")
 	public Map<Long, String> loadCities() {
-		Map<Long, String> cityMap = new HashMap<>();
+		Map<Long, String> cityMap = new HashMap<Long, String>();
 		cityMap = cityService.loadCities();
 		return cityMap;
 	}

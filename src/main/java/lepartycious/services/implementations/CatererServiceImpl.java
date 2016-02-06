@@ -63,8 +63,8 @@ public class CatererServiceImpl implements CatererService {
 	@Override
 	public DetailResponseDTO fetchCatererDetails(DataRequestDTO dataRequestDTO) {
 		Caterer Caterer = catererDAO.fetchCatererDetails(dataRequestDTO.getCityId(), dataRequestDTO.getName());
-		List<String> serviceList = new ArrayList<>();
-		List<String> amenitiesList = new ArrayList<>();
+		List<String> serviceList = new ArrayList<String>();
+		List<String> amenitiesList = new ArrayList<String>();
 		Address address = Caterer.getAddresses().get(0);
 		DetailResponseDTO detailResponseDTO = new DetailResponseDTO();
 		detailResponseDTO.setName(Caterer.getName());
