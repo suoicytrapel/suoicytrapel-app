@@ -58,6 +58,20 @@
 		</preConditions>
 	    <sql>insert into attachment values ((select nextVal('hibernate_sequence')), 'YoChina.jpg', 'YoChina.jpg', (select id from venue where name = 'Yo China!'), 0, now());</sql>
     </changeSet>
+    
+    <changeSet author="msingla" id="1.8.1">
+		<preConditions onFail="MARK_RAN">
+			<sqlCheck expectedResult="0">select count(*) from amenities where amenity_type = 'BNQTHALL' and description = 'Banquet Hall';</sqlCheck>
+		</preConditions>
+	    <sql>insert into amenities values ((select nextVal('hibernate_sequence')), 'BNQTHALL', 'Banquet Hall', true, '25in x 25in x 25in', now());</sql>
+    </changeSet>
+    
+    <changeSet author="msingla" id="1.8.2">
+		<preConditions onFail="MARK_RAN">
+			<sqlCheck expectedResult="0">select count(*) from service where service_type = 'DINEIN' and description = 'Dine In';</sqlCheck>
+		</preConditions>
+	    <sql>insert into service values ((select nextVal('hibernate_sequence')), 'DINEIN', 'Dine In', now());</sql>
+    </changeSet>
 	
 	<changeSet author="msingla" id="1.9">
 		<preConditions onFail="MARK_RAN">

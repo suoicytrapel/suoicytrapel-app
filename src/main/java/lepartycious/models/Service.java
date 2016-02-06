@@ -70,4 +70,13 @@ public class Service implements Serializable{
 	public void setVenueServices(List<VenueServices> venueServices) {
 		this.venueServices = venueServices;
 	}
+
+	public long getServiceId() {
+		return serviceId;
+	}
+
+	public void setServiceId(long serviceId) {
+		this.serviceId = serviceId;
+	}
+	
 }

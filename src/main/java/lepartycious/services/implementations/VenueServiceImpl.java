@@ -1,9 +1,12 @@
 package lepartycious.services.implementations;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import lepartycious.Enums.SearchTypeEnum;
+import lepartycious.daos.CityDAO;
 import lepartycious.daos.VenueDAO;
 import lepartycious.dtos.requestDTOs.DataRequestDTO;
 import lepartycious.dtos.requestDTOs.SearchRequestDTO;
@@ -11,6 +14,7 @@ import lepartycious.dtos.responseDTOs.DetailResponseDTO;
 import lepartycious.dtos.responseDTOs.SearchResponseDTO;
 import lepartycious.dtos.responseDTOs.SearchResponseDTOWrapper;
 import lepartycious.models.Address;
+import lepartycious.models.Amenities;
 import lepartycious.models.Attachment;
 import lepartycious.models.Venue;
 import lepartycious.models.VenueAmenities;
@@ -19,6 +23,7 @@ import lepartycious.services.VenueService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 @Service
 public class VenueServiceImpl implements VenueService {
@@ -26,20 +31,52 @@ public class VenueServiceImpl implements VenueService {
 	@Autowired
 	private VenueDAO venueDAO;
 
+	@Autowired
+	private CityDAO cityDAO;
+
 	@Override
 	public SearchResponseDTOWrapper getVenues(SearchRequestDTO searchDTO) {
 		SearchResponseDTOWrapper searchResponseDTOWrapper = new SearchResponseDTOWrapper();
 		List<SearchResponseDTO> searchResponseDTOList = new ArrayList<SearchResponseDTO>();
+		List<String> services = new ArrayList<String>();
+		List<String> amenities = new ArrayList<String>();
+		List<lepartycious.models.Service> serviceList = cityDAO.getServices();
+		List<Amenities> amenitiesList = cityDAO.getAmenities();
+		List<Long> serviceIds = new ArrayList<Long>();
+		List<Long> amenityIds = new ArrayList<Long>();
+
+		for(lepartycious.models.Service service : serviceList){
+			services.add(service.getDescription());
+			if(!CollectionUtils.isEmpty(searchDTO.getFilters())){
+				for(String filter : searchDTO.getFilters()){
+					if(filter.equalsIgnoreCase(service.getDescription())){
+						serviceIds.add(service.getServiceId());
+					}
+				}
+			}
+		}
+		for(Amenities amenity : amenitiesList){
+			amenities.add(amenity.getDescription());
+			if(!CollectionUtils.isEmpty(searchDTO.getFilters())){
+				for(String filter : searchDTO.getFilters()){
+					if(filter.equalsIgnoreCase(amenity.getDescription())){
+						amenityIds.add(amenity.getAmenitiesId());
+					}
+				}
+			}
+		}
 		Long totalVenueCount = null;
 		if(searchDTO.getOffset() == null || searchDTO.getOffset() == 0){
-			totalVenueCount = venueDAO.getVenueCount(searchDTO.getCityId(), searchDTO.getSearchString());
+			totalVenueCount = venueDAO.getVenueCount(searchDTO.getCityId(), searchDTO.getSearchString(), serviceIds, amenityIds);
 			if(totalVenueCount < 1){
 				throw new IllegalArgumentException("No matching results");
 			}
 		}
-		populateVenueResults(searchResponseDTOList, searchDTO);
+		populateVenueResults(searchResponseDTOList, searchDTO, serviceIds, amenityIds);
 		searchResponseDTOWrapper.setResultCount(totalVenueCount);
 		searchResponseDTOWrapper.setSearchResponseDTOList(searchResponseDTOList);
+		searchResponseDTOWrapper.setAmenities(amenities);
+		searchResponseDTOWrapper.setServices(services);
 		return searchResponseDTOWrapper;	
 	}
 
@@ -54,8 +91,8 @@ public class VenueServiceImpl implements VenueService {
 	}
 
 	private void populateVenueResults(
-			List<SearchResponseDTO> searchResponseDTOList, SearchRequestDTO searchDTO) {
-		List<Venue> venues = venueDAO.getVenues(searchDTO.getCityId(), searchDTO.getSearchString(), searchDTO.getOffset(), searchDTO.getLimit(), searchDTO.getSortField(), searchDTO.getSortOrder());
+			List<SearchResponseDTO> searchResponseDTOList, SearchRequestDTO searchDTO, List<Long> serviceIds, List<Long> amenityIds) {
+		List<Venue> venues = venueDAO.getVenues(searchDTO.getCityId(), searchDTO.getSearchString(), searchDTO.getOffset(), searchDTO.getLimit(), searchDTO.getSortField(), searchDTO.getSortOrder(), serviceIds, amenityIds);
 		for(Venue venue : venues){
 			SearchResponseDTO searchResponseDTO = new SearchResponseDTO();
 			searchResponseDTO.setName(venue.getName());

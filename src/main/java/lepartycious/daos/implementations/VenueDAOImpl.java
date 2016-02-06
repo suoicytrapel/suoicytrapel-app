@@ -22,8 +22,8 @@ public class VenueDAOImpl extends BaseDAOImpl implements VenueDAO {
 	private SessionFactory sessionFactory;
 
 	@Override
-	public List<Venue> getVenues(Long cityId, String searchString, Long offset, Long limit, String sortField, String sortOrder) {
-		Criteria criteria = createVenueSearchCriteria(cityId, searchString);
+	public List<Venue> getVenues(Long cityId, String searchString, Long offset, Long limit, String sortField, String sortOrder,List<Long> serviceIds, List<Long> amenityIds) {
+		Criteria criteria = createVenueSearchCriteria(cityId, searchString, serviceIds, amenityIds);
 		criteria.setFirstResult(offset.intValue());
 		criteria.setMaxResults(limit.intValue());
 		criteria.addOrder(Order.asc("name"));
@@ -33,24 +33,34 @@ public class VenueDAOImpl extends BaseDAOImpl implements VenueDAO {
 
 	@Override
 	public List<Venue> loadVenueList(Long cityId, String searchString) {
-		Criteria criteria = createVenueSearchCriteria(cityId, searchString);
+		Criteria criteria = createVenueSearchCriteria(cityId, searchString, null, null);
 		List ls =  criteria.list();
 		return ls;
 	}
 
 	@Override
-	public Long getVenueCount(Long cityId, String searchString) {
-		Criteria criteria = createVenueSearchCriteria(cityId, searchString);
+	public Long getVenueCount(Long cityId, String searchString, List<Long> serviceIds, List<Long> amenityIds) {
+		Criteria criteria = createVenueSearchCriteria(cityId, searchString, serviceIds, amenityIds);
 		criteria.setProjection(Projections.rowCount());
 		return (Long) criteria.uniqueResult();
 	}
 	
-	private Criteria createVenueSearchCriteria(Long cityId, String searchString) {
-		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Venue.class);
-		criteria.add(Restrictions.eq("city.cityId", cityId));
+	private Criteria createVenueSearchCriteria(Long cityId, String searchString, List<Long> serviceIds, List<Long> amenityIds) {
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Venue.class, "venue");
+		if(!CollectionUtils.isEmpty(serviceIds)){
+			criteria.createAlias("venue.venueServices", "vs"); // inner join by default
+			criteria.createAlias("vs.serviceId", "service");
+			criteria.add(Restrictions.in("service.serviceId", serviceIds));
+		}
+		if(!CollectionUtils.isEmpty(amenityIds)){
+			criteria.createAlias("venue.venueamenities", "va"); // inner join by default
+			criteria.createAlias("va.amenitiesId", "amenity");
+			criteria.add(Restrictions.in("amenity.amenitiesId", amenityIds));
+		}
 		if(StringUtils.isNotBlank(searchString)){
 			criteria.add(Restrictions.ilike("name", "%" + searchString + "%"));
 		}
+		criteria.add(Restrictions.eq("city.cityId", cityId));
 		return criteria;
 	}
 
