@@ -5,8 +5,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import lepartycious.Error.Error;
 import lepartycious.dtos.requestDTOs.DataRequestDTO;
+import lepartycious.dtos.requestDTOs.FilterRequestDTO;
 import lepartycious.dtos.requestDTOs.SearchRequestDTO;
 import lepartycious.dtos.responseDTOs.DetailResponseDTO;
+import lepartycious.dtos.responseDTOs.FilterResponseWrapperDTO;
 import lepartycious.dtos.responseDTOs.SearchResponseDTOWrapper;
 import lepartycious.services.CommonService;
 
@@ -43,6 +45,13 @@ public class DataController {
 	public DetailResponseDTO fetchDetails(@RequestBody DataRequestDTO dataRequestDTO) {
 		DetailResponseDTO detailResponseDTO = commonService.fetchDetails(dataRequestDTO);
 		return detailResponseDTO;
+	}
+	
+	@RequestMapping(method=RequestMethod.POST, value="/filters")
+	public FilterResponseWrapperDTO fetchFilters(@RequestBody FilterRequestDTO filterRequestDTO) {
+		FilterResponseWrapperDTO filterResponseDTO = new FilterResponseWrapperDTO();
+		filterResponseDTO = commonService.loadFilters(filterRequestDTO.getSearchType(), filterRequestDTO.getCityId());
+		return filterResponseDTO;
 	}
 
 	@ExceptionHandler(IllegalArgumentException.class)

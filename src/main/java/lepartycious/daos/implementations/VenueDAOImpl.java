@@ -22,8 +22,8 @@ public class VenueDAOImpl extends BaseDAOImpl implements VenueDAO {
 	private SessionFactory sessionFactory;
 
 	@Override
-	public List<Venue> getVenues(Long cityId, String searchString, Long offset, Long limit, String sortField, String sortOrder,List<Long> serviceIds, List<Long> amenityIds) {
-		Criteria criteria = createVenueSearchCriteria(cityId, searchString, serviceIds, amenityIds);
+	public List<Venue> getVenues(Long cityId, String searchString, Long offset, Long limit, String sortField, String sortOrder,List<Long> serviceIds, List<Long> amenityIds, List<Long> roomIds, List<Long> localityIds, List<String> types) {
+		Criteria criteria = createVenueSearchCriteria(cityId, searchString, serviceIds, amenityIds, roomIds, localityIds, types);
 		criteria.setFirstResult(offset.intValue());
 		criteria.setMaxResults(limit.intValue());
 		criteria.addOrder(Order.asc("name"));
@@ -33,19 +33,19 @@ public class VenueDAOImpl extends BaseDAOImpl implements VenueDAO {
 
 	@Override
 	public List<Venue> loadVenueList(Long cityId, String searchString) {
-		Criteria criteria = createVenueSearchCriteria(cityId, searchString, null, null);
+		Criteria criteria = createVenueSearchCriteria(cityId, searchString, null, null, null, null, null);
 		List ls =  criteria.list();
 		return ls;
 	}
 
 	@Override
-	public Long getVenueCount(Long cityId, String searchString, List<Long> serviceIds, List<Long> amenityIds) {
-		Criteria criteria = createVenueSearchCriteria(cityId, searchString, serviceIds, amenityIds);
+	public Long getVenueCount(Long cityId, String searchString, List<Long> serviceIds, List<Long> amenityIds, List<Long> roomIds, List<Long> localityIds, List<String> types) {
+		Criteria criteria = createVenueSearchCriteria(cityId, searchString, serviceIds, amenityIds, roomIds, localityIds, types);
 		criteria.setProjection(Projections.rowCount());
 		return (Long) criteria.uniqueResult();
 	}
 	
-	private Criteria createVenueSearchCriteria(Long cityId, String searchString, List<Long> serviceIds, List<Long> amenityIds) {
+	private Criteria createVenueSearchCriteria(Long cityId, String searchString, List<Long> serviceIds, List<Long> amenityIds, List<Long> roomIds, List<Long> localityIds, List<String> types) {
 		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Venue.class, "venue");
 		if(!CollectionUtils.isEmpty(serviceIds)){
 			criteria.createAlias("venue.venueServices", "vs"); // inner join by default
@@ -56,6 +56,17 @@ public class VenueDAOImpl extends BaseDAOImpl implements VenueDAO {
 			criteria.createAlias("venue.venueamenities", "va"); // inner join by default
 			criteria.createAlias("va.amenitiesId", "amenity");
 			criteria.add(Restrictions.in("amenity.amenitiesId", amenityIds));
+		}
+		if(!CollectionUtils.isEmpty(roomIds)){
+			criteria.createAlias("venue.venueRooms", "vr"); // inner join by default
+			criteria.createAlias("vr.roomId", "room");
+			criteria.add(Restrictions.in("room.roomId", roomIds));
+		}
+		if(!CollectionUtils.isEmpty(localityIds)){
+			criteria.add(Restrictions.in("locality.localityId", localityIds));
+		}
+		if(!CollectionUtils.isEmpty(types)){
+			criteria.add(Restrictions.in("type", types));
 		}
 		if(StringUtils.isNotBlank(searchString)){
 			criteria.add(Restrictions.ilike("name", "%" + searchString + "%"));

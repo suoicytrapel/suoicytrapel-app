@@ -20,7 +20,7 @@ public class CityServiceImpl implements CityService {
 	@Override
 	public Map<Long, String> loadCities() {
 		Map<Long, String> cityMap = new HashMap<Long, String>();
-		List<City> cities = cityDAO.loadCities();
+		List<City> cities = cityDAO.loadCities("city");
 		for(City city : cities){
 			cityMap.put(city.getCityId(), city.getName());
 		}

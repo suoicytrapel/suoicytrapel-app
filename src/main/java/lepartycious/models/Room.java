@@ -81,4 +81,12 @@ public class Room implements Serializable{
 	public void setVenueRooms(List<VenueRooms> venueRooms) {
 		this.venueRooms = venueRooms;
 	}
+
+	public long getRoomId() {
+		return roomId;
+	}
+
+	public void setRoomId(long roomId) {
+		this.roomId = roomId;
+	}
 }

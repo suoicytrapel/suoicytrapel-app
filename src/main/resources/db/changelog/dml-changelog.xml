@@ -20,6 +20,34 @@
 	    <sql>insert into locality (id, name, description, added_on, city_id) values ((select nextVal('hibernate_sequence')), 'Chandigarh', 'Chandigarh', now(), (select id from city where name = 'Chandigarh'));</sql>
     </changeSet>
     
+    <changeSet author="msingla" id="1.1.1">
+		<preConditions onFail="MARK_RAN">
+			<sqlCheck expectedResult="0">select count(*) from city where name = 'Bikaner';</sqlCheck>
+		</preConditions>
+	    <sql>insert into city values ((select nextVal('hibernate_sequence')), 'Bikaner', 'Bikaner', now());</sql>
+    </changeSet>
+    
+    <changeSet author="msingla" id="1.2.1">
+		<preConditions onFail="MARK_RAN">
+			<sqlCheck expectedResult="0">select count(*) from locality where name = 'Delhi Road';</sqlCheck>
+		</preConditions>
+	    <sql>insert into locality (id, name, description, added_on, city_id) values ((select nextVal('hibernate_sequence')), 'Delhi Road', 'Delhi Road', now(), (select id from city where name = 'Bikaner'));</sql>
+    </changeSet>
+	
+	<changeSet author="msingla" id="1.2.2">
+		<preConditions onFail="MARK_RAN">
+			<sqlCheck expectedResult="0">select count(*) from locality where name = 'Jaisalmer Road';</sqlCheck>
+		</preConditions>
+	    <sql>insert into locality (id, name, description, added_on, city_id) values ((select nextVal('hibernate_sequence')), 'Jaisalmer Road', 'Jaisalmer Road', now(), (select id from city where name = 'Bikaner'));</sql>
+    </changeSet>
+	
+	<changeSet author="msingla" id="1.2.3">
+		<preConditions onFail="MARK_RAN">
+			<sqlCheck expectedResult="0">select count(*) from locality where name = 'Pawan Puri';</sqlCheck>
+		</preConditions>
+	    <sql>insert into locality (id, name, description, added_on, city_id) values ((select nextVal('hibernate_sequence')), 'Pawan Puri', 'Pawan Puri', now(), (select id from city where name = 'Bikaner'));</sql>
+    </changeSet>
+    
     <changeSet author="msingla" id="1.3">
 		<preConditions onFail="MARK_RAN">
 			<sqlCheck expectedResult="0">select count(*) from locality where name = 'Panchkula';</sqlCheck>
@@ -72,7 +100,112 @@
 		</preConditions>
 	    <sql>insert into service values ((select nextVal('hibernate_sequence')), 'DINEIN', 'Dine In', now());</sql>
     </changeSet>
+    
+    	<changeSet author="msingla" id="1.8.3">
+		<preConditions onFail="MARK_RAN">
+			<sqlCheck expectedResult="0">select count(*) from amenities where amenity_type = 'CLUBROOM' and description = 'Club Room';</sqlCheck>
+		</preConditions>
+	    <sql>insert into amenities values ((select nextVal('hibernate_sequence')), 'CLUBROOM', 'Club Room', true, '25in x 25in x 25in', now());</sql>
+    </changeSet>
+   	
+	<changeSet author="msingla" id="1.8.4">
+		<preConditions onFail="MARK_RAN">
+			<sqlCheck expectedResult="0">select count(*) from amenities where amenity_type = 'PARLOUR' and description = 'Beauty Parlour';</sqlCheck>
+		</preConditions>
+	    <sql>insert into amenities values ((select nextVal('hibernate_sequence')), 'PARLOUR', 'Beauty Parlour', true, '25in x 25in x 25in', now());</sql>
+    </changeSet>
+    
+	<changeSet author="msingla" id="1.8.5">
+		<preConditions onFail="MARK_RAN">
+			<sqlCheck expectedResult="0">select count(*) from amenities where amenity_type = 'GYM' and description = 'Gym';</sqlCheck>
+		</preConditions>
+	    <sql>insert into amenities values ((select nextVal('hibernate_sequence')), 'GYM', 'Gym', true, '25in x 25in x 25in', now());</sql>
+    </changeSet>
 	
+	<changeSet author="msingla" id="1.8.6">
+		<preConditions onFail="MARK_RAN">
+			<sqlCheck expectedResult="0">select count(*) from amenities where amenity_type = 'INHOUSECATERING' and description = 'In House Catering';</sqlCheck>
+		</preConditions>
+	    <sql>insert into amenities values ((select nextVal('hibernate_sequence')), 'INHOUSECATERING', 'In House Catering', true, '25in x 25in x 25in', now());</sql>
+    </changeSet>
+   	
+	<changeSet author="msingla" id="1.8.7">
+		<preConditions onFail="MARK_RAN">
+			<sqlCheck expectedResult="0">select count(*) from amenities where amenity_type = 'LOBBY' and description = 'Lobby Area';</sqlCheck>
+		</preConditions>
+	    <sql>insert into amenities values ((select nextVal('hibernate_sequence')), 'LOBBY', 'Lobby Area', true, '25in x 25in x 25in', now());</sql>
+    </changeSet>
+    
+	<changeSet author="msingla" id="1.8.8">
+		<preConditions onFail="MARK_RAN">
+			<sqlCheck expectedResult="0">select count(*) from amenities where amenity_type = 'CONFERENCE' and description = 'Conference Room';</sqlCheck>
+		</preConditions>
+	    <sql>insert into amenities values ((select nextVal('hibernate_sequence')), 'CONFERENCE', 'Conference Room', true, '25in x 25in x 25in', now());</sql>
+    </changeSet>
+    
+    	<changeSet author="msingla" id="1.8.9">
+		<preConditions onFail="MARK_RAN">
+			<sqlCheck expectedResult="0">select count(*) from service where service_type = 'DINEIN' and description = 'Dine In';</sqlCheck>
+		</preConditions>
+	    <sql>insert into service values ((select nextVal('hibernate_sequence')), 'DINEIN', 'Dine In', now());</sql>
+    </changeSet>
+	
+	 <changeSet author="msingla" id="1.8.10">
+		<preConditions onFail="MARK_RAN">
+			<sqlCheck expectedResult="0">select count(*) from service where service_type = 'ALCOHAL' and description = 'Alcohal Served';</sqlCheck>
+		</preConditions>
+	    <sql>insert into service values ((select nextVal('hibernate_sequence')), 'ALCOHAL', 'Alcohal Served', now());</sql>
+    </changeSet>
+	
+	 <changeSet author="msingla" id="1.8.11">
+		<preConditions onFail="MARK_RAN">
+			<sqlCheck expectedResult="0">select count(*) from service where service_type = 'NOALCOHAL' and description = 'Alcohal Not served';</sqlCheck>
+		</preConditions>
+	    <sql>insert into service values ((select nextVal('hibernate_sequence')), 'NOALCOHAL', 'Alcohal Not served', now());</sql>
+    </changeSet>
+	
+	<changeSet author="msingla" id="1.8.12">
+		<preConditions onFail="MARK_RAN">
+			<sqlCheck expectedResult="0">select count(*) from service where service_type = 'BUFFET' and description = 'Buffet';</sqlCheck>
+		</preConditions>
+	    <sql>insert into service values ((select nextVal('hibernate_sequence')), 'BUFFET', 'Buffet', now());</sql>
+    </changeSet>
+	
+	 <changeSet author="msingla" id="1.8.13">
+		<preConditions onFail="MARK_RAN">
+			<sqlCheck expectedResult="0">select count(*) from service where service_type = 'VEG' and description = 'Pure Veg';</sqlCheck>
+		</preConditions>
+	    <sql>insert into service values ((select nextVal('hibernate_sequence')), 'VEG', 'Pure Veg', now());</sql>
+    </changeSet>
+	
+	 <changeSet author="msingla" id="1.8.14">
+		<preConditions onFail="MARK_RAN">
+			<sqlCheck expectedResult="0">select count(*) from service where service_type = 'OUTDOOR' and description = 'Outdoor Seating';</sqlCheck>
+		</preConditions>
+	    <sql>insert into service values ((select nextVal('hibernate_sequence')), 'OUTDOOR', 'Outdoor Seating', now());</sql>
+    </changeSet>
+    
+    <changeSet author="msingla" id="1.8.15">
+		<preConditions onFail="MARK_RAN">
+			<sqlCheck expectedResult="0">select count(*) from room where room_type = 'STANDARD';</sqlCheck>
+		</preConditions>
+	    <sql>insert into room values ((select nextVal('hibernate_sequence')), 'STANDARD', 'Standard Room', '15in X 15in X 15in', now());</sql>
+    </changeSet>
+    
+    <changeSet author="msingla" id="1.8.16">
+		<preConditions onFail="MARK_RAN">
+			<sqlCheck expectedResult="0">select count(*) from room where room_type = 'DELUXE';</sqlCheck>
+		</preConditions>
+	    <sql>insert into room values ((select nextVal('hibernate_sequence')), 'DELUXE', 'Deluxe Room', '15in X 15in X 15in', now());</sql>
+    </changeSet>
+    
+    <changeSet author="msingla" id="1.8.17">
+		<preConditions onFail="MARK_RAN">
+			<sqlCheck expectedResult="0">select count(*) from room where room_type = 'SUPERDELUXE';</sqlCheck>
+		</preConditions>
+	    <sql>insert into room values ((select nextVal('hibernate_sequence')), 'SUPERDELUXE', 'Super Deluxe Room', '15in X 15in X 15in', now());</sql>
+    </changeSet>
+    
 	<changeSet author="msingla" id="1.9">
 		<preConditions onFail="MARK_RAN">
 			<sqlCheck expectedResult="0">select count(*) from venue_services where venue_id = (select id from venue where name = 'Yo China!') and service_id = (select id from service where service_type = 'DINEIN');</sqlCheck>

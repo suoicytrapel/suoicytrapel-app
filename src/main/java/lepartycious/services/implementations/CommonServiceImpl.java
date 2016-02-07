@@ -4,8 +4,10 @@ import java.util.List;
 
 import lepartycious.Enums.SearchTypeEnum;
 import lepartycious.dtos.requestDTOs.DataRequestDTO;
+import lepartycious.dtos.requestDTOs.FilterRequestDTO;
 import lepartycious.dtos.requestDTOs.SearchRequestDTO;
 import lepartycious.dtos.responseDTOs.DetailResponseDTO;
+import lepartycious.dtos.responseDTOs.FilterResponseWrapperDTO;
 import lepartycious.dtos.responseDTOs.SearchResponseDTOWrapper;
 import lepartycious.services.BandService;
 import lepartycious.services.CatererService;
@@ -109,6 +111,31 @@ public class CommonServiceImpl implements CommonService {
 		}
 		else if(SearchTypeEnum.RENTAL.toString().equals(dataRequestDTO.getSearchType())){
 			//return rentalService.getRentals(searchDTO);
+		}*/
+		else{
+			return null;
+		}
+	}
+
+	@Override
+	public FilterResponseWrapperDTO loadFilters(String searchType, Long cityId) {
+		if(SearchTypeEnum.VENUE.toString().equals(searchType)){
+			return venueService.loadFilters(cityId);
+		}
+		/*else if(SearchTypeEnum.CATERER.toString().equals(filterRequestDTO.getSearchType())){
+			return catererService.getCaterers(searchDTO);
+		}
+		else if(SearchTypeEnum.BAND.toString().equals(filterRequestDTO.getSearchType())){
+			return bandService.getBands(searchDTO);
+		}
+		else if(SearchTypeEnum.PHOTOGRAPHER.toString().equals(filterRequestDTO.getSearchType())){
+			return photographerService.getPhotographers(searchDTO);
+		}
+		else if(SearchTypeEnum.DECORATOR.toString().equals(filterRequestDTO.getSearchType())){
+			return decoratorService.getDecorators(searchDTO);
+		}
+		else if(SearchTypeEnum.RENTAL.toString().equals(filterRequestDTO.getSearchType())){
+			return rentalService.getRentals(searchDTO);
 		}*/
 		else{
 			return null;
