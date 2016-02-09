@@ -68,6 +68,17 @@ public class Venue implements Serializable{
 	
 	@OneToMany(mappedBy="venueId")
 	private List<VenueRooms> venueRooms;
+	
+	@Column(name="priority")
+	private Long priority;
+
+	public Long getPriority() {
+		return priority;
+	}
+
+	public void setPriority(Long priority) {
+		this.priority = priority;
+	}
 
 	public String getName() {
 		return name;

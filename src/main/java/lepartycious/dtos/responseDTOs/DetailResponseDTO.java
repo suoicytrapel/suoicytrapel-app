@@ -6,12 +6,17 @@ import java.util.List;
 public class DetailResponseDTO implements Serializable{
 	
 	private String name;
+	private String description;
 	private String addressLine1;
 	private String addressLine2;
 	private String city;
 	private String state;
+	private String primaryPhoneNumber;
+	private String secondaryPhoneNumber;
 	private List<String> services;
 	private List<String> amenities;
+	private List<String> rooms;
+	private List<String> attachments;
 	
 	public String getName() {
 		return name;
@@ -55,5 +60,34 @@ public class DetailResponseDTO implements Serializable{
 	public void setAmenities(List<String> amenities) {
 		this.amenities = amenities;
 	}
-	
+	public List<String> getRooms() {
+		return rooms;
+	}
+	public void setRooms(List<String> rooms) {
+		this.rooms = rooms;
+	}
+	public List<String> getAttachments() {
+		return attachments;
+	}
+	public void setAttachments(List<String> attachments) {
+		this.attachments = attachments;
+	}
+	public String getPrimaryPhoneNumber() {
+		return primaryPhoneNumber;
+	}
+	public void setPrimaryPhoneNumber(String primaryPhoneNumber) {
+		this.primaryPhoneNumber = primaryPhoneNumber;
+	}
+	public String getSecondaryPhoneNumber() {
+		return secondaryPhoneNumber;
+	}
+	public void setSecondaryPhoneNumber(String secondaryPhoneNumber) {
+		this.secondaryPhoneNumber = secondaryPhoneNumber;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
 }

@@ -99,6 +99,17 @@ public class Band implements Serializable{
 	
 	@Column(name = "min_rath_charges")
 	private Float minRathCharges;
+	
+	@Column(name="priority")
+	private Long priority;
+
+	public Long getPriority() {
+		return priority;
+	}
+
+	public void setPriority(Long priority) {
+		this.priority = priority;
+	}
 
 	public long getBandId() {
 		return bandId;

@@ -488,6 +488,70 @@
 	    <sql>insert into venue_services values ((select nextVal('hibernate_sequence')),(select id from venue where name = 'The Brew Estate'), (select id from service where service_type = 'DINEIN'), null, 0, now());</sql>
     </changeSet>
     
+    <changeSet author="msingla" id="1.54">
+	    <sql>
+			insert into service values ((select nextVal('hibernate_sequence')), 'WIFI', 'High-speed Wi-Fi Internet', now());
+			insert into service values ((select nextVal('hibernate_sequence')), 'CCTV', 'CCTV Surveillance', now());
+			insert into service values ((select nextVal('hibernate_sequence')), 'DRINKS', 'Drinks Available', now());
+			insert into service values ((select nextVal('hibernate_sequence')), 'LAUNDRY', 'Laundry Service', now());
+			insert into service values ((select nextVal('hibernate_sequence')), 'SMOKEZONE', 'Smoking zone', now());
+			insert into service values ((select nextVal('hibernate_sequence')), 'VALLET', 'Vallet Parking', now());
+		</sql>
+    </changeSet>
+    
+    <changeSet author="msingla" id="1.55">
+	    <sql>
+			insert into venue (id, name, description, type, comments, rating, added_on, city_id, locality_id) values ((select nextval('hibernate_sequence')), 'JW Marriott', 'Treat yourself to five-star luxury at the JW Marriott Hotel Chandigarh. Located in Sector 17, our hotel is in the center of the city''s vibrant business district, offering convenient accessibility to an array of historic attractions and sites. Upon stepping into our top-rated hotel, guests will be immersed in the ultimate in luxury', 'HOTEL', null, null, now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Chandigarh'));
+			
+			insert into address values ((select nextVal('hibernate_sequence')), 'JW Marriott Hotel Chandigarh', 'Plot no: 6, Sector 35-B, Dakshin Marg', 'Chandigarh', 'Chandigarh', 160035, '+91-172-3955555', '1-800-102-5000', null, (select id from venue where name = 'JW Marriott'), 0, now());
+			
+			insert into attachment values ((select nextVal('hibernate_sequence')), 'JWMarriottCover.jpg', 'JWMarriottCover.jpg', (select id from venue where name = 'JW Marriott'), 0, now());
+			
+			insert into attachment values ((select nextVal('hibernate_sequence')), 'JWMarriottGuestRoom.jpg', 'JWMarriottGuestRoom.jpg', (select id from venue where name = 'JW Marriott'), 0, now());
+			
+			insert into attachment values ((select nextVal('hibernate_sequence')), 'JWMarriottLobby.jpg', 'JWMarriottLobby.jpg', (select id from venue where name = 'JW Marriott'), 0, now());
+			
+			insert into attachment values ((select nextVal('hibernate_sequence')), 'JWMarriottLuxurySuite.jpg', 'JWMarriottLuxurySuite.jpg', (select id from venue where name = 'JW Marriott'), 0, now());
+			
+			insert into attachment values ((select nextVal('hibernate_sequence')), 'JWMarriottPool.jpg', 'JWMarriottPool.jpg', (select id from venue where name = 'JW Marriott'), 0, now());
+			
+			insert into attachment values ((select nextVal('hibernate_sequence')), 'JWMarriottRestaurant.jpg', 'JWMarriottRestaurant.jpg', (select id from venue where name = 'JW Marriott'), 0, now());
+			
+			insert into venue_rooms values ((select nextVal('hibernate_sequence')),(select id from venue where name = 'JW Marriott'), (select id from room where room_type = 'STANDARD'), null, true, true, true, true, true, 0, now());
+			
+			insert into venue_rooms values ((select nextVal('hibernate_sequence')),(select id from venue where name = 'JW Marriott'), (select id from room where room_type = 'DELUXE'), null, true, true, true, true, true, 0, now());
+			
+			insert into venue_rooms values ((select nextVal('hibernate_sequence')),(select id from venue where name = 'JW Marriott'), (select id from room where room_type = 'SUPERDELUXE'), null, true, true, true, true, true, 0, now());
+			
+			insert into venue_services values ((select nextVal('hibernate_sequence')),(select id from venue where name = 'JW Marriott'), (select id from service where service_type = 'WIFI'), null, 0, now());
+			
+			insert into venue_services values ((select nextVal('hibernate_sequence')),(select id from venue where name = 'JW Marriott'), (select id from service where service_type = 'CCTV'), null, 0, now());
+			
+			insert into venue_services values ((select nextVal('hibernate_sequence')),(select id from venue where name = 'JW Marriott'), (select id from service where service_type = 'DRINKS'), null, 0, now());
+			
+			insert into venue_services values ((select nextVal('hibernate_sequence')),(select id from venue where name = 'JW Marriott'), (select id from service where service_type = 'LAUNDRY'), null, 0, now());
+			
+			insert into venue_services values ((select nextVal('hibernate_sequence')),(select id from venue where name = 'JW Marriott'), (select id from service where service_type = 'SMOKEZONE'), null, 0, now());
+			
+			insert into venue_services values ((select nextVal('hibernate_sequence')),(select id from venue where name = 'JW Marriott'), (select id from service where service_type = 'VALLET'), null, 0, now());
+			
+			insert into venue_amenities values ((select nextVal('hibernate_sequence')),(select id from venue where name = 'JW Marriott'), (select id from amenities where amenity_type = 'BNQTHALL'), null, 0, now());
+			
+			insert into venue_amenities values ((select nextVal('hibernate_sequence')),(select id from venue where name = 'JW Marriott'), (select id from amenities where amenity_type = 'CLUBROOM'), null, 0, now());
+			
+			insert into venue_amenities values ((select nextVal('hibernate_sequence')),(select id from venue where name = 'JW Marriott'), (select id from amenities where amenity_type = 'PARLOUR'), null, 0, now());
+			
+			insert into venue_amenities values ((select nextVal('hibernate_sequence')),(select id from venue where name = 'JW Marriott'), (select id from amenities where amenity_type = 'GYM'), null, 0, now());
+			
+			insert into venue_amenities values ((select nextVal('hibernate_sequence')),(select id from venue where name = 'JW Marriott'), (select id from amenities where amenity_type = 'INHOUSECATERING'), null, 0, now());
+			
+			insert into venue_amenities values ((select nextVal('hibernate_sequence')),(select id from venue where name = 'JW Marriott'), (select id from amenities where amenity_type = 'LOBBY'), null, 0, now());
+			
+		</sql>
+    </changeSet>
+	
+    
+    
     <!-- <changeSet author="msingla" id="1.2">
 		<preConditions onFail="MARK_RAN">
 			<sqlCheck expectedResult="0">select count(*) from venue where name = 'Bahia Resort';</sqlCheck>

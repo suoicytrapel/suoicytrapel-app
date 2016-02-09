@@ -18,11 +18,13 @@ import lepartycious.dtos.responseDTOs.SearchResponseDTO;
 import lepartycious.dtos.responseDTOs.SearchResponseDTOWrapper;
 import lepartycious.models.Address;
 import lepartycious.models.Amenities;
+import lepartycious.models.Attachment;
 import lepartycious.models.City;
 import lepartycious.models.Locality;
 import lepartycious.models.Room;
 import lepartycious.models.Venue;
 import lepartycious.models.VenueAmenities;
+import lepartycious.models.VenueRooms;
 import lepartycious.models.VenueServices;
 import lepartycious.services.VenueService;
 
@@ -143,6 +145,9 @@ public class VenueServiceImpl implements VenueService {
 		Venue venue = venueDAO.fetchVenueDetails(dataRequestDTO.getCityId(), dataRequestDTO.getName());
 		List<String> serviceList = new ArrayList<String>();
 		List<String> amenitiesList = new ArrayList<String>();
+		List<String> roomList = new ArrayList<String>();
+		List<String> attachmentList = new ArrayList<String>();
+		
 		Address address = venue.getAddresses().get(0);
 		for(VenueServices venueService : venue.getVenueServices()){
 			serviceList.add(venueService.getServiceId().getDescription());
@@ -150,14 +155,25 @@ public class VenueServiceImpl implements VenueService {
 		for(VenueAmenities venueAmenities : venue.getVenueamenities()){
 			amenitiesList.add(venueAmenities.getAmenitiesId().getDescription());
 		}
+		for(VenueRooms room : venue.getVenueRooms()){
+			roomList.add(room.getRoomId().getDescription());
+		}
+		for(Attachment attachment : venue.getAttachments()){
+			attachmentList.add(attachment.getImageURL());
+		}
 		DetailResponseDTO detailResponseDTO = new DetailResponseDTO();
 		detailResponseDTO.setName(venue.getName());
+		detailResponseDTO.setDescription(venue.getDescription());
 		detailResponseDTO.setAddressLine1(address.getAddressLine1());
 		detailResponseDTO.setAddressLine2(address.getAddressLine2());
 		detailResponseDTO.setCity(address.getCity());
 		detailResponseDTO.setState(address.getState());
+		detailResponseDTO.setPrimaryPhoneNumber(address.getPrimaryPhone());
+		detailResponseDTO.setSecondaryPhoneNumber(address.getSecondaryPhone());
 		detailResponseDTO.setServices(serviceList);
 		detailResponseDTO.setAmenities(amenitiesList);
+		detailResponseDTO.setRooms(roomList);
+		detailResponseDTO.setAttachments(attachmentList);
 		return detailResponseDTO;
 	}
 

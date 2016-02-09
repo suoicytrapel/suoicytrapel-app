@@ -88,6 +88,17 @@ public class Photographer implements Serializable{
 	@Column(name = "dvd_making_charges")
 	private Float dvdMakingCharges;
 	
+	@Column(name="priority")
+	private Long priority;
+
+	public Long getPriority() {
+		return priority;
+	}
+
+	public void setPriority(Long priority) {
+		this.priority = priority;
+	}
+	
 	public long getPhotographerId() {
 		return photographerId;
 	}

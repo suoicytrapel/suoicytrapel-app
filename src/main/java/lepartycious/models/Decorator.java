@@ -75,6 +75,17 @@ public class Decorator implements Serializable{
 	
 	@Column(name = "min_floral_works_charges")
 	private Float minFloralWorksCharges;
+	
+	@Column(name="priority")
+	private Long priority;
+
+	public Long getPriority() {
+		return priority;
+	}
+
+	public void setPriority(Long priority) {
+		this.priority = priority;
+	}
 
 	public long getDecoratorId() {
 		return decoratorId;

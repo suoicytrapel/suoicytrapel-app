@@ -43,10 +43,10 @@ public class Address implements Serializable{
 	private Long pincode;
 	
 	@Column(name="primary_phone")
-	private Long primaryPhone;
+	private String primaryPhone;
 	
 	@Column(name="secondary_phone")
-	private Long secondaryPhone;
+	private String secondaryPhone;
 	
 	@Column(name="entity_id")
 	private Long entityId;
@@ -107,27 +107,27 @@ public class Address implements Serializable{
 		this.pincode = pincode;
 	}
 
-	public Long getPrimaryPhone() {
-		return primaryPhone;
-	}
-
-	public void setPrimaryPhone(Long primaryPhone) {
-		this.primaryPhone = primaryPhone;
-	}
-
-	public Long getSecondaryPhone() {
-		return secondaryPhone;
-	}
-
-	public void setSecondaryPhone(Long secondaryPhone) {
-		this.secondaryPhone = secondaryPhone;
-	}
-
 	public Long getEntityId() {
 		return entityId;
 	}
 
 	public void setEntityId(Long entityId) {
 		this.entityId = entityId;
+	}
+
+	public String getPrimaryPhone() {
+		return primaryPhone;
+	}
+
+	public void setPrimaryPhone(String primaryPhone) {
+		this.primaryPhone = primaryPhone;
+	}
+
+	public String getSecondaryPhone() {
+		return secondaryPhone;
+	}
+
+	public void setSecondaryPhone(String secondaryPhone) {
+		this.secondaryPhone = secondaryPhone;
 	}
 }

@@ -81,6 +81,17 @@ public class Caterer implements Serializable{
 	@ManyToOne
 	@JoinColumn(name = "locality_id")
 	private Locality locality;
+	
+	@Column(name="priority")
+	private Long priority;
+
+	public Long getPriority() {
+		return priority;
+	}
+
+	public void setPriority(Long priority) {
+		this.priority = priority;
+	}
 
 	public long getCaterer_id() {
 		return caterer_id;

@@ -398,5 +398,97 @@
 			);
 		</sql>
 	</changeSet>
-
+	
+	<changeSet author="msingla" id="1.16">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<columnExists columnName="priority" tableName="venue" />
+			</not>
+		</preConditions>
+		<sql>
+			ALTER TABLE venue ADD COLUMN priority bigint;
+		</sql>
+	</changeSet>
+	
+	<changeSet author="msingla" id="1.17">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<columnExists columnName="priority" tableName="caterer" />
+			</not>
+		</preConditions>
+		<sql>
+			ALTER TABLE caterer ADD COLUMN priority bigint;
+		</sql>
+	</changeSet>
+	
+	<changeSet author="msingla" id="1.18">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<columnExists columnName="priority" tableName="rental" />
+			</not>
+		</preConditions>
+		<sql>
+			ALTER TABLE rental ADD COLUMN priority bigint;
+		</sql>
+	</changeSet>
+	
+	<changeSet author="msingla" id="1.19">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<columnExists columnName="priority" tableName="band" />
+			</not>
+		</preConditions>
+		<sql>
+			ALTER TABLE band ADD COLUMN priority bigint;
+		</sql>
+	</changeSet>
+	
+	<changeSet author="msingla" id="1.20">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<columnExists columnName="priority" tableName="photographer" />
+			</not>
+		</preConditions>
+		<sql>
+			ALTER TABLE photographer ADD COLUMN priority bigint;
+		</sql>
+	</changeSet>
+	
+	<changeSet author="msingla" id="1.21">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<columnExists columnName="priority" tableName="decorater" />
+			</not>
+		</preConditions>
+		<sql>
+			ALTER TABLE decorater ADD COLUMN priority bigint;
+		</sql>
+	</changeSet>
+	
+	<changeSet author="msingla" id="1.22">
+		<preConditions onFail="MARK_RAN">
+			<columnExists columnName="primary_phone" tableName="address" />
+		</preConditions>
+		<sql>
+			ALTER TABLE address ALTER COLUMN primary_phone TYPE char (20);
+		</sql>
+	</changeSet>
+	
+	<changeSet author="msingla" id="1.23">
+		<preConditions onFail="MARK_RAN">
+			<columnExists columnName="secondary_phone" tableName="address" />
+		</preConditions>
+		<sql>
+			ALTER TABLE address ALTER COLUMN secondary_phone TYPE char (20);
+		</sql>
+	</changeSet>
+	
+	<changeSet author="msingla" id="1.24">
+		<preConditions onFail="MARK_RAN">
+			<columnExists columnName="description" tableName="venue" />
+		</preConditions>
+		<sql>
+			ALTER TABLE venue ALTER COLUMN description TYPE varchar (2000);
+		</sql>
+	</changeSet>
 </databaseChangeLog>

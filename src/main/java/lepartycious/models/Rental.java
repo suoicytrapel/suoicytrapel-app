@@ -96,6 +96,17 @@ public class Rental implements Serializable{
 	
 	@Column(name = "parking_charges_included")
 	private Boolean parkingChargesIncluded;
+	
+	@Column(name="priority")
+	private Long priority;
+
+	public Long getPriority() {
+		return priority;
+	}
+
+	public void setPriority(Long priority) {
+		this.priority = priority;
+	}
 
 	public long getRentalId() {
 		return rentalId;
