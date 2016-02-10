@@ -11,10 +11,10 @@ apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: 'spring-boot'
+apply plugin: 'war'
 
-jar {
-    baseName = 'le-partycious-app'
-    version =  '0.1.0'
+war {
+    baseName = 'lepartycious'
 }
 
 repositories {
@@ -26,6 +26,7 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 dependencies {
+	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
     compile "org.springframework.boot:spring-boot-starter-web",
     "org.springframework.boot:spring-boot-starter-actuator",
     "org.springframework.boot:spring-boot-starter-data-jpa",
