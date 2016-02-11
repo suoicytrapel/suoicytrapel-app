@@ -8,6 +8,7 @@ import lepartycious.dtos.requestDTOs.FilterRequestDTO;
 import lepartycious.dtos.requestDTOs.SearchRequestDTO;
 import lepartycious.dtos.responseDTOs.DetailResponseDTO;
 import lepartycious.dtos.responseDTOs.FilterResponseWrapperDTO;
+import lepartycious.dtos.responseDTOs.SearchResponseDTO;
 import lepartycious.dtos.responseDTOs.SearchResponseDTOWrapper;
 import lepartycious.services.BandService;
 import lepartycious.services.CatererService;
@@ -137,6 +138,17 @@ public class CommonServiceImpl implements CommonService {
 		else if(SearchTypeEnum.RENTAL.toString().equals(filterRequestDTO.getSearchType())){
 			return rentalService.getRentals(searchDTO);
 		}*/
+		else{
+			return null;
+		}
+	}
+
+	@Override
+	public List<SearchResponseDTO> fetchRecomendations(String searchType,
+			Long cityId) {
+		if(SearchTypeEnum.VENUE.toString().equals(searchType)){
+			return venueService.fetchRecomendations(cityId);
+		}
 		else{
 			return null;
 		}

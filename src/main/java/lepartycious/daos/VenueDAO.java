@@ -2,6 +2,7 @@ package lepartycious.daos;
 
 import java.util.List;
 
+import lepartycious.dtos.responseDTOs.SearchResponseDTO;
 import lepartycious.models.Venue;
 
 public interface VenueDAO extends BaseDAO{
@@ -13,5 +14,7 @@ public interface VenueDAO extends BaseDAO{
 	public Long getVenueCount(Long cityid, String searchString, List<Long> serviceIds, List<Long> amenityIds, List<Long> roomIds, List<Long> localityIds, List<String> types);
 
 	public Venue fetchVenueDetails(Long cityId, String name);
+	
+	public List<Venue> fetchRecomendations(Long cityId);
 
 }

@@ -36,6 +36,9 @@ public class Attachment implements Serializable{
 	
 	@Column(name = "added_on")
 	private Date addedOn;
+	
+	@Column(name = "help_text")
+	private String helpText;
 
 	public Long getEntityId() {
 		return entityId;
@@ -67,6 +70,22 @@ public class Attachment implements Serializable{
 
 	public void setAddedOn(Date addedOn) {
 		this.addedOn = addedOn;
+	}
+
+	public long getAttachment_id() {
+		return attachment_id;
+	}
+
+	public void setAttachment_id(long attachment_id) {
+		this.attachment_id = attachment_id;
+	}
+
+	public String getHelpText() {
+		return helpText;
+	}
+
+	public void setHelpText(String helpText) {
+		this.helpText = helpText;
 	}
 
 }

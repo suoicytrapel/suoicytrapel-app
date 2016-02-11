@@ -2,6 +2,7 @@ package lepartycious.dtos.responseDTOs;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
 public class DetailResponseDTO implements Serializable{
 	
@@ -13,10 +14,9 @@ public class DetailResponseDTO implements Serializable{
 	private String state;
 	private String primaryPhoneNumber;
 	private String secondaryPhoneNumber;
-	private List<String> services;
-	private List<String> amenities;
-	private List<String> rooms;
-	private List<String> attachments;
+	private Map<String, List<TabResponseDTO>> tabMap;
+	private List<AttachmentResponseDTO> attachments;
+	private List<SearchResponseDTO> recommendationList;
 	
 	public String getName() {
 		return name;
@@ -48,30 +48,6 @@ public class DetailResponseDTO implements Serializable{
 	public void setState(String state) {
 		this.state = state;
 	}
-	public List<String> getServices() {
-		return services;
-	}
-	public void setServices(List<String> services) {
-		this.services = services;
-	}
-	public List<String> getAmenities() {
-		return amenities;
-	}
-	public void setAmenities(List<String> amenities) {
-		this.amenities = amenities;
-	}
-	public List<String> getRooms() {
-		return rooms;
-	}
-	public void setRooms(List<String> rooms) {
-		this.rooms = rooms;
-	}
-	public List<String> getAttachments() {
-		return attachments;
-	}
-	public void setAttachments(List<String> attachments) {
-		this.attachments = attachments;
-	}
 	public String getPrimaryPhoneNumber() {
 		return primaryPhoneNumber;
 	}
@@ -89,5 +65,23 @@ public class DetailResponseDTO implements Serializable{
 	}
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	public List<SearchResponseDTO> getRecommendationList() {
+		return recommendationList;
+	}
+	public void setRecommendationList(List<SearchResponseDTO> recommendationList) {
+		this.recommendationList = recommendationList;
+	}
+	public Map<String, List<TabResponseDTO>> getTabMap() {
+		return tabMap;
+	}
+	public void setTabMap(Map<String, List<TabResponseDTO>> tabMap) {
+		this.tabMap = tabMap;
+	}
+	public List<AttachmentResponseDTO> getAttachments() {
+		return attachments;
+	}
+	public void setAttachments(List<AttachmentResponseDTO> attachments) {
+		this.attachments = attachments;
 	}
 }

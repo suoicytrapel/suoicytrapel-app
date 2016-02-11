@@ -71,7 +71,7 @@ public class RentalServiceImpl implements RentalService {
 		detailResponseDTO.setAddressLine2(address.getAddressLine2());
 		detailResponseDTO.setCity(address.getCity());
 		detailResponseDTO.setState(address.getState());
-		detailResponseDTO.setServices(serviceList);
+		//detailResponseDTO.setServices(serviceList);
 		return detailResponseDTO;
 	}
 

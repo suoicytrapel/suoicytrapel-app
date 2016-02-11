@@ -73,7 +73,7 @@
 		<preConditions onFail="MARK_RAN">
 			<sqlCheck expectedResult="0">select count(*) from venue where name = 'Yo China!';</sqlCheck>
 		</preConditions>
-	    <sql>insert into venue (id, name, description, type, comments, rating, added_on, city_id, locality_id) values ((select nextval('hibernate_sequence')), 'Yo China!', 'Yo China!', 'RESTAURANT', null, null, now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Chandigarh'));</sql>
+	    <sql>insert into venue (id, name, description, type, comments, rating, added_on, city_id, locality_id, priority) values ((select nextval('hibernate_sequence')), 'Yo China!', 'Yo China!', 'RESTAURANT', null, null, now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Chandigarh'), 1);</sql>
     </changeSet>
 	
 	<changeSet author="msingla" id="1.7">
@@ -84,7 +84,7 @@
 		<preConditions onFail="MARK_RAN">
 			<sqlCheck expectedResult="0">select count(*) from attachment where name = 'YoChina.jpg';</sqlCheck>
 		</preConditions>
-	    <sql>insert into attachment values ((select nextVal('hibernate_sequence')), 'YoChina.jpg', 'YoChina.jpg', (select id from venue where name = 'Yo China!'), 0, now());</sql>
+	    <sql>insert into attachment values ((select nextVal('hibernate_sequence')), 'YoChina.jpg', 'YoChina.jpg', (select id from venue where name = 'Yo China!'), 0, now(), 'Yo China Front View');</sql>
     </changeSet>
     
     <changeSet author="msingla" id="1.8.1">
@@ -143,25 +143,11 @@
 	    <sql>insert into amenities values ((select nextVal('hibernate_sequence')), 'CONFERENCE', 'Conference Room', true, '25in x 25in x 25in', now());</sql>
     </changeSet>
     
-    	<changeSet author="msingla" id="1.8.9">
-		<preConditions onFail="MARK_RAN">
-			<sqlCheck expectedResult="0">select count(*) from service where service_type = 'DINEIN' and description = 'Dine In';</sqlCheck>
-		</preConditions>
-	    <sql>insert into service values ((select nextVal('hibernate_sequence')), 'DINEIN', 'Dine In', now());</sql>
-    </changeSet>
-	
 	 <changeSet author="msingla" id="1.8.10">
 		<preConditions onFail="MARK_RAN">
-			<sqlCheck expectedResult="0">select count(*) from service where service_type = 'ALCOHAL' and description = 'Alcohal Served';</sqlCheck>
+			<sqlCheck expectedResult="0">select count(*) from service where service_type = 'ALCOHOL' and description = 'Alcohol Served';</sqlCheck>
 		</preConditions>
-	    <sql>insert into service values ((select nextVal('hibernate_sequence')), 'ALCOHAL', 'Alcohal Served', now());</sql>
-    </changeSet>
-	
-	 <changeSet author="msingla" id="1.8.11">
-		<preConditions onFail="MARK_RAN">
-			<sqlCheck expectedResult="0">select count(*) from service where service_type = 'NOALCOHAL' and description = 'Alcohal Not served';</sqlCheck>
-		</preConditions>
-	    <sql>insert into service values ((select nextVal('hibernate_sequence')), 'NOALCOHAL', 'Alcohal Not served', now());</sql>
+	    <sql>insert into service values ((select nextVal('hibernate_sequence')), 'ALCOHOL', 'Alcohol Served', now());</sql>
     </changeSet>
 	
 	<changeSet author="msingla" id="1.8.12">
@@ -217,7 +203,7 @@
 		<preConditions onFail="MARK_RAN">
 			<sqlCheck expectedResult="0">select count(*) from venue where name = 'Midnight Chef';</sqlCheck>
 		</preConditions>
-	    <sql>insert into venue (id, name, description, type, comments, rating, added_on, city_id, locality_id) values ((select nextval('hibernate_sequence')), 'Midnight Chef', 'Midnight Chef', 'RESTAURANT', null, null, now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Chandigarh'));</sql>
+	    <sql>insert into venue (id, name, description, type, comments, rating, added_on, city_id, locality_id, priority) values ((select nextval('hibernate_sequence')), 'Midnight Chef', 'Midnight Chef', 'RESTAURANT', null, null, now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Chandigarh'), 10);</sql>
     </changeSet>
 	
 	<changeSet author="msingla" id="1.11">
@@ -228,7 +214,7 @@
 		<preConditions onFail="MARK_RAN">
 			<sqlCheck expectedResult="0">select count(*) from attachment where name = 'MidnightChef.jpg';</sqlCheck>
 		</preConditions>
-	    <sql>insert into attachment values ((select nextVal('hibernate_sequence')), 'MidnightChef.jpg', 'MidnightChef.jpg', (select id from venue where name = 'Midnight Chef'), 0, now());</sql>
+	    <sql>insert into attachment values ((select nextVal('hibernate_sequence')), 'MidnightChef.jpg', 'MidnightChef.jpg', (select id from venue where name = 'Midnight Chef'), 0, now(), 'Midnight Chef Image');</sql>
     </changeSet>
 	
 	<changeSet author="msingla" id="1.13">
@@ -242,7 +228,7 @@
 		<preConditions onFail="MARK_RAN">
 			<sqlCheck expectedResult="0">select count(*) from venue where name = 'La Pino''z Pizza';</sqlCheck>
 		</preConditions>
-	    <sql>insert into venue (id, name, description, type, comments, rating, added_on, city_id, locality_id) values ((select nextval('hibernate_sequence')), 'La Pino''z Pizza', 'La Pino''z Pizza', 'RESTAURANT', null, null, now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Chandigarh'));</sql>
+	    <sql>insert into venue (id, name, description, type, comments, rating, added_on, city_id, locality_id, priority) values ((select nextval('hibernate_sequence')), 'La Pino''z Pizza', 'La Pino''z Pizza', 'RESTAURANT', null, null, now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Chandigarh'), 20);</sql>
     </changeSet>
 	
 	<changeSet author="msingla" id="1.15">
@@ -253,7 +239,7 @@
 		<preConditions onFail="MARK_RAN">
 			<sqlCheck expectedResult="0">select count(*) from attachment where name = 'LaPinoPizza.jpg';</sqlCheck>
 		</preConditions>
-	    <sql>insert into attachment values ((select nextVal('hibernate_sequence')), 'LaPinoPizza.jpg', 'LaPinoPizza.jpg', (select id from venue where name = 'La Pino''z Pizza'), 0, now());</sql>
+	    <sql>insert into attachment values ((select nextVal('hibernate_sequence')), 'LaPinoPizza.jpg', 'LaPinoPizza.jpg', (select id from venue where name = 'La Pino''z Pizza'), 0, now(), 'Lapino Pizza Image');</sql>
     </changeSet>
 	
 	<changeSet author="msingla" id="1.17">
@@ -267,7 +253,7 @@
 		<preConditions onFail="MARK_RAN">
 			<sqlCheck expectedResult="0">select count(*) from venue where name = 'Burger Point';</sqlCheck>
 		</preConditions>
-	    <sql>insert into venue (id, name, description, type, comments, rating, added_on, city_id, locality_id) values ((select nextval('hibernate_sequence')), 'Burger Point', 'Burger Point', 'RESTAURANT', null, null, now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Chandigarh'));</sql>
+	    <sql>insert into venue (id, name, description, type, comments, rating, added_on, city_id, locality_id, priority) values ((select nextval('hibernate_sequence')), 'Burger Point', 'Burger Point', 'RESTAURANT', null, null, now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Chandigarh'), 30);</sql>
     </changeSet>
 	
 	<changeSet author="msingla" id="1.19">
@@ -278,7 +264,7 @@
 		<preConditions onFail="MARK_RAN">
 			<sqlCheck expectedResult="0">select count(*) from attachment where name = 'BurgerPoint.jpg';</sqlCheck>
 		</preConditions>
-	    <sql>insert into attachment values ((select nextVal('hibernate_sequence')), 'BurgerPoint.jpg', 'BurgerPoint.jpg', (select id from venue where name = 'Burger Point'), 0, now());</sql>
+	    <sql>insert into attachment values ((select nextVal('hibernate_sequence')), 'BurgerPoint.jpg', 'BurgerPoint.jpg', (select id from venue where name = 'Burger Point'), 0, now(), 'Burger Point Image');</sql>
     </changeSet>
 	
 	<changeSet author="msingla" id="1.21">
@@ -292,7 +278,7 @@
 		<preConditions onFail="MARK_RAN">
 			<sqlCheck expectedResult="0">select count(*) from venue where name = 'Puzzles - The Cove';</sqlCheck>
 		</preConditions>
-	    <sql>insert into venue (id, name, description, type, comments, rating, added_on, city_id, locality_id) values ((select nextval('hibernate_sequence')), 'Puzzles - The Cove', 'Puzzles - The Cove', 'RESTAURANT', null, null, now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Panchkula'));</sql>
+	    <sql>insert into venue (id, name, description, type, comments, rating, added_on, city_id, locality_id, priority) values ((select nextval('hibernate_sequence')), 'Puzzles - The Cove', 'Puzzles - The Cove', 'RESTAURANT', null, null, now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Panchkula'), 40);</sql>
     </changeSet>
 	
 	<changeSet author="msingla" id="1.23">
@@ -303,7 +289,7 @@
 		<preConditions onFail="MARK_RAN">
 			<sqlCheck expectedResult="0">select count(*) from attachment where name = 'Puzzles.jpg';</sqlCheck>
 		</preConditions>
-	    <sql>insert into attachment values ((select nextVal('hibernate_sequence')), 'Puzzles.jpg', 'Puzzles.jpg', (select id from venue where name = 'Puzzles - The Cove'), 0, now());</sql>
+	    <sql>insert into attachment values ((select nextVal('hibernate_sequence')), 'Puzzles.jpg', 'Puzzles.jpg', (select id from venue where name = 'Puzzles - The Cove'), 0, now(), 'Puzzles Image');</sql>
     </changeSet>
 	
 	<changeSet author="msingla" id="1.25">
@@ -317,7 +303,7 @@
 		<preConditions onFail="MARK_RAN">
 			<sqlCheck expectedResult="0">select count(*) from venue where name = 'Pashtun';</sqlCheck>
 		</preConditions>
-	    <sql>insert into venue (id, name, description, type, comments, rating, added_on, city_id, locality_id) values ((select nextval('hibernate_sequence')), 'Pashtun', 'Pashtun', 'RESTAURANT', null, null, now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Chandigarh'));</sql>
+	    <sql>insert into venue (id, name, description, type, comments, rating, added_on, city_id, locality_id, priority) values ((select nextval('hibernate_sequence')), 'Pashtun', 'Pashtun', 'RESTAURANT', null, null, now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Chandigarh'), 50);</sql>
     </changeSet>
 	
 	<changeSet author="msingla" id="1.27">
@@ -328,7 +314,7 @@
 		<preConditions onFail="MARK_RAN">
 			<sqlCheck expectedResult="0">select count(*) from attachment where name = 'Pashtun.jpg';</sqlCheck>
 		</preConditions>
-	    <sql>insert into attachment values ((select nextVal('hibernate_sequence')), 'Pashtun.jpg', 'Pashtun.jpg', (select id from venue where name = 'Pashtun'), 0, now());</sql>
+	    <sql>insert into attachment values ((select nextVal('hibernate_sequence')), 'Pashtun.jpg', 'Pashtun.jpg', (select id from venue where name = 'Pashtun'), 0, now(), 'Pashtun Image');</sql>
     </changeSet>
 	
 	<changeSet author="msingla" id="1.29">
@@ -342,7 +328,7 @@
 		<preConditions onFail="MARK_RAN">
 			<sqlCheck expectedResult="0">select count(*) from venue where name = 'Sindhi Sweets';</sqlCheck>
 		</preConditions>
-	    <sql>insert into venue (id, name, description, type, comments, rating, added_on, city_id, locality_id) values ((select nextval('hibernate_sequence')), 'Sindhi Sweets', 'Sindhi Sweets', 'RESTAURANT', null, null, now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Chandigarh'));</sql>
+	    <sql>insert into venue (id, name, description, type, comments, rating, added_on, city_id, locality_id, priority) values ((select nextval('hibernate_sequence')), 'Sindhi Sweets', 'Sindhi Sweets', 'RESTAURANT', null, null, now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Chandigarh'), 60);</sql>
     </changeSet>
 	
 	<changeSet author="msingla" id="1.31">
@@ -353,7 +339,7 @@
 		<preConditions onFail="MARK_RAN">
 			<sqlCheck expectedResult="0">select count(*) from attachment where name = 'SindhiSweets.jpg';</sqlCheck>
 		</preConditions>
-	    <sql>insert into attachment values ((select nextVal('hibernate_sequence')), 'SindhiSweets.jpg', 'SindhiSweets.jpg', (select id from venue where name = 'Sindhi Sweets'), 0, now());</sql>
+	    <sql>insert into attachment values ((select nextVal('hibernate_sequence')), 'SindhiSweets.jpg', 'SindhiSweets.jpg', (select id from venue where name = 'Sindhi Sweets'), 0, now(), 'Sindhi Sweets Image');</sql>
     </changeSet>
 	
 	<changeSet author="msingla" id="1.33">
@@ -367,7 +353,7 @@
 		<preConditions onFail="MARK_RAN">
 			<sqlCheck expectedResult="0">select count(*) from venue where name = 'Underdoggs Sports Bar &amp; Grill';</sqlCheck>
 		</preConditions>
-	    <sql>insert into venue (id, name, description, type, comments, rating, added_on, city_id, locality_id) values ((select nextval('hibernate_sequence')), 'Underdoggs Sports Bar &amp; Grill', 'Underdoggs Sports Bar &amp; Grill', 'RESTAURANT', null, null, now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Chandigarh'));</sql>
+	    <sql>insert into venue (id, name, description, type, comments, rating, added_on, city_id, locality_id, priority) values ((select nextval('hibernate_sequence')), 'Underdoggs Sports Bar &amp; Grill', 'Underdoggs Sports Bar &amp; Grill', 'RESTAURANT', null, null, now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Chandigarh'), 70);</sql>
     </changeSet>
 	
 	<changeSet author="msingla" id="1.35">
@@ -378,7 +364,7 @@
 		<preConditions onFail="MARK_RAN">
 			<sqlCheck expectedResult="0">select count(*) from attachment where name = 'Underdoggs.jpg';</sqlCheck>
 		</preConditions>
-	    <sql>insert into attachment values ((select nextVal('hibernate_sequence')), 'Underdoggs.jpg', 'Underdoggs.jpg', (select id from venue where name = 'Underdoggs Sports Bar &amp; Grill'), 0, now());</sql>
+	    <sql>insert into attachment values ((select nextVal('hibernate_sequence')), 'Underdoggs.jpg', 'Underdoggs.jpg', (select id from venue where name = 'Underdoggs Sports Bar &amp; Grill'), 0, now(), 'Underdoggs Image');</sql>
     </changeSet>
 	
 	<changeSet author="msingla" id="1.37">
@@ -392,7 +378,7 @@
 		<preConditions onFail="MARK_RAN">
 			<sqlCheck expectedResult="0">select count(*) from venue where name = 'The Kitchen Knight';</sqlCheck>
 		</preConditions>
-	    <sql>insert into venue (id, name, description, type, comments, rating, added_on, city_id, locality_id) values ((select nextval('hibernate_sequence')), 'The Kitchen Knight', 'The Kitchen Knight', 'RESTAURANT', null, null, now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Chandigarh'));</sql>
+	    <sql>insert into venue (id, name, description, type, comments, rating, added_on, city_id, locality_id, priority) values ((select nextval('hibernate_sequence')), 'The Kitchen Knight', 'The Kitchen Knight', 'RESTAURANT', null, null, now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Chandigarh'), 80);</sql>
     </changeSet>
 	
 	<changeSet author="msingla" id="1.39">
@@ -403,7 +389,7 @@
 		<preConditions onFail="MARK_RAN">
 			<sqlCheck expectedResult="0">select count(*) from attachment where name = 'TheKitchenKnight.jpg';</sqlCheck>
 		</preConditions>
-	    <sql>insert into attachment values ((select nextVal('hibernate_sequence')), 'TheKitchenKnight.jpg', 'TheKitchenKnight.jpg', (select id from venue where name = 'The Kitchen Knight'), 0, now());</sql>
+	    <sql>insert into attachment values ((select nextVal('hibernate_sequence')), 'TheKitchenKnight.jpg', 'TheKitchenKnight.jpg', (select id from venue where name = 'The Kitchen Knight'), 0, now(), 'The Kitchen Knight Image');</sql>
     </changeSet>
 	
 	<changeSet author="msingla" id="1.41">
@@ -417,7 +403,7 @@
 		<preConditions onFail="MARK_RAN">
 			<sqlCheck expectedResult="0">select count(*) from venue where name = 'Hot Millions';</sqlCheck>
 		</preConditions>
-	    <sql>insert into venue (id, name, description, type, comments, rating, added_on, city_id, locality_id) values ((select nextval('hibernate_sequence')), 'Hot Millions', 'Hot Millions', 'RESTAURANT', null, null, now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Chandigarh'));</sql>
+	    <sql>insert into venue (id, name, description, type, comments, rating, added_on, city_id, locality_id, priority) values ((select nextval('hibernate_sequence')), 'Hot Millions', 'Hot Millions', 'RESTAURANT', null, null, now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Chandigarh'), 90);</sql>
     </changeSet>
 	
 	<changeSet author="msingla" id="1.43">
@@ -428,7 +414,7 @@
 		<preConditions onFail="MARK_RAN">
 			<sqlCheck expectedResult="0">select count(*) from attachment where name = 'HotMillions.jpg';</sqlCheck>
 		</preConditions>
-	    <sql>insert into attachment values ((select nextVal('hibernate_sequence')), 'HotMillions.jpg', 'HotMillions.jpg', (select id from venue where name = 'Hot Millions'), 0, now());</sql>
+	    <sql>insert into attachment values ((select nextVal('hibernate_sequence')), 'HotMillions.jpg', 'HotMillions.jpg', (select id from venue where name = 'Hot Millions'), 0, now(), 'Hot Millions Image');</sql>
     </changeSet>
 	
 	<changeSet author="msingla" id="1.45">
@@ -442,7 +428,7 @@
 		<preConditions onFail="MARK_RAN">
 			<sqlCheck expectedResult="0">select count(*) from venue where name = 'Brooklyn Central';</sqlCheck>
 		</preConditions>
-	    <sql>insert into venue (id, name, description, type, comments, rating, added_on, city_id, locality_id) values ((select nextval('hibernate_sequence')), 'Brooklyn Central', 'Brooklyn Central', 'RESTAURANT', null, null, now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Chandigarh'));</sql>
+	    <sql>insert into venue (id, name, description, type, comments, rating, added_on, city_id, locality_id, priority) values ((select nextval('hibernate_sequence')), 'Brooklyn Central', 'Brooklyn Central', 'RESTAURANT', null, null, now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Chandigarh'), 100);</sql>
     </changeSet>
 	
 	<changeSet author="msingla" id="1.47">
@@ -453,7 +439,7 @@
 		<preConditions onFail="MARK_RAN">
 			<sqlCheck expectedResult="0">select count(*) from attachment where name = 'BrooklynCentral.jpg';</sqlCheck>
 		</preConditions>
-	    <sql>insert into attachment values ((select nextVal('hibernate_sequence')), 'BrooklynCentral.jpg', 'BrooklynCentral.jpg', (select id from venue where name = 'Brooklyn Central'), 0, now());</sql>
+	    <sql>insert into attachment values ((select nextVal('hibernate_sequence')), 'BrooklynCentral.jpg', 'BrooklynCentral.jpg', (select id from venue where name = 'Brooklyn Central'), 0, now(), 'Brooklyn Central Image');</sql>
     </changeSet>
 	
 	<changeSet author="msingla" id="1.49">
@@ -467,7 +453,7 @@
 		<preConditions onFail="MARK_RAN">
 			<sqlCheck expectedResult="0">select count(*) from venue where name = 'The Brew Estate';</sqlCheck>
 		</preConditions>
-	    <sql>insert into venue (id, name, description, type, comments, rating, added_on, city_id, locality_id) values ((select nextval('hibernate_sequence')), 'The Brew Estate', 'The Brew Estate', 'RESTAURANT', null, null, now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Chandigarh'));</sql>
+	    <sql>insert into venue (id, name, description, type, comments, rating, added_on, city_id, locality_id, priority) values ((select nextval('hibernate_sequence')), 'The Brew Estate', 'The Brew Estate', 'RESTAURANT', null, null, now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Chandigarh'), 110);</sql>
     </changeSet>
 	
 	<changeSet author="msingla" id="1.51">
@@ -478,7 +464,7 @@
 		<preConditions onFail="MARK_RAN">
 			<sqlCheck expectedResult="0">select count(*) from attachment where name = 'TheBrewEstate.jpg';</sqlCheck>
 		</preConditions>
-	    <sql>insert into attachment values ((select nextVal('hibernate_sequence')), 'TheBrewEstate.jpg', 'TheBrewEstate.jpg', (select id from venue where name = 'The Brew Estate'), 0, now());</sql>
+	    <sql>insert into attachment values ((select nextVal('hibernate_sequence')), 'TheBrewEstate.jpg', 'TheBrewEstate.jpg', (select id from venue where name = 'The Brew Estate'), 0, now(), 'The Brew Estate Image');</sql>
     </changeSet>
 	
 	<changeSet author="msingla" id="1.53">
@@ -501,27 +487,27 @@
     
     <changeSet author="msingla" id="1.55">
 	    <sql>
-			insert into venue (id, name, description, type, comments, rating, added_on, city_id, locality_id) values ((select nextval('hibernate_sequence')), 'JW Marriott', 'Treat yourself to five-star luxury at the JW Marriott Hotel Chandigarh. Located in Sector 17, our hotel is in the center of the city''s vibrant business district, offering convenient accessibility to an array of historic attractions and sites. Upon stepping into our top-rated hotel, guests will be immersed in the ultimate in luxury', 'HOTEL', null, null, now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Chandigarh'));
+			insert into venue (id, name, description, type, comments, rating, added_on, city_id, locality_id, priority) values ((select nextval('hibernate_sequence')), 'JW Marriott', 'Treat yourself to five-star luxury at the JW Marriott Hotel Chandigarh. Located in Sector 17, our hotel is in the center of the city''s vibrant business district, offering convenient accessibility to an array of historic attractions and sites. Upon stepping into our top-rated hotel, guests will be immersed in the ultimate in luxury', 'HOTEL', null, null, now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Chandigarh'), 120);
 			
 			insert into address values ((select nextVal('hibernate_sequence')), 'JW Marriott Hotel Chandigarh', 'Plot no: 6, Sector 35-B, Dakshin Marg', 'Chandigarh', 'Chandigarh', 160035, '+91-172-3955555', '1-800-102-5000', null, (select id from venue where name = 'JW Marriott'), 0, now());
 			
-			insert into attachment values ((select nextVal('hibernate_sequence')), 'JWMarriottCover.jpg', 'JWMarriottCover.jpg', (select id from venue where name = 'JW Marriott'), 0, now());
+			insert into attachment values ((select nextVal('hibernate_sequence')), 'JWMarriottCover.jpg', 'JWMarriottCover.jpg', (select id from venue where name = 'JW Marriott'), 0, now(), 'Outer View');
 			
-			insert into attachment values ((select nextVal('hibernate_sequence')), 'JWMarriottGuestRoom.jpg', 'JWMarriottGuestRoom.jpg', (select id from venue where name = 'JW Marriott'), 0, now());
+			insert into attachment values ((select nextVal('hibernate_sequence')), 'JWMarriottGuestRoom.jpg', 'JWMarriottGuestRoom.jpg', (select id from venue where name = 'JW Marriott'), 0, now(), 'Guest Room');
 			
-			insert into attachment values ((select nextVal('hibernate_sequence')), 'JWMarriottLobby.jpg', 'JWMarriottLobby.jpg', (select id from venue where name = 'JW Marriott'), 0, now());
+			insert into attachment values ((select nextVal('hibernate_sequence')), 'JWMarriottLobby.jpg', 'JWMarriottLobby.jpg', (select id from venue where name = 'JW Marriott'), 0, now(), 'Lobby Area');
 			
-			insert into attachment values ((select nextVal('hibernate_sequence')), 'JWMarriottLuxurySuite.jpg', 'JWMarriottLuxurySuite.jpg', (select id from venue where name = 'JW Marriott'), 0, now());
+			insert into attachment values ((select nextVal('hibernate_sequence')), 'JWMarriottLuxurySuite.jpg', 'JWMarriottLuxurySuite.jpg', (select id from venue where name = 'JW Marriott'), 0, now(), 'Luxury Suite');
 			
-			insert into attachment values ((select nextVal('hibernate_sequence')), 'JWMarriottPool.jpg', 'JWMarriottPool.jpg', (select id from venue where name = 'JW Marriott'), 0, now());
+			insert into attachment values ((select nextVal('hibernate_sequence')), 'JWMarriottPool.jpg', 'JWMarriottPool.jpg', (select id from venue where name = 'JW Marriott'), 0, now(), 'Pool Side');
 			
-			insert into attachment values ((select nextVal('hibernate_sequence')), 'JWMarriottRestaurant.jpg', 'JWMarriottRestaurant.jpg', (select id from venue where name = 'JW Marriott'), 0, now());
+			insert into attachment values ((select nextVal('hibernate_sequence')), 'JWMarriottRestaurant.jpg', 'JWMarriottRestaurant.jpg', (select id from venue where name = 'JW Marriott'), 0, now(), 'Restaurant');
 			
-			insert into venue_rooms values ((select nextVal('hibernate_sequence')),(select id from venue where name = 'JW Marriott'), (select id from room where room_type = 'STANDARD'), null, true, true, true, true, true, 0, now());
+			insert into venue_rooms values ((select nextVal('hibernate_sequence')),(select id from venue where name = 'JW Marriott'), (select id from room where room_type = 'STANDARD'), 2000, true, true, true, true, true, 0, now(), false);
 			
-			insert into venue_rooms values ((select nextVal('hibernate_sequence')),(select id from venue where name = 'JW Marriott'), (select id from room where room_type = 'DELUXE'), null, true, true, true, true, true, 0, now());
+			insert into venue_rooms values ((select nextVal('hibernate_sequence')),(select id from venue where name = 'JW Marriott'), (select id from room where room_type = 'DELUXE'), 3000, true, true, true, true, true, 0, now(), true);
 			
-			insert into venue_rooms values ((select nextVal('hibernate_sequence')),(select id from venue where name = 'JW Marriott'), (select id from room where room_type = 'SUPERDELUXE'), null, true, true, true, true, true, 0, now());
+			insert into venue_rooms values ((select nextVal('hibernate_sequence')),(select id from venue where name = 'JW Marriott'), (select id from room where room_type = 'SUPERDELUXE'), 5000, true, true, true, true, true, 0, now(), true);
 			
 			insert into venue_services values ((select nextVal('hibernate_sequence')),(select id from venue where name = 'JW Marriott'), (select id from service where service_type = 'WIFI'), null, 0, now());
 			

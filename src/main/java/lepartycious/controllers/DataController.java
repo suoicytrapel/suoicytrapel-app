@@ -1,5 +1,8 @@
 package lepartycious.controllers;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -9,6 +12,7 @@ import lepartycious.dtos.requestDTOs.FilterRequestDTO;
 import lepartycious.dtos.requestDTOs.SearchRequestDTO;
 import lepartycious.dtos.responseDTOs.DetailResponseDTO;
 import lepartycious.dtos.responseDTOs.FilterResponseWrapperDTO;
+import lepartycious.dtos.responseDTOs.SearchResponseDTO;
 import lepartycious.dtos.responseDTOs.SearchResponseDTOWrapper;
 import lepartycious.services.CommonService;
 
@@ -44,6 +48,8 @@ public class DataController {
 	@RequestMapping(method=RequestMethod.POST, value="/details")
 	public DetailResponseDTO fetchDetails(@RequestBody DataRequestDTO dataRequestDTO) {
 		DetailResponseDTO detailResponseDTO = commonService.fetchDetails(dataRequestDTO);
+		List<SearchResponseDTO> recommendationList = commonService.fetchRecomendations(dataRequestDTO.getSearchType(), dataRequestDTO.getCityId());
+		detailResponseDTO.setRecommendationList(recommendationList);
 		return detailResponseDTO;
 	}
 	
@@ -53,6 +59,13 @@ public class DataController {
 		filterResponseDTO = commonService.loadFilters(filterRequestDTO.getSearchType(), filterRequestDTO.getCityId());
 		return filterResponseDTO;
 	}
+	
+	/*@RequestMapping(method=RequestMethod.POST, value="/filters")
+	public List<SearchResponseDTO> fetchRecomendations(@RequestBody FilterRequestDTO filterRequestDTO) {
+		List<SearchResponseDTO> recommendationList = new ArrayList<SearchResponseDTO>();
+		//filterResponseDTO = commonService.loadFilters(filterRequestDTO.getSearchType(), filterRequestDTO.getCityId());
+		return recommendationList;
+	}*/
 
 	@ExceptionHandler(IllegalArgumentException.class)
 	public Error handleError(HttpServletRequest req, HttpServletResponse response, Exception exception){

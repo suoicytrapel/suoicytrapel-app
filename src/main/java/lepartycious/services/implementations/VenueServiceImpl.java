@@ -11,9 +11,11 @@ import lepartycious.daos.VenueDAO;
 import lepartycious.dtos.requestDTOs.DataRequestDTO;
 import lepartycious.dtos.requestDTOs.FilterRequestDTO;
 import lepartycious.dtos.requestDTOs.SearchRequestDTO;
+import lepartycious.dtos.responseDTOs.AttachmentResponseDTO;
 import lepartycious.dtos.responseDTOs.DetailResponseDTO;
 import lepartycious.dtos.responseDTOs.FilterResponseDTO;
 import lepartycious.dtos.responseDTOs.FilterResponseWrapperDTO;
+import lepartycious.dtos.responseDTOs.TabResponseDTO;
 import lepartycious.dtos.responseDTOs.SearchResponseDTO;
 import lepartycious.dtos.responseDTOs.SearchResponseDTOWrapper;
 import lepartycious.models.Address;
@@ -50,13 +52,13 @@ public class VenueServiceImpl implements VenueService {
 		List<Room> roomList = cityDAO.getRooms("room");
 		City city = cityDAO.getCityById(searchDTO.getCityId());
 		List<Locality> localityList = city.getLocalities();
-		
+
 		List<Long> serviceIds = new ArrayList<Long>();
 		List<Long> amenityIds = new ArrayList<Long>();
 		List<Long> roomIds = new ArrayList<Long>();;
 		List<Long> localityIds = new ArrayList<Long>();
 		List<String> types = new ArrayList<String>();
-		
+
 		Map<String, String> establishmentType = getEstablishmentTypes();
 		for(Entry<String, String> entry : establishmentType.entrySet()){
 			if(!CollectionUtils.isEmpty(searchDTO.getFilters())){
@@ -67,7 +69,7 @@ public class VenueServiceImpl implements VenueService {
 				}
 			}
 		}
-		
+
 		for(lepartycious.models.Service service : serviceList){
 			if(!CollectionUtils.isEmpty(searchDTO.getFilters())){
 				for(String filter : searchDTO.getFilters()){
@@ -104,8 +106,8 @@ public class VenueServiceImpl implements VenueService {
 				}
 			}
 		}
-		
-		
+
+
 		Long totalVenueCount = null;
 		if(searchDTO.getOffset() == null || searchDTO.getOffset() == 0){
 			totalVenueCount = venueDAO.getVenueCount(searchDTO.getCityId(), searchDTO.getSearchString(), serviceIds, amenityIds, roomIds, localityIds, types);
@@ -143,24 +145,34 @@ public class VenueServiceImpl implements VenueService {
 	@Override
 	public DetailResponseDTO fetchVenueDetails(DataRequestDTO dataRequestDTO) {
 		Venue venue = venueDAO.fetchVenueDetails(dataRequestDTO.getCityId(), dataRequestDTO.getName());
-		List<String> serviceList = new ArrayList<String>();
-		List<String> amenitiesList = new ArrayList<String>();
-		List<String> roomList = new ArrayList<String>();
-		List<String> attachmentList = new ArrayList<String>();
-		
+		List<TabResponseDTO> serviceList = new ArrayList<TabResponseDTO>();
+		List<TabResponseDTO> amenitiesList = new ArrayList<TabResponseDTO>();
+		List<TabResponseDTO> roomList = new ArrayList<TabResponseDTO>();
+		List<AttachmentResponseDTO> attachmentList = new ArrayList<AttachmentResponseDTO>();
+		Map<String, List<TabResponseDTO>> tabMap = new HashMap<String, List<TabResponseDTO>>();
+
 		Address address = venue.getAddresses().get(0);
 		for(VenueServices venueService : venue.getVenueServices()){
-			serviceList.add(venueService.getServiceId().getDescription());
+			TabResponseDTO serviceDTO = new TabResponseDTO();
+			serviceDTO.setName(venueService.getServiceId().getDescription());
+			serviceList.add(serviceDTO);
 		}
 		for(VenueAmenities venueAmenities : venue.getVenueamenities()){
-			amenitiesList.add(venueAmenities.getAmenitiesId().getDescription());
+			TabResponseDTO amenityDTO = new TabResponseDTO();
+			amenityDTO.setName(venueAmenities.getAmenitiesId().getDescription());
+			amenitiesList.add(amenityDTO);
 		}
 		for(VenueRooms room : venue.getVenueRooms()){
-			roomList.add(room.getRoomId().getDescription());
+			TabResponseDTO roomDTO = new TabResponseDTO(room.getRoomId().getDescription(), room.getAcAvailability(), room.getFridgeAvailability(), room.getLockerAvailability(), room.getLedAvailability(), room.getAttachedBathroomAvailability(), room.getHotWaterAvailability(), room.getMinCost());
+			roomList.add(roomDTO);
 		}
 		for(Attachment attachment : venue.getAttachments()){
-			attachmentList.add(attachment.getImageURL());
+			AttachmentResponseDTO attachmentDTO = new AttachmentResponseDTO(attachment.getImageURL(), attachment.getHelpText());
+			attachmentList.add(attachmentDTO);
 		}
+		tabMap.put("Services", serviceList);
+		tabMap.put("Amenities", amenitiesList);
+		tabMap.put("Rooms", roomList);
 		DetailResponseDTO detailResponseDTO = new DetailResponseDTO();
 		detailResponseDTO.setName(venue.getName());
 		detailResponseDTO.setDescription(venue.getDescription());
@@ -170,9 +182,7 @@ public class VenueServiceImpl implements VenueService {
 		detailResponseDTO.setState(address.getState());
 		detailResponseDTO.setPrimaryPhoneNumber(address.getPrimaryPhone());
 		detailResponseDTO.setSecondaryPhoneNumber(address.getSecondaryPhone());
-		detailResponseDTO.setServices(serviceList);
-		detailResponseDTO.setAmenities(amenitiesList);
-		detailResponseDTO.setRooms(roomList);
+		detailResponseDTO.setTabMap(tabMap);
 		detailResponseDTO.setAttachments(attachmentList);
 		return detailResponseDTO;
 	}
@@ -185,14 +195,14 @@ public class VenueServiceImpl implements VenueService {
 		List<FilterResponseDTO> rooms = new ArrayList<FilterResponseDTO>();
 		List<FilterResponseDTO> localities = new ArrayList<FilterResponseDTO>();
 		List<FilterResponseDTO> establishments = new ArrayList<FilterResponseDTO>();
-		
+
 		List<lepartycious.models.Service> serviceList = cityDAO.getServices("service");
 		List<Amenities> amenityList = cityDAO.getAmenities("amenity");
 		List<Room> roomList = cityDAO.getRooms("room");
 		City city = cityDAO.getCityById(cityId);
 		List<Locality> localityList = city.getLocalities();
 		Map<String, String> establishmentType = getEstablishmentTypes();
-		
+
 		for(lepartycious.models.Service service : serviceList){
 			FilterResponseDTO filter = new FilterResponseDTO(service.getDescription(), service.getServiceType(), service.getServiceId());
 			services.add(filter);
@@ -228,6 +238,19 @@ public class VenueServiceImpl implements VenueService {
 		establishmentType.put("HOTEL", "Hotel");
 		establishmentType.put("CASUALDINE", "Casual Dining");
 		return establishmentType;
+	}
+
+	@Override
+	public List<SearchResponseDTO> fetchRecomendations(Long cityId) {
+		List<SearchResponseDTO> recommendationList = new ArrayList<SearchResponseDTO>();
+		List<Venue> venueList = venueDAO.fetchRecomendations(cityId);
+		for(Venue venue : venueList){
+			SearchResponseDTO searchResponseDTO = new SearchResponseDTO();
+			searchResponseDTO.setName(venue.getName());
+			searchResponseDTO.setMainImagerURL(venue.getAttachments().get(0).getImageURL());
+			recommendationList.add(searchResponseDTO);
+		}
+		return recommendationList;
 	}
 
 }

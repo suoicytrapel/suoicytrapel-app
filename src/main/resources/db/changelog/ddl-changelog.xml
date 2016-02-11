@@ -491,4 +491,27 @@
 			ALTER TABLE venue ALTER COLUMN description TYPE varchar (2000);
 		</sql>
 	</changeSet>
+	
+	<changeSet author="msingla" id="1.25">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<columnExists columnName="help_text" tableName="attachment" />
+			</not>
+		</preConditions>
+		<sql>
+			ALTER TABLE attachment ADD COLUMN help_text varchar (255);
+		</sql>
+	</changeSet>
+	
+	<changeSet author="msingla" id="1.26">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<columnExists columnName="hot_water_availability" tableName="venue_rooms" />
+			</not>
+		</preConditions>
+		<sql>
+			ALTER TABLE venue_rooms ADD COLUMN hot_water_availability boolean;
+		</sql>
+	</changeSet>
+	
 </databaseChangeLog>

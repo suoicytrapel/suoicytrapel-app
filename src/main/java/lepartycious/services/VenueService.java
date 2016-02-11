@@ -9,6 +9,7 @@ import lepartycious.dtos.requestDTOs.FilterRequestDTO;
 import lepartycious.dtos.requestDTOs.SearchRequestDTO;
 import lepartycious.dtos.responseDTOs.DetailResponseDTO;
 import lepartycious.dtos.responseDTOs.FilterResponseWrapperDTO;
+import lepartycious.dtos.responseDTOs.SearchResponseDTO;
 import lepartycious.dtos.responseDTOs.SearchResponseDTOWrapper;
 
 @Transactional(readOnly=true)
@@ -21,5 +22,7 @@ public interface VenueService {
 	public DetailResponseDTO fetchVenueDetails(DataRequestDTO dataRequestDTO);
 	
 	public FilterResponseWrapperDTO loadFilters(Long cityId);
+	
+	public List<SearchResponseDTO> fetchRecomendations(Long cityId);
 
 }

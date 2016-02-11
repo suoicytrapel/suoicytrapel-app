@@ -53,6 +53,9 @@ public class VenueRooms implements Serializable{
 	@Column(name = "attached_bathroom_availability")
 	private Boolean attachedBathroomAvailability;
 	
+	@Column(name = "hot_water_availability")
+	private Boolean hotWaterAvailability;
+	
 	@Column(name = "added_on")
 	private Date addedOn;
 	
@@ -135,4 +138,13 @@ public class VenueRooms implements Serializable{
 	public void setAddedOn(Date addedOn) {
 		this.addedOn = addedOn;
 	}
+
+	public Boolean getHotWaterAvailability() {
+		return hotWaterAvailability;
+	}
+
+	public void setHotWaterAvailability(Boolean hotWaterAvailability) {
+		this.hotWaterAvailability = hotWaterAvailability;
+	}
+	
 }
