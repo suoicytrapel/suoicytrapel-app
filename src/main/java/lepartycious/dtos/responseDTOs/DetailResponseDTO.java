@@ -14,6 +14,8 @@ public class DetailResponseDTO implements Serializable{
 	private String state;
 	private String primaryPhoneNumber;
 	private String secondaryPhoneNumber;
+	private Float latitude;
+	private Float longitude;
 	private Map<String, List<TabResponseDTO>> tabMap;
 	private List<AttachmentResponseDTO> attachments;
 	private List<SearchResponseDTO> recommendationList;
@@ -83,5 +85,17 @@ public class DetailResponseDTO implements Serializable{
 	}
 	public void setAttachments(List<AttachmentResponseDTO> attachments) {
 		this.attachments = attachments;
+	}
+	public Float getLatitude() {
+		return latitude;
+	}
+	public void setLatitude(Float latitude) {
+		this.latitude = latitude;
+	}
+	public Float getLongitude() {
+		return longitude;
+	}
+	public void setLongitude(Float longitude) {
+		this.longitude = longitude;
 	}
 }

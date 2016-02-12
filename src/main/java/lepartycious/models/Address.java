@@ -50,6 +50,12 @@ public class Address implements Serializable{
 	
 	@Column(name="entity_id")
 	private Long entityId;
+	
+	@Column(name="latitude")
+	private Float latitude;
+	
+	@Column(name="longitude")
+	private Float longitude;
 
 	public long getAddressId() {
 		return addressId;
@@ -129,5 +135,21 @@ public class Address implements Serializable{
 
 	public void setSecondaryPhone(String secondaryPhone) {
 		this.secondaryPhone = secondaryPhone;
+	}
+
+	public Float getLatitude() {
+		return latitude;
+	}
+
+	public void setLatitude(Float latitude) {
+		this.latitude = latitude;
+	}
+
+	public Float getLongitude() {
+		return longitude;
+	}
+
+	public void setLongitude(Float longitude) {
+		this.longitude = longitude;
 	}
 }

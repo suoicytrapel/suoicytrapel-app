@@ -514,4 +514,26 @@
 		</sql>
 	</changeSet>
 	
+	<changeSet author="msingla" id="1.27">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<columnExists columnName="latitude" tableName="address" />
+			</not>
+		</preConditions>
+		<sql>
+			ALTER TABLE address ADD COLUMN latitude float;
+		</sql>
+	</changeSet>
+	
+	<changeSet author="msingla" id="1.28">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<columnExists columnName="longitude" tableName="address" />
+			</not>
+		</preConditions>
+		<sql>
+			ALTER TABLE address ADD COLUMN longitude float;
+		</sql>
+	</changeSet>
+	
 </databaseChangeLog>

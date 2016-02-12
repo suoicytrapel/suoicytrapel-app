@@ -77,7 +77,7 @@
     </changeSet>
 	
 	<changeSet author="msingla" id="1.7">
-	    <sql>insert into address values ((select nextVal('hibernate_sequence')), 'SCO 4 &amp; 5, Sector 9 D', 'Sector 9', 'Chandigarh', 'Chandigarh', 160101, null, null, null, (select id from venue where name = 'Yo China!'), 0, now());</sql>
+	    <sql>insert into address values ((select nextVal('hibernate_sequence')), 'SCO 4 &amp; 5, Sector 9 D', 'Sector 9', 'Chandigarh', 'Chandigarh', 160101, null, null, null, (select id from venue where name = 'Yo China!'), 0, now(), null, null);</sql>
     </changeSet>
     
     <changeSet author="msingla" id="1.8">
@@ -207,7 +207,7 @@
     </changeSet>
 	
 	<changeSet author="msingla" id="1.11">
-	    <sql>insert into address values ((select nextVal('hibernate_sequence')), 'Sector 35', 'Sector 35', 'Chandigarh', 'Chandigarh', 160101, null, null, null, (select id from venue where name = 'Midnight Chef'), 0, now());</sql>
+	    <sql>insert into address values ((select nextVal('hibernate_sequence')), 'Sector 35', 'Sector 35', 'Chandigarh', 'Chandigarh', 160101, null, null, null, (select id from venue where name = 'Midnight Chef'), 0, now(), null, null);</sql>
     </changeSet>
     
     <changeSet author="msingla" id="1.12">
@@ -232,7 +232,7 @@
     </changeSet>
 	
 	<changeSet author="msingla" id="1.15">
-	    <sql>insert into address values ((select nextVal('hibernate_sequence')), 'Shop 10, Inner Market, Sector 9D', 'Sector 9', 'Chandigarh', 'Chandigarh', 160101, null, null, null, (select id from venue where name = 'La Pino''z Pizza'), 0, now());</sql>
+	    <sql>insert into address values ((select nextVal('hibernate_sequence')), 'Shop 10, Inner Market, Sector 9D', 'Sector 9', 'Chandigarh', 'Chandigarh', 160101, null, null, null, (select id from venue where name = 'La Pino''z Pizza'), 0, now(), null, null);</sql>
     </changeSet>
     
     <changeSet author="msingla" id="1.16">
@@ -257,7 +257,7 @@
     </changeSet>
 	
 	<changeSet author="msingla" id="1.19">
-	    <sql>insert into address values ((select nextVal('hibernate_sequence')), 'Shop No. 348, Sector 32 D', 'Sector 32', 'Chandigarh', 'Chandigarh', 160101, null, null, null, (select id from venue where name = 'Burger Point'), 0, now());</sql>
+	    <sql>insert into address values ((select nextVal('hibernate_sequence')), 'Shop No. 348, Sector 32 D', 'Sector 32', 'Chandigarh', 'Chandigarh', 160101, null, null, null, (select id from venue where name = 'Burger Point'), 0, now(), null, null);</sql>
     </changeSet>
     
     <changeSet author="msingla" id="1.20">
@@ -282,7 +282,7 @@
     </changeSet>
 	
 	<changeSet author="msingla" id="1.23">
-	    <sql>insert into address values ((select nextVal('hibernate_sequence')), 'The Cove, SCO 1 to 2', 'Sector 5', 'Panchkula', 'Chandigarh', 160101, null, null, null, (select id from venue where name = 'Puzzles - The Cove'), 0, now());</sql>
+	    <sql>insert into address values ((select nextVal('hibernate_sequence')), 'The Cove, SCO 1 to 2', 'Sector 5', 'Panchkula', 'Chandigarh', 160101, null, null, null, (select id from venue where name = 'Puzzles - The Cove'), 0, now(), null, null);</sql>
     </changeSet>
     
     <changeSet author="msingla" id="1.24">
@@ -307,7 +307,7 @@
     </changeSet>
 	
 	<changeSet author="msingla" id="1.27">
-	    <sql>insert into address values ((select nextVal('hibernate_sequence')), 'SCO 333 &amp; 334, Sector 35 B', 'Sector 35', 'Chandigarh', 'Chandigarh', 160101, null, null, null, (select id from venue where name = 'Pashtun'), 0, now());</sql>
+	    <sql>insert into address values ((select nextVal('hibernate_sequence')), 'SCO 333 &amp; 334, Sector 35 B', 'Sector 35', 'Chandigarh', 'Chandigarh', 160101, null, null, null, (select id from venue where name = 'Pashtun'), 0, now(), null, null);</sql>
     </changeSet>
     
     <changeSet author="msingla" id="1.28">
@@ -332,7 +332,7 @@
     </changeSet>
 	
 	<changeSet author="msingla" id="1.31">
-	    <sql>insert into address values ((select nextVal('hibernate_sequence')), 'SCO 108 &amp; 109, Sindhi''s Veg Food Court', 'Sector 17C', 'Chandigarh', 'Chandigarh', 160101, null, null, null, (select id from venue where name = 'Sindhi Sweets'), 0, now());</sql>
+	    <sql>insert into address values ((select nextVal('hibernate_sequence')), 'SCO 108 &amp; 109, Sindhi''s Veg Food Court', 'Sector 17C', 'Chandigarh', 'Chandigarh', 160101, null, null, null, (select id from venue where name = 'Sindhi Sweets'), 0, now(), null, null);</sql>
     </changeSet>
     
     <changeSet author="msingla" id="1.32">
@@ -357,7 +357,7 @@
     </changeSet>
 	
 	<changeSet author="msingla" id="1.35">
-	    <sql>insert into address values ((select nextVal('hibernate_sequence')), '178 A, 3rd Floor, Elante Mall', 'Chandigarh Industrial Area Phase 1', 'Chandigarh', 'Chandigarh', 160101, null, null, null, (select id from venue where name = 'Underdoggs Sports Bar &amp; Grill'), 0, now());</sql>
+	    <sql>insert into address values ((select nextVal('hibernate_sequence')), '178 A, 3rd Floor, Elante Mall', 'Chandigarh Industrial Area Phase 1', 'Chandigarh', 'Chandigarh', 160101, null, null, null, (select id from venue where name = 'Underdoggs Sports Bar &amp; Grill'), 0, now(), null, null);</sql>
     </changeSet>
     
     <changeSet author="msingla" id="1.36">
@@ -382,7 +382,7 @@
     </changeSet>
 	
 	<changeSet author="msingla" id="1.39">
-	    <sql>insert into address values ((select nextVal('hibernate_sequence')), 'Chandigarh Industrial Area', null, 'Chandigarh', 'Chandigarh', 160101, null, null, null, (select id from venue where name = 'The Kitchen Knight'), 0, now());</sql>
+	    <sql>insert into address values ((select nextVal('hibernate_sequence')), 'Chandigarh Industrial Area', null, 'Chandigarh', 'Chandigarh', 160101, null, null, null, (select id from venue where name = 'The Kitchen Knight'), 0, now(), null, null);</sql>
     </changeSet>
     
     <changeSet author="msingla" id="1.40">
@@ -407,7 +407,7 @@
     </changeSet>
 	
 	<changeSet author="msingla" id="1.43">
-	    <sql>insert into address values ((select nextVal('hibernate_sequence')), 'SCO 196 &amp; 197, Sector 17 C', 'Sector 17', 'Chandigarh', 'Chandigarh', 160101, null, null, null, (select id from venue where name = 'Hot Millions'), 0, now());</sql>
+	    <sql>insert into address values ((select nextVal('hibernate_sequence')), 'SCO 196 &amp; 197, Sector 17 C', 'Sector 17', 'Chandigarh', 'Chandigarh', 160101, null, null, null, (select id from venue where name = 'Hot Millions'), 0, now(), null, null);</sql>
     </changeSet>
     
     <changeSet author="msingla" id="1.44">
@@ -432,7 +432,7 @@
     </changeSet>
 	
 	<changeSet author="msingla" id="1.47">
-	    <sql>insert into address values ((select nextVal('hibernate_sequence')), 'Courtyard, Elante Mall, Chandigarh Industrial Area (Phase 1)', 'Chandigarh Industrial Area', 'Chandigarh', 'Chandigarh', 160101, null, null, null, (select id from venue where name = 'Brooklyn Central'), 0, now());</sql>
+	    <sql>insert into address values ((select nextVal('hibernate_sequence')), 'Courtyard, Elante Mall, Chandigarh Industrial Area (Phase 1)', 'Chandigarh Industrial Area', 'Chandigarh', 'Chandigarh', 160101, null, null, null, (select id from venue where name = 'Brooklyn Central'), 0, now(), null, null);</sql>
     </changeSet>
     
     <changeSet author="msingla" id="1.48">
@@ -457,7 +457,7 @@
     </changeSet>
 	
 	<changeSet author="msingla" id="1.51">
-	    <sql>insert into address values ((select nextVal('hibernate_sequence')), 'Sector 26', null, 'Chandigarh', 'Chandigarh', 160101, null, null, null, (select id from venue where name = 'The Brew Estate'), 0, now());</sql>
+	    <sql>insert into address values ((select nextVal('hibernate_sequence')), 'Sector 26', null, 'Chandigarh', 'Chandigarh', 160101, null, null, null, (select id from venue where name = 'The Brew Estate'), 0, now(), null, null);</sql>
     </changeSet>
     
     <changeSet author="msingla" id="1.52">
@@ -489,7 +489,7 @@
 	    <sql>
 			insert into venue (id, name, description, type, comments, rating, added_on, city_id, locality_id, priority) values ((select nextval('hibernate_sequence')), 'JW Marriott', 'Treat yourself to five-star luxury at the JW Marriott Hotel Chandigarh. Located in Sector 17, our hotel is in the center of the city''s vibrant business district, offering convenient accessibility to an array of historic attractions and sites. Upon stepping into our top-rated hotel, guests will be immersed in the ultimate in luxury', 'HOTEL', null, null, now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Chandigarh'), 120);
 			
-			insert into address values ((select nextVal('hibernate_sequence')), 'JW Marriott Hotel Chandigarh', 'Plot no: 6, Sector 35-B, Dakshin Marg', 'Chandigarh', 'Chandigarh', 160035, '+91-172-3955555', '1-800-102-5000', null, (select id from venue where name = 'JW Marriott'), 0, now());
+			insert into address values ((select nextVal('hibernate_sequence')), 'JW Marriott Hotel Chandigarh', 'Plot no: 6, Sector 35-B, Dakshin Marg', 'Chandigarh', 'Chandigarh', 160035, '+91-172-3955555', '1-800-102-5000', null, (select id from venue where name = 'JW Marriott'), 0, now(), '30.7398', '76.7827');
 			
 			insert into attachment values ((select nextVal('hibernate_sequence')), 'JWMarriottCover.jpg', 'JWMarriottCover.jpg', (select id from venue where name = 'JW Marriott'), 0, now(), 'Outer View');
 			

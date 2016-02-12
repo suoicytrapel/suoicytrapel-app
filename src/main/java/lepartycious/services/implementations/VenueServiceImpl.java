@@ -182,6 +182,8 @@ public class VenueServiceImpl implements VenueService {
 		detailResponseDTO.setState(address.getState());
 		detailResponseDTO.setPrimaryPhoneNumber(address.getPrimaryPhone());
 		detailResponseDTO.setSecondaryPhoneNumber(address.getSecondaryPhone());
+		detailResponseDTO.setLatitude(address.getLatitude());
+		detailResponseDTO.setLongitude(address.getLongitude());
 		detailResponseDTO.setTabMap(tabMap);
 		detailResponseDTO.setAttachments(attachmentList);
 		return detailResponseDTO;
