@@ -170,9 +170,15 @@ public class VenueServiceImpl implements VenueService {
 			AttachmentResponseDTO attachmentDTO = new AttachmentResponseDTO(attachment.getImageURL(), attachment.getHelpText());
 			attachmentList.add(attachmentDTO);
 		}
-		tabMap.put("Services", serviceList);
-		tabMap.put("Amenities", amenitiesList);
-		tabMap.put("Rooms", roomList);
+		if(!CollectionUtils.isEmpty(serviceList)){
+			tabMap.put("Services", serviceList);
+		}
+		if(!CollectionUtils.isEmpty(amenitiesList)){
+			tabMap.put("Amenities", amenitiesList);
+		}
+		if(!CollectionUtils.isEmpty(roomList)){
+			tabMap.put("Rooms", roomList);
+		}
 		DetailResponseDTO detailResponseDTO = new DetailResponseDTO();
 		detailResponseDTO.setName(venue.getName());
 		detailResponseDTO.setDescription(venue.getDescription());
