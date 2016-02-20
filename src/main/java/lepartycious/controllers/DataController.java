@@ -60,12 +60,10 @@ public class DataController {
 		return filterResponseDTO;
 	}
 	
-	/*@RequestMapping(method=RequestMethod.POST, value="/filters")
-	public List<SearchResponseDTO> fetchRecomendations(@RequestBody FilterRequestDTO filterRequestDTO) {
-		List<SearchResponseDTO> recommendationList = new ArrayList<SearchResponseDTO>();
-		//filterResponseDTO = commonService.loadFilters(filterRequestDTO.getSearchType(), filterRequestDTO.getCityId());
-		return recommendationList;
-	}*/
+	@RequestMapping(method=RequestMethod.POST, value="/pushData")
+	public boolean pushDataToDatabase(@RequestBody String query){
+		return commonService.pushDataToDatabase(query);
+	}
 
 	@ExceptionHandler(IllegalArgumentException.class)
 	public Error handleError(HttpServletRequest req, HttpServletResponse response, Exception exception){

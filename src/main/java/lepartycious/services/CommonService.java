@@ -1,10 +1,12 @@
 package lepartycious.services;
 
 import java.util.List;
+import java.util.Map;
 
 import lepartycious.dtos.requestDTOs.DataRequestDTO;
 import lepartycious.dtos.requestDTOs.FilterRequestDTO;
 import lepartycious.dtos.requestDTOs.SearchRequestDTO;
+import lepartycious.dtos.responseDTOs.AddedDTO;
 import lepartycious.dtos.responseDTOs.DetailResponseDTO;
 import lepartycious.dtos.responseDTOs.FilterResponseWrapperDTO;
 import lepartycious.dtos.responseDTOs.SearchResponseDTO;
@@ -25,5 +27,10 @@ public interface CommonService {
 	public FilterResponseWrapperDTO loadFilters(String searchType, Long cityId);
 	
 	public List<SearchResponseDTO> fetchRecomendations(String searchType, Long cityId);
+	
+	public Map<String, List<AddedDTO>> getRecentAdditions(Long cityId);
+	
+	@Transactional(readOnly=false)
+	public boolean pushDataToDatabase(String query);
 
 }

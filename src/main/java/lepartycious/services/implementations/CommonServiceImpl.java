@@ -1,15 +1,21 @@
 package lepartycious.services.implementations;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import lepartycious.Enums.SearchTypeEnum;
+import lepartycious.daos.CommonDAO;
 import lepartycious.dtos.requestDTOs.DataRequestDTO;
 import lepartycious.dtos.requestDTOs.FilterRequestDTO;
 import lepartycious.dtos.requestDTOs.SearchRequestDTO;
+import lepartycious.dtos.responseDTOs.AddedDTO;
 import lepartycious.dtos.responseDTOs.DetailResponseDTO;
 import lepartycious.dtos.responseDTOs.FilterResponseWrapperDTO;
 import lepartycious.dtos.responseDTOs.SearchResponseDTO;
 import lepartycious.dtos.responseDTOs.SearchResponseDTOWrapper;
+import lepartycious.models.Venue;
 import lepartycious.services.BandService;
 import lepartycious.services.CatererService;
 import lepartycious.services.CommonService;
@@ -20,6 +26,7 @@ import lepartycious.services.VenueService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 @Service
 public class CommonServiceImpl implements CommonService {
@@ -42,6 +49,9 @@ public class CommonServiceImpl implements CommonService {
 	@Autowired
 	private CatererService catererService;
 
+	@Autowired
+	private CommonDAO commonDAO;
+	
 	@Override
 	public SearchResponseDTOWrapper getEntities(SearchRequestDTO searchDTO) {
 		if(SearchTypeEnum.VENUE.toString().equals(searchDTO.getSearchType())){
@@ -152,6 +162,26 @@ public class CommonServiceImpl implements CommonService {
 		else{
 			return null;
 		}
+	}
+
+	@Override
+	public Map<String, List<AddedDTO>> getRecentAdditions(Long cityId) {
+		Map<String, List<AddedDTO>> recentlyAddedVenues = new HashMap<String, List<AddedDTO>>();
+		List<AddedDTO> venueAdditions = new ArrayList<AddedDTO>();
+		List<Venue> venueList =  commonDAO.getRecentlyAddedVenues(cityId);
+		for(Venue venue : venueList){
+			AddedDTO details = new AddedDTO(venue.getName(), venue.getLocality().getName(), venue.getCity().getName()); 
+			venueAdditions.add(details);
+		}
+		if(!CollectionUtils.isEmpty(venueAdditions)){
+			recentlyAddedVenues.put("Venues", venueAdditions);
+		}
+		return recentlyAddedVenues;
+	}
+
+	@Override
+	public boolean pushDataToDatabase(String query) {
+		return commonDAO.pushDataToDatabase(query);
 	}
 
 }
