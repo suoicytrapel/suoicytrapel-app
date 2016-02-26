@@ -6,620 +6,408 @@
   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
          
+    <!-- Create City Specific Data -->
+         
 	<changeSet author="msingla" id="1.1">
-		<preConditions onFail="MARK_RAN">
-			<sqlCheck expectedResult="0">select count(*) from city where name = 'Chandigarh';</sqlCheck>
-		</preConditions>
-	    <sql>insert into city values ((select nextVal('hibernate_sequence')), 'Chandigarh', 'Chandigarh', now());</sql>
+	    <sql>
+	    	insert into city values ((select nextVal('hibernate_sequence')), 'Chandigarh', 'Chandigarh', now());
+	    	insert into city values ((select nextVal('hibernate_sequence')), 'Bikaner', 'Bikaner', now());
+	    </sql>
     </changeSet>
+    
+    <!-- Create Locality Specific Data -->
     
     <changeSet author="msingla" id="1.2">
-		<preConditions onFail="MARK_RAN">
-			<sqlCheck expectedResult="0">select count(*) from locality where name = 'Chandigarh';</sqlCheck>
-		</preConditions>
-	    <sql>insert into locality (id, name, description, added_on, city_id) values ((select nextVal('hibernate_sequence')), 'Chandigarh', 'Chandigarh', now(), (select id from city where name = 'Chandigarh'));</sql>
+	    <sql>
+	    	insert into locality values ((select nextVal('hibernate_sequence')), 'Chandigarh', 'Chandigarh', now(), (select id from city where name = 'Chandigarh'));
+	    	insert into locality values ((select nextVal('hibernate_sequence')), 'Panchkula', 'Panchkula', now(), (select id from city where name = 'Chandigarh'));
+	    	insert into locality values ((select nextVal('hibernate_sequence')), 'Mohali', 'Mohali', now(), (select id from city where name = 'Chandigarh'));
+	    	insert into locality values ((select nextVal('hibernate_sequence')), 'Zirakpur', 'Zirakpur', now(), (select id from city where name = 'Chandigarh'));
+	    	insert into locality values ((select nextVal('hibernate_sequence')), 'Jaisalmer Road', 'Jaisalmer Road', now(), (select id from city where name = 'Bikaner'));
+	    	insert into locality values ((select nextVal('hibernate_sequence')), 'Delhi Road', 'Delhi Road', now(), (select id from city where name = 'Bikaner'));
+	    	insert into locality values ((select nextVal('hibernate_sequence')), 'Pawan Puri', 'Pawan Puri', now(), (select id from city where name = 'Bikaner'));
+	    </sql>
     </changeSet>
     
-    <changeSet author="msingla" id="1.1.1">
-		<preConditions onFail="MARK_RAN">
-			<sqlCheck expectedResult="0">select count(*) from city where name = 'Bikaner';</sqlCheck>
-		</preConditions>
-	    <sql>insert into city values ((select nextVal('hibernate_sequence')), 'Bikaner', 'Bikaner', now());</sql>
+    <!-- Create Service Specific Data -->
+    
+     <changeSet author="msingla" id="1.3">
+	    <sql>
+	    	insert into service values ((select nextVal('hibernate_sequence')), 'SERVICE', 'VENUE', 'Dine In', 'Dine In', true, now());
+	    	insert into service values ((select nextVal('hibernate_sequence')), 'SERVICE', 'VENUE', 'High-speed Wi-Fi Internet', 'Wi-Fi', false, now());
+	    	insert into service values ((select nextVal('hibernate_sequence')), 'SERVICE', 'VENUE', 'CCTV Surveillance', 'CCTV', false, now());
+	    	insert into service values ((select nextVal('hibernate_sequence')), 'SERVICE', 'VENUE', 'Drinks Available', 'Drinks', false, now());
+	    	insert into service values ((select nextVal('hibernate_sequence')), 'SERVICE', 'VENUE', 'Smoking Zone', 'Smoking Zone', false, now());
+	    	insert into service values ((select nextVal('hibernate_sequence')), 'SERVICE', 'VENUE', 'Vallet Parking', 'Vallet Parking', false, now());
+	    	insert into service values ((select nextVal('hibernate_sequence')), 'SERVICE', 'VENUE', 'Alcohol Served', 'Alcohol', false, now());
+	    	insert into service values ((select nextVal('hibernate_sequence')), 'SERVICE', 'VENUE', 'Buffet', 'Buffet', false, now());
+	    	insert into service values ((select nextVal('hibernate_sequence')), 'SERVICE', 'VENUE', 'Pure Veg', 'Only Veg', false, now());
+	    	insert into service values ((select nextVal('hibernate_sequence')), 'SERVICE', 'VENUE', 'Outdoor Seating', 'Outdoor Seating', false, now());
+	    	insert into service values ((select nextVal('hibernate_sequence')), 'SERVICE', 'CATERER', 'Crockery', 'Crockery', true, now());
+			insert into service values ((select nextVal('hibernate_sequence')), 'SERVICE', 'CATERER', 'Own Service Staff', 'Own Service Staff', true, now());
+			insert into service values ((select nextVal('hibernate_sequence')), 'SERVICE', 'CATERER', 'Pure Veg', 'Only Veg', true, now());
+			insert into service values ((select nextVal('hibernate_sequence')), 'SERVICE', 'CATERER', 'Live Tandoor', 'Live Tandoor', false, now());
+			insert into service values ((select nextVal('hibernate_sequence')), 'SERVICE', 'CATERER', 'Beverages', 'Beverages', false, now());
+			insert into service values ((select nextVal('hibernate_sequence')), 'SERVICE', 'RENTAL', 'Simple Band', 'Simple Band', false, now());
+			insert into service values ((select nextVal('hibernate_sequence')), 'SERVICE', 'RENTAL', 'Military Band', 'Military Band', false, now());
+			insert into service values ((select nextVal('hibernate_sequence')), 'SERVICE', 'RENTAL', 'Crew Band', 'Crew Band', false, now());
+			insert into service values ((select nextVal('hibernate_sequence')), 'SERVICE', 'RENTAL', 'DJ Sound Band', 'DJ Sound Band Band', false, now());
+			insert into service values ((select nextVal('hibernate_sequence')), 'SERVICE', 'RENTAL', 'Baghi', 'Baghi', false, now());
+			insert into service values ((select nextVal('hibernate_sequence')), 'SERVICE', 'RENTAL', 'Ghodi', 'Ghodi', false, now());
+			insert into service values ((select nextVal('hibernate_sequence')), 'SERVICE', 'RENTAL', 'Rath', 'Rath', false, now());
+			insert into service values ((select nextVal('hibernate_sequence')), 'SERVICE', 'RENTAL', 'Speakers', 'Speakers', false, now());
+			insert into service values ((select nextVal('hibernate_sequence')), 'SERVICE', 'RENTAL', 'Dance Floor', 'Dance Floor', false, now());
+			insert into service values ((select nextVal('hibernate_sequence')), 'SERVICE', 'RENTAL', 'Dancers', 'Dancers', false, now());
+			insert into service values ((select nextVal('hibernate_sequence')), 'SERVICE', 'RENTAL', 'Tent', 'Tent', false, now());
+			insert into service values ((select nextVal('hibernate_sequence')), 'SERVICE', 'RENTAL', 'Chairs', 'Chairs', false, now());
+			insert into service values ((select nextVal('hibernate_sequence')), 'SERVICE', 'RENTAL', 'Bedding', 'Bedding', false, now());
+			insert into service values ((select nextVal('hibernate_sequence')), 'SERVICE', 'RENTAL', 'Sedan', 'Sedan', false, now());
+			insert into service values ((select nextVal('hibernate_sequence')), 'SERVICE', 'RENTAL', 'HatchBack', 'Hatchback', false, now());
+			insert into service values ((select nextVal('hibernate_sequence')), 'SERVICE', 'RENTAL', 'SUV', 'SUV', false, now());
+			insert into service values ((select nextVal('hibernate_sequence')), 'SERVICE', 'RENTAL', 'Bus Service', 'Bus Service', false, now());
+			insert into service values ((select nextVal('hibernate_sequence')), 'SERVICE', 'PHOTOGRAPHER', 'Couple Shoots', null, false, now());
+			insert into service values ((select nextVal('hibernate_sequence')), 'SERVICE', 'PHOTOGRAPHER', 'Live Photobooth', null, false, now());
+			insert into service values ((select nextVal('hibernate_sequence')), 'SERVICE', 'PHOTOGRAPHER', 'Digital Album', null, false, now());
+			insert into service values ((select nextVal('hibernate_sequence')), 'SERVICE', 'PHOTOGRAPHER', 'Live Video Streaming', null, false, now());
+			insert into service values ((select nextVal('hibernate_sequence')), 'SERVICE', 'PHOTOGRAPHER', 'LED TVs', null, false, now());
+			insert into service values ((select nextVal('hibernate_sequence')), 'SERVICE', 'PHOTOGRAPHER', 'Multiple Cameras', null, false, now());
+			insert into service values ((select nextVal('hibernate_sequence')), 'SERVICE', 'PHOTOGRAPHER', 'Projection', null, false, now());
+			insert into service values ((select nextVal('hibernate_sequence')), 'SERVICE', 'PHOTOGRAPHER', 'Candid Photo Shoots', null, false, now());
+			insert into service values ((select nextVal('hibernate_sequence')), 'SERVICE', 'PHOTOGRAPHER', 'Portfolios', null, false, now());
+			insert into service values ((select nextVal('hibernate_sequence')), 'SERVICE', 'PHOTOGRAPHER', 'Pre Wedding Shoots', null, false, now());
+			insert into service values ((select nextVal('hibernate_sequence')), 'SERVICE', 'DECORATOR', 'Flower Decoration', 'Floral', true, now());
+			insert into service values ((select nextVal('hibernate_sequence')), 'SERVICE', 'DECORATOR', 'Lighting Decoration', 'Lighting', true, now());
+			insert into service values ((select nextVal('hibernate_sequence')), 'SERVICE', 'DECORATOR', 'Home Decoration', null, false, now());
+			insert into service values ((select nextVal('hibernate_sequence')), 'SERVICE', 'DECORATOR', 'Car Decoration', null, false, now());
+			insert into service values ((select nextVal('hibernate_sequence')), 'SERVICE', 'DECORATOR', 'Mandap Decoration', null, false, now());
+			insert into service values ((select nextVal('hibernate_sequence')), 'SERVICE', 'DECORATOR', 'Stage Decoration', null, false, now());
+			insert into service values ((select nextVal('hibernate_sequence')), 'SERVICE', 'DECORATOR', 'Venue Decoration', null, false, now());
+			insert into service values ((select nextVal('hibernate_sequence')), 'SERVICE', 'DECORATOR', 'Event Lighting', null, false, now());
+			insert into service values ((select nextVal('hibernate_sequence')), 'SERVICE', 'DECORATOR', 'Ground Lighting', null, false, now());
+			insert into service values ((select nextVal('hibernate_sequence')), 'SERVICE', 'DECORATOR', 'Backdrops', null, false, now());
+		</sql>
     </changeSet>
     
-    <changeSet author="msingla" id="1.2.1">
-		<preConditions onFail="MARK_RAN">
-			<sqlCheck expectedResult="0">select count(*) from locality where name = 'Delhi Road';</sqlCheck>
-		</preConditions>
-	    <sql>insert into locality (id, name, description, added_on, city_id) values ((select nextVal('hibernate_sequence')), 'Delhi Road', 'Delhi Road', now(), (select id from city where name = 'Bikaner'));</sql>
-    </changeSet>
-	
-	<changeSet author="msingla" id="1.2.2">
-		<preConditions onFail="MARK_RAN">
-			<sqlCheck expectedResult="0">select count(*) from locality where name = 'Jaisalmer Road';</sqlCheck>
-		</preConditions>
-	    <sql>insert into locality (id, name, description, added_on, city_id) values ((select nextVal('hibernate_sequence')), 'Jaisalmer Road', 'Jaisalmer Road', now(), (select id from city where name = 'Bikaner'));</sql>
-    </changeSet>
-	
-	<changeSet author="msingla" id="1.2.3">
-		<preConditions onFail="MARK_RAN">
-			<sqlCheck expectedResult="0">select count(*) from locality where name = 'Pawan Puri';</sqlCheck>
-		</preConditions>
-	    <sql>insert into locality (id, name, description, added_on, city_id) values ((select nextVal('hibernate_sequence')), 'Pawan Puri', 'Pawan Puri', now(), (select id from city where name = 'Bikaner'));</sql>
-    </changeSet>
-    
-    <changeSet author="msingla" id="1.3">
-		<preConditions onFail="MARK_RAN">
-			<sqlCheck expectedResult="0">select count(*) from locality where name = 'Panchkula';</sqlCheck>
-		</preConditions>
-	    <sql>insert into locality (id, name, description, added_on, city_id) values ((select nextVal('hibernate_sequence')), 'Panchkula', 'Panchkula', now(), (select id from city where name = 'Chandigarh'));</sql>
-    </changeSet>
+    <!-- Create Amenity Specific Data -->
     
     <changeSet author="msingla" id="1.4">
-		<preConditions onFail="MARK_RAN">
-			<sqlCheck expectedResult="0">select count(*) from locality where name = 'Mohali';</sqlCheck>
-		</preConditions>
-	    <sql>insert into locality (id, name, description, added_on, city_id) values ((select nextVal('hibernate_sequence')), 'Mohali', 'Mohali', now(), (select id from city where name = 'Chandigarh'));</sql>
+	    <sql>
+	    	insert into amenities values ((select nextVal('hibernate_sequence')), 'BNQTHALL', 'Banquet Hall', true, '25in x 25in x 25in', now(), true);
+	    	insert into amenities values ((select nextVal('hibernate_sequence')), 'CLUBROOM', 'Club Room', true, '25in x 25in x 25in', now(), true);
+	    	insert into amenities values ((select nextVal('hibernate_sequence')), 'PARLOUR', 'Beauty Parlour', true, '25in x 25in x 25in', now(), true);
+	    	insert into amenities values ((select nextVal('hibernate_sequence')), 'GYM', 'Gym', true, '25in x 25in x 25in', now(), true);
+	    	insert into amenities values ((select nextVal('hibernate_sequence')), 'INHOUSECATERING', 'In House Catering', true, '25in x 25in x 25in', now(), true);
+	    	insert into amenities values ((select nextVal('hibernate_sequence')), 'LOBBY', 'Lobby Area', true, '25in x 25in x 25in', now(), false);
+	    	insert into amenities values ((select nextVal('hibernate_sequence')), 'CONFERENCE', 'Conference Room', true, '25in x 25in x 25in', now(), false);
+	    </sql>
     </changeSet>
+    
+    <!-- Create Room Specific Data -->
     
     <changeSet author="msingla" id="1.5">
-		<preConditions onFail="MARK_RAN">
-			<sqlCheck expectedResult="0">select count(*) from locality where name = 'Zirakpur';</sqlCheck>
-		</preConditions>
-	    <sql>insert into locality (id, name, description, added_on, city_id) values ((select nextVal('hibernate_sequence')), 'Zirakpur', 'Zirakpur', now(), (select id from city where name = 'Chandigarh'));</sql>
+	    <sql>
+	    	insert into room values ((select nextVal('hibernate_sequence')), 'STANDARD', 'Standard Room', '15in X 15in X 15in', now());
+	    	insert into room values ((select nextVal('hibernate_sequence')), 'DELUXE', 'Deluxe Room', '15in X 15in X 15in', now());
+	    	insert into room values ((select nextVal('hibernate_sequence')), 'SUPERDELUXE', 'Super Deluxe Room', '15in X 15in X 15in', now());
+	    </sql>
     </changeSet>
     
+    <!-- Create Filter Specific Data -->
+    
+    <changeSet author="msingla" id="1.5.1">
+	    <sql>
+	    	insert into filters values ((select nextVal('hibernate_sequence')), 'ESTABLISHMENT', 'VENUE', 'Hotel', now());
+			insert into filters values ((select nextVal('hibernate_sequence')), 'ESTABLISHMENT', 'VENUE', 'Restaurant', now());
+			insert into filters values ((select nextVal('hibernate_sequence')), 'ESTABLISHMENT', 'VENUE', 'Palace', now());
+			insert into filters values ((select nextVal('hibernate_sequence')), 'ESTABLISHMENT', 'VENUE', 'Banquet Hall', now());
+			insert into filters values ((select nextVal('hibernate_sequence')), 'EVENT', 'ALL', 'Engagement', now());
+			insert into filters values ((select nextVal('hibernate_sequence')), 'EVENT', 'ALL', 'Wedding', now());
+			insert into filters values ((select nextVal('hibernate_sequence')), 'EVENT', 'ALL', 'Sangeeth', now());
+			insert into filters values ((select nextVal('hibernate_sequence')), 'EVENT', 'ALL', 'Reception', now());
+			insert into filters values ((select nextVal('hibernate_sequence')), 'EVENT', 'ALL', 'Birthday', now());
+			insert into filters values ((select nextVal('hibernate_sequence')), 'EVENT', 'ALL', 'Anniversary', now());
+			insert into filters values ((select nextVal('hibernate_sequence')), 'EVENT', 'ALL', 'House Warming', now());
+			insert into filters values ((select nextVal('hibernate_sequence')), 'EVENT', 'ALL', 'Others', now());
+			insert into filters values ((select nextVal('hibernate_sequence')), 'PRICE', 'VENUE', 'Less than 50,000', now());
+			insert into filters values ((select nextVal('hibernate_sequence')), 'PRICE', 'VENUE', '50,000 - 1Lac', now());
+			insert into filters values ((select nextVal('hibernate_sequence')), 'PRICE', 'VENUE', '1Lac - 2Lac', now());
+			insert into filters values ((select nextVal('hibernate_sequence')), 'PRICE', 'VENUE', 'More than 2Lac', now());
+			insert into filters values ((select nextVal('hibernate_sequence')), 'PRICE', 'CATERER', 'Less than 1,000', now());
+			insert into filters values ((select nextVal('hibernate_sequence')), 'PRICE', 'CATERER', '1,000 - 2,000', now());
+			insert into filters values ((select nextVal('hibernate_sequence')), 'PRICE', 'CATERER', '2,000 - 3,000', now());
+			insert into filters values ((select nextVal('hibernate_sequence')), 'PRICE', 'CATERER', 'More than 3,000', now());
+			insert into filters values ((select nextVal('hibernate_sequence')), 'PRICE', 'DECORATOR', 'Less than 50,000', now());
+			insert into filters values ((select nextVal('hibernate_sequence')), 'PRICE', 'DECORATOR', '50,000 - 1Lac', now());
+			insert into filters values ((select nextVal('hibernate_sequence')), 'PRICE', 'DECORATOR', '1Lac - 2Lac', now());
+			insert into filters values ((select nextVal('hibernate_sequence')), 'PRICE', 'DECORATOR', 'More than 2Lac', now());
+			insert into filters values ((select nextVal('hibernate_sequence')), 'PRICE', 'PHOTOGRAPHER', 'Less than 10,000', now());
+			insert into filters values ((select nextVal('hibernate_sequence')), 'PRICE', 'PHOTOGRAPHER', '10,000 - 20,000', now());
+			insert into filters values ((select nextVal('hibernate_sequence')), 'PRICE', 'PHOTOGRAPHER', '20,000 - 50,000', now());
+			insert into filters values ((select nextVal('hibernate_sequence')), 'PRICE', 'PHOTOGRAPHER', 'More than 50,000', now());
+			insert into filters values ((select nextVal('hibernate_sequence')), 'RENTAL', 'RENTAL', 'DJ Services', now());
+			insert into filters values ((select nextVal('hibernate_sequence')), 'RENTAL', 'RENTAL', 'Cab Services', now());
+			insert into filters values ((select nextVal('hibernate_sequence')), 'RENTAL', 'RENTAL', 'Band Services', now());
+			insert into filters values ((select nextVal('hibernate_sequence')), 'RENTAL', 'RENTAL', 'Tent House', now());
+	    </sql>
+    </changeSet>
+    
+	<!-- Create Venue Related Data -->    
+	
      <changeSet author="msingla" id="1.6">
-		<preConditions onFail="MARK_RAN">
-			<sqlCheck expectedResult="0">select count(*) from venue where name = 'Yo China!';</sqlCheck>
-		</preConditions>
-	    <sql>insert into venue (id, name, description, type, comments, rating, added_on, city_id, locality_id, priority) values ((select nextval('hibernate_sequence')), 'Yo China!', 'Yo China!', 'RESTAURANT', null, null, now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Chandigarh'), 1);</sql>
-    </changeSet>
-	
-	<changeSet author="msingla" id="1.7">
-	    <sql>insert into address values ((select nextVal('hibernate_sequence')), 'SCO 4 &amp; 5, Sector 9 D', 'Sector 9', 'Chandigarh', 'Chandigarh', 160101, null, null, null, (select id from venue where name = 'Yo China!'), 0, now(), null, null);</sql>
-    </changeSet>
-    
-    <changeSet author="msingla" id="1.8">
-		<preConditions onFail="MARK_RAN">
-			<sqlCheck expectedResult="0">select count(*) from attachment where name = 'YoChina.jpg';</sqlCheck>
-		</preConditions>
-	    <sql>insert into attachment values ((select nextVal('hibernate_sequence')), 'YoChina.jpg', 'YoChina.jpg', (select id from venue where name = 'Yo China!'), 0, now(), 'Yo China Front View');</sql>
-    </changeSet>
-    
-    <changeSet author="msingla" id="1.8.1">
-		<preConditions onFail="MARK_RAN">
-			<sqlCheck expectedResult="0">select count(*) from amenities where amenity_type = 'BNQTHALL' and description = 'Banquet Hall';</sqlCheck>
-		</preConditions>
-	    <sql>insert into amenities values ((select nextVal('hibernate_sequence')), 'BNQTHALL', 'Banquet Hall', true, '25in x 25in x 25in', now());</sql>
-    </changeSet>
-    
-    <changeSet author="msingla" id="1.8.2">
-		<preConditions onFail="MARK_RAN">
-			<sqlCheck expectedResult="0">select count(*) from service where service_type = 'DINEIN' and description = 'Dine In';</sqlCheck>
-		</preConditions>
-	    <sql>insert into service values ((select nextVal('hibernate_sequence')), 'DINEIN', 'Dine In', now());</sql>
-    </changeSet>
-    
-    	<changeSet author="msingla" id="1.8.3">
-		<preConditions onFail="MARK_RAN">
-			<sqlCheck expectedResult="0">select count(*) from amenities where amenity_type = 'CLUBROOM' and description = 'Club Room';</sqlCheck>
-		</preConditions>
-	    <sql>insert into amenities values ((select nextVal('hibernate_sequence')), 'CLUBROOM', 'Club Room', true, '25in x 25in x 25in', now());</sql>
-    </changeSet>
-   	
-	<changeSet author="msingla" id="1.8.4">
-		<preConditions onFail="MARK_RAN">
-			<sqlCheck expectedResult="0">select count(*) from amenities where amenity_type = 'PARLOUR' and description = 'Beauty Parlour';</sqlCheck>
-		</preConditions>
-	    <sql>insert into amenities values ((select nextVal('hibernate_sequence')), 'PARLOUR', 'Beauty Parlour', true, '25in x 25in x 25in', now());</sql>
-    </changeSet>
-    
-	<changeSet author="msingla" id="1.8.5">
-		<preConditions onFail="MARK_RAN">
-			<sqlCheck expectedResult="0">select count(*) from amenities where amenity_type = 'GYM' and description = 'Gym';</sqlCheck>
-		</preConditions>
-	    <sql>insert into amenities values ((select nextVal('hibernate_sequence')), 'GYM', 'Gym', true, '25in x 25in x 25in', now());</sql>
-    </changeSet>
-	
-	<changeSet author="msingla" id="1.8.6">
-		<preConditions onFail="MARK_RAN">
-			<sqlCheck expectedResult="0">select count(*) from amenities where amenity_type = 'INHOUSECATERING' and description = 'In House Catering';</sqlCheck>
-		</preConditions>
-	    <sql>insert into amenities values ((select nextVal('hibernate_sequence')), 'INHOUSECATERING', 'In House Catering', true, '25in x 25in x 25in', now());</sql>
-    </changeSet>
-   	
-	<changeSet author="msingla" id="1.8.7">
-		<preConditions onFail="MARK_RAN">
-			<sqlCheck expectedResult="0">select count(*) from amenities where amenity_type = 'LOBBY' and description = 'Lobby Area';</sqlCheck>
-		</preConditions>
-	    <sql>insert into amenities values ((select nextVal('hibernate_sequence')), 'LOBBY', 'Lobby Area', true, '25in x 25in x 25in', now());</sql>
-    </changeSet>
-    
-	<changeSet author="msingla" id="1.8.8">
-		<preConditions onFail="MARK_RAN">
-			<sqlCheck expectedResult="0">select count(*) from amenities where amenity_type = 'CONFERENCE' and description = 'Conference Room';</sqlCheck>
-		</preConditions>
-	    <sql>insert into amenities values ((select nextVal('hibernate_sequence')), 'CONFERENCE', 'Conference Room', true, '25in x 25in x 25in', now());</sql>
-    </changeSet>
-    
-	 <changeSet author="msingla" id="1.8.10">
-		<preConditions onFail="MARK_RAN">
-			<sqlCheck expectedResult="0">select count(*) from service where service_type = 'ALCOHOL' and description = 'Alcohol Served';</sqlCheck>
-		</preConditions>
-	    <sql>insert into service values ((select nextVal('hibernate_sequence')), 'ALCOHOL', 'Alcohol Served', now());</sql>
-    </changeSet>
-	
-	<changeSet author="msingla" id="1.8.12">
-		<preConditions onFail="MARK_RAN">
-			<sqlCheck expectedResult="0">select count(*) from service where service_type = 'BUFFET' and description = 'Buffet';</sqlCheck>
-		</preConditions>
-	    <sql>insert into service values ((select nextVal('hibernate_sequence')), 'BUFFET', 'Buffet', now());</sql>
-    </changeSet>
-	
-	 <changeSet author="msingla" id="1.8.13">
-		<preConditions onFail="MARK_RAN">
-			<sqlCheck expectedResult="0">select count(*) from service where service_type = 'VEG' and description = 'Pure Veg';</sqlCheck>
-		</preConditions>
-	    <sql>insert into service values ((select nextVal('hibernate_sequence')), 'VEG', 'Pure Veg', now());</sql>
-    </changeSet>
-	
-	 <changeSet author="msingla" id="1.8.14">
-		<preConditions onFail="MARK_RAN">
-			<sqlCheck expectedResult="0">select count(*) from service where service_type = 'OUTDOOR' and description = 'Outdoor Seating';</sqlCheck>
-		</preConditions>
-	    <sql>insert into service values ((select nextVal('hibernate_sequence')), 'OUTDOOR', 'Outdoor Seating', now());</sql>
-    </changeSet>
-    
-    <changeSet author="msingla" id="1.8.15">
-		<preConditions onFail="MARK_RAN">
-			<sqlCheck expectedResult="0">select count(*) from room where room_type = 'STANDARD';</sqlCheck>
-		</preConditions>
-	    <sql>insert into room values ((select nextVal('hibernate_sequence')), 'STANDARD', 'Standard Room', '15in X 15in X 15in', now());</sql>
-    </changeSet>
-    
-    <changeSet author="msingla" id="1.8.16">
-		<preConditions onFail="MARK_RAN">
-			<sqlCheck expectedResult="0">select count(*) from room where room_type = 'DELUXE';</sqlCheck>
-		</preConditions>
-	    <sql>insert into room values ((select nextVal('hibernate_sequence')), 'DELUXE', 'Deluxe Room', '15in X 15in X 15in', now());</sql>
-    </changeSet>
-    
-    <changeSet author="msingla" id="1.8.17">
-		<preConditions onFail="MARK_RAN">
-			<sqlCheck expectedResult="0">select count(*) from room where room_type = 'SUPERDELUXE';</sqlCheck>
-		</preConditions>
-	    <sql>insert into room values ((select nextVal('hibernate_sequence')), 'SUPERDELUXE', 'Super Deluxe Room', '15in X 15in X 15in', now());</sql>
-    </changeSet>
-    
-	<changeSet author="msingla" id="1.9">
-		<preConditions onFail="MARK_RAN">
-			<sqlCheck expectedResult="0">select count(*) from venue_services where venue_id = (select id from venue where name = 'Yo China!') and service_id = (select id from service where service_type = 'DINEIN');</sqlCheck>
-		</preConditions>
-	    <sql>insert into venue_services values ((select nextVal('hibernate_sequence')),(select id from venue where name = 'Yo China!'), (select id from service where service_type = 'DINEIN'), null, 0, now());</sql>
-    </changeSet>
-    
-     <changeSet author="msingla" id="1.10">
-		<preConditions onFail="MARK_RAN">
-			<sqlCheck expectedResult="0">select count(*) from venue where name = 'Midnight Chef';</sqlCheck>
-		</preConditions>
-	    <sql>insert into venue (id, name, description, type, comments, rating, added_on, city_id, locality_id, priority) values ((select nextval('hibernate_sequence')), 'Midnight Chef', 'Midnight Chef', 'RESTAURANT', null, null, now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Chandigarh'), 10);</sql>
-    </changeSet>
-	
-	<changeSet author="msingla" id="1.11">
-	    <sql>insert into address values ((select nextVal('hibernate_sequence')), 'Sector 35', 'Sector 35', 'Chandigarh', 'Chandigarh', 160101, null, null, null, (select id from venue where name = 'Midnight Chef'), 0, now(), null, null);</sql>
-    </changeSet>
-    
-    <changeSet author="msingla" id="1.12">
-		<preConditions onFail="MARK_RAN">
-			<sqlCheck expectedResult="0">select count(*) from attachment where name = 'MidnightChef.jpg';</sqlCheck>
-		</preConditions>
-	    <sql>insert into attachment values ((select nextVal('hibernate_sequence')), 'MidnightChef.jpg', 'MidnightChef.jpg', (select id from venue where name = 'Midnight Chef'), 0, now(), 'Midnight Chef Image');</sql>
-    </changeSet>
-	
-	<changeSet author="msingla" id="1.13">
-		<preConditions onFail="MARK_RAN">
-			<sqlCheck expectedResult="0">select count(*) from venue_services where venue_id = (select id from venue where name = 'Midnight Chef') and service_id = (select id from service where service_type = 'DINEIN');</sqlCheck>
-		</preConditions>
-	    <sql>insert into venue_services values ((select nextVal('hibernate_sequence')),(select id from venue where name = 'Midnight Chef'), (select id from service where service_type = 'DINEIN'), null, 0, now());</sql>
-    </changeSet>
-    
-    <changeSet author="msingla" id="1.14">
-		<preConditions onFail="MARK_RAN">
-			<sqlCheck expectedResult="0">select count(*) from venue where name = 'La Pino''z Pizza';</sqlCheck>
-		</preConditions>
-	    <sql>insert into venue (id, name, description, type, comments, rating, added_on, city_id, locality_id, priority) values ((select nextval('hibernate_sequence')), 'La Pino''z Pizza', 'La Pino''z Pizza', 'RESTAURANT', null, null, now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Chandigarh'), 20);</sql>
-    </changeSet>
-	
-	<changeSet author="msingla" id="1.15">
-	    <sql>insert into address values ((select nextVal('hibernate_sequence')), 'Shop 10, Inner Market, Sector 9D', 'Sector 9', 'Chandigarh', 'Chandigarh', 160101, null, null, null, (select id from venue where name = 'La Pino''z Pizza'), 0, now(), null, null);</sql>
-    </changeSet>
-    
-    <changeSet author="msingla" id="1.16">
-		<preConditions onFail="MARK_RAN">
-			<sqlCheck expectedResult="0">select count(*) from attachment where name = 'LaPinoPizza.jpg';</sqlCheck>
-		</preConditions>
-	    <sql>insert into attachment values ((select nextVal('hibernate_sequence')), 'LaPinoPizza.jpg', 'LaPinoPizza.jpg', (select id from venue where name = 'La Pino''z Pizza'), 0, now(), 'Lapino Pizza Image');</sql>
-    </changeSet>
-	
-	<changeSet author="msingla" id="1.17">
-		<preConditions onFail="MARK_RAN">
-			<sqlCheck expectedResult="0">select count(*) from venue_services where venue_id = (select id from venue where name = 'La Pino''z Pizza') and service_id = (select id from service where service_type = 'DINEIN');</sqlCheck>
-		</preConditions>
-	    <sql>insert into venue_services values ((select nextVal('hibernate_sequence')),(select id from venue where name = 'La Pino''z Pizza'), (select id from service where service_type = 'DINEIN'), null, 0, now());</sql>
-    </changeSet>
-    
-     <changeSet author="msingla" id="1.18">
-		<preConditions onFail="MARK_RAN">
-			<sqlCheck expectedResult="0">select count(*) from venue where name = 'Burger Point';</sqlCheck>
-		</preConditions>
-	    <sql>insert into venue (id, name, description, type, comments, rating, added_on, city_id, locality_id, priority) values ((select nextval('hibernate_sequence')), 'Burger Point', 'Burger Point', 'RESTAURANT', null, null, now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Chandigarh'), 30);</sql>
-    </changeSet>
-	
-	<changeSet author="msingla" id="1.19">
-	    <sql>insert into address values ((select nextVal('hibernate_sequence')), 'Shop No. 348, Sector 32 D', 'Sector 32', 'Chandigarh', 'Chandigarh', 160101, null, null, null, (select id from venue where name = 'Burger Point'), 0, now(), null, null);</sql>
-    </changeSet>
-    
-    <changeSet author="msingla" id="1.20">
-		<preConditions onFail="MARK_RAN">
-			<sqlCheck expectedResult="0">select count(*) from attachment where name = 'BurgerPoint.jpg';</sqlCheck>
-		</preConditions>
-	    <sql>insert into attachment values ((select nextVal('hibernate_sequence')), 'BurgerPoint.jpg', 'BurgerPoint.jpg', (select id from venue where name = 'Burger Point'), 0, now(), 'Burger Point Image');</sql>
-    </changeSet>
-	
-	<changeSet author="msingla" id="1.21">
-		<preConditions onFail="MARK_RAN">
-			<sqlCheck expectedResult="0">select count(*) from venue_services where venue_id = (select id from venue where name = 'Burger Point') and service_id = (select id from service where service_type = 'DINEIN');</sqlCheck>
-		</preConditions>
-	    <sql>insert into venue_services values ((select nextVal('hibernate_sequence')),(select id from venue where name = 'Burger Point'), (select id from service where service_type = 'DINEIN'), null, 0, now());</sql>
-    </changeSet>
-    
-     <changeSet author="msingla" id="1.22">
-		<preConditions onFail="MARK_RAN">
-			<sqlCheck expectedResult="0">select count(*) from venue where name = 'Puzzles - The Cove';</sqlCheck>
-		</preConditions>
-	    <sql>insert into venue (id, name, description, type, comments, rating, added_on, city_id, locality_id, priority) values ((select nextval('hibernate_sequence')), 'Puzzles - The Cove', 'Puzzles - The Cove', 'RESTAURANT', null, null, now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Panchkula'), 40);</sql>
-    </changeSet>
-	
-	<changeSet author="msingla" id="1.23">
-	    <sql>insert into address values ((select nextVal('hibernate_sequence')), 'The Cove, SCO 1 to 2', 'Sector 5', 'Panchkula', 'Chandigarh', 160101, null, null, null, (select id from venue where name = 'Puzzles - The Cove'), 0, now(), null, null);</sql>
-    </changeSet>
-    
-    <changeSet author="msingla" id="1.24">
-		<preConditions onFail="MARK_RAN">
-			<sqlCheck expectedResult="0">select count(*) from attachment where name = 'Puzzles.jpg';</sqlCheck>
-		</preConditions>
-	    <sql>insert into attachment values ((select nextVal('hibernate_sequence')), 'Puzzles.jpg', 'Puzzles.jpg', (select id from venue where name = 'Puzzles - The Cove'), 0, now(), 'Puzzles Image');</sql>
-    </changeSet>
-	
-	<changeSet author="msingla" id="1.25">
-		<preConditions onFail="MARK_RAN">
-			<sqlCheck expectedResult="0">select count(*) from venue_services where venue_id = (select id from venue where name = 'Puzzles - The Cove') and service_id = (select id from service where service_type = 'DINEIN');</sqlCheck>
-		</preConditions>
-	    <sql>insert into venue_services values ((select nextVal('hibernate_sequence')),(select id from venue where name = 'Puzzles - The Cove'), (select id from service where service_type = 'DINEIN'), null, 0, now());</sql>
-    </changeSet>
-    
-     <changeSet author="msingla" id="1.26">
-		<preConditions onFail="MARK_RAN">
-			<sqlCheck expectedResult="0">select count(*) from venue where name = 'Pashtun';</sqlCheck>
-		</preConditions>
-	    <sql>insert into venue (id, name, description, type, comments, rating, added_on, city_id, locality_id, priority) values ((select nextval('hibernate_sequence')), 'Pashtun', 'Pashtun', 'RESTAURANT', null, null, now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Chandigarh'), 50);</sql>
-    </changeSet>
-	
-	<changeSet author="msingla" id="1.27">
-	    <sql>insert into address values ((select nextVal('hibernate_sequence')), 'SCO 333 &amp; 334, Sector 35 B', 'Sector 35', 'Chandigarh', 'Chandigarh', 160101, null, null, null, (select id from venue where name = 'Pashtun'), 0, now(), null, null);</sql>
-    </changeSet>
-    
-    <changeSet author="msingla" id="1.28">
-		<preConditions onFail="MARK_RAN">
-			<sqlCheck expectedResult="0">select count(*) from attachment where name = 'Pashtun.jpg';</sqlCheck>
-		</preConditions>
-	    <sql>insert into attachment values ((select nextVal('hibernate_sequence')), 'Pashtun.jpg', 'Pashtun.jpg', (select id from venue where name = 'Pashtun'), 0, now(), 'Pashtun Image');</sql>
-    </changeSet>
-	
-	<changeSet author="msingla" id="1.29">
-		<preConditions onFail="MARK_RAN">
-			<sqlCheck expectedResult="0">select count(*) from venue_services where venue_id = (select id from venue where name = 'Pashtun') and service_id = (select id from service where service_type = 'DINEIN');</sqlCheck>
-		</preConditions>
-	    <sql>insert into venue_services values ((select nextVal('hibernate_sequence')),(select id from venue where name = 'Pashtun'), (select id from service where service_type = 'DINEIN'), null, 0, now());</sql>
-    </changeSet>
-    
-     <changeSet author="msingla" id="1.30">
-		<preConditions onFail="MARK_RAN">
-			<sqlCheck expectedResult="0">select count(*) from venue where name = 'Sindhi Sweets';</sqlCheck>
-		</preConditions>
-	    <sql>insert into venue (id, name, description, type, comments, rating, added_on, city_id, locality_id, priority) values ((select nextval('hibernate_sequence')), 'Sindhi Sweets', 'Sindhi Sweets', 'RESTAURANT', null, null, now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Chandigarh'), 60);</sql>
-    </changeSet>
-	
-	<changeSet author="msingla" id="1.31">
-	    <sql>insert into address values ((select nextVal('hibernate_sequence')), 'SCO 108 &amp; 109, Sindhi''s Veg Food Court', 'Sector 17C', 'Chandigarh', 'Chandigarh', 160101, null, null, null, (select id from venue where name = 'Sindhi Sweets'), 0, now(), null, null);</sql>
-    </changeSet>
-    
-    <changeSet author="msingla" id="1.32">
-		<preConditions onFail="MARK_RAN">
-			<sqlCheck expectedResult="0">select count(*) from attachment where name = 'SindhiSweets.jpg';</sqlCheck>
-		</preConditions>
-	    <sql>insert into attachment values ((select nextVal('hibernate_sequence')), 'SindhiSweets.jpg', 'SindhiSweets.jpg', (select id from venue where name = 'Sindhi Sweets'), 0, now(), 'Sindhi Sweets Image');</sql>
-    </changeSet>
-	
-	<changeSet author="msingla" id="1.33">
-		<preConditions onFail="MARK_RAN">
-			<sqlCheck expectedResult="0">select count(*) from venue_services where venue_id = (select id from venue where name = 'Sindhi Sweets') and service_id = (select id from service where service_type = 'DINEIN');</sqlCheck>
-		</preConditions>
-	    <sql>insert into venue_services values ((select nextVal('hibernate_sequence')),(select id from venue where name = 'Sindhi Sweets'), (select id from service where service_type = 'DINEIN'), null, 0, now());</sql>
-    </changeSet>
-    
-     <changeSet author="msingla" id="1.34">
-		<preConditions onFail="MARK_RAN">
-			<sqlCheck expectedResult="0">select count(*) from venue where name = 'Underdoggs Sports Bar &amp; Grill';</sqlCheck>
-		</preConditions>
-	    <sql>insert into venue (id, name, description, type, comments, rating, added_on, city_id, locality_id, priority) values ((select nextval('hibernate_sequence')), 'Underdoggs Sports Bar &amp; Grill', 'Underdoggs Sports Bar &amp; Grill', 'RESTAURANT', null, null, now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Chandigarh'), 70);</sql>
-    </changeSet>
-	
-	<changeSet author="msingla" id="1.35">
-	    <sql>insert into address values ((select nextVal('hibernate_sequence')), '178 A, 3rd Floor, Elante Mall', 'Chandigarh Industrial Area Phase 1', 'Chandigarh', 'Chandigarh', 160101, null, null, null, (select id from venue where name = 'Underdoggs Sports Bar &amp; Grill'), 0, now(), null, null);</sql>
-    </changeSet>
-    
-    <changeSet author="msingla" id="1.36">
-		<preConditions onFail="MARK_RAN">
-			<sqlCheck expectedResult="0">select count(*) from attachment where name = 'Underdoggs.jpg';</sqlCheck>
-		</preConditions>
-	    <sql>insert into attachment values ((select nextVal('hibernate_sequence')), 'Underdoggs.jpg', 'Underdoggs.jpg', (select id from venue where name = 'Underdoggs Sports Bar &amp; Grill'), 0, now(), 'Underdoggs Image');</sql>
-    </changeSet>
-	
-	<changeSet author="msingla" id="1.37">
-		<preConditions onFail="MARK_RAN">
-			<sqlCheck expectedResult="0">select count(*) from venue_services where venue_id = (select id from venue where name = 'Underdoggs Sports Bar &amp; Grill') and service_id = (select id from service where service_type = 'DINEIN');</sqlCheck>
-		</preConditions>
-	    <sql>insert into venue_services values ((select nextVal('hibernate_sequence')),(select id from venue where name = 'Underdoggs Sports Bar &amp; Grill'), (select id from service where service_type = 'DINEIN'), null, 0, now());</sql>
-    </changeSet>
-    
-     <changeSet author="msingla" id="1.38">
-		<preConditions onFail="MARK_RAN">
-			<sqlCheck expectedResult="0">select count(*) from venue where name = 'The Kitchen Knight';</sqlCheck>
-		</preConditions>
-	    <sql>insert into venue (id, name, description, type, comments, rating, added_on, city_id, locality_id, priority) values ((select nextval('hibernate_sequence')), 'The Kitchen Knight', 'The Kitchen Knight', 'RESTAURANT', null, null, now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Chandigarh'), 80);</sql>
-    </changeSet>
-	
-	<changeSet author="msingla" id="1.39">
-	    <sql>insert into address values ((select nextVal('hibernate_sequence')), 'Chandigarh Industrial Area', null, 'Chandigarh', 'Chandigarh', 160101, null, null, null, (select id from venue where name = 'The Kitchen Knight'), 0, now(), null, null);</sql>
-    </changeSet>
-    
-    <changeSet author="msingla" id="1.40">
-		<preConditions onFail="MARK_RAN">
-			<sqlCheck expectedResult="0">select count(*) from attachment where name = 'TheKitchenKnight.jpg';</sqlCheck>
-		</preConditions>
-	    <sql>insert into attachment values ((select nextVal('hibernate_sequence')), 'TheKitchenKnight.jpg', 'TheKitchenKnight.jpg', (select id from venue where name = 'The Kitchen Knight'), 0, now(), 'The Kitchen Knight Image');</sql>
-    </changeSet>
-	
-	<changeSet author="msingla" id="1.41">
-		<preConditions onFail="MARK_RAN">
-			<sqlCheck expectedResult="0">select count(*) from venue_services where venue_id = (select id from venue where name = 'The Kitchen Knight') and service_id = (select id from service where service_type = 'DINEIN');</sqlCheck>
-		</preConditions>
-	    <sql>insert into venue_services values ((select nextVal('hibernate_sequence')),(select id from venue where name = 'The Kitchen Knight'), (select id from service where service_type = 'DINEIN'), null, 0, now());</sql>
-    </changeSet>
-    
-     <changeSet author="msingla" id="1.42">
-		<preConditions onFail="MARK_RAN">
-			<sqlCheck expectedResult="0">select count(*) from venue where name = 'Hot Millions';</sqlCheck>
-		</preConditions>
-	    <sql>insert into venue (id, name, description, type, comments, rating, added_on, city_id, locality_id, priority) values ((select nextval('hibernate_sequence')), 'Hot Millions', 'Hot Millions', 'RESTAURANT', null, null, now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Chandigarh'), 90);</sql>
-    </changeSet>
-	
-	<changeSet author="msingla" id="1.43">
-	    <sql>insert into address values ((select nextVal('hibernate_sequence')), 'SCO 196 &amp; 197, Sector 17 C', 'Sector 17', 'Chandigarh', 'Chandigarh', 160101, null, null, null, (select id from venue where name = 'Hot Millions'), 0, now(), null, null);</sql>
-    </changeSet>
-    
-    <changeSet author="msingla" id="1.44">
-		<preConditions onFail="MARK_RAN">
-			<sqlCheck expectedResult="0">select count(*) from attachment where name = 'HotMillions.jpg';</sqlCheck>
-		</preConditions>
-	    <sql>insert into attachment values ((select nextVal('hibernate_sequence')), 'HotMillions.jpg', 'HotMillions.jpg', (select id from venue where name = 'Hot Millions'), 0, now(), 'Hot Millions Image');</sql>
-    </changeSet>
-	
-	<changeSet author="msingla" id="1.45">
-		<preConditions onFail="MARK_RAN">
-			<sqlCheck expectedResult="0">select count(*) from venue_services where venue_id = (select id from venue where name = 'Hot Millions') and service_id = (select id from service where service_type = 'DINEIN');</sqlCheck>
-		</preConditions>
-	    <sql>insert into venue_services values ((select nextVal('hibernate_sequence')),(select id from venue where name = 'Hot Millions'), (select id from service where service_type = 'DINEIN'), null, 0, now());</sql>
-    </changeSet>
-    
-     <changeSet author="msingla" id="1.46">
-		<preConditions onFail="MARK_RAN">
-			<sqlCheck expectedResult="0">select count(*) from venue where name = 'Brooklyn Central';</sqlCheck>
-		</preConditions>
-	    <sql>insert into venue (id, name, description, type, comments, rating, added_on, city_id, locality_id, priority) values ((select nextval('hibernate_sequence')), 'Brooklyn Central', 'Brooklyn Central', 'RESTAURANT', null, null, now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Chandigarh'), 100);</sql>
-    </changeSet>
-	
-	<changeSet author="msingla" id="1.47">
-	    <sql>insert into address values ((select nextVal('hibernate_sequence')), 'Courtyard, Elante Mall, Chandigarh Industrial Area (Phase 1)', 'Chandigarh Industrial Area', 'Chandigarh', 'Chandigarh', 160101, null, null, null, (select id from venue where name = 'Brooklyn Central'), 0, now(), null, null);</sql>
-    </changeSet>
-    
-    <changeSet author="msingla" id="1.48">
-		<preConditions onFail="MARK_RAN">
-			<sqlCheck expectedResult="0">select count(*) from attachment where name = 'BrooklynCentral.jpg';</sqlCheck>
-		</preConditions>
-	    <sql>insert into attachment values ((select nextVal('hibernate_sequence')), 'BrooklynCentral.jpg', 'BrooklynCentral.jpg', (select id from venue where name = 'Brooklyn Central'), 0, now(), 'Brooklyn Central Image');</sql>
-    </changeSet>
-	
-	<changeSet author="msingla" id="1.49">
-		<preConditions onFail="MARK_RAN">
-			<sqlCheck expectedResult="0">select count(*) from venue_services where venue_id = (select id from venue where name = 'Brooklyn Central') and service_id = (select id from service where service_type = 'DINEIN');</sqlCheck>
-		</preConditions>
-	    <sql>insert into venue_services values ((select nextVal('hibernate_sequence')),(select id from venue where name = 'Brooklyn Central'), (select id from service where service_type = 'DINEIN'), null, 0, now());</sql>
-    </changeSet>
-    
-     <changeSet author="msingla" id="1.50">
-		<preConditions onFail="MARK_RAN">
-			<sqlCheck expectedResult="0">select count(*) from venue where name = 'The Brew Estate';</sqlCheck>
-		</preConditions>
-	    <sql>insert into venue (id, name, description, type, comments, rating, added_on, city_id, locality_id, priority) values ((select nextval('hibernate_sequence')), 'The Brew Estate', 'The Brew Estate', 'RESTAURANT', null, null, now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Chandigarh'), 110);</sql>
-    </changeSet>
-	
-	<changeSet author="msingla" id="1.51">
-	    <sql>insert into address values ((select nextVal('hibernate_sequence')), 'Sector 26', null, 'Chandigarh', 'Chandigarh', 160101, null, null, null, (select id from venue where name = 'The Brew Estate'), 0, now(), null, null);</sql>
-    </changeSet>
-    
-    <changeSet author="msingla" id="1.52">
-		<preConditions onFail="MARK_RAN">
-			<sqlCheck expectedResult="0">select count(*) from attachment where name = 'TheBrewEstate.jpg';</sqlCheck>
-		</preConditions>
-	    <sql>insert into attachment values ((select nextVal('hibernate_sequence')), 'TheBrewEstate.jpg', 'TheBrewEstate.jpg', (select id from venue where name = 'The Brew Estate'), 0, now(), 'The Brew Estate Image');</sql>
-    </changeSet>
-	
-	<changeSet author="msingla" id="1.53">
-		<preConditions onFail="MARK_RAN">
-			<sqlCheck expectedResult="0">select count(*) from venue_services where venue_id = (select id from venue where name = 'The Brew Estate') and service_id = (select id from service where service_type = 'DINEIN');</sqlCheck>
-		</preConditions>
-	    <sql>insert into venue_services values ((select nextVal('hibernate_sequence')),(select id from venue where name = 'The Brew Estate'), (select id from service where service_type = 'DINEIN'), null, 0, now());</sql>
-    </changeSet>
-    
-    <changeSet author="msingla" id="1.54">
 	    <sql>
-			insert into service values ((select nextVal('hibernate_sequence')), 'WIFI', 'High-speed Wi-Fi Internet', now());
-			insert into service values ((select nextVal('hibernate_sequence')), 'CCTV', 'CCTV Surveillance', now());
-			insert into service values ((select nextVal('hibernate_sequence')), 'DRINKS', 'Drinks Available', now());
-			insert into service values ((select nextVal('hibernate_sequence')), 'LAUNDRY', 'Laundry Service', now());
-			insert into service values ((select nextVal('hibernate_sequence')), 'SMOKEZONE', 'Smoking zone', now());
-			insert into service values ((select nextVal('hibernate_sequence')), 'VALLET', 'Vallet Parking', now());
-		</sql>
-    </changeSet>
-    
-    <changeSet author="msingla" id="1.55">
-	    <sql>
-			insert into venue (id, name, description, type, comments, rating, added_on, city_id, locality_id, priority) values ((select nextval('hibernate_sequence')), 'JW Marriott', 'Treat yourself to five-star luxury at the JW Marriott Hotel Chandigarh. Located in Sector 17, our hotel is in the center of the city''s vibrant business district, offering convenient accessibility to an array of historic attractions and sites. Upon stepping into our top-rated hotel, guests will be immersed in the ultimate in luxury', 'HOTEL', null, null, now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Chandigarh'), 120);
-			
-			insert into address values ((select nextVal('hibernate_sequence')), 'JW Marriott Hotel Chandigarh', 'Plot no: 6, Sector 35-B, Dakshin Marg', 'Chandigarh', 'Chandigarh', 160035, '+91-172-3955555', '1-800-102-5000', null, (select id from venue where name = 'JW Marriott'), 0, now(), '30.7398', '76.7827');
-			
-			insert into attachment values ((select nextVal('hibernate_sequence')), 'JWMarriottCover.jpg', 'JWMarriottCover.jpg', (select id from venue where name = 'JW Marriott'), 0, now(), 'Outer View');
-			
-			insert into attachment values ((select nextVal('hibernate_sequence')), 'JWMarriottGuestRoom.jpg', 'JWMarriottGuestRoom.jpg', (select id from venue where name = 'JW Marriott'), 0, now(), 'Guest Room');
-			
-			insert into attachment values ((select nextVal('hibernate_sequence')), 'JWMarriottLobby.jpg', 'JWMarriottLobby.jpg', (select id from venue where name = 'JW Marriott'), 0, now(), 'Lobby Area');
-			
-			insert into attachment values ((select nextVal('hibernate_sequence')), 'JWMarriottLuxurySuite.jpg', 'JWMarriottLuxurySuite.jpg', (select id from venue where name = 'JW Marriott'), 0, now(), 'Luxury Suite');
-			
-			insert into attachment values ((select nextVal('hibernate_sequence')), 'JWMarriottPool.jpg', 'JWMarriottPool.jpg', (select id from venue where name = 'JW Marriott'), 0, now(), 'Pool Side');
-			
-			insert into attachment values ((select nextVal('hibernate_sequence')), 'JWMarriottRestaurant.jpg', 'JWMarriottRestaurant.jpg', (select id from venue where name = 'JW Marriott'), 0, now(), 'Restaurant');
-			
-			insert into venue_rooms values ((select nextVal('hibernate_sequence')),(select id from venue where name = 'JW Marriott'), (select id from room where room_type = 'STANDARD'), 2000, true, true, true, true, true, 0, now(), false);
-			
-			insert into venue_rooms values ((select nextVal('hibernate_sequence')),(select id from venue where name = 'JW Marriott'), (select id from room where room_type = 'DELUXE'), 3000, true, true, true, true, true, 0, now(), true);
-			
-			insert into venue_rooms values ((select nextVal('hibernate_sequence')),(select id from venue where name = 'JW Marriott'), (select id from room where room_type = 'SUPERDELUXE'), 5000, true, true, true, true, true, 0, now(), true);
-			
-			insert into venue_services values ((select nextVal('hibernate_sequence')),(select id from venue where name = 'JW Marriott'), (select id from service where service_type = 'WIFI'), null, 0, now());
-			
-			insert into venue_services values ((select nextVal('hibernate_sequence')),(select id from venue where name = 'JW Marriott'), (select id from service where service_type = 'CCTV'), null, 0, now());
-			
-			insert into venue_services values ((select nextVal('hibernate_sequence')),(select id from venue where name = 'JW Marriott'), (select id from service where service_type = 'DRINKS'), null, 0, now());
-			
-			insert into venue_services values ((select nextVal('hibernate_sequence')),(select id from venue where name = 'JW Marriott'), (select id from service where service_type = 'LAUNDRY'), null, 0, now());
-			
-			insert into venue_services values ((select nextVal('hibernate_sequence')),(select id from venue where name = 'JW Marriott'), (select id from service where service_type = 'SMOKEZONE'), null, 0, now());
-			
-			insert into venue_services values ((select nextVal('hibernate_sequence')),(select id from venue where name = 'JW Marriott'), (select id from service where service_type = 'VALLET'), null, 0, now());
-			
-			insert into venue_amenities values ((select nextVal('hibernate_sequence')),(select id from venue where name = 'JW Marriott'), (select id from amenities where amenity_type = 'BNQTHALL'), null, 0, now());
-			
-			insert into venue_amenities values ((select nextVal('hibernate_sequence')),(select id from venue where name = 'JW Marriott'), (select id from amenities where amenity_type = 'CLUBROOM'), null, 0, now());
-			
-			insert into venue_amenities values ((select nextVal('hibernate_sequence')),(select id from venue where name = 'JW Marriott'), (select id from amenities where amenity_type = 'PARLOUR'), null, 0, now());
-			
-			insert into venue_amenities values ((select nextVal('hibernate_sequence')),(select id from venue where name = 'JW Marriott'), (select id from amenities where amenity_type = 'GYM'), null, 0, now());
-			
-			insert into venue_amenities values ((select nextVal('hibernate_sequence')),(select id from venue where name = 'JW Marriott'), (select id from amenities where amenity_type = 'INHOUSECATERING'), null, 0, now());
-			
-			insert into venue_amenities values ((select nextVal('hibernate_sequence')),(select id from venue where name = 'JW Marriott'), (select id from amenities where amenity_type = 'LOBBY'), null, 0, now());
-			
-		</sql>
-    </changeSet>
-	
-    
-    
-    <!-- <changeSet author="msingla" id="1.2">
-		<preConditions onFail="MARK_RAN">
-			<sqlCheck expectedResult="0">select count(*) from venue where name = 'Bahia Resort';</sqlCheck>
-		</preConditions>
-	    <sql>insert into venue (id, name, description, type, comments, rating, added_on, city_id) values ((select nextval('hibernate_sequence')), 'Bahia Resort', 'descript', 'PALACE', null, null, now(), (select id from city where name = 'Bikaner'));</sql>
-    </changeSet>
-    
-    <changeSet author="msingla" id="1.3">
-		<preConditions onFail="MARK_RAN">
-			<sqlCheck expectedResult="0">select count(*) from amenities where amenity_type = 'BNQTHALL' and description = 'Banquet Hall';</sqlCheck>
-		</preConditions>
-	    <sql>insert into amenities values ((select nextVal('hibernate_sequence')), 'BNQTHALL', 'Banquet Hall', true, '25in x 25in x 25in', now());</sql>
-    </changeSet>
-    
-    <changeSet author="msingla" id="1.4">
-		<preConditions onFail="MARK_RAN">
-			<sqlCheck expectedResult="0">select count(*) from service where service_type = 'DINEIN' and description = 'Dine In';</sqlCheck>
-		</preConditions>
-	    <sql>insert into service values ((select nextVal('hibernate_sequence')), 'DINEIN', 'Dine In', now());</sql>
-    </changeSet>
-    
-    <changeSet author="msingla" id="1.5">
-		<preConditions onFail="MARK_RAN">
-			<sqlCheck expectedResult="0">select count(*) from room where room_type = 'STANDARD';</sqlCheck>
-		</preConditions>
-	    <sql>insert into room values ((select nextVal('hibernate_sequence')), 'STANDARD', 'Standard Room', '15in X 15in X 15in', now());</sql>
-    </changeSet>
-    
-    <changeSet author="msingla" id="1.6">
-		<preConditions onFail="MARK_RAN">
-			<sqlCheck expectedResult="0">select count(*) from room where room_type = 'DELUXE';</sqlCheck>
-		</preConditions>
-	    <sql>insert into room values ((select nextVal('hibernate_sequence')), 'DELUXE', 'Deluxe Room', '15in X 15in X 15in', now());</sql>
+	    	insert into venue (id, name, description, type, comments, rating, added_on, city_id, locality_id, priority) values ((select nextval('hibernate_sequence')), 'Yo China!', 'Yo China!', 'RESTAURANT', null, null, now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Chandigarh'), 1);
+	    	insert into address values ((select nextVal('hibernate_sequence')), 'SCO 4 &amp; 5, Sector 9 D', 'Sector 9', 'Chandigarh', 'Chandigarh', 160101, '+91-9876556789', '0171-987678', 'venue@gmail.com', (select id from venue where name = 'Yo China!'), 0, now(), '30.7398', '76.7827');
+	    	insert into attachment values ((select nextVal('hibernate_sequence')), 'YoChina.jpg', 'yochina.jpg', (select id from venue where name = 'Yo China!'), 0, now(), 'COVER', 'Yo China Front View');
+	    	insert into entity_services values ((select nextVal('hibernate_sequence')),(select id from venue where name = 'Yo China!'), (select id from service where tab_data_name = 'Dine In'), null, null, 0, now());
+	    	insert into entity_filters values ((select nextVal('hibernate_sequence')), (select id from venue where name = 'Yo China!'), (select id from filters where filter_type = 'ESTABLISHMENT' and filter_for_entity = 'VENUE' and filter_name = 'Restaurant'), 0, now());
+	    </sql>
     </changeSet>
     
     <changeSet author="msingla" id="1.7">
-		<preConditions onFail="MARK_RAN">
-			<sqlCheck expectedResult="0">select count(*) from room where room_type = 'SUPERDELUXE';</sqlCheck>
-		</preConditions>
-	    <sql>insert into room values ((select nextVal('hibernate_sequence')), 'SUPERDELUXE', 'Super Deluxe Room', '15in X 15in X 15in', now());</sql>
+	    <sql>
+			insert into venue (id, name, description, type, comments, rating, added_on, city_id, locality_id, priority) values ((select nextval('hibernate_sequence')), 'Midnight Chef', 'Midnight Chef', 'RESTAURANT', null, null, now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Chandigarh'), 10);
+	    	insert into address values ((select nextVal('hibernate_sequence')), 'Sector 35', 'Sector 35', 'Chandigarh', 'Chandigarh', 160101, '+91-0172-2254375', '+91-9876543219', 'venue@gmail.com', (select id from venue where name = 'Midnight Chef'), 0, now(), '30.7398', '76.7827');
+			insert into attachment values ((select nextVal('hibernate_sequence')), 'MidnightChef.jpg', 'midnightchef.jpg', (select id from venue where name = 'Midnight Chef'), 0, now(), 'COVER', 'Midnight Chef Image');
+	    	insert into entity_services values ((select nextVal('hibernate_sequence')),(select id from venue where name = 'Midnight Chef'), (select id from service where tab_data_name = 'Dine In'), null, null, 0, now());
+	    	insert into entity_filters values ((select nextVal('hibernate_sequence')), (select id from venue where name = 'Midnight Chef'), (select id from filters where filter_type = 'ESTABLISHMENT' and filter_for_entity = 'VENUE' and filter_name = 'Restaurant'), 0, now());
+	    </sql>
     </changeSet>
     
     <changeSet author="msingla" id="1.8">
-		<preConditions onFail="MARK_RAN">
-			<sqlCheck expectedResult="0">select count(*) from city where name = 'Bikaner'</sqlCheck>
-		</preConditions>
-	    <sql>insert into address values ((select nextVal('hibernate_sequence')), 'Addr Line 1', 'Addr Line 2', 'Bikaner', 'Rajasthan', 151001, 9876543210, 9876556789, 'msinla@gmail.com', (select id from venue where name = 'Bahia Resort'), 0, now());</sql>
+	    <sql>
+			insert into venue (id, name, description, type, comments, rating, added_on, city_id, locality_id, priority) values ((select nextval('hibernate_sequence')), 'La Pino''z Pizza', 'La Pino''z Pizza', 'RESTAURANT', null, null, now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Chandigarh'), 20);	    	
+			insert into address values ((select nextVal('hibernate_sequence')), 'Shop 10, Inner Market, Sector 9D', 'Sector 9', 'Chandigarh', 'Chandigarh', 160101, '+91-0172-256987', '+91-9879877890', 'venue@gmail.com', (select id from venue where name = 'La Pino''z Pizza'), 0, now(), '30.7398', '76.7827');	    	
+			insert into attachment values ((select nextVal('hibernate_sequence')), 'LaPinoPizza.jpg', 'lapinopizza.jpg', (select id from venue where name = 'La Pino''z Pizza'), 0, now(), 'COVER', 'Lapino Pizza Image');
+	    	insert into entity_services values ((select nextVal('hibernate_sequence')),(select id from venue where name = 'La Pino''z Pizza'), (select id from service where tab_data_name = 'Dine In'), null, null, 0, now());
+	    	insert into entity_filters values ((select nextVal('hibernate_sequence')), (select id from venue where name = 'La Pino''z Pizza'), (select id from filters where filter_type = 'ESTABLISHMENT' and filter_for_entity = 'VENUE' and filter_name = 'Restaurant'), 0, now());
+	    </sql>
     </changeSet>
     
-    <changeSet author="msingla" id="1.9">
-		<preConditions onFail="MARK_RAN">
-			<sqlCheck expectedResult="0">select count(*) from attachment where name = 'ImageURl';</sqlCheck>
-		</preConditions>
-	    <sql>insert into attachment values ((select nextVal('hibernate_sequence')), 'Attachment1', 'ImageURl', (select id from venue where name = 'Bahia Resort'), 0, now());</sql>
+     <changeSet author="msingla" id="1.9">
+	    <sql>
+	    	insert into venue (id, name, description, type, comments, rating, added_on, city_id, locality_id, priority) values ((select nextval('hibernate_sequence')), 'Burger Point', 'Burger Point', 'RESTAURANT', null, null, now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Chandigarh'), 30);
+	    	insert into address values ((select nextVal('hibernate_sequence')), 'Shop No. 348, Sector 32 D', 'Sector 32', 'Chandigarh', 'Chandigarh', 160101, '+91-0172-2254375', '+91-9876543219', 'venue@gmail.com', (select id from venue where name = 'Burger Point'), 0, now(), '30.7398', '76.7827');
+	    	insert into attachment values ((select nextVal('hibernate_sequence')), 'BurgerPoint.jpg', 'burgerpoint.jpg', (select id from venue where name = 'Burger Point'), 0, now(), 'COVER', 'Burger Point Image');
+	    	insert into entity_services values ((select nextVal('hibernate_sequence')),(select id from venue where name = 'Burger Point'), (select id from service where tab_data_name = 'Dine In'), null, null, 0, now());
+	    	insert into entity_filters values ((select nextVal('hibernate_sequence')), (select id from venue where name = 'Burger Point'), (select id from filters where filter_type = 'ESTABLISHMENT' and filter_for_entity = 'VENUE' and filter_name = 'Restaurant'), 0, now());
+	    </sql>
     </changeSet>
     
     <changeSet author="msingla" id="1.10">
-		<preConditions onFail="MARK_RAN">
-			<sqlCheck expectedResult="0">select count(*) from venue_rooms where venue_id = (select id from venue where name = 'Bahia Resort') and room_id = (select id from room where room_type = 'STANDARD');</sqlCheck>
-		</preConditions>
-	    <sql>insert into venue_rooms values ((select nextVal('hibernate_sequence')),(select id from venue where name = 'Bahia Resort'), (select id from room where room_type = 'STANDARD'), null, true, true, true, true, true, 0, now());</sql>
+	    <sql>
+	    	insert into venue (id, name, description, type, comments, rating, added_on, city_id, locality_id, priority) values ((select nextval('hibernate_sequence')), 'Puzzles - The Cove', 'Puzzles - The Cove', 'RESTAURANT', null, null, now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Panchkula'), 40);
+	    	insert into address values ((select nextVal('hibernate_sequence')), 'The Cove, SCO 1 to 2', 'Sector 5', 'Panchkula', 'Chandigarh', 160101, '+91-0172-2254375', '+91-9876543219', 'venue@gmail.com', (select id from venue where name = 'Puzzles - The Cove'), 0, now(), '30.7398', '76.7827');
+	    	insert into attachment values ((select nextVal('hibernate_sequence')), 'Puzzles.jpg', 'puzzles.jpg', (select id from venue where name = 'Puzzles - The Cove'), 0, now(), 'COVER', 'Puzzles Image');
+	    	insert into entity_services values ((select nextVal('hibernate_sequence')),(select id from venue where name = 'Puzzles - The Cove'), (select id from service where tab_data_name = 'Dine In'), null, null, 0, now());
+	    	insert into entity_filters values ((select nextVal('hibernate_sequence')), (select id from venue where name = 'Puzzles - The Cove'), (select id from filters where filter_type = 'ESTABLISHMENT' and filter_for_entity = 'VENUE' and filter_name = 'Restaurant'), 0, now());
+	    </sql>
     </changeSet>
     
     <changeSet author="msingla" id="1.11">
-		<preConditions onFail="MARK_RAN">
-			<sqlCheck expectedResult="0">select count(*) from venue_rooms where venue_id = (select id from venue where name = 'Bahia Resort') and room_id = (select id from room where room_type = 'DELUXE');</sqlCheck>
-		</preConditions>
-	    <sql>insert into venue_rooms values ((select nextVal('hibernate_sequence')),(select id from venue where name = 'Bahia Resort'), (select id from room where room_type = 'DELUXE'), null, true, true, true, true, true, 0, now());</sql>
+	    <sql>
+	    	insert into venue (id, name, description, type, comments, rating, added_on, city_id, locality_id, priority) values ((select nextval('hibernate_sequence')), 'Pashtun', 'Pashtun', 'RESTAURANT', null, null, now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Chandigarh'), 50);
+	    	insert into address values ((select nextVal('hibernate_sequence')), 'SCO 333 &amp; 334, Sector 35 B', 'Sector 35', 'Chandigarh', 'Chandigarh', 160101, '+91-0172-2254375', '+91-9876543219', 'venue@gmail.com', (select id from venue where name = 'Pashtun'), 0, now(), '30.7398', '76.7827');
+	    	insert into attachment values ((select nextVal('hibernate_sequence')), 'Pashtun.jpg', 'pashtun.jpg', (select id from venue where name = 'Pashtun'), 0, now(), 'COVER', 'Pashtun Image');
+	    	insert into entity_services values ((select nextVal('hibernate_sequence')),(select id from venue where name = 'Pashtun'), (select id from service where tab_data_name = 'Dine In'), null, null, 0, now());
+	    	insert into entity_filters values ((select nextVal('hibernate_sequence')), (select id from venue where name = 'Pashtun'), (select id from filters where filter_type = 'ESTABLISHMENT' and filter_for_entity = 'VENUE' and filter_name = 'Restaurant'), 0, now());
+	    </sql>
     </changeSet>
     
     <changeSet author="msingla" id="1.12">
-		<preConditions onFail="MARK_RAN">
-			<sqlCheck expectedResult="0">select count(*) from venue_amenities where venue_id = (select id from venue where name = 'Bahia Resort') and amenities_id = (select id from amenities where amenity_type = 'BNQTHALL');</sqlCheck>
-		</preConditions>
-	    <sql>insert into venue_amenities values ((select nextVal('hibernate_sequence')),(select id from venue where name = 'Bahia Resort'), (select id from amenities where amenity_type = 'BNQTHALL'), null, 0, now());</sql>
+	    <sql>
+	    	insert into venue (id, name, description, type, comments, rating, added_on, city_id, locality_id, priority) values ((select nextval('hibernate_sequence')), 'Sindhi Sweets', 'Sindhi Sweets', 'RESTAURANT', null, null, now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Chandigarh'), 60);
+	    	insert into address values ((select nextVal('hibernate_sequence')), 'SCO 108 &amp; 109, Sindhi''s Veg Food Court', 'Sector 17C', 'Chandigarh', 'Chandigarh', 160101, '+91-0172-2254375', '+91-9876543219', 'venue@gmail.com', (select id from venue where name = 'Sindhi Sweets'), 0, now(), '30.7398', '76.7827');
+	    	insert into attachment values ((select nextVal('hibernate_sequence')), 'SindhiSweets.jpg', 'sindhisweets.jpg', (select id from venue where name = 'Sindhi Sweets'), 0, now(), 'COVER', 'Sindhi Sweets Image');
+	    	insert into entity_services values ((select nextVal('hibernate_sequence')),(select id from venue where name = 'Sindhi Sweets'), (select id from service where tab_data_name = 'Dine In'), null, null, 0, now());
+	    	insert into entity_filters values ((select nextVal('hibernate_sequence')), (select id from venue where name = 'Sindhi Sweets'), (select id from filters where filter_type = 'ESTABLISHMENT' and filter_for_entity = 'VENUE' and filter_name = 'Restaurant'), 0, now());
+	    </sql>
     </changeSet>
     
-    <changeSet author="msingla" id="1.13">
-		<preConditions onFail="MARK_RAN">
-			<sqlCheck expectedResult="0">select count(*) from venue_services where venue_id = (select id from venue where name = 'Bahia Resort') and service_id = (select id from service where service_type = 'DINEIN');</sqlCheck>
-		</preConditions>
-	    <sql>insert into venue_services values ((select nextVal('hibernate_sequence')),(select id from venue where name = 'Bahia Resort'), (select id from service where service_type = 'DINEIN'), null, 0, now());</sql>
-    </changeSet> -->
+     <changeSet author="msingla" id="1.13">
+	    <sql>
+	    	insert into venue (id, name, description, type, comments, rating, added_on, city_id, locality_id, priority) values ((select nextval('hibernate_sequence')), 'Underdoggs Sports Bar &amp; Grill', 'Underdoggs Sports Bar &amp; Grill', 'RESTAURANT', null, null, now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Chandigarh'), 70);
+	    	insert into address values ((select nextVal('hibernate_sequence')), '178 A, 3rd Floor, Elante Mall', 'Chandigarh Industrial Area Phase 1', 'Chandigarh', 'Chandigarh', 160101, '+91-0172-2254375', '+91-9876543219', 'venue@gmail.com', (select id from venue where name = 'Underdoggs Sports Bar &amp; Grill'), 0, now(), '30.7398', '76.7827');
+	    	insert into attachment values ((select nextVal('hibernate_sequence')), 'Underdoggs.jpg', 'underdoggs.jpg', (select id from venue where name = 'Underdoggs Sports Bar &amp; Grill'), 0, now(), 'COVER', 'Underdoggs Image');
+	    	insert into entity_services values ((select nextVal('hibernate_sequence')),(select id from venue where name = 'Underdoggs Sports Bar &amp; Grill'), (select id from service where tab_data_name = 'Dine In'), null, null, 0, now());
+	    	insert into entity_filters values ((select nextVal('hibernate_sequence')), (select id from venue where name = 'Underdoggs Sports Bar &amp; Grill'), (select id from filters where filter_type = 'ESTABLISHMENT' and filter_for_entity = 'VENUE' and filter_name = 'Restaurant'), 0, now());
+	    </sql>
+    </changeSet>
+    
+    <changeSet author="msingla" id="1.14">
+	    <sql>
+	    	insert into venue (id, name, description, type, comments, rating, added_on, city_id, locality_id, priority) values ((select nextval('hibernate_sequence')), 'The Kitchen Knight', 'The Kitchen Knight', 'RESTAURANT', null, null, now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Chandigarh'), 80);
+	    	insert into address values ((select nextVal('hibernate_sequence')), 'Chandigarh Industrial Area', null, 'Chandigarh', 'Chandigarh', 160101, '+91-0172-2254375', '+91-9876543219', 'venue@gmail.com', (select id from venue where name = 'The Kitchen Knight'), 0, now(), '30.7398', '76.7827');
+	    	insert into attachment values ((select nextVal('hibernate_sequence')), 'TheKitchenKnight.jpg', 'thekitchenknight.jpg', (select id from venue where name = 'The Kitchen Knight'), 0, now(), 'Cover', 'The Kitchen Knight Image');
+	    	insert into entity_services values ((select nextVal('hibernate_sequence')),(select id from venue where name = 'The Kitchen Knight'), (select id from service where tab_data_name = 'Dine In'), null, null, 0, now());
+	    	insert into entity_filters values ((select nextVal('hibernate_sequence')), (select id from venue where name = 'The Kitchen Knight'), (select id from filters where filter_type = 'ESTABLISHMENT' and filter_for_entity = 'VENUE' and filter_name = 'Restaurant'), 0, now());
+	    </sql>
+    </changeSet>
+    
+    <changeSet author="msingla" id="1.15">
+	    <sql>
+	    	insert into venue (id, name, description, type, comments, rating, added_on, city_id, locality_id, priority) values ((select nextval('hibernate_sequence')), 'Hot Millions', 'Hot Millions', 'RESTAURANT', null, null, now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Chandigarh'), 90);
+	    	insert into address values ((select nextVal('hibernate_sequence')), 'SCO 196 &amp; 197, Sector 17 C', 'Sector 17', 'Chandigarh', 'Chandigarh', 160101, '+91-0172-2254375', '+91-9876543219', 'venue@gmail.com', (select id from venue where name = 'Hot Millions'), 0, now(), '30.7398', '76.7827');
+	    	insert into attachment values ((select nextVal('hibernate_sequence')), 'HotMillions.jpg', 'hotmillions.jpg', (select id from venue where name = 'Hot Millions'), 0, now(), 'COVER', 'Hot Millions Image');
+	    	insert into entity_services values ((select nextVal('hibernate_sequence')),(select id from venue where name = 'Hot Millions'), (select id from service where tab_data_name = 'Dine In'), null, null, 0, now());
+	    	insert into entity_filters values ((select nextVal('hibernate_sequence')), (select id from venue where name = 'Hot Millions'), (select id from filters where filter_type = 'ESTABLISHMENT' and filter_for_entity = 'VENUE' and filter_name = 'Restaurant'), 0, now());
+	    </sql>
+    </changeSet>
+    
+    <changeSet author="msingla" id="1.16">
+	    <sql>
+	    	insert into venue (id, name, description, type, comments, rating, added_on, city_id, locality_id, priority) values ((select nextval('hibernate_sequence')), 'Brooklyn Central', 'Brooklyn Central', 'RESTAURANT', null, null, now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Chandigarh'), 100);
+	    	insert into address values ((select nextVal('hibernate_sequence')), 'Courtyard, Elante Mall, Chandigarh Industrial Area (Phase 1)', 'Chandigarh Industrial Area', 'Chandigarh', 'Chandigarh', 160101, '+91-0172-2254375', '+91-9876543219', 'venue@gmail.com', (select id from venue where name = 'Brooklyn Central'), 0, now(), '30.7398', '76.7827');
+	    	insert into attachment values ((select nextVal('hibernate_sequence')), 'BrooklynCentral.jpg', 'brooklyncentral.jpg', (select id from venue where name = 'Brooklyn Central'), 0, now(), 'COVER', 'Brooklyn Central Image');
+	    	insert into entity_services values ((select nextVal('hibernate_sequence')),(select id from venue where name = 'Brooklyn Central'), (select id from service where tab_data_name = 'Dine In'), null, null, 0, now());
+	    	insert into entity_filters values ((select nextVal('hibernate_sequence')), (select id from venue where name = 'Brooklyn Central'), (select id from filters where filter_type = 'ESTABLISHMENT' and filter_for_entity = 'VENUE' and filter_name = 'Restaurant'), 0, now());
+	    </sql>
+    </changeSet>
+    
+     <changeSet author="msingla" id="1.17">
+	    <sql>
+	    	insert into venue (id, name, description, type, comments, rating, added_on, city_id, locality_id, priority) values ((select nextval('hibernate_sequence')), 'The Brew Estate', 'The Brew Estate', 'RESTAURANT', null, null, now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Chandigarh'), 110);
+	    	insert into address values ((select nextVal('hibernate_sequence')), 'Sector 26', null, 'Chandigarh', 'Chandigarh', 160101, '+91-0172-2254375', '+91-9876543219', 'venue@gmail.com', (select id from venue where name = 'The Brew Estate'), 0, now(), '30.7398', '76.7827');
+	    	insert into attachment values ((select nextVal('hibernate_sequence')), 'TheBrewEstate.jpg', 'thebrewestate.jpg', (select id from venue where name = 'The Brew Estate'), 0, now(), 'COVER', 'The Brew Estate Image');
+	    	insert into entity_services values ((select nextVal('hibernate_sequence')),(select id from venue where name = 'The Brew Estate'), (select id from service where tab_data_name = 'Dine In'), null, null, 0, now());
+	    	insert into entity_filters values ((select nextVal('hibernate_sequence')), (select id from venue where name = 'The Brew Estate'), (select id from filters where filter_type = 'ESTABLISHMENT' and filter_for_entity = 'VENUE' and filter_name = 'Restaurant'), 0, now());
+	    </sql>
+    </changeSet>
+    
+    <changeSet author="msingla" id="1.18">
+	    <sql>
+			insert into venue (id, name, description, type, comments, rating, added_on, city_id, locality_id, priority) values ((select nextval('hibernate_sequence')), 'JW Marriott', 'Treat yourself to five-star luxury at the JW Marriott Hotel Chandigarh. Located in Sector 17, our hotel is in the center of the city''s vibrant business district, offering convenient accessibility to an array of historic attractions and sites. Upon stepping into our top-rated hotel, guests will be immersed in the ultimate in luxury', 'HOTEL', null, null, now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Chandigarh'), 120);
+			insert into address values ((select nextVal('hibernate_sequence')), 'JW Marriott Hotel Chandigarh', 'Plot no: 6, Sector 35-B, Dakshin Marg', 'Chandigarh', 'Chandigarh', 160035, '+91-172-3955555', '1-800-102-5000', null, (select id from venue where name = 'JW Marriott'), 0, now(), '30.7398', '76.7827');
+			insert into attachment values ((select nextVal('hibernate_sequence')), 'JWMarriottCover.jpg', 'jwmarriottcover.jpg', (select id from venue where name = 'JW Marriott'), 0, now(), 'COVER', 'Outer View');
+			insert into attachment values ((select nextVal('hibernate_sequence')), 'JWMarriottGuestRoom.jpg', 'jwmarriottguestroom.jpg', (select id from venue where name = 'JW Marriott'), 0, now(), 'COVER', 'Guest Room');
+			insert into attachment values ((select nextVal('hibernate_sequence')), 'JWMarriottLobby.jpg', 'jwmarriottlobby.jpg', (select id from venue where name = 'JW Marriott'), 0, now(), 'COVER', 'Lobby Area');
+			insert into attachment values ((select nextVal('hibernate_sequence')), 'JWMarriottLuxurySuite.jpg', 'jwmarriottluxurysuite.jpg', (select id from venue where name = 'JW Marriott'), 0, now(), 'COVER', 'Luxury Suite');
+			insert into attachment values ((select nextVal('hibernate_sequence')), 'JWMarriottPool.jpg', 'jwmarriottpool.jpg', (select id from venue where name = 'JW Marriott'), 0, now(), 'COVER', 'Pool Side');
+			insert into attachment values ((select nextVal('hibernate_sequence')), 'JWMarriottRestaurant.jpg', 'jwmarriottrestaurant.jpg', (select id from venue where name = 'JW Marriott'), 0, now(), 'COVER', 'Restaurant');
+			insert into venue_rooms values ((select nextVal('hibernate_sequence')),(select id from venue where name = 'JW Marriott'), (select id from room where room_type = 'STANDARD'), 2000, true, true, true, true, true, 0, now(), false);
+			insert into venue_rooms values ((select nextVal('hibernate_sequence')),(select id from venue where name = 'JW Marriott'), (select id from room where room_type = 'DELUXE'), 3000, true, true, true, true, true, 0, now(), true);
+			insert into venue_rooms values ((select nextVal('hibernate_sequence')),(select id from venue where name = 'JW Marriott'), (select id from room where room_type = 'SUPERDELUXE'), 5000, true, true, true, true, true, 0, now(), true);
+			insert into entity_services values ((select nextVal('hibernate_sequence')),(select id from venue where name = 'JW Marriott'), (select id from service where tab_data_name = 'Dine In'), null, null, 0, now());
+			insert into entity_services values ((select nextVal('hibernate_sequence')),(select id from venue where name = 'JW Marriott'), (select id from service where tab_data_name = 'Drinks Available'), null, null, 0, now());
+			insert into entity_services values ((select nextVal('hibernate_sequence')),(select id from venue where name = 'JW Marriott'), (select id from service where tab_data_name = 'Smoking Zone'), null, null, 0, now());
+			insert into entity_services values ((select nextVal('hibernate_sequence')),(select id from venue where name = 'JW Marriott'), (select id from service where tab_data_name = 'Vallet Parking'), null, null, 0, now());
+			insert into entity_services values ((select nextVal('hibernate_sequence')),(select id from venue where name = 'JW Marriott'), (select id from service where tab_data_name = 'Alcohol Served'), null, null, 0, now());
+			insert into entity_services values ((select nextVal('hibernate_sequence')),(select id from venue where name = 'JW Marriott'), (select id from service where tab_data_name = 'Outdoor Seating'), null, null, 0, now());
+			insert into venue_amenities values ((select nextVal('hibernate_sequence')),(select id from venue where name = 'JW Marriott'), (select id from amenities where amenity_type = 'BNQTHALL'), null, null, 0, now());
+			insert into venue_amenities values ((select nextVal('hibernate_sequence')),(select id from venue where name = 'JW Marriott'), (select id from amenities where amenity_type = 'CLUBROOM'), null, null, 0, now());
+			insert into venue_amenities values ((select nextVal('hibernate_sequence')),(select id from venue where name = 'JW Marriott'), (select id from amenities where amenity_type = 'PARLOUR'), null, null, 0, now());
+			insert into venue_amenities values ((select nextVal('hibernate_sequence')),(select id from venue where name = 'JW Marriott'), (select id from amenities where amenity_type = 'GYM'), null, null, 0, now());
+			insert into venue_amenities values ((select nextVal('hibernate_sequence')),(select id from venue where name = 'JW Marriott'), (select id from amenities where amenity_type = 'INHOUSECATERING'), null, null, 0, now());
+			insert into venue_amenities values ((select nextVal('hibernate_sequence')),(select id from venue where name = 'JW Marriott'), (select id from amenities where amenity_type = 'LOBBY'), null, null, 0, now());
+			insert into entity_filters values ((select nextVal('hibernate_sequence')), (select id from venue where name = 'JW Marriott'), (select id from filters where filter_type = 'ESTABLISHMENT' and filter_for_entity = 'VENUE' and filter_name = 'Hotel'), 0, now());
+		</sql>
+    </changeSet>
+    
+    <!-- Create Caterer Specific Data -->
+    
+    <changeSet author="msingla" id="1.19">
+	    <sql>
+	    	insert into caterer values ((select nextval('hibernate_sequence')), 'Gopal''s', 'Treat yourself to the taste at the Gopal''s. Located in Sector9, our chain is in the center of the city''s vibrant business district, offering convenient accessibility to an array of historic attractions and sites. Upon stepping into our top-rated hotel, guests will be immersed in the ultimate in luxury', null, null, 0, 'North Indian, South Indian, Continental, Chinese, Mexican', now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Panchkula'), 10);
+			insert into address values ((select nextVal('hibernate_sequence')), 'Gopal''s', 'Sector 9', 'Panchkula', 'Chandigarh', 160035, '+91-172-3955555', '1-800-102-5000', null, (select id from caterer where name = 'Gopal''s'), 0, now(), '30.7398', '76.7827');
+			insert into attachment values ((select nextVal('hibernate_sequence')), 'GopalCover.jpg', 'gopal_cover.jpg', (select id from caterer where name = 'Gopal''s'), 0, now(), 'COVER', 'Outer View');
+			insert into attachment values ((select nextVal('hibernate_sequence')), 'GopalChat.jpg', 'gopal_chat.jpg', (select id from caterer where name = 'Gopal''s'), 0, now(), 'GENERAL', 'Raj Kachori Chat');
+			insert into attachment values ((select nextVal('hibernate_sequence')), 'GopalStarter.jpg', 'gopal_starter.jpg', (select id from caterer where name = 'Gopal''s'), 0, now(), 'GENERAL', 'Paneer Tikka');
+			insert into attachment values ((select nextVal('hibernate_sequence')), 'GopalSweet.jpg', 'gopal_sweet.jpg', (select id from caterer where name = 'Gopal''s'), 0, now(), 'GENERAL', 'Ladoo');
+			insert into entity_services values ((select nextVal('hibernate_sequence')),(select id from caterer where name = 'Gopal''s'), (select id from service where tab_data_name = 'Crockery'), null, null, 0, now());
+			insert into entity_services values ((select nextVal('hibernate_sequence')),(select id from caterer where name = 'Gopal''s'), (select id from service where tab_data_name = 'Own Service Staff'), null, null, 0, now());
+			insert into entity_services values ((select nextVal('hibernate_sequence')),(select id from caterer where name = 'Gopal''s'), (select id from service where tab_data_name = 'Pure Veg' and service_for_entity = 'CATERER'), null, null, 0, now());
+			insert into entity_services values ((select nextVal('hibernate_sequence')),(select id from caterer where name = 'Gopal''s'), (select id from service where tab_data_name = 'Live Tandoor'), null, null, 0, now());
+			insert into entity_services values ((select nextVal('hibernate_sequence')),(select id from caterer where name = 'Gopal''s'), (select id from service where tab_data_name = 'Beverages'), null, null, 0, now());
+	    </sql>
+    </changeSet>
+    
+    <!-- Create Rental Specific Data -->
+    
+    <changeSet author="msingla" id="1.20">
+	    <sql>
+	    	insert into rental values ((select nextval('hibernate_sequence')), 'Mega Cabs', 'We provide Cab services in tricity. Book Cabs from mega cabs to go anytime, anywhere.', null, null, null, 0, 'CAB', now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Chandigarh'), 10);	
+			insert into address values ((select nextVal('hibernate_sequence')), 'Mega Cabs', 'Sector 9', 'Panchkula', 'Chandigarh', 160035, '+91-172-3955555', '1-800-102-5000', null, (select id from rental where name = 'Mega Cabs'), 0, now(), '30.7398', '76.7827');
+			insert into attachment values ((select nextVal('hibernate_sequence')), 'GopalCover.jpg', 'gopal_cover.jpg', (select id from rental where name = 'Mega Cabs'), 0, now(), 'COVER', 'Outer View');
+			insert into attachment values ((select nextVal('hibernate_sequence')), 'GopalChat.jpg', 'gopal_chat.jpg', (select id from rental where name = 'Mega Cabs'), 0, now(), 'GENERAL', 'Raj Kachori Chat');
+			insert into attachment values ((select nextVal('hibernate_sequence')), 'GopalStarter.jpg', 'gopal_starter.jpg', (select id from rental where name = 'Mega Cabs'), 0, now(), 'GENERAL', 'Paneer Tikka');
+			insert into attachment values ((select nextVal('hibernate_sequence')), 'GopalSweet.jpg', 'gopal_sweet.jpg', (select id from rental where name = 'Mega Cabs'), 0, now(), 'GENERAL', 'Ladoo');
+			insert into entity_services values ((select nextVal('hibernate_sequence')),(select id from rental where name = 'Mega Cabs'), (select id from service where tab_data_name = 'Sedan'), 200, 500, 0, now());
+			insert into entity_services values ((select nextVal('hibernate_sequence')),(select id from rental where name = 'Mega Cabs'), (select id from service where tab_data_name = 'HatchBack'), 300, 700, 0, now());
+			insert into entity_services values ((select nextVal('hibernate_sequence')),(select id from rental where name = 'Mega Cabs'), (select id from service where tab_data_name = 'SUV'), 500, 1000, 0, now());
+			insert into entity_services values ((select nextVal('hibernate_sequence')),(select id from rental where name = 'Mega Cabs'), (select id from service where tab_data_name = 'Bus Service'), 5000, 20000, 0, now());
+			insert into entity_filters values ((select nextVal('hibernate_sequence')), (select id from rental where name = 'Mega Cabs'), (select id from filters where filter_type = 'RENTAL' and filter_for_entity = 'RENTAL' and filter_name = 'Cab Services'), 0, now());
+			
+			insert into rental values ((select nextval('hibernate_sequence')), 'City Band', 'We provide Band services in tricity. Book bands anytime, anywhere.', null, null, null, 0, 'BAND', now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Chandigarh'), 10);	
+			insert into address values ((select nextVal('hibernate_sequence')), 'City Band', 'Sector 9', 'Panchkula', 'Chandigarh', 160035, '+91-172-3955555', '1-800-102-5000', null, (select id from rental where name = 'City Band'), 0, now(), '30.7398', '76.7827');
+			insert into attachment values ((select nextVal('hibernate_sequence')), 'GopalCover.jpg', 'gopal_cover.jpg', (select id from rental where name = 'City Band'), 0, now(), 'COVER', 'Outer View');
+			insert into attachment values ((select nextVal('hibernate_sequence')), 'GopalChat.jpg', 'gopal_chat.jpg', (select id from rental where name = 'City Band'), 0, now(), 'GENERAL', 'Raj Kachori Chat');
+			insert into attachment values ((select nextVal('hibernate_sequence')), 'GopalStarter.jpg', 'gopal_starter.jpg', (select id from rental where name = 'City Band'), 0, now(), 'GENERAL', 'Paneer Tikka');
+			insert into attachment values ((select nextVal('hibernate_sequence')), 'GopalSweet.jpg', 'gopal_sweet.jpg', (select id from rental where name = 'City Band'), 0, now(), 'GENERAL', 'Ladoo');
+			insert into entity_services values ((select nextVal('hibernate_sequence')),(select id from rental where name = 'City Band'), (select id from service where tab_data_name = 'Simple Band'), 200, 500, 0, now());
+			insert into entity_services values ((select nextVal('hibernate_sequence')),(select id from rental where name = 'City Band'), (select id from service where tab_data_name = 'Military Band'), 300, 700, 0, now());
+			insert into entity_services values ((select nextVal('hibernate_sequence')),(select id from rental where name = 'City Band'), (select id from service where tab_data_name = 'Crew Band'), 500, 1000, 0, now());
+			insert into entity_services values ((select nextVal('hibernate_sequence')),(select id from rental where name = 'City Band'), (select id from service where tab_data_name = 'DJ Sound Band'), 5000, 20000, 0, now());
+			insert into entity_services values ((select nextVal('hibernate_sequence')),(select id from rental where name = 'City Band'), (select id from service where tab_data_name = 'Baghi'), 500, 1000, 0, now());
+			insert into entity_services values ((select nextVal('hibernate_sequence')),(select id from rental where name = 'City Band'), (select id from service where tab_data_name = 'Ghodi'), 5000, 20000, 0, now());
+			insert into entity_services values ((select nextVal('hibernate_sequence')),(select id from rental where name = 'City Band'), (select id from service where tab_data_name = 'Rath'), 5000, 20000, 0, now());
+			insert into entity_filters values ((select nextVal('hibernate_sequence')), (select id from rental where name = 'City Band'), (select id from filters where filter_type = 'RENTAL' and filter_for_entity = 'RENTAL' and filter_name = 'Band Services'), 0, now());
+
+			insert into rental values ((select nextval('hibernate_sequence')), 'Rock n Roll DJ', 'We provide DJ services in tricity. Book DJs anytime, anywhere.', null, null, null, 0, 'DJ', now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Chandigarh'), 10);	
+			insert into address values ((select nextVal('hibernate_sequence')), 'Rock n Roll DJ', 'Sector 9', 'Panchkula', 'Chandigarh', 160035, '+91-172-3955555', '1-800-102-5000', null, (select id from rental where name = 'Rock n Roll DJ'), 0, now(), '30.7398', '76.7827');
+			insert into attachment values ((select nextVal('hibernate_sequence')), 'GopalCover.jpg', 'gopal_cover.jpg', (select id from rental where name = 'Rock n Roll DJ'), 0, now(), 'COVER', 'Outer View');
+			insert into attachment values ((select nextVal('hibernate_sequence')), 'GopalChat.jpg', 'gopal_chat.jpg', (select id from rental where name = 'Rock n Roll DJ'), 0, now(), 'GENERAL', 'Raj Kachori Chat');
+			insert into attachment values ((select nextVal('hibernate_sequence')), 'GopalStarter.jpg', 'gopal_starter.jpg', (select id from rental where name = 'Rock n Roll DJ'), 0, now(), 'GENERAL', 'Paneer Tikka');
+			insert into attachment values ((select nextVal('hibernate_sequence')), 'GopalSweet.jpg', 'gopal_sweet.jpg', (select id from rental where name = 'Rock n Roll DJ'), 0, now(), 'GENERAL', 'Ladoo');
+			insert into entity_services values ((select nextVal('hibernate_sequence')),(select id from rental where name = 'Rock n Roll DJ'), (select id from service where tab_data_name = 'Speakers'), 200, 500, 0, now());
+			insert into entity_services values ((select nextVal('hibernate_sequence')),(select id from rental where name = 'Rock n Roll DJ'), (select id from service where tab_data_name = 'Dance Floor'), 300, 700, 0, now());
+			insert into entity_services values ((select nextVal('hibernate_sequence')),(select id from rental where name = 'Rock n Roll DJ'), (select id from service where tab_data_name = 'Dancers'), 500, 1000, 0, now());
+			insert into entity_filters values ((select nextVal('hibernate_sequence')), (select id from rental where name = 'Rock n Roll DJ'), (select id from filters where filter_type = 'RENTAL' and filter_for_entity = 'RENTAL' and filter_name = 'DJ Services'), 0, now());
+
+			insert into rental values ((select nextval('hibernate_sequence')), 'Shivam Tent House', 'We provide Tent services in tricity. Book Tents anytime, anywhere.', null, null, null, 0, 'TENT', now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Chandigarh'), 10);	
+			insert into address values ((select nextVal('hibernate_sequence')), 'Shivam Tent House', 'Sector 9', 'Panchkula', 'Chandigarh', 160035, '+91-172-3955555', '1-800-102-5000', null, (select id from rental where name = 'Shivam Tent House'), 0, now(), '30.7398', '76.7827');
+			insert into attachment values ((select nextVal('hibernate_sequence')), 'GopalCover.jpg', 'gopal_cover.jpg', (select id from rental where name = 'Shivam Tent House'), 0, now(), 'COVER', 'Outer View');
+			insert into attachment values ((select nextVal('hibernate_sequence')), 'GopalChat.jpg', 'gopal_chat.jpg', (select id from rental where name = 'Shivam Tent House'), 0, now(), 'GENERAL', 'Raj Kachori Chat');
+			insert into attachment values ((select nextVal('hibernate_sequence')), 'GopalStarter.jpg', 'gopal_starter.jpg', (select id from rental where name = 'Shivam Tent House'), 0, now(), 'GENERAL', 'Paneer Tikka');
+			insert into attachment values ((select nextVal('hibernate_sequence')), 'GopalSweet.jpg', 'gopal_sweet.jpg', (select id from rental where name = 'Shivam Tent House'), 0, now(), 'GENERAL', 'Ladoo');
+			insert into entity_services values ((select nextVal('hibernate_sequence')),(select id from rental where name = 'Shivam Tent House'), (select id from service where tab_data_name = 'Tent'), 200, 500, 0, now());
+			insert into entity_services values ((select nextVal('hibernate_sequence')),(select id from rental where name = 'Shivam Tent House'), (select id from service where tab_data_name = 'Chairs'), 300, 700, 0, now());
+			insert into entity_services values ((select nextVal('hibernate_sequence')),(select id from rental where name = 'Shivam Tent House'), (select id from service where tab_data_name = 'Bedding'), 500, 1000, 0, now());
+			insert into entity_filters values ((select nextVal('hibernate_sequence')), (select id from rental where name = 'Shivam Tent House'), (select id from filters where filter_type = 'RENTAL' and filter_for_entity = 'RENTAL' and filter_name = 'Tent House'), 0, now());
+	    </sql>
+    </changeSet>
+    
+    <!-- Create Photographer Specific Data -->
+    
+    <changeSet author="msingla" id="1.21">
+	   	<sql>	
+	    	insert into photographer values ((select nextval('hibernate_sequence')), 'Bhagawati Color Lab', 'We provide photo and videography servces in tricity', null, null, 0, now(), (select id from city where name = 'Bikaner'), (select id from locality where name = 'Delhi Road'), 10);
+			insert into address values ((select nextVal('hibernate_sequence')), 'Bhagawati Color Lab', 'Near Shiv mandir', 'Bikaner', 'Rajasthan', 160101, '+91-9876556789', '0171-987678', 'photographer@gmail.com', (select id from photographer where name = 'Bhagawati Color Lab'), 0, now(), '30.7398', '76.7827');
+			insert into attachment values ((select nextVal('hibernate_sequence')), 'YoChina.jpg', 'yochina.jpg', (select id from photographer where name = 'Bhagawati Color Lab'), 0, now(), 'COVER', 'Yo China Front View');
+			insert into entity_services values ((select nextVal('hibernate_sequence')),(select id from photographer where name = 'Bhagawati Color Lab'), (select id from service where tab_data_name = 'Couple Shoots'), null, null, 0, now());
+			insert into entity_services values ((select nextVal('hibernate_sequence')),(select id from photographer where name = 'Bhagawati Color Lab'), (select id from service where tab_data_name = 'Pre Wedding Shoots'), null, null, 0, now());
+			insert into entity_services values ((select nextVal('hibernate_sequence')),(select id from photographer where name = 'Bhagawati Color Lab'), (select id from service where tab_data_name = 'Candid Photo Shoots'), null, null, 0, now());
+			insert into entity_services values ((select nextVal('hibernate_sequence')),(select id from photographer where name = 'Bhagawati Color Lab'), (select id from service where tab_data_name = 'Portfolios'), null, null, 0, now());
+			insert into entity_services values ((select nextVal('hibernate_sequence')),(select id from photographer where name = 'Bhagawati Color Lab'), (select id from service where tab_data_name = 'Live Video Streaming'), null, null, 0, now());
+			insert into entity_services values ((select nextVal('hibernate_sequence')),(select id from photographer where name = 'Bhagawati Color Lab'), (select id from service where tab_data_name = 'Multiple Cameras'), null, null, 0, now());
+			insert into entity_services values ((select nextVal('hibernate_sequence')),(select id from photographer where name = 'Bhagawati Color Lab'), (select id from service where tab_data_name = 'Digital Album'), null, null, 0, now());
+			insert into entity_filters values ((select nextVal('hibernate_sequence')), (select id from photographer where name = 'Bhagawati Color Lab'), (select id from filters where filter_type = 'PRICE' and filter_for_entity = 'PHOTOGRAPHER' and filter_name = '10,000 - 20,000'), 0, now());
+	    </sql>
+    </changeSet>
+    
+     <!-- Create Decorator Specific Data -->
+    
+    <changeSet author="msingla" id="1.22">
+	    <sql>
+	    	insert into decorater values ((select nextval('hibernate_sequence')), 'City Decorators', 'We provide Decoration servces in tricity', null, null, 0, now(), (select id from city where name = 'Bikaner'), (select id from locality where name = 'Delhi Road'), 10);
+			insert into address values ((select nextVal('hibernate_sequence')), 'City Decorators', 'Near Shiv mandir', 'Bikaner', 'Rajasthan', 160101, '+91-9876556789', '0171-987678', 'photographer@gmail.com', (select id from decorater where name = 'City Decorators'), 0, now(), '30.7398', '76.7827');
+			insert into attachment values ((select nextVal('hibernate_sequence')), 'YoChina.jpg', 'yochina.jpg', (select id from decorater where name = 'City Decorators'), 0, now(), 'COVER', 'Yo China Front View');
+			insert into entity_services values ((select nextVal('hibernate_sequence')),(select id from decorater where name = 'City Decorators'), (select id from service where tab_data_name = 'Flower Decoration'), null, null, 0, now());
+			insert into entity_services values ((select nextVal('hibernate_sequence')),(select id from decorater where name = 'City Decorators'), (select id from service where tab_data_name = 'Lighting Decoration'), null, null, 0, now());
+			insert into entity_services values ((select nextVal('hibernate_sequence')),(select id from decorater where name = 'City Decorators'), (select id from service where tab_data_name = 'Car Decoration'), null, null, 0, now());
+			insert into entity_services values ((select nextVal('hibernate_sequence')),(select id from decorater where name = 'City Decorators'), (select id from service where tab_data_name = 'Mandap Decoration'), null, null, 0, now());
+			insert into entity_services values ((select nextVal('hibernate_sequence')),(select id from decorater where name = 'City Decorators'), (select id from service where tab_data_name = 'Venue Decoration'), null, null, 0, now());
+			insert into entity_services values ((select nextVal('hibernate_sequence')),(select id from decorater where name = 'City Decorators'), (select id from service where tab_data_name = 'Event Lighting'), null, null, 0, now());
+			insert into entity_services values ((select nextVal('hibernate_sequence')),(select id from decorater where name = 'City Decorators'), (select id from service where tab_data_name = 'Backdrops'), null, null, 0, now());
+	    </sql>
+    </changeSet>
     
 </databaseChangeLog>

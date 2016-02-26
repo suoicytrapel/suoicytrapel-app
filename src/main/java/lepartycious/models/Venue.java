@@ -63,8 +63,11 @@ public class Venue implements Serializable{
 	@OneToMany(mappedBy="venueId")
 	private List<VenueAmenities> venueamenities;
 	
-	@OneToMany(mappedBy="venueId")
-	private List<VenueServices> venueServices;
+	@OneToMany(mappedBy="entityId")
+	private List<EntityServices> venueServices;
+	
+	@OneToMany(mappedBy="entityId")
+	private List<EntityFilters> venueFilters;
 	
 	@OneToMany(mappedBy="venueId")
 	private List<VenueRooms> venueRooms;
@@ -152,11 +155,11 @@ public class Venue implements Serializable{
 		this.venueamenities = venueamenities;
 	}
 
-	public List<VenueServices> getVenueServices() {
+	public List<EntityServices> getVenueServices() {
 		return venueServices;
 	}
 
-	public void setVenueServices(List<VenueServices> venueServices) {
+	public void setVenueServices(List<EntityServices> venueServices) {
 		this.venueServices = venueServices;
 	}
 
@@ -191,4 +194,13 @@ public class Venue implements Serializable{
 	public void setLocality(Locality locality) {
 		this.locality = locality;
 	}
+
+	public List<EntityFilters> getVenueFilters() {
+		return venueFilters;
+	}
+
+	public void setVenueFilters(List<EntityFilters> venueFilters) {
+		this.venueFilters = venueFilters;
+	}
+	
 }

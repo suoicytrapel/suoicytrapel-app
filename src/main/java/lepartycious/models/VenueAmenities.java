@@ -37,8 +37,11 @@ public class VenueAmenities implements Serializable{
 	@JoinColumn(name="amenities_id")
 	private Amenities amenitiesId;
 	
-	@Column(name="min_cost")
+	@Column(name="min_amenity_cost")
 	private Float minCost;
+	
+	@Column(name="max_amenity_cost")
+	private Float maxCost;
 	
 	@Column(name = "added_on")
 	private Date addedOn;
@@ -73,5 +76,21 @@ public class VenueAmenities implements Serializable{
 
 	public void setAddedOn(Date addedOn) {
 		this.addedOn = addedOn;
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public Float getMaxCost() {
+		return maxCost;
+	}
+
+	public void setMaxCost(Float maxCost) {
+		this.maxCost = maxCost;
 	}
 }

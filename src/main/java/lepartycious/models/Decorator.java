@@ -16,7 +16,7 @@ import javax.persistence.Table;
 import javax.persistence.Version;
 
 @Entity
-@Table(name="decorator")
+@Table(name="decorater")
 public class Decorator implements Serializable{
 	
 	/**
@@ -58,23 +58,11 @@ public class Decorator implements Serializable{
 	@JoinColumn(name = "locality_id")
 	private Locality locality;
 	
-	@Column(name = "tent_availability")
-	private Boolean tentAvailability;
+	@OneToMany(mappedBy="entityId")
+	private List<EntityServices> decoratorServices;
 	
-	@Column(name = "min_tent_charges")
-	private Float minTentCharges;
-	
-	@Column(name = "lighting_availability")
-	private Boolean lightingAvailability;
-	
-	@Column(name = "min_lighting_charges")
-	private Float minLightingCharges;
-	
-	@Column(name = "floral_works_availability")
-	private Boolean floralWorksAvailability;
-	
-	@Column(name = "min_floral_works_charges")
-	private Float minFloralWorksCharges;
+	@OneToMany(mappedBy="entityId")
+	private List<EntityFilters> decoratorFilters;
 	
 	@Column(name="priority")
 	private Long priority;
@@ -159,59 +147,27 @@ public class Decorator implements Serializable{
 		this.city = city;
 	}
 
-	public Boolean getTentAvailability() {
-		return tentAvailability;
-	}
-
-	public void setTentAvailability(Boolean tentAvailability) {
-		this.tentAvailability = tentAvailability;
-	}
-
-	public Float getMinTentCharges() {
-		return minTentCharges;
-	}
-
-	public void setMinTentCharges(Float minTentCharges) {
-		this.minTentCharges = minTentCharges;
-	}
-
-	public Boolean getLightingAvailability() {
-		return lightingAvailability;
-	}
-
-	public void setLightingAvailability(Boolean lightingAvailability) {
-		this.lightingAvailability = lightingAvailability;
-	}
-
-	public Float getMinLightingCharges() {
-		return minLightingCharges;
-	}
-
-	public void setMinLightingCharges(Float minLightingCharges) {
-		this.minLightingCharges = minLightingCharges;
-	}
-
-	public Boolean getFloralWorksAvailability() {
-		return floralWorksAvailability;
-	}
-
-	public void setFloralWorksAvailability(Boolean floralWorksAvailability) {
-		this.floralWorksAvailability = floralWorksAvailability;
-	}
-
-	public Float getMinFloralWorksCharges() {
-		return minFloralWorksCharges;
-	}
-
-	public void setMinFloralWorksCharges(Float minFloralWorksCharges) {
-		this.minFloralWorksCharges = minFloralWorksCharges;
-	}
-
 	public Locality getLocality() {
 		return locality;
 	}
 
 	public void setLocality(Locality locality) {
 		this.locality = locality;
+	}
+
+	public List<EntityServices> getDecoratorServices() {
+		return decoratorServices;
+	}
+
+	public void setDecoratorServices(List<EntityServices> decoratorServices) {
+		this.decoratorServices = decoratorServices;
+	}
+
+	public List<EntityFilters> getDecoratorFilters() {
+		return decoratorFilters;
+	}
+
+	public void setDecoratorFilters(List<EntityFilters> decoratorFilters) {
+		this.decoratorFilters = decoratorFilters;
 	}
 }

@@ -13,8 +13,11 @@ import org.springframework.stereotype.Repository;
 import org.springframework.util.CollectionUtils;
 
 import lepartycious.daos.CatererDAO;
+import lepartycious.dtos.requestDTOs.FilterWrapperDTO;
+import lepartycious.dtos.responseDTOs.SearchResponseDTO;
 import lepartycious.models.Caterer;
 import lepartycious.models.Caterer;
+import lepartycious.models.Venue;
 
 @Repository
 public class CatererDAOImpl extends BaseDAOImpl implements CatererDAO {
@@ -23,8 +26,8 @@ public class CatererDAOImpl extends BaseDAOImpl implements CatererDAO {
 	private SessionFactory sessionFactory;
 
 	@Override
-	public List<Caterer> getCaterers(Long cityId, String searchString, Long offset, Long limit, String sortField, String sortOrder) {
-		Criteria criteria = createCatererSearchCriteria(cityId, searchString);
+	public List<Caterer> getCaterers(Long cityId, String searchString, Long offset, Long limit, String sortField, String sortOrder, FilterWrapperDTO filters) {
+		Criteria criteria = createCatererSearchCriteria(cityId, searchString, filters);
 		criteria.setFirstResult(offset.intValue());
 		criteria.setMaxResults(limit.intValue());
 		criteria.addOrder(Order.asc("name"));
@@ -34,21 +37,41 @@ public class CatererDAOImpl extends BaseDAOImpl implements CatererDAO {
 
 	@Override
 	public List<Caterer> loadCatererList(Long cityId, String searchString) {
-		Criteria criteria = createCatererSearchCriteria(cityId, searchString);
+		Criteria criteria = createCatererSearchCriteria(cityId, searchString, null);
 		List ls =  criteria.list();
 		return ls;
 	}
 
 	@Override
-	public Long getCatererCount(Long cityId, String searchString) {
-		Criteria criteria = createCatererSearchCriteria(cityId, searchString);
+	public Long getCatererCount(Long cityId, String searchString, FilterWrapperDTO filters) {
+		Criteria criteria = createCatererSearchCriteria(cityId, searchString, filters);
 		criteria.setProjection(Projections.rowCount());
 		return (Long) criteria.uniqueResult();
 	}
-	
-	private Criteria createCatererSearchCriteria(Long cityId, String searchString) {
-		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Caterer.class);
+
+	private Criteria createCatererSearchCriteria(Long cityId, String searchString, FilterWrapperDTO filters) {
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Caterer.class, "caterer");
 		criteria.add(Restrictions.eq("city.cityId", cityId));
+		if(filters != null){
+			if(!CollectionUtils.isEmpty(filters.getServiceList())){
+				criteria.createAlias("caterer.catererServices", "cs"); // inner join by default
+				criteria.createAlias("cs.serviceId", "service");
+				criteria.add(Restrictions.in("service.serviceId", filters.getServiceList()));
+			}
+			if(!CollectionUtils.isEmpty(filters.getLocalityList())){
+				criteria.add(Restrictions.in("locality.localityId", filters.getLocalityList()));
+			}
+			if(!CollectionUtils.isEmpty(filters.getEventList())){
+				criteria.createAlias("caterer.catererFilters", "cf"); // inner join by default
+				criteria.createAlias("cf.filterId", "filters");
+				criteria.add(Restrictions.and(Restrictions.in("filters.filterId", filters.getEventList()), Restrictions.eq("filters.filterType", "EVENT")));
+			}
+			if(!CollectionUtils.isEmpty(filters.getPriceRangeList())){
+				criteria.createAlias("caterer.catererFilters", "cf"); // inner join by default
+				criteria.createAlias("cf.filterId", "filters");
+				criteria.add(Restrictions.and(Restrictions.in("filters.filterId", filters.getPriceRangeList()), Restrictions.eq("filters.filterType", "PRICE")));
+			}
+		}
 		if(StringUtils.isNotBlank(searchString)){
 			criteria.add(Restrictions.ilike("name", "%" + searchString + "%"));
 		}
@@ -67,6 +90,18 @@ public class CatererDAOImpl extends BaseDAOImpl implements CatererDAO {
 		else{
 			return caterers.get(0);
 		}
+	}
+
+	@Override
+	public List<Caterer> fetchRecomendations(Long cityId) {
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Caterer.class);
+		criteria.add(Restrictions.eq("city.cityId", cityId));
+		criteria.add(Restrictions.isNotNull("priority"));
+		criteria.setFirstResult(0);
+		criteria.setMaxResults(3);
+		criteria.addOrder(Order.asc("priority"));
+		List<Caterer> catererList = criteria.list();
+		return catererList;
 	}
 
 }

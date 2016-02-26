@@ -63,7 +63,8 @@
 			image_url varchar (255),
 			entity_id bigint,
 			version bigint,
-			added_on timestamp without time zone NOT NULL DEFAULT now()
+			added_on timestamp without time zone NOT NULL DEFAULT now(),
+			attachment_type varchar (20)
 			);
 		</sql>
 	</changeSet>
@@ -78,18 +79,11 @@
 			CREATE TABLE caterer (
 			id bigint PRIMARY KEY,
 			name varchar (25) NOT NULL,
-			description varchar (255),
+			description varchar (2550),
 			comments varchar (3000),
 			rating float,
 			version bigint,
-			veg_menu varchar (5000),
-			non_veg_menu varchar(5000),
-			only_veg boolean,
-			min_veg_plate_charges float,
-			min_nonveg_plate_charges float,
-			waiters boolean,
-			crockery boolean,
-			counters boolean,
+			cuisine_offered varchar (5000),
 			added_on timestamp without time zone NOT NULL DEFAULT now(),
 			city_id bigint,
 			FOREIGN KEY (city_id) REFERENCES city (id),
@@ -109,7 +103,7 @@
 			CREATE TABLE venue (
 			id bigint PRIMARY KEY,
 			name varchar (255) NOT NULL,
-			description varchar (255),
+			description varchar (2550),
 			type varchar(20) NOT NULL,
 			comments varchar (3000),
 			rating float,
@@ -133,20 +127,10 @@
 			CREATE TABLE photographer (
 			id bigint PRIMARY KEY,
 			name varchar(25) NOT NULL,
-			description varchar (255),
+			description varchar (2550),
 			comments varchar (3000),
 			rating float,
 			version bigint,
-			normal_photography boolean,
-			min_normal_photography_charges float,
-			candid_photography boolean,
-			min_candid_photography_charges float,
-			pre_wedding_shoot boolean,
-			pre_wedding_shoot_charges float,
-			album_making boolean,
-			album_making_charges float,
-			dvd_making boolean,
-			dvd_making_charges float,
 			added_on timestamp without time zone NOT NULL DEFAULT now(),
 			city_id bigint,
 			FOREIGN KEY (city_id) REFERENCES city (id),
@@ -166,16 +150,10 @@
 			CREATE TABLE decorater (
 			id bigint PRIMARY KEY,
 			name varchar (25) NOT NULL,
-			description varchar (255),
+			description varchar (2550),
 			comments varchar (3000),
 			rating float,
 			version bigint,
-			tent_availability boolean,
-			min_tent_charges float,
-			lighting_availability boolean,
-			min_lighting_charges float,
-			floral_works_availability boolean,
-			min_floral_works_charges float,
 			added_on timestamp without time zone NOT NULL DEFAULT now(),
 			city_id bigint,
 			FOREIGN KEY (city_id) REFERENCES city (id),
@@ -195,61 +173,12 @@
 			CREATE TABLE rental (
 			id bigint PRIMARY KEY,
 			name varchar (25) NOT NULL,
-			description varchar (255),
-			car_model varchar (3000),
+			description varchar (2550),
+			addition_details varchar (3000),
 			comments varchar (3000),
 			rating float,
 			version bigint,
-			sedan_availability boolean,
-			min_sedan_charges_per_hour float,
-			min_sedan_charges_per_km float,
-			hatchback_availability boolean,
-			min_hatchback_charges_per_hour float,
-			min_hatchback_charges_per_km float,
-			suv_availability boolean,
-			min_suv_charges_per_hour float,
-			min_suv_charges_per_km float,
-			min_driver_night_rate float,
-			toll_cahrges_included boolean,
-			parking_charges_included boolean,
-			waiting_charges float,
-			added_on timestamp without time zone NOT NULL DEFAULT now(),
-			city_id bigint,
-			FOREIGN KEY (city_id) REFERENCES city (id),
-			locality_id bigint,
-			FOREIGN KEY (locality_id) REFERENCES locality (id)
-			);
-		</sql>
-	</changeSet>
-
-	<changeSet author="msingla" id="1.8">
-		<preConditions onFail="MARK_RAN">
-			<not>
-				<tableExists tableName="band" />
-			</not>
-		</preConditions>
-		<sql>
-			CREATE TABLE band (
-			id bigint PRIMARY KEY,
-			name varchar (25) NOT NULL,
-			description varchar (255),
-			comments varchar (3000),
-			rating float,
-			version bigint,
-			simple_band_availability boolean,
-			min_simple_band_charges float,
-			crew_band_availability boolean,
-			min_crew_band_charges float,
-			military_band_availability boolean,
-			min_military_band_charges float,
-			dj_sound_band_availability boolean,
-			min_dj_sound_band_charges float,
-			bhaggi_availability boolean,
-			min_bhaggi_charges float,
-			ghodi_availability boolean,
-			min_ghodi_charges float,
-			rath_availability boolean,
-			min_rath_charges float,
+			rental_type varchar(20),
 			added_on timestamp without time zone NOT NULL DEFAULT now(),
 			city_id bigint,
 			FOREIGN KEY (city_id) REFERENCES city (id),
@@ -285,8 +214,11 @@
 		<sql>
 			CREATE TABLE service (
 			id bigint PRIMARY KEY,
-			service_type varchar (500) NOT NULL,
-			description varchar (255),
+			service_type varchar (20) NOT NULL,
+			service_for_entity varchar(20),
+			tab_data_name varchar (50),
+			filter_data_name varchar (20),
+			is_filter boolean,
 			added_on timestamp without time zone NOT NULL DEFAULT now()
 			);
 		</sql>
@@ -305,7 +237,8 @@
 			description varchar (255),
 			is_indoor_amenity boolean,
 			amenity_dimensions varchar (500),
-			added_on timestamp without time zone NOT NULL DEFAULT now()
+			added_on timestamp without time zone NOT NULL DEFAULT now(),
+			is_filter boolean
 			);
 		</sql>
 	</changeSet>
@@ -362,18 +295,18 @@
 	<changeSet author="msingla" id="1.14">
 		<preConditions onFail="MARK_RAN">
 			<not>
-				<tableExists tableName="venue_services" />
+				<tableExists tableName="entity_services" />
 			</not>
 		</preConditions>
 		<sql>
-			CREATE TABLE venue_services(
+			CREATE TABLE entity_services(
 			id bigint PRIMARY KEY,
-			venue_id bigint,
+			entity_id bigint,
 			service_id bigint,
-			min_cost float,
+			min_service_cost float,
+			max_service_cost float,
 			version bigint,
 			added_on timestamp without time zone NOT NULL DEFAULT now(),
-			FOREIGN KEY (venue_id) REFERENCES venue (id),
 			FOREIGN KEY (service_id) REFERENCES service (id)
 			);
 		</sql>
@@ -390,7 +323,8 @@
 			id bigint PRIMARY KEY,
 			venue_id bigint,
 			amenities_id bigint,
-			min_cost float,
+			min_amenity_cost float,
+			max_amenity_cost float,
 			version bigint,
 			added_on timestamp without time zone NOT NULL DEFAULT now(),
 			FOREIGN KEY (venue_id) REFERENCES venue (id),
@@ -432,7 +366,7 @@
 		</sql>
 	</changeSet>
 	
-	<changeSet author="msingla" id="1.19">
+	<!-- <changeSet author="msingla" id="1.19">
 		<preConditions onFail="MARK_RAN">
 			<not>
 				<columnExists columnName="priority" tableName="band" />
@@ -441,7 +375,7 @@
 		<sql>
 			ALTER TABLE band ADD COLUMN priority bigint;
 		</sql>
-	</changeSet>
+	</changeSet> -->
 	
 	<changeSet author="msingla" id="1.20">
 		<preConditions onFail="MARK_RAN">
@@ -470,7 +404,7 @@
 			<columnExists columnName="primary_phone" tableName="address" />
 		</preConditions>
 		<sql>
-			ALTER TABLE address ALTER COLUMN primary_phone TYPE char (20);
+			ALTER TABLE address ALTER COLUMN primary_phone TYPE varchar (20);
 		</sql>
 	</changeSet>
 	
@@ -479,7 +413,7 @@
 			<columnExists columnName="secondary_phone" tableName="address" />
 		</preConditions>
 		<sql>
-			ALTER TABLE address ALTER COLUMN secondary_phone TYPE char (20);
+			ALTER TABLE address ALTER COLUMN secondary_phone TYPE varchar (20);
 		</sql>
 	</changeSet>
 	
@@ -533,6 +467,41 @@
 		</preConditions>
 		<sql>
 			ALTER TABLE address ADD COLUMN longitude float;
+		</sql>
+	</changeSet>
+	
+	<changeSet author="msingla" id="1.29">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<tableExists tableName="filters" />
+			</not>
+		</preConditions>
+		<sql>
+			CREATE TABLE filters (
+			id bigint PRIMARY KEY,
+			filter_type varchar (20) NOT NULL,
+			filter_for_entity varchar(20),
+			filter_name varchar (50),
+			added_on timestamp without time zone NOT NULL DEFAULT now()
+			);
+		</sql>
+	</changeSet>
+	
+	<changeSet author="msingla" id="1.30">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<tableExists tableName="entity_filters" />
+			</not>
+		</preConditions>
+		<sql>
+			CREATE TABLE entity_filters(
+			id bigint PRIMARY KEY,
+			entity_id bigint,
+			filter_id bigint,
+			version bigint,
+			added_on timestamp without time zone NOT NULL DEFAULT now(),
+			FOREIGN KEY (filter_id) REFERENCES filters (id)
+			);
 		</sql>
 	</changeSet>
 	

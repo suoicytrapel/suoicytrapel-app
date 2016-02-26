@@ -13,6 +13,8 @@ import org.springframework.stereotype.Repository;
 import org.springframework.util.CollectionUtils;
 
 import lepartycious.daos.PhotographerDAO;
+import lepartycious.dtos.requestDTOs.FilterWrapperDTO;
+import lepartycious.models.Caterer;
 import lepartycious.models.Photographer;
 import lepartycious.models.Photographer;
 
@@ -23,8 +25,8 @@ public class PhotographerDAOImpl extends BaseDAOImpl implements PhotographerDAO 
 	private SessionFactory sessionFactory;
 
 	@Override
-	public List<Photographer> getPhotographers(Long cityId, String searchString, Long offset, Long limit, String sortField, String sortOrder) {
-		Criteria criteria = createPhotographerSearchCriteria(cityId, searchString);
+	public List<Photographer> getPhotographers(Long cityId, String searchString, Long offset, Long limit, String sortField, String sortOrder, FilterWrapperDTO filters) {
+		Criteria criteria = createPhotographerSearchCriteria(cityId, searchString, filters);
 		criteria.setFirstResult(offset.intValue());
 		criteria.setMaxResults(limit.intValue());
 		criteria.addOrder(Order.asc("name"));
@@ -34,21 +36,36 @@ public class PhotographerDAOImpl extends BaseDAOImpl implements PhotographerDAO 
 
 	@Override
 	public List<Photographer> loadPhotographerList(Long cityId, String searchString) {
-		Criteria criteria = createPhotographerSearchCriteria(cityId, searchString);
+		Criteria criteria = createPhotographerSearchCriteria(cityId, searchString, null);
 		List ls =  criteria.list();
 		return ls;
 	}
 
 	@Override
-	public Long getPhotographerCount(Long cityId, String searchString) {
-		Criteria criteria = createPhotographerSearchCriteria(cityId, searchString);
+	public Long getPhotographerCount(Long cityId, String searchString, FilterWrapperDTO filters) {
+		Criteria criteria = createPhotographerSearchCriteria(cityId, searchString, filters);
 		criteria.setProjection(Projections.rowCount());
 		return (Long) criteria.uniqueResult();
 	}
 	
-	private Criteria createPhotographerSearchCriteria(Long cityId, String searchString) {
-		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Photographer.class);
+	private Criteria createPhotographerSearchCriteria(Long cityId, String searchString, FilterWrapperDTO filters) {
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Photographer.class, "photographer");
 		criteria.add(Restrictions.eq("city.cityId", cityId));
+		if(filters != null){
+			if(!CollectionUtils.isEmpty(filters.getLocalityList())){
+				criteria.add(Restrictions.in("locality.localityId", filters.getLocalityList()));
+			}
+			if(!CollectionUtils.isEmpty(filters.getEventList())){
+				criteria.createAlias("photographer.photographerFilters", "ff"); // inner join by default
+				criteria.createAlias("ff.filterId", "filters");
+				criteria.add(Restrictions.and(Restrictions.in("filters.filterId", filters.getEventList()), Restrictions.eq("filters.filterType", "EVENT")));
+			}
+			if(!CollectionUtils.isEmpty(filters.getPriceRangeList())){
+				criteria.createAlias("photographer.photographerFilters", "ff"); // inner join by default
+				criteria.createAlias("ff.filterId", "filters");
+				criteria.add(Restrictions.and(Restrictions.in("filters.filterId", filters.getPriceRangeList()), Restrictions.eq("filters.filterType", "PRICE")));
+			}
+		}
 		if(StringUtils.isNotBlank(searchString)){
 			criteria.add(Restrictions.ilike("name", "%" + searchString + "%"));
 		}
@@ -67,5 +84,17 @@ public class PhotographerDAOImpl extends BaseDAOImpl implements PhotographerDAO 
 		else{
 			return photographers.get(0);
 		}
+	}
+
+	@Override
+	public List<Photographer> fetchRecomendations(Long cityId) {
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Caterer.class);
+		criteria.add(Restrictions.eq("city.cityId", cityId));
+		criteria.add(Restrictions.isNotNull("priority"));
+		criteria.setFirstResult(0);
+		criteria.setMaxResults(3);
+		criteria.addOrder(Order.asc("priority"));
+		List<Photographer> photographerList = criteria.list();
+		return photographerList;
 	}
 }

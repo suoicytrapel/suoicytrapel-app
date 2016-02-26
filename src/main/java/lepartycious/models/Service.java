@@ -30,15 +30,32 @@ public class Service implements Serializable{
 	@Column(name = "service_type", nullable=false)
 	private String serviceType;
 	
-	@Column(name = "description")
-	private String description;
+	@Column(name = "service_for_entity")
+	private String serviceForEntity;
+	
+	@Column(name = "tab_data_name")
+	private String tabDataName;
+	
+	@Column(name = "filter_data_name")
+	private String filterDataName;
+	
+	@Column(name = "is_filter")
+	private Boolean isFilter;
 	
 	@Column(name = "added_on")
 	private Date addedOn;
 	
 	@OneToMany(mappedBy="serviceId")
-	private List<VenueServices> venueServices;
-	
+	private List<EntityServices> venueServices;
+
+	public long getServiceId() {
+		return serviceId;
+	}
+
+	public void setServiceId(long serviceId) {
+		this.serviceId = serviceId;
+	}
+
 	public String getServiceType() {
 		return serviceType;
 	}
@@ -47,12 +64,36 @@ public class Service implements Serializable{
 		this.serviceType = serviceType;
 	}
 
-	public String getDescription() {
-		return description;
+	public String getServiceForEntity() {
+		return serviceForEntity;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setServiceForEntity(String serviceForEntity) {
+		this.serviceForEntity = serviceForEntity;
+	}
+
+	public String getTabDataName() {
+		return tabDataName;
+	}
+
+	public void setTabDataName(String tabDataName) {
+		this.tabDataName = tabDataName;
+	}
+
+	public String getFilterDataName() {
+		return filterDataName;
+	}
+
+	public void setFilterDataName(String filterDataName) {
+		this.filterDataName = filterDataName;
+	}
+
+	public Boolean getIsFilter() {
+		return isFilter;
+	}
+
+	public void setIsFilter(Boolean isFilter) {
+		this.isFilter = isFilter;
 	}
 
 	public Date getAddedOn() {
@@ -63,20 +104,12 @@ public class Service implements Serializable{
 		this.addedOn = addedOn;
 	}
 
-	public List<VenueServices> getVenueServices() {
+	public List<EntityServices> getVenueServices() {
 		return venueServices;
 	}
 
-	public void setVenueServices(List<VenueServices> venueServices) {
+	public void setVenueServices(List<EntityServices> venueServices) {
 		this.venueServices = venueServices;
-	}
-
-	public long getServiceId() {
-		return serviceId;
-	}
-
-	public void setServiceId(long serviceId) {
-		this.serviceId = serviceId;
 	}
 	
 }

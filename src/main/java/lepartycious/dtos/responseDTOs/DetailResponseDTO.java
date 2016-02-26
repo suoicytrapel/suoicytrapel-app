@@ -19,6 +19,7 @@ public class DetailResponseDTO implements Serializable{
 	private Map<String, List<TabResponseDTO>> tabMap;
 	private List<AttachmentResponseDTO> attachments;
 	private List<SearchResponseDTO> recommendationList;
+	private List<AttachmentResponseDTO> menuImages;
 	
 	public String getName() {
 		return name;
@@ -97,5 +98,11 @@ public class DetailResponseDTO implements Serializable{
 	}
 	public void setLongitude(Float longitude) {
 		this.longitude = longitude;
+	}
+	public List<AttachmentResponseDTO> getMenuImages() {
+		return menuImages;
+	}
+	public void setMenuImages(List<AttachmentResponseDTO> menuImages) {
+		this.menuImages = menuImages;
 	}
 }

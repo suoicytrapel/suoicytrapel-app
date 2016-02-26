@@ -39,6 +39,9 @@ public class Attachment implements Serializable{
 	
 	@Column(name = "help_text")
 	private String helpText;
+	
+	@Column(name = "attachment_type")
+	private String attachmentType;
 
 	public Long getEntityId() {
 		return entityId;
@@ -88,4 +91,11 @@ public class Attachment implements Serializable{
 		this.helpText = helpText;
 	}
 
+	public String getAttachmentType() {
+		return attachmentType;
+	}
+
+	public void setAttachmentType(String attachmentType) {
+		this.attachmentType = attachmentType;
+	}
 }

@@ -13,6 +13,8 @@ import org.springframework.stereotype.Repository;
 import org.springframework.util.CollectionUtils;
 
 import lepartycious.daos.DecoratorDAO;
+import lepartycious.dtos.requestDTOs.FilterWrapperDTO;
+import lepartycious.models.Caterer;
 import lepartycious.models.Decorator;
 import lepartycious.models.Decorator;
 
@@ -23,32 +25,47 @@ public class DecoratorDAOImpl extends BaseDAOImpl implements DecoratorDAO {
 	private SessionFactory sessionFactory;
 
 	@Override
-	public List<Decorator> getDecorators(Long cityId, String searchString, Long offset, Long limit, String sortField, String sortOrder) {
-		Criteria criteria = createDecoratorSearchCriteria(cityId, searchString);
+	public List<Decorator> getDecorators(Long cityId, String searchString, Long offset, Long limit, String sortField, String sortOrder, FilterWrapperDTO filters) {
+		Criteria criteria = createDecoratorSearchCriteria(cityId, searchString, filters);
 		criteria.setFirstResult(offset.intValue());
 		criteria.setMaxResults(limit.intValue());
 		criteria.addOrder(Order.asc("name"));
-		List ls =  criteria.list();
+		List<Decorator> ls =  criteria.list();
 		return ls;
 	}
 
 	@Override
 	public List<Decorator> loadDecoratorList(Long cityId, String searchString) {
-		Criteria criteria = createDecoratorSearchCriteria(cityId, searchString);
+		Criteria criteria = createDecoratorSearchCriteria(cityId, searchString, null);
 		List ls =  criteria.list();
 		return ls;
 	}
 
 	@Override
-	public Long getDecoratorCount(Long cityId, String searchString) {
-		Criteria criteria = createDecoratorSearchCriteria(cityId, searchString);
+	public Long getDecoratorCount(Long cityId, String searchString, FilterWrapperDTO filters) {
+		Criteria criteria = createDecoratorSearchCriteria(cityId, searchString, filters);
 		criteria.setProjection(Projections.rowCount());
 		return (Long) criteria.uniqueResult();
 	}
 	
-	private Criteria createDecoratorSearchCriteria(Long cityId, String searchString) {
-		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Decorator.class);
+	private Criteria createDecoratorSearchCriteria(Long cityId, String searchString, FilterWrapperDTO filters) {
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Decorator.class, "decorator");
 		criteria.add(Restrictions.eq("city.cityId", cityId));
+		if(filters != null){
+			if(!CollectionUtils.isEmpty(filters.getServiceList())){
+				criteria.createAlias("decorator.decoratorServices", "ds"); // inner join by default
+				criteria.createAlias("ds.serviceId", "service");
+				criteria.add(Restrictions.in("service.serviceId", filters.getServiceList()));
+			}
+			if(!CollectionUtils.isEmpty(filters.getLocalityList())){
+				criteria.add(Restrictions.in("locality.localityId", filters.getLocalityList()));
+			}
+			if(!CollectionUtils.isEmpty(filters.getEventList())){
+				criteria.createAlias("decorator.decoratorFilters", "df"); // inner join by default
+				criteria.createAlias("df.filterId", "filters");
+				criteria.add(Restrictions.and(Restrictions.in("filters.filterId", filters.getEventList()), Restrictions.eq("filters.filterType", "EVENT")));
+			}
+		}
 		if(StringUtils.isNotBlank(searchString)){
 			criteria.add(Restrictions.ilike("name", "%" + searchString + "%"));
 		}
@@ -67,6 +84,18 @@ public class DecoratorDAOImpl extends BaseDAOImpl implements DecoratorDAO {
 		else{
 			return decorators.get(0);
 		}
+	}
+
+	@Override
+	public List<Decorator> fetchRecomendations(Long cityId) {
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Caterer.class);
+		criteria.add(Restrictions.eq("city.cityId", cityId));
+		criteria.add(Restrictions.isNotNull("priority"));
+		criteria.setFirstResult(0);
+		criteria.setMaxResults(3);
+		criteria.addOrder(Order.asc("priority"));
+		List<Decorator> decoratorList = criteria.list();
+		return decoratorList;
 	}
 
 }

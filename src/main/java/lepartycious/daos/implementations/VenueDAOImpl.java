@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.util.CollectionUtils;
 
 import lepartycious.daos.VenueDAO;
+import lepartycious.dtos.requestDTOs.FilterWrapperDTO;
 import lepartycious.models.Venue;
 
 @Repository
@@ -22,8 +23,8 @@ public class VenueDAOImpl extends BaseDAOImpl implements VenueDAO {
 	private SessionFactory sessionFactory;
 
 	@Override
-	public List<Venue> getVenues(Long cityId, String searchString, Long offset, Long limit, String sortField, String sortOrder,List<Long> serviceIds, List<Long> amenityIds, List<Long> roomIds, List<Long> localityIds, List<String> types) {
-		Criteria criteria = createVenueSearchCriteria(cityId, searchString, serviceIds, amenityIds, roomIds, localityIds, types);
+	public List<Venue> getVenues(Long cityId, String searchString, Long offset, Long limit, String sortField, String sortOrder,FilterWrapperDTO filters) {
+		Criteria criteria = createVenueSearchCriteria(cityId, searchString, filters);
 		criteria.setFirstResult(offset.intValue());
 		criteria.setMaxResults(limit.intValue());
 		criteria.addOrder(Order.asc("name"));
@@ -33,41 +34,56 @@ public class VenueDAOImpl extends BaseDAOImpl implements VenueDAO {
 
 	@Override
 	public List<Venue> loadVenueList(Long cityId, String searchString) {
-		Criteria criteria = createVenueSearchCriteria(cityId, searchString, null, null, null, null, null);
+		Criteria criteria = createVenueSearchCriteria(cityId, searchString, null);
 		List ls =  criteria.list();
 		return ls;
 	}
 
 	@Override
-	public Long getVenueCount(Long cityId, String searchString, List<Long> serviceIds, List<Long> amenityIds, List<Long> roomIds, List<Long> localityIds, List<String> types) {
-		Criteria criteria = createVenueSearchCriteria(cityId, searchString, serviceIds, amenityIds, roomIds, localityIds, types);
+	public Long getVenueCount(Long cityId, String searchString, FilterWrapperDTO filters) {
+		Criteria criteria = createVenueSearchCriteria(cityId, searchString, filters);
 		criteria.setProjection(Projections.rowCount());
 		return (Long) criteria.uniqueResult();
 	}
 	
-	private Criteria createVenueSearchCriteria(Long cityId, String searchString, List<Long> serviceIds, List<Long> amenityIds, List<Long> roomIds, List<Long> localityIds, List<String> types) {
+	private Criteria createVenueSearchCriteria(Long cityId, String searchString, FilterWrapperDTO filters) {
 		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Venue.class, "venue");
-		if(!CollectionUtils.isEmpty(serviceIds)){
-			criteria.createAlias("venue.venueServices", "vs"); // inner join by default
-			criteria.createAlias("vs.serviceId", "service");
-			criteria.add(Restrictions.in("service.serviceId", serviceIds));
+		if(filters != null){
+			if(!CollectionUtils.isEmpty(filters.getServiceList())){
+				criteria.createAlias("venue.venueServices", "vs"); // inner join by default
+				criteria.createAlias("vs.serviceId", "service");
+				criteria.add(Restrictions.in("service.serviceId", filters.getServiceList()));
+			}
+			if(!CollectionUtils.isEmpty(filters.getAmenityList())){
+				criteria.createAlias("venue.venueamenities", "va"); // inner join by default
+				criteria.createAlias("va.amenitiesId", "amenity");
+				criteria.add(Restrictions.in("amenity.amenitiesId", filters.getAmenityList()));
+			}
+			if(!CollectionUtils.isEmpty(filters.getRoomList())){
+				criteria.createAlias("venue.venueRooms", "vr"); // inner join by default
+				criteria.createAlias("vr.roomId", "room");
+				criteria.add(Restrictions.in("room.roomId", filters.getRoomList()));
+			}
+			if(!CollectionUtils.isEmpty(filters.getLocalityList())){
+				criteria.add(Restrictions.in("locality.localityId", filters.getLocalityList()));
+			}
+			if(!CollectionUtils.isEmpty(filters.getEstList())){
+				criteria.createAlias("venue.venueFilters", "vf"); // inner join by default
+				criteria.createAlias("vf.filterId", "filters");
+				criteria.add(Restrictions.and(Restrictions.in("filters.filterId", filters.getEstList()), Restrictions.eq("filters.filterType", "ESTABLISHMENT")));
+			}
+			if(!CollectionUtils.isEmpty(filters.getEventList())){
+				criteria.createAlias("venue.venueFilters", "vf"); // inner join by default
+				criteria.createAlias("vf.filterId", "filters");
+				criteria.add(Restrictions.and(Restrictions.in("filters.filterId", filters.getEventList()), Restrictions.eq("filters.filterType", "EVENT")));
+			}
+			if(!CollectionUtils.isEmpty(filters.getPriceRangeList())){
+				criteria.createAlias("venue.venueFilters", "vf"); // inner join by default
+				criteria.createAlias("vf.filterId", "filters");
+				criteria.add(Restrictions.and(Restrictions.in("filters.filterId", filters.getPriceRangeList()), Restrictions.eq("filters.filterType", "PRICE")));
+			}
 		}
-		if(!CollectionUtils.isEmpty(amenityIds)){
-			criteria.createAlias("venue.venueamenities", "va"); // inner join by default
-			criteria.createAlias("va.amenitiesId", "amenity");
-			criteria.add(Restrictions.in("amenity.amenitiesId", amenityIds));
-		}
-		if(!CollectionUtils.isEmpty(roomIds)){
-			criteria.createAlias("venue.venueRooms", "vr"); // inner join by default
-			criteria.createAlias("vr.roomId", "room");
-			criteria.add(Restrictions.in("room.roomId", roomIds));
-		}
-		if(!CollectionUtils.isEmpty(localityIds)){
-			criteria.add(Restrictions.in("locality.localityId", localityIds));
-		}
-		if(!CollectionUtils.isEmpty(types)){
-			criteria.add(Restrictions.in("type", types));
-		}
+			
 		if(StringUtils.isNotBlank(searchString)){
 			criteria.add(Restrictions.ilike("name", "%" + searchString + "%"));
 		}

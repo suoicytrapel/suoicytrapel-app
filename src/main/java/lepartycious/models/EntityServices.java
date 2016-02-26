@@ -14,8 +14,8 @@ import javax.persistence.Table;
 import javax.persistence.Version;
 
 @Entity
-@Table(name="venue_services")
-public class VenueServices implements Serializable{
+@Table(name="entity_services")
+public class EntityServices implements Serializable{
 	
 	/**
 	 * 
@@ -27,28 +27,22 @@ public class VenueServices implements Serializable{
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	
-	@ManyToOne
-	@JoinColumn(name="venue_id")
-	private Venue venueId;
+	@Column(name="entity_id")
+	private Long entityId;
 	
 	@ManyToOne
 	@JoinColumn(name="service_id")
 	private Service serviceId;
 	
-	@Column(name="min_cost")
+	@Column(name="min_service_cost")
 	private Float minCost;
+	
+	@Column(name="max_service_cost")
+	private Float maxCost;
 	
 	@Column(name = "added_on")
 	private Date addedOn;
 	
-	public Venue getVenueId() {
-		return venueId;
-	}
-
-	public void setVenueId(Venue venueId) {
-		this.venueId = venueId;
-	}
-
 	public Service getServiceId() {
 		return serviceId;
 	}
@@ -72,5 +66,28 @@ public class VenueServices implements Serializable{
 	public void setAddedOn(Date addedOn) {
 		this.addedOn = addedOn;
 	}
-	
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public Long getEntityId() {
+		return entityId;
+	}
+
+	public void setEntityId(Long entityId) {
+		this.entityId = entityId;
+	}
+
+	public Float getMaxCost() {
+		return maxCost;
+	}
+
+	public void setMaxCost(Float maxCost) {
+		this.maxCost = maxCost;
+	}
 }

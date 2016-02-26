@@ -58,38 +58,14 @@ public class Photographer implements Serializable{
 	@JoinColumn(name = "locality_id")
 	private Locality locality;
 	
-	@Column(name = "normal_photography")
-	private Boolean normalPhotography;
-	
-	@Column(name = "min_normal_photography_charges")
-	private Float minNormalPhotographyCharges;
-	
-	@Column(name = "candid_photography")
-	private Boolean candidPhotography;
-	
-	@Column(name = "min_candid_photography_charges")
-	private Float minCandidPhotographyCharges;
-	
-	@Column(name = "pre_wedding_shoot")
-	private Boolean preWeddingShoot;
-	
-	@Column(name = "pre_wedding_shoot_charges")
-	private Float preWeddingShootCharges;
-	
-	@Column(name = "album_making")
-	private Boolean albumMaking;
-	
-	@Column(name = "album_making_charges")
-	private Float albumMakingCharges;
-	
-	@Column(name = "dvd_making")
-	private Boolean dvdMaking;
-	
-	@Column(name = "dvd_making_charges")
-	private Float dvdMakingCharges;
-	
 	@Column(name="priority")
 	private Long priority;
+	
+	@OneToMany(mappedBy="entityId")
+	private List<EntityServices> photographerServices;
+	
+	@OneToMany(mappedBy="entityId")
+	private List<EntityFilters> photographerFilters;
 
 	public Long getPriority() {
 		return priority;
@@ -171,86 +147,6 @@ public class Photographer implements Serializable{
 		this.city = city;
 	}
 
-	public Boolean getNormalPhotography() {
-		return normalPhotography;
-	}
-
-	public void setNormalPhotography(Boolean normalPhotography) {
-		this.normalPhotography = normalPhotography;
-	}
-
-	public Float getMinNormalPhotographyCharges() {
-		return minNormalPhotographyCharges;
-	}
-
-	public void setMinNormalPhotographyCharges(Float minNormalPhotographyCharges) {
-		this.minNormalPhotographyCharges = minNormalPhotographyCharges;
-	}
-
-	public Boolean getCandidPhotography() {
-		return candidPhotography;
-	}
-
-	public void setCandidPhotography(Boolean candidPhotography) {
-		this.candidPhotography = candidPhotography;
-	}
-
-	public Float getMinCandidPhotographyCharges() {
-		return minCandidPhotographyCharges;
-	}
-
-	public void setMinCandidPhotographyCharges(Float minCandidPhotographyCharges) {
-		this.minCandidPhotographyCharges = minCandidPhotographyCharges;
-	}
-
-	public Boolean getPreWeddingShoot() {
-		return preWeddingShoot;
-	}
-
-	public void setPreWeddingShoot(Boolean preWeddingShoot) {
-		this.preWeddingShoot = preWeddingShoot;
-	}
-
-	public Float getPreWeddingShootCharges() {
-		return preWeddingShootCharges;
-	}
-
-	public void setPreWeddingShootCharges(Float preWeddingShootCharges) {
-		this.preWeddingShootCharges = preWeddingShootCharges;
-	}
-
-	public Boolean getAlbumMaking() {
-		return albumMaking;
-	}
-
-	public void setAlbumMaking(Boolean albumMaking) {
-		this.albumMaking = albumMaking;
-	}
-
-	public Float getAlbumMakingCharges() {
-		return albumMakingCharges;
-	}
-
-	public void setAlbumMakingCharges(Float albumMakingCharges) {
-		this.albumMakingCharges = albumMakingCharges;
-	}
-
-	public Boolean getDvdMaking() {
-		return dvdMaking;
-	}
-
-	public void setDvdMaking(Boolean dvdMaking) {
-		this.dvdMaking = dvdMaking;
-	}
-
-	public Float getDvdMakingCharges() {
-		return dvdMakingCharges;
-	}
-
-	public void setDvdMakingCharges(Float dvdMakingCharges) {
-		this.dvdMakingCharges = dvdMakingCharges;
-	}
-
 	public Locality getLocality() {
 		return locality;
 	}
@@ -258,4 +154,21 @@ public class Photographer implements Serializable{
 	public void setLocality(Locality locality) {
 		this.locality = locality;
 	}
+
+	public List<EntityServices> getPhotographerServices() {
+		return photographerServices;
+	}
+
+	public void setPhotographerServices(List<EntityServices> photographerServices) {
+		this.photographerServices = photographerServices;
+	}
+
+	public List<EntityFilters> getPhotographerFilters() {
+		return photographerFilters;
+	}
+
+	public void setPhotographerFilters(List<EntityFilters> photographerFilters) {
+		this.photographerFilters = photographerFilters;
+	}
+	
 }

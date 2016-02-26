@@ -35,22 +35,6 @@ public class CityDAOImpl extends BaseDAOImpl implements CityDAO {
 
 	@Override
 	@Cacheable
-	public List<Service> getServices(String service) {
-		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Service.class);
-		List<Service> services = criteria.list();
-		return services;
-	}
-
-	@Override
-	@Cacheable
-	public List<Amenities> getAmenities(String amenity) {
-		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Amenities.class);
-		List<Amenities> amenities = criteria.list();
-		return amenities;
-	}
-
-	@Override
-	@Cacheable
 	public City getCityById(Long cityId) {
 		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(City.class);
 		criteria.add(Restrictions.eq("cityId", cityId));
@@ -59,14 +43,6 @@ public class CityDAOImpl extends BaseDAOImpl implements CityDAO {
 			return cities.get(0);
 		}
 		return null;
-	}
-
-	@Override
-	@Cacheable
-	public List<Room> getRooms(String room) {
-		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Room.class);
-		List<Room> rooms = criteria.list();
-		return rooms;
 	}
 
 }

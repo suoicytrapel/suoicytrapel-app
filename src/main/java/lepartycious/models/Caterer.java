@@ -41,6 +41,12 @@ public class Caterer implements Serializable{
 	@OneToMany(mappedBy="entityId")
 	private List<Address> addresses;
 	
+	@OneToMany(mappedBy="entityId")
+	private List<EntityServices> catererServices;
+	
+	@OneToMany(mappedBy="entityId")
+	private List<EntityFilters> catererFilters;
+	
 	@Column(name = "comments")
 	private String comments;
 	
@@ -50,29 +56,8 @@ public class Caterer implements Serializable{
 	@Column(name = "added_on")
 	private Date addedOn;
 	
-	@Column(name = "veg_menu")
-	private String vegMenu;
-	
-	@Column(name = "non_veg_menu")
-	private String nonVegMenu;
-	
-	@Column(name = "only_veg")
-	private Boolean onlyVeg;
-	
-	@Column(name = "waiters")
-	private Boolean waiters;
-	
-	@Column(name = "crockery")
-	private Boolean crockery;
-	
-	@Column(name = "counters")
-	private Boolean counters;
-	
-	@Column(name = "min_veg_plate_charges")
-	private Float minVegPlateCharges;
-	
-	@Column(name = "min_nonveg_plate_charges")
-	private Float minNonvegPlateCharges;
+	@Column(name = "cuisine_offered")
+	private String cuisineOffered;
 	
 	@ManyToOne
 	@JoinColumn(name = "city_id")
@@ -157,70 +142,6 @@ public class Caterer implements Serializable{
 		this.addedOn = addedOn;
 	}
 
-	public String getVegMenu() {
-		return vegMenu;
-	}
-
-	public void setVegMenu(String vegMenu) {
-		this.vegMenu = vegMenu;
-	}
-
-	public String getNonVegMenu() {
-		return nonVegMenu;
-	}
-
-	public void setNonVegMenu(String nonVegMenu) {
-		this.nonVegMenu = nonVegMenu;
-	}
-
-	public Boolean getOnlyVeg() {
-		return onlyVeg;
-	}
-
-	public void setOnlyVeg(Boolean onlyVeg) {
-		this.onlyVeg = onlyVeg;
-	}
-
-	public Boolean getWaiters() {
-		return waiters;
-	}
-
-	public void setWaiters(Boolean waiters) {
-		this.waiters = waiters;
-	}
-
-	public Boolean getCrockery() {
-		return crockery;
-	}
-
-	public void setCrockery(Boolean crockery) {
-		this.crockery = crockery;
-	}
-
-	public Boolean getCounters() {
-		return counters;
-	}
-
-	public void setCounters(Boolean counters) {
-		this.counters = counters;
-	}
-
-	public Float getMinVegPlateCharges() {
-		return minVegPlateCharges;
-	}
-
-	public void setMinVegPlateCharges(Float minVegPlateCharges) {
-		this.minVegPlateCharges = minVegPlateCharges;
-	}
-
-	public Float getMinNonvegPlateCharges() {
-		return minNonvegPlateCharges;
-	}
-
-	public void setMinNonvegPlateCharges(Float minNonvegPlateCharges) {
-		this.minNonvegPlateCharges = minNonvegPlateCharges;
-	}
-
 	public City getCity() {
 		return city;
 	}
@@ -236,4 +157,29 @@ public class Caterer implements Serializable{
 	public void setLocality(Locality locality) {
 		this.locality = locality;
 	}
+
+	public String getCuisineOffered() {
+		return cuisineOffered;
+	}
+
+	public void setCuisineOffered(String cuisineOffered) {
+		this.cuisineOffered = cuisineOffered;
+	}
+
+	public List<EntityServices> getCatererServices() {
+		return catererServices;
+	}
+
+	public void setCatererServices(List<EntityServices> catererServices) {
+		this.catererServices = catererServices;
+	}
+
+	public List<EntityFilters> getCatererFilters() {
+		return catererFilters;
+	}
+
+	public void setCatererFilters(List<EntityFilters> catererFilters) {
+		this.catererFilters = catererFilters;
+	}
+	
 }

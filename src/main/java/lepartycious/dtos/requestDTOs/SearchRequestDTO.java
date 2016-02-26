@@ -3,6 +3,8 @@ package lepartycious.dtos.requestDTOs;
 import java.io.Serializable;
 import java.util.List;
 
+import lepartycious.dtos.responseDTOs.FilterResponseDTO;
+
 public class SearchRequestDTO implements Serializable{
 	
 	private String searchType;
@@ -12,7 +14,7 @@ public class SearchRequestDTO implements Serializable{
 	private Long limit;
 	private String sortOrder;
 	private String sortField;
-	private List<String> filters;
+	private FilterWrapperDTO filters;
 	
 	public String getSearchType() {
 		return searchType;
@@ -56,10 +58,10 @@ public class SearchRequestDTO implements Serializable{
 	public void setSortField(String sortField) {
 		this.sortField = sortField;
 	}
-	public List<String> getFilters() {
+	public FilterWrapperDTO getFilters() {
 		return filters;
 	}
-	public void setFilters(List<String> filters) {
+	public void setFilters(FilterWrapperDTO filters) {
 		this.filters = filters;
 	}
 }

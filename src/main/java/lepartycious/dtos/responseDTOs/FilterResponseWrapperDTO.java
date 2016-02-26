@@ -10,7 +10,9 @@ public class FilterResponseWrapperDTO implements Serializable{
 	private List<FilterResponseDTO> rooms;
 	private List<FilterResponseDTO> localities;
 	private List<FilterResponseDTO> establishments;
-	
+	private List<FilterResponseDTO> priceRange;
+	private List<FilterResponseDTO> rentalType;
+	private List<FilterResponseDTO> eventType;
 	
 	public List<FilterResponseDTO> getServices() {
 		return services;
@@ -41,5 +43,23 @@ public class FilterResponseWrapperDTO implements Serializable{
 	}
 	public void setEstablishments(List<FilterResponseDTO> establishments) {
 		this.establishments = establishments;
+	}
+	public List<FilterResponseDTO> getPriceRange() {
+		return priceRange;
+	}
+	public void setPriceRange(List<FilterResponseDTO> priceRange) {
+		this.priceRange = priceRange;
+	}
+	public List<FilterResponseDTO> getRentalType() {
+		return rentalType;
+	}
+	public void setRentalType(List<FilterResponseDTO> rentalType) {
+		this.rentalType = rentalType;
+	}
+	public List<FilterResponseDTO> getEventType() {
+		return eventType;
+	}
+	public void setEventType(List<FilterResponseDTO> eventType) {
+		this.eventType = eventType;
 	}
 }
