@@ -100,7 +100,8 @@ public class CommonServiceImpl implements CommonService {
 	@Override
 	public DetailResponseDTO fetchDetails(DataRequestDTO dataRequestDTO) {
 		String entityName = dataRequestDTO.getName();
-		if(entityName.contains("+")){
+		if(entityName.contains("&type=")){
+			entityName = entityName.replaceAll("&type=", "+");
 			StringTokenizer strTokens = new StringTokenizer(entityName, "+");
 			dataRequestDTO.setName(strTokens.nextToken());
 			dataRequestDTO.setSearchType(strTokens.nextToken());
