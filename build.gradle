@@ -22,8 +22,8 @@ repositories {
     mavenCentral()
 }
 
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
 
 dependencies {
 	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
@@ -37,6 +37,7 @@ dependencies {
 	"org.liquibase:liquibase-core",
 	"org.apache.commons:commons-lang3:3.0",
 	"org.springframework:spring-context-support:4.1.1.RELEASE",
-	"javax.mail:mail:1.4.7"
+	"javax.mail:mail:1.4.7",
+	"mysql:mysql-connector-java:5.1.6"
 }
 

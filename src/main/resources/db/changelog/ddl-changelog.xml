@@ -5,7 +5,7 @@
 	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
-	<changeSet author="msingla" id="1.0">
+	<!-- <changeSet author="msingla" id="1.0">
 		<preConditions onFail="MARK_RAN">
 			<not>
 				<sequenceExists sequenceName="hibernate_sequence" />
@@ -14,7 +14,7 @@
 		<sql>
 			CREATE SEQUENCE hibernate_sequence START 1;
 		</sql>
-	</changeSet>
+	</changeSet> -->
 
 	<changeSet author="msingla" id="1.1"> 
 		<preConditions onFail="MARK_RAN"> 
@@ -24,10 +24,10 @@
 		</preConditions> 
 		<sql> 
 			CREATE TABLE city ( 
-			id bigint PRIMARY KEY, 
+			id bigint PRIMARY KEY AUTO_INCREMENT, 
 			name varchar (25) NOT NULL, 
 			state varchar (25), 
-			added_on timestamp without time zone NOT NULL DEFAULT now() 
+			added_on timestamp NOT NULL DEFAULT now() 
 			); 
 		</sql> 
 	</changeSet>
@@ -40,10 +40,10 @@
 		</preConditions>
 		<sql>
 			CREATE TABLE locality (
-			id bigint PRIMARY KEY,
+			id bigint PRIMARY KEY AUTO_INCREMENT,
 			name varchar (25) NOT NULL,
 			description varchar (255),
-			added_on timestamp without time zone NOT NULL DEFAULT now(),
+			added_on timestamp NOT NULL DEFAULT now(),
 			city_id bigint,
 			FOREIGN KEY (city_id) REFERENCES city (id)
 			);
@@ -58,12 +58,12 @@
 		</preConditions>
 		<sql>
 			CREATE TABLE attachment (
-			id bigint PRIMARY KEY,
+			id bigint PRIMARY KEY AUTO_INCREMENT,
 			name varchar (25) NOT NULL,
 			image_url varchar (255),
 			entity_id bigint,
 			version bigint,
-			added_on timestamp without time zone NOT NULL DEFAULT now(),
+			added_on timestamp NOT NULL DEFAULT now(),
 			attachment_type varchar (20)
 			);
 		</sql>
@@ -77,14 +77,14 @@
 		</preConditions>
 		<sql>
 			CREATE TABLE caterer (
-			id bigint PRIMARY KEY,
+			id bigint PRIMARY KEY AUTO_INCREMENT,
 			name varchar (25) NOT NULL,
 			description varchar (2550),
 			comments varchar (3000),
 			rating float,
 			version bigint,
 			cuisine_offered varchar (5000),
-			added_on timestamp without time zone NOT NULL DEFAULT now(),
+			added_on timestamp NOT NULL DEFAULT now(),
 			city_id bigint,
 			FOREIGN KEY (city_id) REFERENCES city (id),
 			locality_id bigint,
@@ -101,14 +101,14 @@
 		</preConditions>
 		<sql>
 			CREATE TABLE venue (
-			id bigint PRIMARY KEY,
+			id bigint PRIMARY KEY AUTO_INCREMENT,
 			name varchar (255) NOT NULL,
 			description varchar (2550),
 			type varchar(20) NOT NULL,
 			comments varchar (3000),
 			rating float,
 			version bigint,
-			added_on timestamp without time	zone NOT NULL DEFAULT now(),
+			added_on timestamp NOT NULL DEFAULT now(),
 			city_id bigint,
 			FOREIGN KEY (city_id) REFERENCES city (id),
 			locality_id bigint,
@@ -125,13 +125,13 @@
 		</preConditions>
 		<sql>
 			CREATE TABLE photographer (
-			id bigint PRIMARY KEY,
+			id bigint PRIMARY KEY AUTO_INCREMENT,
 			name varchar(25) NOT NULL,
 			description varchar (2550),
 			comments varchar (3000),
 			rating float,
 			version bigint,
-			added_on timestamp without time zone NOT NULL DEFAULT now(),
+			added_on timestamp NOT NULL DEFAULT now(),
 			city_id bigint,
 			FOREIGN KEY (city_id) REFERENCES city (id),
 			locality_id bigint,
@@ -148,13 +148,13 @@
 		</preConditions>
 		<sql>
 			CREATE TABLE decorater (
-			id bigint PRIMARY KEY,
+			id bigint PRIMARY KEY AUTO_INCREMENT,
 			name varchar (25) NOT NULL,
 			description varchar (2550),
 			comments varchar (3000),
 			rating float,
 			version bigint,
-			added_on timestamp without time zone NOT NULL DEFAULT now(),
+			added_on timestamp NOT NULL DEFAULT now(),
 			city_id bigint,
 			FOREIGN KEY (city_id) REFERENCES city (id),
 			locality_id bigint,
@@ -171,7 +171,7 @@
 		</preConditions>
 		<sql>
 			CREATE TABLE rental (
-			id bigint PRIMARY KEY,
+			id bigint PRIMARY KEY AUTO_INCREMENT,
 			name varchar (25) NOT NULL,
 			description varchar (2550),
 			addition_details varchar (3000),
@@ -179,7 +179,7 @@
 			rating float,
 			version bigint,
 			rental_type varchar(20),
-			added_on timestamp without time zone NOT NULL DEFAULT now(),
+			added_on timestamp NOT NULL DEFAULT now(),
 			city_id bigint,
 			FOREIGN KEY (city_id) REFERENCES city (id),
 			locality_id bigint,
@@ -196,11 +196,11 @@
 		</preConditions>
 		<sql>
 			CREATE TABLE room (
-			id bigint PRIMARY KEY,
+			id bigint PRIMARY KEY AUTO_INCREMENT,
 			room_type varchar (50) NOT NULL,
 			description varchar (255),
 			room_dimensions varchar (255),
-			added_on timestamp without time zone NOT NULL DEFAULT now()
+			added_on timestamp NOT NULL DEFAULT now()
 			);
 		</sql>
 	</changeSet>
@@ -213,13 +213,13 @@
 		</preConditions>
 		<sql>
 			CREATE TABLE service (
-			id bigint PRIMARY KEY,
+			id bigint PRIMARY KEY AUTO_INCREMENT,
 			service_type varchar (20) NOT NULL,
 			service_for_entity varchar(20),
 			tab_data_name varchar (50),
 			filter_data_name varchar (20),
 			is_filter boolean,
-			added_on timestamp without time zone NOT NULL DEFAULT now()
+			added_on timestamp NOT NULL DEFAULT now()
 			);
 		</sql>
 	</changeSet>
@@ -232,12 +232,12 @@
 		</preConditions>
 		<sql>
 			CREATE TABLE amenities (
-			id bigint PRIMARY KEY,
+			id bigint PRIMARY KEY AUTO_INCREMENT,
 			amenity_type varchar (500) NOT NULL,
 			description varchar (255),
 			is_indoor_amenity boolean,
 			amenity_dimensions varchar (500),
-			added_on timestamp without time zone NOT NULL DEFAULT now(),
+			added_on timestamp NOT NULL DEFAULT now(),
 			is_filter boolean
 			);
 		</sql>
@@ -251,18 +251,18 @@
 		</preConditions>
 		<sql>
 			CREATE TABLE address (
-			id bigint PRIMARY KEY,
+			id bigint PRIMARY KEY AUTO_INCREMENT,
 			address_line_1 varchar (255) NOT NULL,
 			address_line_2 varchar (255),
 			city varchar(25),
 			state varchar(25),
 			pincode bigint,
-			primary_phone bigint,
-			secondary_phone bigint,
+			primary_phone varchar (20),
+			secondary_phone varchar (20),
 			email varchar(50),
 			entity_id bigint,
 			version bigint,
-			added_on timestamp without time zone NOT NULL DEFAULT now()
+			added_on timestamp NOT NULL DEFAULT now()
 			);
 		</sql>
 	</changeSet>
@@ -275,7 +275,7 @@
 		</preConditions>
 		<sql>
 			CREATE TABLE venue_rooms (
-			id bigint PRIMARY KEY,
+			id bigint PRIMARY KEY AUTO_INCREMENT,
 			venue_id bigint,
 			room_id bigint,
 			min_cost float,
@@ -285,7 +285,7 @@
 			led_availability boolean,
 			attached_bathroom_availability boolean,
 			version bigint,
-			added_on timestamp without time zone NOT NULL DEFAULT now(),
+			added_on timestamp NOT NULL DEFAULT now(),
 			FOREIGN KEY (venue_id) REFERENCES venue (id),
 			FOREIGN KEY (room_id) REFERENCES room (id)
 			);
@@ -300,13 +300,13 @@
 		</preConditions>
 		<sql>
 			CREATE TABLE entity_services(
-			id bigint PRIMARY KEY,
+			id bigint PRIMARY KEY AUTO_INCREMENT,
 			entity_id bigint,
 			service_id bigint,
 			min_service_cost float,
 			max_service_cost float,
 			version bigint,
-			added_on timestamp without time zone NOT NULL DEFAULT now(),
+			added_on timestamp NOT NULL DEFAULT now(),
 			FOREIGN KEY (service_id) REFERENCES service (id)
 			);
 		</sql>
@@ -320,13 +320,13 @@
 		</preConditions>
 		<sql>
 			CREATE TABLE venue_amenities(
-			id bigint PRIMARY KEY,
+			id bigint PRIMARY KEY AUTO_INCREMENT,
 			venue_id bigint,
 			amenities_id bigint,
 			min_amenity_cost float,
 			max_amenity_cost float,
 			version bigint,
-			added_on timestamp without time zone NOT NULL DEFAULT now(),
+			added_on timestamp NOT NULL DEFAULT now(),
 			FOREIGN KEY (venue_id) REFERENCES venue (id),
 			FOREIGN KEY (amenities_id) REFERENCES amenities (id)
 			);
@@ -399,7 +399,7 @@
 		</sql>
 	</changeSet>
 	
-	<changeSet author="msingla" id="1.22">
+	<!-- <changeSet author="msingla" id="1.22">
 		<preConditions onFail="MARK_RAN">
 			<columnExists columnName="primary_phone" tableName="address" />
 		</preConditions>
@@ -424,7 +424,7 @@
 		<sql>
 			ALTER TABLE venue ALTER COLUMN description TYPE varchar (2000);
 		</sql>
-	</changeSet>
+	</changeSet> -->
 	
 	<changeSet author="msingla" id="1.25">
 		<preConditions onFail="MARK_RAN">
@@ -478,11 +478,11 @@
 		</preConditions>
 		<sql>
 			CREATE TABLE filters (
-			id bigint PRIMARY KEY,
+			id bigint PRIMARY KEY AUTO_INCREMENT,
 			filter_type varchar (20) NOT NULL,
 			filter_for_entity varchar(20),
 			filter_name varchar (50),
-			added_on timestamp without time zone NOT NULL DEFAULT now()
+			added_on timestamp NOT NULL DEFAULT now()
 			);
 		</sql>
 	</changeSet>
@@ -495,11 +495,11 @@
 		</preConditions>
 		<sql>
 			CREATE TABLE entity_filters(
-			id bigint PRIMARY KEY,
+			id bigint PRIMARY KEY AUTO_INCREMENT,
 			entity_id bigint,
 			filter_id bigint,
 			version bigint,
-			added_on timestamp without time zone NOT NULL DEFAULT now(),
+			added_on timestamp NOT NULL DEFAULT now(),
 			FOREIGN KEY (filter_id) REFERENCES filters (id)
 			);
 		</sql>
