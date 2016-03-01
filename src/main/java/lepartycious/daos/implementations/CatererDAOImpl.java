@@ -9,6 +9,8 @@ import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.CollectionUtils;
 
@@ -20,12 +22,14 @@ import lepartycious.models.Caterer;
 import lepartycious.models.Venue;
 
 @Repository
+@CacheConfig(cacheNames = "catererCache")
 public class CatererDAOImpl extends BaseDAOImpl implements CatererDAO {
 
 	@Autowired
 	private SessionFactory sessionFactory;
 
 	@Override
+	@Cacheable
 	public List<Caterer> getCaterers(Long cityId, String searchString, Long offset, Long limit, String sortField, String sortOrder, FilterWrapperDTO filters) {
 		Criteria criteria = createCatererSearchCriteria(cityId, searchString, filters);
 		criteria.setFirstResult(offset.intValue());
@@ -36,6 +40,7 @@ public class CatererDAOImpl extends BaseDAOImpl implements CatererDAO {
 	}
 
 	@Override
+	@Cacheable
 	public List<Caterer> loadCatererList(Long cityId, String searchString) {
 		Criteria criteria = createCatererSearchCriteria(cityId, searchString, null);
 		List ls =  criteria.list();
@@ -43,6 +48,7 @@ public class CatererDAOImpl extends BaseDAOImpl implements CatererDAO {
 	}
 
 	@Override
+	@Cacheable
 	public Long getCatererCount(Long cityId, String searchString, FilterWrapperDTO filters) {
 		Criteria criteria = createCatererSearchCriteria(cityId, searchString, filters);
 		criteria.setProjection(Projections.rowCount());
@@ -79,6 +85,7 @@ public class CatererDAOImpl extends BaseDAOImpl implements CatererDAO {
 	}
 
 	@Override
+	@Cacheable
 	public Caterer fetchCatererDetails(Long cityId, String name) {
 		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Caterer.class);
 		criteria.add(Restrictions.eq("city.cityId", cityId));
@@ -93,6 +100,7 @@ public class CatererDAOImpl extends BaseDAOImpl implements CatererDAO {
 	}
 
 	@Override
+	@Cacheable
 	public List<Caterer> fetchRecomendations(Long cityId) {
 		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Caterer.class);
 		criteria.add(Restrictions.eq("city.cityId", cityId));

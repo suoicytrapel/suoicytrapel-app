@@ -1,7 +1,32 @@
 <ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		 xsi:noNamespaceSchemaLocation="ehcache.xsd">
-	<cache name="lpcache"
+	<cache name="venueCache"
 		   maxEntriesLocalHeap="200"
 		   timeToLiveSeconds="60000">
 	</cache>
+	<cache name="catererCache"
+		   maxEntriesLocalHeap="200"
+		   timeToLiveSeconds="60000">
+	</cache>
+	<cache name="decoratorCache"
+		   maxEntriesLocalHeap="200"
+		   timeToLiveSeconds="60000">
+	</cache>
+	<cache name="photographerCache"
+		   maxEntriesLocalHeap="200"
+		   timeToLiveSeconds="60000">
+	</cache>
+	<cache name="rentalCache"
+		   maxEntriesLocalHeap="200"
+		   timeToLiveSeconds="60000">
+	</cache>
+	<cache name="cityCache"
+		   maxEntriesLocalHeap="200"
+		   timeToLiveSeconds="60000">
+	</cache>
+	<cache name="commonCache"
+		   maxEntriesLocalHeap="200"
+		   timeToLiveSeconds="60000">
+	</cache>
+	
 </ehcache>

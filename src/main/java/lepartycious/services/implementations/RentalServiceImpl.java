@@ -53,7 +53,7 @@ public class RentalServiceImpl implements RentalService {
 		if(searchDTO.getOffset() == null || searchDTO.getOffset() == 0){
 			totalRentalCount = rentalDAO.getRentalCount(searchDTO.getCityId(), searchDTO.getSearchString(), filters);
 			if(totalRentalCount < 1){
-				throw new IllegalArgumentException("No matching results");
+				throw new IllegalArgumentException("No Records Found");
 			}
 		}
 		populateRentalResults(searchResponseDTOList, searchDTO, filters);
@@ -65,8 +65,11 @@ public class RentalServiceImpl implements RentalService {
 	@Override
 	public List<String> loadRentalList(SearchRequestDTO searchRequestDTO) {
 		List<String> list = new ArrayList<String>();
-		List<Rental> Rentals = rentalDAO.loadRentalList(searchRequestDTO.getCityId(), searchRequestDTO.getSearchString());
-		for(Rental Rental : Rentals){
+		List<Rental> rentals = rentalDAO.loadRentalList(searchRequestDTO.getCityId(), searchRequestDTO.getSearchString());
+		if(CollectionUtils.isEmpty(rentals)){
+			throw new IllegalArgumentException("No Records Found");
+		}
+		for(Rental Rental : rentals){
 			list.add(Rental.getName());
 		}
 		return list;

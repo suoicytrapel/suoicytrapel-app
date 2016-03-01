@@ -58,7 +58,7 @@ public class CatererServiceImpl implements CatererService {
 		if(searchDTO.getOffset() == null || searchDTO.getOffset() == 0){
 			totalCatererCount = catererDAO.getCatererCount(searchDTO.getCityId(), searchDTO.getSearchString(), filters);
 			if(totalCatererCount < 1){
-				throw new IllegalArgumentException("No matching results");
+				throw new IllegalArgumentException("No Records Found");
 			}
 		}
 		populateCatererResults(searchResponseDTOList, searchDTO, filters);
@@ -71,6 +71,9 @@ public class CatererServiceImpl implements CatererService {
 	public List<String> loadCatererList(SearchRequestDTO searchRequestDTO) {
 		List<String> list = new ArrayList<String>();
 		List<Caterer> Caterers = catererDAO.loadCatererList(searchRequestDTO.getCityId(), searchRequestDTO.getSearchString());
+		if(CollectionUtils.isEmpty(Caterers)){
+			throw new IllegalArgumentException("No Records Found");
+		}
 		for(Caterer Caterer : Caterers){
 			list.add(Caterer.getName());
 		}

@@ -9,6 +9,8 @@ import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.CollectionUtils;
 
@@ -19,12 +21,14 @@ import lepartycious.models.Photographer;
 import lepartycious.models.Photographer;
 
 @Repository
+@CacheConfig(cacheNames = "photographerCache")
 public class PhotographerDAOImpl extends BaseDAOImpl implements PhotographerDAO {
 
 	@Autowired
 	private SessionFactory sessionFactory;
 
 	@Override
+	@Cacheable
 	public List<Photographer> getPhotographers(Long cityId, String searchString, Long offset, Long limit, String sortField, String sortOrder, FilterWrapperDTO filters) {
 		Criteria criteria = createPhotographerSearchCriteria(cityId, searchString, filters);
 		criteria.setFirstResult(offset.intValue());
@@ -35,6 +39,7 @@ public class PhotographerDAOImpl extends BaseDAOImpl implements PhotographerDAO 
 	}
 
 	@Override
+	@Cacheable
 	public List<Photographer> loadPhotographerList(Long cityId, String searchString) {
 		Criteria criteria = createPhotographerSearchCriteria(cityId, searchString, null);
 		List ls =  criteria.list();
@@ -42,6 +47,7 @@ public class PhotographerDAOImpl extends BaseDAOImpl implements PhotographerDAO 
 	}
 
 	@Override
+	@Cacheable
 	public Long getPhotographerCount(Long cityId, String searchString, FilterWrapperDTO filters) {
 		Criteria criteria = createPhotographerSearchCriteria(cityId, searchString, filters);
 		criteria.setProjection(Projections.rowCount());
@@ -73,6 +79,7 @@ public class PhotographerDAOImpl extends BaseDAOImpl implements PhotographerDAO 
 	}
 
 	@Override
+	@Cacheable
 	public Photographer fetchPhotographerDetails(Long cityId, String name) {
 		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Photographer.class);
 		criteria.add(Restrictions.eq("city.cityId", cityId));
@@ -87,6 +94,7 @@ public class PhotographerDAOImpl extends BaseDAOImpl implements PhotographerDAO 
 	}
 
 	@Override
+	@Cacheable
 	public List<Photographer> fetchRecomendations(Long cityId) {
 		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Caterer.class);
 		criteria.add(Restrictions.eq("city.cityId", cityId));

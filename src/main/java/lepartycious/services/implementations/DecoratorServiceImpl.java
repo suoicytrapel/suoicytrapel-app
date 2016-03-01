@@ -37,10 +37,10 @@ public class DecoratorServiceImpl implements DecoratorService {
 
 	@Autowired
 	private DecoratorDAO decoratorDAO;
-	
+
 	@Autowired
 	private CityDAO cityDAO;
-	
+
 	@Autowired
 	private CommonDAO commonDAO;
 
@@ -53,7 +53,7 @@ public class DecoratorServiceImpl implements DecoratorService {
 		if(searchDTO.getOffset() == null || searchDTO.getOffset() == 0){
 			totalDecoratorCount = decoratorDAO.getDecoratorCount(searchDTO.getCityId(), searchDTO.getSearchString(), filters);
 			if(totalDecoratorCount < 1){
-				throw new IllegalArgumentException("No matching results");
+				throw new IllegalArgumentException("No Records Found");
 			}
 		}
 		populateDecoratorResults(searchResponseDTOList, searchDTO, filters);
@@ -65,13 +65,16 @@ public class DecoratorServiceImpl implements DecoratorService {
 	@Override
 	public List<String> loadDecoratorList(SearchRequestDTO searchRequestDTO) {
 		List<String> list = new ArrayList<String>();
-			List<Decorator> Decorators = decoratorDAO.loadDecoratorList(searchRequestDTO.getCityId(), searchRequestDTO.getSearchString());
-			for(Decorator Decorator : Decorators){
-				list.add(Decorator.getName());
-			}
+		List<Decorator> decorators = decoratorDAO.loadDecoratorList(searchRequestDTO.getCityId(), searchRequestDTO.getSearchString());
+		if(CollectionUtils.isEmpty(decorators)){
+			throw new IllegalArgumentException("No Records Found");
+		}
+		for(Decorator Decorator : decorators){
+			list.add(Decorator.getName());
+		}
 		return list;
 	}
-	
+
 	private void populateDecoratorResults(
 			List<SearchResponseDTO> searchResponseDTOList, SearchRequestDTO searchDTO, FilterWrapperDTO filters) {
 		List<Decorator> Decorators = decoratorDAO.getDecorators(searchDTO.getCityId(), searchDTO.getSearchString(), searchDTO.getOffset(), searchDTO.getLimit(), searchDTO.getSortField(), searchDTO.getSortOrder(), filters);
@@ -125,10 +128,10 @@ public class DecoratorServiceImpl implements DecoratorService {
 		List<FilterResponseDTO> events = new ArrayList<FilterResponseDTO>();
 		City city = cityDAO.getCityById(cityId);
 		List<Locality> localityList = city.getLocalities();
-		
+
 		List<lepartycious.models.Service> serviceList = commonDAO.getServiceFilters("DECORATOR", "SERVICE");
 		List<Filter> eventList = commonDAO.getRequiredFilters("ALL", "EVENT");
-		
+
 		for(lepartycious.models.Service service : serviceList){
 			FilterResponseDTO filter = new FilterResponseDTO(service.getFilterDataName(), service.getServiceType(), service.getServiceId());
 			services.add(filter);

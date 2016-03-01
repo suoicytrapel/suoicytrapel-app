@@ -9,6 +9,8 @@ import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.CollectionUtils;
 
@@ -19,12 +21,14 @@ import lepartycious.models.Rental;
 import lepartycious.models.Rental;
 
 @Repository
+@CacheConfig(cacheNames = "rentalCache")
 public class RentalDAOImpl extends BaseDAOImpl implements RentalDAO {
 
 	@Autowired
 	private SessionFactory sessionFactory;
 
 	@Override
+	@Cacheable
 	public List<Rental> getRentals(Long cityId, String searchString, Long offset, Long limit, String sortField, String sortOrder, FilterWrapperDTO filters) {
 		Criteria criteria = createRentalSearchCriteria(cityId, searchString, filters);
 		criteria.setFirstResult(offset.intValue());
@@ -35,6 +39,7 @@ public class RentalDAOImpl extends BaseDAOImpl implements RentalDAO {
 	}
 
 	@Override
+	@Cacheable
 	public List<Rental> loadRentalList(Long cityId, String searchString) {
 		Criteria criteria = createRentalSearchCriteria(cityId, searchString, null);
 		List ls =  criteria.list();
@@ -42,6 +47,7 @@ public class RentalDAOImpl extends BaseDAOImpl implements RentalDAO {
 	}
 
 	@Override
+	@Cacheable
 	public Long getRentalCount(Long cityId, String searchString, FilterWrapperDTO filters) {
 		Criteria criteria = createRentalSearchCriteria(cityId, searchString, filters);
 		criteria.setProjection(Projections.rowCount());
@@ -73,6 +79,7 @@ public class RentalDAOImpl extends BaseDAOImpl implements RentalDAO {
 	}
 
 	@Override
+	@Cacheable
 	public Rental fetchRentalDetails(Long cityId, String name) {
 		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Rental.class);
 		criteria.add(Restrictions.eq("city.cityId", cityId));
@@ -87,6 +94,7 @@ public class RentalDAOImpl extends BaseDAOImpl implements RentalDAO {
 	}
 	
 	@Override
+	@Cacheable
 	public List<Rental> fetchRecomendations(Long cityId) {
 		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Rental.class);
 		criteria.add(Restrictions.eq("city.cityId", cityId));

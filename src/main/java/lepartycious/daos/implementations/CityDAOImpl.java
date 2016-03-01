@@ -19,7 +19,7 @@ import lepartycious.models.Room;
 import lepartycious.models.Service;
 
 @Repository
-@CacheConfig(cacheNames = "lpcache")
+@CacheConfig(cacheNames = "cityCache")
 public class CityDAOImpl extends BaseDAOImpl implements CityDAO {
 	
 	@Autowired

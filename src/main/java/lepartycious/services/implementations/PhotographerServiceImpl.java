@@ -38,10 +38,10 @@ public class PhotographerServiceImpl implements PhotographerService {
 
 	@Autowired
 	private PhotographerDAO photographerDAO;
-	
+
 	@Autowired
 	private CityDAO cityDAO;
-	
+
 	@Autowired
 	private CommonDAO commonDAO;
 
@@ -54,7 +54,7 @@ public class PhotographerServiceImpl implements PhotographerService {
 		if(searchDTO.getOffset() == null || searchDTO.getOffset() == 0){
 			totalPhotographerCount = photographerDAO.getPhotographerCount(searchDTO.getCityId(), searchDTO.getSearchString(),filters);
 			if(totalPhotographerCount < 1){
-				throw new IllegalArgumentException("No matching results");
+				throw new IllegalArgumentException("No Records Found");
 			}
 		}
 		populatePhotographerResults(searchResponseDTOList, searchDTO, filters);
@@ -66,13 +66,16 @@ public class PhotographerServiceImpl implements PhotographerService {
 	@Override
 	public List<String> loadPhotographerList(SearchRequestDTO searchRequestDTO) {
 		List<String> list = new ArrayList<String>();
-			List<Photographer> Photographers = photographerDAO.loadPhotographerList(searchRequestDTO.getCityId(), searchRequestDTO.getSearchString());
-			for(Photographer Photographer : Photographers){
-				list.add(Photographer.getName());
-			}
+		List<Photographer> photographers = photographerDAO.loadPhotographerList(searchRequestDTO.getCityId(), searchRequestDTO.getSearchString());
+		if(CollectionUtils.isEmpty(photographers)){
+			throw new IllegalArgumentException("No Records Found");
+		}
+		for(Photographer Photographer : photographers){
+			list.add(Photographer.getName());
+		}
 		return list;
 	}
-	
+
 	private void populatePhotographerResults(
 			List<SearchResponseDTO> searchResponseDTOList, SearchRequestDTO searchDTO, FilterWrapperDTO filters) {
 		List<Photographer> Photographers = photographerDAO.getPhotographers(searchDTO.getCityId(), searchDTO.getSearchString(), searchDTO.getOffset(), searchDTO.getLimit(), searchDTO.getSortField(), searchDTO.getSortOrder(), filters);
@@ -126,10 +129,10 @@ public class PhotographerServiceImpl implements PhotographerService {
 		List<FilterResponseDTO> events = new ArrayList<FilterResponseDTO>();
 		City city = cityDAO.getCityById(cityId);
 		List<Locality> localityList = city.getLocalities();
-		
+
 		List<Filter> eventList = commonDAO.getRequiredFilters("ALL", "EVENT");
 		List<Filter> priceRangeList = commonDAO.getRequiredFilters("PHOTOGRAPHER", "PRICE");
-		
+
 		for(Filter priceFilter : priceRangeList){
 			FilterResponseDTO filter = new FilterResponseDTO(priceFilter.getFilterName(), priceFilter.getFilterType(), priceFilter.getFilterid());
 			prices.add(filter);

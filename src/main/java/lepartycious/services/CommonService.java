@@ -32,5 +32,7 @@ public interface CommonService {
 	
 	@Transactional(readOnly=false)
 	public boolean pushDataToDatabase(String query);
+	
+	
 
 }

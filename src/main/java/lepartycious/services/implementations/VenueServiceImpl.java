@@ -59,7 +59,7 @@ public class VenueServiceImpl implements VenueService {
 		if(searchDTO.getOffset() == null || searchDTO.getOffset() == 0){
 			totalVenueCount = venueDAO.getVenueCount(searchDTO.getCityId(), searchDTO.getSearchString(), filters);
 			if(totalVenueCount < 1){
-				throw new IllegalArgumentException("No matching results");
+				throw new IllegalArgumentException("No Records Found");
 			}
 		}
 		populateVenueResults(searchResponseDTOList, searchDTO, filters);
@@ -72,6 +72,9 @@ public class VenueServiceImpl implements VenueService {
 	public List<String> loadVenueList(SearchRequestDTO searchRequestDTO) {
 		List<String> list = new ArrayList<String>();
 		List<Venue> venues = venueDAO.loadVenueList(searchRequestDTO.getCityId(), searchRequestDTO.getSearchString());
+		if(CollectionUtils.isEmpty(venues)){
+			throw new IllegalArgumentException("No Records Found");
+		}
 		for(Venue venue : venues){
 			list.add(venue.getName());
 		}

@@ -9,6 +9,8 @@ import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.CollectionUtils;
 
@@ -17,12 +19,14 @@ import lepartycious.dtos.requestDTOs.FilterWrapperDTO;
 import lepartycious.models.Venue;
 
 @Repository
+@CacheConfig(cacheNames = "venueCache")
 public class VenueDAOImpl extends BaseDAOImpl implements VenueDAO {
 
 	@Autowired
 	private SessionFactory sessionFactory;
 
 	@Override
+	@Cacheable
 	public List<Venue> getVenues(Long cityId, String searchString, Long offset, Long limit, String sortField, String sortOrder,FilterWrapperDTO filters) {
 		Criteria criteria = createVenueSearchCriteria(cityId, searchString, filters);
 		criteria.setFirstResult(offset.intValue());
@@ -33,6 +37,7 @@ public class VenueDAOImpl extends BaseDAOImpl implements VenueDAO {
 	}
 
 	@Override
+	@Cacheable
 	public List<Venue> loadVenueList(Long cityId, String searchString) {
 		Criteria criteria = createVenueSearchCriteria(cityId, searchString, null);
 		List ls =  criteria.list();
@@ -40,6 +45,7 @@ public class VenueDAOImpl extends BaseDAOImpl implements VenueDAO {
 	}
 
 	@Override
+	@Cacheable
 	public Long getVenueCount(Long cityId, String searchString, FilterWrapperDTO filters) {
 		Criteria criteria = createVenueSearchCriteria(cityId, searchString, filters);
 		criteria.setProjection(Projections.rowCount());
@@ -92,6 +98,7 @@ public class VenueDAOImpl extends BaseDAOImpl implements VenueDAO {
 	}
 
 	@Override
+	@Cacheable
 	public Venue fetchVenueDetails(Long cityId, String name) {
 		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Venue.class);
 		criteria.add(Restrictions.eq("city.cityId", cityId));
@@ -106,6 +113,7 @@ public class VenueDAOImpl extends BaseDAOImpl implements VenueDAO {
 	}
 
 	@Override
+	@Cacheable
 	public List<Venue> fetchRecomendations(Long cityId) {
 		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Venue.class);
 		criteria.add(Restrictions.eq("city.cityId", cityId));

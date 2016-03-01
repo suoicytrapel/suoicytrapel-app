@@ -20,10 +20,13 @@ import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Repository;
 
 @Repository
+@CacheConfig(cacheNames = "commonCache")
 public class CommonDAOImpl extends BaseDAOImpl implements CommonDAO{
 	
 	@Autowired
@@ -82,6 +85,7 @@ public class CommonDAOImpl extends BaseDAOImpl implements CommonDAO{
 	}
 
 	@Override
+	@CacheEvict(value = {"commonCache", "cityCache", "decoratorCache", "venueCache", "photographerCache", "catererCache", "rentalCache"}, allEntries = true)
 	public boolean pushDataToDatabase(String query) {
 		boolean isQuerySaved = false;
 		SQLQuery sqlQuery = sessionFactory.getCurrentSession().createSQLQuery(query);
@@ -93,6 +97,7 @@ public class CommonDAOImpl extends BaseDAOImpl implements CommonDAO{
 	}
 
 	@Override
+	@Cacheable
 	public List<Service> getServiceFilters(String forEntity, String ofType) {
 		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Service.class);
 		criteria.add(Restrictions.eq("isFilter", true));
@@ -103,6 +108,7 @@ public class CommonDAOImpl extends BaseDAOImpl implements CommonDAO{
 	}
 	
 	@Override
+	@Cacheable
 	public List<Amenities> getAmenities(String amenity) {
 		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Amenities.class);
 		List<Amenities> amenities = criteria.list();
@@ -110,6 +116,7 @@ public class CommonDAOImpl extends BaseDAOImpl implements CommonDAO{
 	}
 	
 	@Override
+	@Cacheable
 	public List<Room> getRooms(String room) {
 		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Room.class);
 		List<Room> rooms = criteria.list();
@@ -117,6 +124,7 @@ public class CommonDAOImpl extends BaseDAOImpl implements CommonDAO{
 	}
 	
 	@Override
+	@Cacheable
 	public List<Filter> getRequiredFilters(String forEntity, String ofType) {
 		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Filter.class);
 		criteria.add(Restrictions.eq("filterForEntity", forEntity));
