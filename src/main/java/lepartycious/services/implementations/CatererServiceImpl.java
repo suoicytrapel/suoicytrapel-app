@@ -129,6 +129,7 @@ public class CatererServiceImpl implements CatererService {
 		}
 		DetailResponseDTO detailResponseDTO = new DetailResponseDTO();
 		detailResponseDTO.setName(caterer.getName());
+		detailResponseDTO.setDescription(caterer.getDescription());
 		detailResponseDTO.setAddressLine1(address.getAddressLine1());
 		detailResponseDTO.setAddressLine2(address.getAddressLine2());
 		detailResponseDTO.setCity(address.getCity());

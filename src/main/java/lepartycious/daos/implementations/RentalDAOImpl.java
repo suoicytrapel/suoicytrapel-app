@@ -73,7 +73,7 @@ public class RentalDAOImpl extends BaseDAOImpl implements RentalDAO {
 			}
 		}
 		if(StringUtils.isNotBlank(searchString)){
-			criteria.add(Restrictions.ilike("name", "%" + searchString + "%"));
+			criteria.add(Restrictions.ilike("name", searchString + "%"));
 		}
 		return criteria;
 	}

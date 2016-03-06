@@ -107,6 +107,7 @@ public class DecoratorServiceImpl implements DecoratorService {
 		}
 		DetailResponseDTO detailResponseDTO = new DetailResponseDTO();
 		detailResponseDTO.setName(decorator.getName());
+		detailResponseDTO.setDescription(decorator.getDescription());
 		detailResponseDTO.setAddressLine1(address.getAddressLine1());
 		detailResponseDTO.setAddressLine2(address.getAddressLine2());
 		detailResponseDTO.setCity(address.getCity());

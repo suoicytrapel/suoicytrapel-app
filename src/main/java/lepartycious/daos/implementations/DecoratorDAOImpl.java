@@ -73,7 +73,7 @@ public class DecoratorDAOImpl extends BaseDAOImpl implements DecoratorDAO {
 			}
 		}
 		if(StringUtils.isNotBlank(searchString)){
-			criteria.add(Restrictions.ilike("name", "%" + searchString + "%"));
+			criteria.add(Restrictions.ilike("name", searchString + "%"));
 		}
 		return criteria;
 	}

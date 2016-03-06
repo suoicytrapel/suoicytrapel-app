@@ -91,7 +91,7 @@ public class VenueDAOImpl extends BaseDAOImpl implements VenueDAO {
 		}
 			
 		if(StringUtils.isNotBlank(searchString)){
-			criteria.add(Restrictions.ilike("name", "%" + searchString + "%"));
+			criteria.add(Restrictions.ilike("name", searchString + "%"));
 		}
 		criteria.add(Restrictions.eq("city.cityId", cityId));
 		return criteria;

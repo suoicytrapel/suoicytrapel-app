@@ -68,6 +68,7 @@ public class HomeSearchController {
 		Error error = new Error();
 		error.setErrorMessage("Please contact your system administrator");
 		error.setErrorCode(response.SC_BAD_REQUEST);
+		response.setStatus(response.SC_BAD_REQUEST);
 		return error;
 	}
 	

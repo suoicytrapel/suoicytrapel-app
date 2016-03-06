@@ -108,6 +108,7 @@ public class PhotographerServiceImpl implements PhotographerService {
 		}
 		DetailResponseDTO detailResponseDTO = new DetailResponseDTO();
 		detailResponseDTO.setName(photographer.getName());
+		detailResponseDTO.setDescription(photographer.getDescription());
 		detailResponseDTO.setAddressLine1(address.getAddressLine1());
 		detailResponseDTO.setAddressLine2(address.getAddressLine2());
 		detailResponseDTO.setCity(address.getCity());

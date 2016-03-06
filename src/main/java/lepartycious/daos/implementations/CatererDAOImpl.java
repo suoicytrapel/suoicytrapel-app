@@ -79,7 +79,7 @@ public class CatererDAOImpl extends BaseDAOImpl implements CatererDAO {
 			}
 		}
 		if(StringUtils.isNotBlank(searchString)){
-			criteria.add(Restrictions.ilike("name", "%" + searchString + "%"));
+			criteria.add(Restrictions.ilike("name", searchString + "%"));
 		}
 		return criteria;
 	}
