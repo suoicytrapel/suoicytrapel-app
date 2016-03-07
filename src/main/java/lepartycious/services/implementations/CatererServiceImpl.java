@@ -86,6 +86,8 @@ public class CatererServiceImpl implements CatererService {
 		for(Caterer caterer : caterers){
 			SearchResponseDTO searchResponseDTO = new SearchResponseDTO();
 			searchResponseDTO.setName(caterer.getName());
+			searchResponseDTO.setLocality(caterer.getLocality().getDescription());
+			searchResponseDTO.setStartingPrice(caterer.getStartingPrice());
 			searchResponseDTO.setMainImagerURL(caterer.getAttachments().get(0).getImageURL());
 			searchResponseDTOList.add(searchResponseDTO);
 		}
@@ -188,6 +190,8 @@ public class CatererServiceImpl implements CatererService {
 		for(Caterer caterer : catererList){
 			SearchResponseDTO searchResponseDTO = new SearchResponseDTO();
 			searchResponseDTO.setName(caterer.getName());
+			searchResponseDTO.setLocality(caterer.getLocality().getDescription());
+			searchResponseDTO.setStartingPrice(caterer.getStartingPrice());
 			searchResponseDTO.setMainImagerURL(caterer.getAttachments().get(0).getImageURL());
 			recommendationList.add(searchResponseDTO);
 		}

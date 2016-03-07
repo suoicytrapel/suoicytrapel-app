@@ -69,6 +69,9 @@ public class Caterer implements Serializable{
 	
 	@Column(name="priority")
 	private Long priority;
+	
+	@Column(name = "starting_price")
+	private String startingPrice;
 
 	public Long getPriority() {
 		return priority;
@@ -181,5 +184,14 @@ public class Caterer implements Serializable{
 	public void setCatererFilters(List<EntityFilters> catererFilters) {
 		this.catererFilters = catererFilters;
 	}
+
+	public String getStartingPrice() {
+		return startingPrice;
+	}
+
+	public void setStartingPrice(String startingPrice) {
+		this.startingPrice = startingPrice;
+	}
+	
 	
 }

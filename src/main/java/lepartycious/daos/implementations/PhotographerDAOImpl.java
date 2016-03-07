@@ -96,7 +96,7 @@ public class PhotographerDAOImpl extends BaseDAOImpl implements PhotographerDAO 
 	@Override
 	@Cacheable
 	public List<Photographer> fetchRecomendations(Long cityId) {
-		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Caterer.class);
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Photographer.class);
 		criteria.add(Restrictions.eq("city.cityId", cityId));
 		criteria.add(Restrictions.isNotNull("priority"));
 		criteria.setFirstResult(0);

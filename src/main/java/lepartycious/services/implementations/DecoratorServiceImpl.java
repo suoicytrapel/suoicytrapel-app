@@ -78,10 +78,12 @@ public class DecoratorServiceImpl implements DecoratorService {
 	private void populateDecoratorResults(
 			List<SearchResponseDTO> searchResponseDTOList, SearchRequestDTO searchDTO, FilterWrapperDTO filters) {
 		List<Decorator> Decorators = decoratorDAO.getDecorators(searchDTO.getCityId(), searchDTO.getSearchString(), searchDTO.getOffset(), searchDTO.getLimit(), searchDTO.getSortField(), searchDTO.getSortOrder(), filters);
-		for(Decorator Decorator : Decorators){
+		for(Decorator decorator : Decorators){
 			SearchResponseDTO searchResponseDTO = new SearchResponseDTO();
-			searchResponseDTO.setName(Decorator.getName());
-			searchResponseDTO.setMainImagerURL(Decorator.getAttachments().get(0).getImageURL());
+			searchResponseDTO.setName(decorator.getName());
+			searchResponseDTO.setLocality(decorator.getLocality().getDescription());
+			searchResponseDTO.setStartingPrice(decorator.getStartingPrice());
+			searchResponseDTO.setMainImagerURL(decorator.getAttachments().get(0).getImageURL());
 			searchResponseDTOList.add(searchResponseDTO);
 		}
 	}
@@ -158,6 +160,8 @@ public class DecoratorServiceImpl implements DecoratorService {
 		for(Decorator decorator : decoratorList){
 			SearchResponseDTO searchResponseDTO = new SearchResponseDTO();
 			searchResponseDTO.setName(decorator.getName());
+			searchResponseDTO.setLocality(decorator.getLocality().getDescription());
+			searchResponseDTO.setStartingPrice(decorator.getStartingPrice());
 			searchResponseDTO.setMainImagerURL(decorator.getAttachments().get(0).getImageURL());
 			recommendationList.add(searchResponseDTO);
 		}

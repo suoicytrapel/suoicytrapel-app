@@ -73,6 +73,8 @@ public class Rental implements Serializable{
 	@OneToMany(mappedBy="entityId")
 	private List<EntityFilters> rentalFilters;
 	
+	@Column(name = "starting_price")
+	private String startingPrice;
 	
 	public Long getPriority() {
 		return priority;
@@ -194,4 +196,13 @@ public class Rental implements Serializable{
 	public void setRentalFilters(List<EntityFilters> rentalFilters) {
 		this.rentalFilters = rentalFilters;
 	}
+
+	public String getStartingPrice() {
+		return startingPrice;
+	}
+
+	public void setStartingPrice(String startingPrice) {
+		this.startingPrice = startingPrice;
+	}
+	
 }

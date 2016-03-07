@@ -87,6 +87,8 @@ public class VenueServiceImpl implements VenueService {
 		for(Venue venue : venues){
 			SearchResponseDTO searchResponseDTO = new SearchResponseDTO();
 			searchResponseDTO.setName(venue.getName());
+			searchResponseDTO.setLocality(venue.getLocality().getDescription());
+			searchResponseDTO.setStartingPrice(venue.getStartingPrice());
 			searchResponseDTO.setMainImagerURL(venue.getAttachments().get(0).getImageURL());
 			searchResponseDTOList.add(searchResponseDTO);
 		}
@@ -212,6 +214,8 @@ public class VenueServiceImpl implements VenueService {
 		for(Venue venue : venueList){
 			SearchResponseDTO searchResponseDTO = new SearchResponseDTO();
 			searchResponseDTO.setName(venue.getName());
+			searchResponseDTO.setLocality(venue.getLocality().getDescription());
+			searchResponseDTO.setStartingPrice(venue.getStartingPrice());
 			searchResponseDTO.setMainImagerURL(venue.getAttachments().get(0).getImageURL());
 			recommendationList.add(searchResponseDTO);
 		}

@@ -79,10 +79,12 @@ public class PhotographerServiceImpl implements PhotographerService {
 	private void populatePhotographerResults(
 			List<SearchResponseDTO> searchResponseDTOList, SearchRequestDTO searchDTO, FilterWrapperDTO filters) {
 		List<Photographer> Photographers = photographerDAO.getPhotographers(searchDTO.getCityId(), searchDTO.getSearchString(), searchDTO.getOffset(), searchDTO.getLimit(), searchDTO.getSortField(), searchDTO.getSortOrder(), filters);
-		for(Photographer Photographer : Photographers){
+		for(Photographer photographer : Photographers){
 			SearchResponseDTO searchResponseDTO = new SearchResponseDTO();
-			searchResponseDTO.setName(Photographer.getName());
-			searchResponseDTO.setMainImagerURL(Photographer.getAttachments().get(0).getImageURL());
+			searchResponseDTO.setName(photographer.getName());
+			searchResponseDTO.setMainImagerURL(photographer.getAttachments().get(0).getImageURL());
+			searchResponseDTO.setLocality(photographer.getLocality().getDescription());
+			searchResponseDTO.setStartingPrice(photographer.getStartingPrice());
 			searchResponseDTOList.add(searchResponseDTO);
 		}
 	}
@@ -159,6 +161,8 @@ public class PhotographerServiceImpl implements PhotographerService {
 		for(Photographer photographer : photographerList){
 			SearchResponseDTO searchResponseDTO = new SearchResponseDTO();
 			searchResponseDTO.setName(photographer.getName());
+			searchResponseDTO.setLocality(photographer.getLocality().getDescription());
+			searchResponseDTO.setStartingPrice(photographer.getStartingPrice());
 			searchResponseDTO.setMainImagerURL(photographer.getAttachments().get(0).getImageURL());
 			recommendationList.add(searchResponseDTO);
 		}

@@ -61,6 +61,9 @@ public class Photographer implements Serializable{
 	@Column(name="priority")
 	private Long priority;
 	
+	@Column(name = "starting_price")
+	private String startingPrice;
+	
 	@OneToMany(mappedBy="entityId")
 	private List<EntityServices> photographerServices;
 	
@@ -169,6 +172,14 @@ public class Photographer implements Serializable{
 
 	public void setPhotographerFilters(List<EntityFilters> photographerFilters) {
 		this.photographerFilters = photographerFilters;
+	}
+
+	public String getStartingPrice() {
+		return startingPrice;
+	}
+
+	public void setStartingPrice(String startingPrice) {
+		this.startingPrice = startingPrice;
 	}
 	
 }

@@ -74,6 +74,9 @@ public class Venue implements Serializable{
 	
 	@Column(name="priority")
 	private Long priority;
+	
+	@Column(name = "starting_price")
+	private String startingPrice;
 
 	public Long getPriority() {
 		return priority;
@@ -201,6 +204,14 @@ public class Venue implements Serializable{
 
 	public void setVenueFilters(List<EntityFilters> venueFilters) {
 		this.venueFilters = venueFilters;
+	}
+
+	public String getStartingPrice() {
+		return startingPrice;
+	}
+
+	public void setStartingPrice(String startingPrice) {
+		this.startingPrice = startingPrice;
 	}
 	
 }

@@ -66,6 +66,9 @@ public class Decorator implements Serializable{
 	
 	@Column(name="priority")
 	private Long priority;
+	
+	@Column(name = "starting_price")
+	private String startingPrice;
 
 	public Long getPriority() {
 		return priority;
@@ -170,4 +173,13 @@ public class Decorator implements Serializable{
 	public void setDecoratorFilters(List<EntityFilters> decoratorFilters) {
 		this.decoratorFilters = decoratorFilters;
 	}
+
+	public String getStartingPrice() {
+		return startingPrice;
+	}
+
+	public void setStartingPrice(String startingPrice) {
+		this.startingPrice = startingPrice;
+	}
+	
 }

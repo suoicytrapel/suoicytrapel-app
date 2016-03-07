@@ -7,6 +7,8 @@ public class SearchResponseDTO {
 	private String name;
 	private List<String> attachmentURL;
 	private String mainImagerURL;
+	private String startingPrice;
+	private String locality;
 	
 	public SearchResponseDTO() {
 		super();
@@ -35,4 +37,17 @@ public class SearchResponseDTO {
 	public void setMainImagerURL(String mainImagerURL) {
 		this.mainImagerURL = mainImagerURL;
 	}
+	public String getStartingPrice() {
+		return startingPrice;
+	}
+	public void setStartingPrice(String startingPrice) {
+		this.startingPrice = startingPrice;
+	}
+	public String getLocality() {
+		return locality;
+	}
+	public void setLocality(String locality) {
+		this.locality = locality;
+	}
+	
 }

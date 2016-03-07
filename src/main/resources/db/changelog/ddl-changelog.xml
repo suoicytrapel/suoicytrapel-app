@@ -515,4 +515,14 @@
 		</sql>
 	</changeSet>
 	
+	<changeSet author="msingla" id="1.32">
+		<sql>
+			ALTER TABLE venue ADD COLUMN starting_price varchar (10);
+			ALTER TABLE caterer ADD COLUMN starting_price varchar (10);
+			ALTER TABLE decorater ADD COLUMN starting_price varchar (10);
+			ALTER TABLE photographer ADD COLUMN starting_price varchar (10);
+			ALTER TABLE rental ADD COLUMN starting_price varchar (10);
+		</sql>
+	</changeSet>
+	
 </databaseChangeLog>

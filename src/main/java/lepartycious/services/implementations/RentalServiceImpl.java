@@ -78,10 +78,12 @@ public class RentalServiceImpl implements RentalService {
 	private void populateRentalResults(
 			List<SearchResponseDTO> searchResponseDTOList, SearchRequestDTO searchDTO, FilterWrapperDTO filters) {
 		List<Rental> Rentals = rentalDAO.getRentals(searchDTO.getCityId(), searchDTO.getSearchString(), searchDTO.getOffset(), searchDTO.getLimit(), searchDTO.getSortField(), searchDTO.getSortOrder(), filters);
-		for(Rental Rental : Rentals){
+		for(Rental rental : Rentals){
 			SearchResponseDTO searchResponseDTO = new SearchResponseDTO();
-			searchResponseDTO.setName(Rental.getName());
-			searchResponseDTO.setMainImagerURL(Rental.getAttachments().get(0).getImageURL());
+			searchResponseDTO.setName(rental.getName());
+			searchResponseDTO.setLocality(rental.getLocality().getDescription());
+			searchResponseDTO.setStartingPrice(rental.getStartingPrice());
+			searchResponseDTO.setMainImagerURL(rental.getAttachments().get(0).getImageURL());
 			searchResponseDTOList.add(searchResponseDTO);
 		}
 	}
@@ -129,6 +131,8 @@ public class RentalServiceImpl implements RentalService {
 		for(Rental rental : rentalList){
 			SearchResponseDTO searchResponseDTO = new SearchResponseDTO();
 			searchResponseDTO.setName(rental.getName());
+			searchResponseDTO.setLocality(rental.getLocality().getDescription());
+			searchResponseDTO.setStartingPrice(rental.getStartingPrice());
 			searchResponseDTO.setMainImagerURL(rental.getAttachments().get(0).getImageURL());
 			recommendationList.add(searchResponseDTO);
 		}
