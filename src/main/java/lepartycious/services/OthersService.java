@@ -12,13 +12,13 @@ import lepartycious.dtos.responseDTOs.SearchResponseDTO;
 import lepartycious.dtos.responseDTOs.SearchResponseDTOWrapper;
 
 @Transactional(readOnly=true)
-public interface RentalService {
+public interface OthersService {
 	
-	public SearchResponseDTOWrapper getRentals(SearchRequestDTO searchDTO);
+	public SearchResponseDTOWrapper getOthers(SearchRequestDTO searchDTO);
 
-	public List<String> loadRentalList(SearchRequestDTO searchRequestDTO);
+	public List<String> loadOthersList(SearchRequestDTO searchRequestDTO);
 	
-	public DetailResponseDTO fetchRentalDetails(DataRequestDTO dataRequestDTO);
+	public DetailResponseDTO fetchOthersDetails(DataRequestDTO dataRequestDTO);
 	
 	public List<SearchResponseDTO> fetchRecomendations(Long cityId);
 	

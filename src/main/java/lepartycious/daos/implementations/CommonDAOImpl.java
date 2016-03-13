@@ -8,8 +8,9 @@ import lepartycious.models.Amenities;
 import lepartycious.models.Caterer;
 import lepartycious.models.Decorator;
 import lepartycious.models.Filter;
+import lepartycious.models.Others;
 import lepartycious.models.Photographer;
-import lepartycious.models.Rental;
+import lepartycious.models.Entertainment;
 import lepartycious.models.Room;
 import lepartycious.models.Service;
 import lepartycious.models.Venue;
@@ -57,10 +58,10 @@ public class CommonDAOImpl extends BaseDAOImpl implements CommonDAO{
 	}
 
 	@Override
-	public List<Rental> getRecentlyAddedRentals(Long cityId) {
-		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Rental.class);
+	public List<Entertainment> getRecentlyAddedEntertainers(Long cityId) {
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Entertainment.class);
 		criteria = createRecentAddedCriteria(criteria, cityId);
-		List<Rental> rentalList = criteria.list();
+		List<Entertainment> rentalList = criteria.list();
 		return rentalList;
 	}
 
@@ -85,7 +86,7 @@ public class CommonDAOImpl extends BaseDAOImpl implements CommonDAO{
 	}
 
 	@Override
-	@CacheEvict(value = {"commonCache", "cityCache", "decoratorCache", "venueCache", "photographerCache", "catererCache", "rentalCache"}, allEntries = true)
+	@CacheEvict(value = {"commonCache", "cityCache", "decoratorCache", "venueCache", "photographerCache", "catererCache", "entertainmentCache", "othersCache"}, allEntries = true)
 	public boolean pushDataToDatabase(String query) {
 		boolean isQuerySaved = false;
 		SQLQuery sqlQuery = sessionFactory.getCurrentSession().createSQLQuery(query);
@@ -131,5 +132,13 @@ public class CommonDAOImpl extends BaseDAOImpl implements CommonDAO{
 		criteria.add(Restrictions.eq("filterType", ofType));
 		List<Filter> filterList = criteria.list();
 		return filterList;
+	}
+
+	@Override
+	public List<Others> getRecentlyAddedOthers(Long cityId) {
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Others.class);
+		criteria = createRecentAddedCriteria(criteria, cityId);
+		List<Others> rentalList = criteria.list();
+		return rentalList;
 	}
 }

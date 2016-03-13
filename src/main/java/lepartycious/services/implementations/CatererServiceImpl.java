@@ -5,12 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
-import java.util.Map.Entry;
-
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.util.CollectionUtils;
 
 import lepartycious.daos.CatererDAO;
 import lepartycious.daos.CityDAO;
@@ -26,16 +20,18 @@ import lepartycious.dtos.responseDTOs.SearchResponseDTO;
 import lepartycious.dtos.responseDTOs.SearchResponseDTOWrapper;
 import lepartycious.dtos.responseDTOs.TabResponseDTO;
 import lepartycious.models.Address;
-import lepartycious.models.Amenities;
 import lepartycious.models.Attachment;
 import lepartycious.models.Caterer;
 import lepartycious.models.City;
 import lepartycious.models.EntityServices;
 import lepartycious.models.Filter;
 import lepartycious.models.Locality;
-import lepartycious.models.Room;
-import lepartycious.models.Venue;
 import lepartycious.services.CatererService;
+
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 @Service
 public class CatererServiceImpl implements CatererService {
@@ -57,9 +53,6 @@ public class CatererServiceImpl implements CatererService {
 		Long totalCatererCount = null;
 		if(searchDTO.getOffset() == null || searchDTO.getOffset() == 0){
 			totalCatererCount = catererDAO.getCatererCount(searchDTO.getCityId(), searchDTO.getSearchString(), filters);
-			if(totalCatererCount < 1){
-				throw new IllegalArgumentException("No Records Found");
-			}
 		}
 		populateCatererResults(searchResponseDTOList, searchDTO, filters);
 		searchResponseDTOWrapper.setResultCount(totalCatererCount);
@@ -72,7 +65,7 @@ public class CatererServiceImpl implements CatererService {
 		List<String> list = new ArrayList<String>();
 		List<Caterer> Caterers = catererDAO.loadCatererList(searchRequestDTO.getCityId(), searchRequestDTO.getSearchString());
 		if(CollectionUtils.isEmpty(Caterers)){
-			throw new IllegalArgumentException("No Records Found");
+			return list;
 		}
 		for(Caterer Caterer : Caterers){
 			list.add(Caterer.getName());

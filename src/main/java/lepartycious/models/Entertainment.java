@@ -16,8 +16,8 @@ import javax.persistence.Table;
 import javax.persistence.Version;
 
 @Entity
-@Table(name="rental")
-public class Rental implements Serializable{
+@Table(name="entertainment")
+public class Entertainment implements Serializable{
 	
 	/**
 	 * 
@@ -27,7 +27,7 @@ public class Rental implements Serializable{
 	@Id
 	@Column(name="id")
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long rentalId;
+	private long entertainmentId;
 	
 	@Column(name = "name", nullable=false)
 	private String name;
@@ -35,8 +35,8 @@ public class Rental implements Serializable{
 	@Column(name = "description")
 	private String description;
 	
-	@Column(name="rental_type")
-	private String rentalType;
+	@Column(name="entertainment_type")
+	private String entertainmentType;
 	
 	@Column(name = "comments")
 	private String comments;
@@ -65,31 +65,23 @@ public class Rental implements Serializable{
 	private Long priority;
 	
 	@OneToMany(mappedBy="entityId")
-	private List<EntityServices> rentalServices;
+	private List<EntityServices> services;
 	
 	@Column(name = "addition_details")
 	private String additionalDetails;
 	
 	@OneToMany(mappedBy="entityId")
-	private List<EntityFilters> rentalFilters;
+	private List<EntityFilters> filters;
 	
 	@Column(name = "starting_price")
 	private String startingPrice;
-	
-	public Long getPriority() {
-		return priority;
+
+	public long getEntertainmentId() {
+		return entertainmentId;
 	}
 
-	public void setPriority(Long priority) {
-		this.priority = priority;
-	}
-
-	public long getRentalId() {
-		return rentalId;
-	}
-
-	public void setRentalId(long rentalId) {
-		this.rentalId = rentalId;
+	public void setEntertainmentId(long entertainmentId) {
+		this.entertainmentId = entertainmentId;
 	}
 
 	public String getName() {
@@ -106,6 +98,14 @@ public class Rental implements Serializable{
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public String getEntertainmentType() {
+		return entertainmentType;
+	}
+
+	public void setEntertainmentType(String entertainmentType) {
+		this.entertainmentType = entertainmentType;
 	}
 
 	public String getComments() {
@@ -156,7 +156,6 @@ public class Rental implements Serializable{
 		this.city = city;
 	}
 
-
 	public Locality getLocality() {
 		return locality;
 	}
@@ -165,20 +164,20 @@ public class Rental implements Serializable{
 		this.locality = locality;
 	}
 
-	public String getRentalType() {
-		return rentalType;
+	public Long getPriority() {
+		return priority;
 	}
 
-	public void setRentalType(String rentalType) {
-		this.rentalType = rentalType;
+	public void setPriority(Long priority) {
+		this.priority = priority;
 	}
 
-	public List<EntityServices> getRentalServices() {
-		return rentalServices;
+	public List<EntityServices> getServices() {
+		return services;
 	}
 
-	public void setRentalServices(List<EntityServices> rentalServices) {
-		this.rentalServices = rentalServices;
+	public void setServices(List<EntityServices> services) {
+		this.services = services;
 	}
 
 	public String getAdditionalDetails() {
@@ -189,12 +188,12 @@ public class Rental implements Serializable{
 		this.additionalDetails = additionalDetails;
 	}
 
-	public List<EntityFilters> getRentalFilters() {
-		return rentalFilters;
+	public List<EntityFilters> getFilters() {
+		return filters;
 	}
 
-	public void setRentalFilters(List<EntityFilters> rentalFilters) {
-		this.rentalFilters = rentalFilters;
+	public void setFilters(List<EntityFilters> filters) {
+		this.filters = filters;
 	}
 
 	public String getStartingPrice() {
@@ -204,5 +203,4 @@ public class Rental implements Serializable{
 	public void setStartingPrice(String startingPrice) {
 		this.startingPrice = startingPrice;
 	}
-	
 }

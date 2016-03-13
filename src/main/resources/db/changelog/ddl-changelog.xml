@@ -166,11 +166,11 @@
 	<changeSet author="msingla" id="1.7">
 		<preConditions onFail="MARK_RAN">
 			<not>
-				<tableExists tableName="rental" />
+				<tableExists tableName="entertainment" />
 			</not>
 		</preConditions>
 		<sql>
-			CREATE TABLE rental (
+			CREATE TABLE entertainment (
 			id bigint PRIMARY KEY AUTO_INCREMENT,
 			name varchar (25) NOT NULL,
 			description varchar (2550),
@@ -178,9 +178,35 @@
 			comments varchar (3000),
 			rating float,
 			version bigint,
-			rental_type varchar(20),
+			entertainment_type varchar(20),
 			added_on timestamp NOT NULL DEFAULT now(),
 			city_id bigint,
+			FOREIGN KEY (city_id) REFERENCES city (id),
+			locality_id bigint,
+			FOREIGN KEY (locality_id) REFERENCES locality (id)
+			);
+		</sql>
+	</changeSet>
+	
+	<changeSet author="msingla" id="1.8">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<tableExists tableName="miscellaneous" />
+			</not>
+		</preConditions>
+		<sql>
+			CREATE TABLE miscellaneous (
+			id bigint PRIMARY KEY AUTO_INCREMENT,
+			name varchar (25) NOT NULL,
+			description varchar (2550),
+			addition_details varchar (3000),
+			comments varchar (3000),
+			rating float,
+			version bigint,
+			miscellaneous_type varchar(20),
+			added_on timestamp NOT NULL DEFAULT now(),
+			city_id bigint,
+			priority bigint,
 			FOREIGN KEY (city_id) REFERENCES city (id),
 			locality_id bigint,
 			FOREIGN KEY (locality_id) REFERENCES locality (id)
@@ -358,11 +384,11 @@
 	<changeSet author="msingla" id="1.18">
 		<preConditions onFail="MARK_RAN">
 			<not>
-				<columnExists columnName="priority" tableName="rental" />
+				<columnExists columnName="priority" tableName="entertainment" />
 			</not>
 		</preConditions>
 		<sql>
-			ALTER TABLE rental ADD COLUMN priority bigint;
+			ALTER TABLE entertainment ADD COLUMN priority bigint;
 		</sql>
 	</changeSet>
 	
@@ -510,8 +536,9 @@
 			ALTER TABLE venue AUTO_INCREMENT = 100000;
 			ALTER TABLE caterer AUTO_INCREMENT = 200000;
 			ALTER TABLE photographer AUTO_INCREMENT = 300000;
-			ALTER TABLE rental AUTO_INCREMENT = 400000;
+			ALTER TABLE entertainment AUTO_INCREMENT = 400000;
 			ALTER TABLE decorater AUTO_INCREMENT = 500000;
+			ALTER TABLE miscellaneous AUTO_INCREMENT = 600000;
 		</sql>
 	</changeSet>
 	
@@ -521,7 +548,8 @@
 			ALTER TABLE caterer ADD COLUMN starting_price varchar (10);
 			ALTER TABLE decorater ADD COLUMN starting_price varchar (10);
 			ALTER TABLE photographer ADD COLUMN starting_price varchar (10);
-			ALTER TABLE rental ADD COLUMN starting_price varchar (10);
+			ALTER TABLE entertainment ADD COLUMN starting_price varchar (10);
+			ALTER TABLE miscellaneous ADD COLUMN starting_price varchar (10);
 		</sql>
 	</changeSet>
 	

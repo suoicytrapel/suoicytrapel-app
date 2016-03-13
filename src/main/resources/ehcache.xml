@@ -16,7 +16,11 @@
 		   maxEntriesLocalHeap="200"
 		   timeToLiveSeconds="60000">
 	</cache>
-	<cache name="rentalCache"
+	<cache name="entertainmentCache"
+		   maxEntriesLocalHeap="200"
+		   timeToLiveSeconds="60000">
+	</cache>
+	<cache name="othersCache"
 		   maxEntriesLocalHeap="200"
 		   timeToLiveSeconds="60000">
 	</cache>

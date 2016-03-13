@@ -17,14 +17,16 @@ import lepartycious.dtos.responseDTOs.SearchResponseDTO;
 import lepartycious.dtos.responseDTOs.SearchResponseDTOWrapper;
 import lepartycious.models.Caterer;
 import lepartycious.models.Decorator;
+import lepartycious.models.Entertainment;
+import lepartycious.models.Others;
 import lepartycious.models.Photographer;
-import lepartycious.models.Rental;
 import lepartycious.models.Venue;
 import lepartycious.services.CatererService;
 import lepartycious.services.CommonService;
 import lepartycious.services.DecoratorService;
+import lepartycious.services.EntertainmentService;
+import lepartycious.services.OthersService;
 import lepartycious.services.PhotographerService;
-import lepartycious.services.RentalService;
 import lepartycious.services.VenueService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +40,10 @@ public class CommonServiceImpl implements CommonService {
 	private VenueService venueService;
 
 	@Autowired
-	private RentalService rentalService;
+	private EntertainmentService entertainmentService;
+
+	@Autowired
+	private OthersService othersService;
 
 	@Autowired
 	private PhotographerService photographerService;
@@ -66,11 +71,14 @@ public class CommonServiceImpl implements CommonService {
 		else if(SearchTypeEnum.DECORATOR.toString().equals(searchDTO.getSearchType())){
 			return decoratorService.getDecorators(searchDTO);
 		}
-		else if(SearchTypeEnum.RENTAL.toString().equals(searchDTO.getSearchType())){
-			return rentalService.getRentals(searchDTO);
+		else if(SearchTypeEnum.ENTERTAINMENT.toString().equals(searchDTO.getSearchType())){
+			return entertainmentService.getRentals(searchDTO);
+		}
+		else if(SearchTypeEnum.OTHERS.toString().equals(searchDTO.getSearchType())){
+			return othersService.getOthers(searchDTO);
 		}
 		else{
-			return null;
+			throw new IllegalArgumentException("Invalid Category");
 		}
 
 	}
@@ -89,11 +97,14 @@ public class CommonServiceImpl implements CommonService {
 		else if(SearchTypeEnum.DECORATOR.toString().equals(searchDTO.getSearchType())){
 			return decoratorService.loadDecoratorList(searchDTO);
 		}
-		else if(SearchTypeEnum.RENTAL.toString().equals(searchDTO.getSearchType())){
-			return rentalService.loadRentalList(searchDTO);
+		else if(SearchTypeEnum.ENTERTAINMENT.toString().equals(searchDTO.getSearchType())){
+			return entertainmentService.loadRentalList(searchDTO);
+		}
+		else if(SearchTypeEnum.OTHERS.toString().equals(searchDTO.getSearchType())){
+			return othersService.loadOthersList(searchDTO);
 		}
 		else{
-			return null;
+			throw new IllegalArgumentException("Invalid Category");
 		}
 	}
 
@@ -112,8 +123,8 @@ public class CommonServiceImpl implements CommonService {
 		else if(SearchTypeEnum.CATERER.toString().equals(dataRequestDTO.getSearchType())){
 			return catererService.fetchCatererDetails(dataRequestDTO);
 		}
-		else if(SearchTypeEnum.RENTAL.toString().equals(dataRequestDTO.getSearchType())){
-			return rentalService.fetchRentalDetails(dataRequestDTO);
+		else if(SearchTypeEnum.ENTERTAINMENT.toString().equals(dataRequestDTO.getSearchType())){
+			return entertainmentService.fetchRentalDetails(dataRequestDTO);
 		}
 		else if(SearchTypeEnum.PHOTOGRAPHER.toString().equals(dataRequestDTO.getSearchType())){
 			return photographerService.fetchPhotographerDetails(dataRequestDTO);
@@ -121,8 +132,11 @@ public class CommonServiceImpl implements CommonService {
 		else if(SearchTypeEnum.DECORATOR.toString().equals(dataRequestDTO.getSearchType())){
 			return decoratorService.fetchDecoratorDetails(dataRequestDTO);
 		}
+		else if(SearchTypeEnum.OTHERS.toString().equals(dataRequestDTO.getSearchType())){
+			return othersService.fetchOthersDetails(dataRequestDTO);
+		}
 		else{
-			return null;
+			throw new IllegalArgumentException("Invalid Category");
 		}
 	}
 
@@ -134,8 +148,8 @@ public class CommonServiceImpl implements CommonService {
 		else if(SearchTypeEnum.CATERER.toString().equals(searchType)){
 			return catererService.loadFilters(cityId);
 		}
-		else if(SearchTypeEnum.RENTAL.toString().equals(searchType)){
-			return rentalService.loadFilters(cityId);
+		else if(SearchTypeEnum.ENTERTAINMENT.toString().equals(searchType)){
+			return entertainmentService.loadFilters(cityId);
 		}
 		else if(SearchTypeEnum.PHOTOGRAPHER.toString().equals(searchType)){
 			return photographerService.loadFilters(cityId);
@@ -143,8 +157,11 @@ public class CommonServiceImpl implements CommonService {
 		else if(SearchTypeEnum.DECORATOR.toString().equals(searchType)){
 			return decoratorService.loadFilters(cityId);
 		}
+		else if(SearchTypeEnum.OTHERS.toString().equals(searchType)){
+			return othersService.loadFilters(cityId);
+		}
 		else{
-			return null;
+			throw new IllegalArgumentException("Invalid Category");
 		}
 	}
 
@@ -157,8 +174,8 @@ public class CommonServiceImpl implements CommonService {
 		if(SearchTypeEnum.CATERER.toString().equals(searchType)){
 			return catererService.fetchRecomendations(cityId);
 		}
-		if(SearchTypeEnum.RENTAL.toString().equals(searchType)){
-			return rentalService.fetchRecomendations(cityId);
+		if(SearchTypeEnum.ENTERTAINMENT.toString().equals(searchType)){
+			return entertainmentService.fetchRecomendations(cityId);
 		}
 		if(SearchTypeEnum.PHOTOGRAPHER.toString().equals(searchType)){
 			return photographerService.fetchRecomendations(cityId);
@@ -166,8 +183,11 @@ public class CommonServiceImpl implements CommonService {
 		if(SearchTypeEnum.DECORATOR.toString().equals(searchType)){
 			return decoratorService.fetchRecomendations(cityId);
 		}
+		if(SearchTypeEnum.OTHERS.toString().equals(searchType)){
+			return othersService.fetchRecomendations(cityId);
+		}
 		else{
-			return null;
+			throw new IllegalArgumentException("Invalid Category");
 		}
 	}
 
@@ -197,15 +217,15 @@ public class CommonServiceImpl implements CommonService {
 			recentAdditions.put("Caterers", catererAdditions);
 		}
 
-		//Fetching Recent Rentals
+		//Fetching Entertainment Rentals
 		List<AddedDTO> rentalAdditions = new ArrayList<AddedDTO>();
-		List<Rental> rentalList =  commonDAO.getRecentlyAddedRentals(cityId);
-		for(Rental rental : rentalList){
-			AddedDTO details = new AddedDTO(rental.getName(), rental.getLocality().getName(), rental.getCity().getName(), SearchTypeEnum.RENTAL.toString()); 
+		List<Entertainment> rentalList =  commonDAO.getRecentlyAddedEntertainers(cityId);
+		for(Entertainment rental : rentalList){
+			AddedDTO details = new AddedDTO(rental.getName(), rental.getLocality().getName(), rental.getCity().getName(), SearchTypeEnum.ENTERTAINMENT.toString()); 
 			rentalAdditions.add(details);
 		}
 		if(!CollectionUtils.isEmpty(rentalAdditions)){
-			recentAdditions.put("Rentals", rentalAdditions);
+			recentAdditions.put("Entertainers", rentalAdditions);
 		}
 
 		//Fetching Recent Decorators
@@ -228,6 +248,17 @@ public class CommonServiceImpl implements CommonService {
 		}
 		if(!CollectionUtils.isEmpty(photographerAdditions)){
 			recentAdditions.put("Photographers", photographerAdditions);
+		}
+
+		//Fetching Recent Rentals
+		List<AddedDTO> othersAdditions = new ArrayList<AddedDTO>();
+		List<Others> othersList =  commonDAO.getRecentlyAddedOthers(cityId);
+		for(Others other : othersList){
+			AddedDTO details = new AddedDTO(other.getName(), other.getLocality().getName(), other.getCity().getName(), SearchTypeEnum.OTHERS.toString()); 
+			othersAdditions.add(details);
+		}
+		if(!CollectionUtils.isEmpty(othersAdditions)){
+			recentAdditions.put("Others", othersAdditions);
 		}
 		return recentAdditions;
 	}

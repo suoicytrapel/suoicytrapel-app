@@ -49,7 +49,7 @@ public class City implements Serializable{
 	private List<Decorator> decorators;
 	
 	@OneToMany(mappedBy="city")
-	private List<Rental> rentals;
+	private List<Entertainment> rentals;
 	
 	@OneToMany(mappedBy="city")
 	private List<Locality> localities;
@@ -110,11 +110,11 @@ public class City implements Serializable{
 		this.decorators = decorators;
 	}
 
-	public List<Rental> getRentals() {
+	public List<Entertainment> getRentals() {
 		return rentals;
 	}
 
-	public void setRentals(List<Rental> rentals) {
+	public void setRentals(List<Entertainment> rentals) {
 		this.rentals = rentals;
 	}
 

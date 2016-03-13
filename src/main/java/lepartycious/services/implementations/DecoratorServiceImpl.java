@@ -5,10 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.util.CollectionUtils;
-
 import lepartycious.daos.CityDAO;
 import lepartycious.daos.CommonDAO;
 import lepartycious.daos.DecoratorDAO;
@@ -24,13 +20,16 @@ import lepartycious.dtos.responseDTOs.SearchResponseDTOWrapper;
 import lepartycious.dtos.responseDTOs.TabResponseDTO;
 import lepartycious.models.Address;
 import lepartycious.models.Attachment;
-import lepartycious.models.Caterer;
 import lepartycious.models.City;
 import lepartycious.models.Decorator;
 import lepartycious.models.EntityServices;
 import lepartycious.models.Filter;
 import lepartycious.models.Locality;
 import lepartycious.services.DecoratorService;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 @Service
 public class DecoratorServiceImpl implements DecoratorService {
@@ -52,9 +51,6 @@ public class DecoratorServiceImpl implements DecoratorService {
 		FilterWrapperDTO filters = searchDTO.getFilters();
 		if(searchDTO.getOffset() == null || searchDTO.getOffset() == 0){
 			totalDecoratorCount = decoratorDAO.getDecoratorCount(searchDTO.getCityId(), searchDTO.getSearchString(), filters);
-			if(totalDecoratorCount < 1){
-				throw new IllegalArgumentException("No Records Found");
-			}
 		}
 		populateDecoratorResults(searchResponseDTOList, searchDTO, filters);
 		searchResponseDTOWrapper.setResultCount(totalDecoratorCount);
@@ -67,7 +63,7 @@ public class DecoratorServiceImpl implements DecoratorService {
 		List<String> list = new ArrayList<String>();
 		List<Decorator> decorators = decoratorDAO.loadDecoratorList(searchRequestDTO.getCityId(), searchRequestDTO.getSearchString());
 		if(CollectionUtils.isEmpty(decorators)){
-			throw new IllegalArgumentException("No Records Found");
+			return list;
 		}
 		for(Decorator Decorator : decorators){
 			list.add(Decorator.getName());

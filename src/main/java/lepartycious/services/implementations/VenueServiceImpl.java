@@ -4,33 +4,31 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 
 import lepartycious.daos.CityDAO;
 import lepartycious.daos.CommonDAO;
 import lepartycious.daos.VenueDAO;
 import lepartycious.dtos.requestDTOs.DataRequestDTO;
-import lepartycious.dtos.requestDTOs.FilterRequestDTO;
 import lepartycious.dtos.requestDTOs.FilterWrapperDTO;
 import lepartycious.dtos.requestDTOs.SearchRequestDTO;
 import lepartycious.dtos.responseDTOs.AttachmentResponseDTO;
 import lepartycious.dtos.responseDTOs.DetailResponseDTO;
 import lepartycious.dtos.responseDTOs.FilterResponseDTO;
 import lepartycious.dtos.responseDTOs.FilterResponseWrapperDTO;
-import lepartycious.dtos.responseDTOs.TabResponseDTO;
 import lepartycious.dtos.responseDTOs.SearchResponseDTO;
 import lepartycious.dtos.responseDTOs.SearchResponseDTOWrapper;
+import lepartycious.dtos.responseDTOs.TabResponseDTO;
 import lepartycious.models.Address;
 import lepartycious.models.Amenities;
 import lepartycious.models.Attachment;
 import lepartycious.models.City;
+import lepartycious.models.EntityServices;
 import lepartycious.models.Filter;
 import lepartycious.models.Locality;
 import lepartycious.models.Room;
 import lepartycious.models.Venue;
 import lepartycious.models.VenueAmenities;
 import lepartycious.models.VenueRooms;
-import lepartycious.models.EntityServices;
 import lepartycious.services.VenueService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,9 +56,6 @@ public class VenueServiceImpl implements VenueService {
 		Long totalVenueCount = null;
 		if(searchDTO.getOffset() == null || searchDTO.getOffset() == 0){
 			totalVenueCount = venueDAO.getVenueCount(searchDTO.getCityId(), searchDTO.getSearchString(), filters);
-			if(totalVenueCount < 1){
-				throw new IllegalArgumentException("No Records Found");
-			}
 		}
 		populateVenueResults(searchResponseDTOList, searchDTO, filters);
 		searchResponseDTOWrapper.setResultCount(totalVenueCount);
@@ -73,7 +68,7 @@ public class VenueServiceImpl implements VenueService {
 		List<String> list = new ArrayList<String>();
 		List<Venue> venues = venueDAO.loadVenueList(searchRequestDTO.getCityId(), searchRequestDTO.getSearchString());
 		if(CollectionUtils.isEmpty(venues)){
-			throw new IllegalArgumentException("No Records Found");
+			return list;
 		}
 		for(Venue venue : venues){
 			list.add(venue.getName());
