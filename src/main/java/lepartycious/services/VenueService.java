@@ -19,7 +19,7 @@ public interface VenueService {
 
 	public List<String> loadVenueList(SearchRequestDTO searchRequestDTO);
 	
-	public DetailResponseDTO fetchVenueDetails(DataRequestDTO dataRequestDTO);
+	public DetailResponseDTO fetchVenueDetails(Long cityId, String name);
 	
 	public FilterResponseWrapperDTO loadFilters(Long cityId);
 	

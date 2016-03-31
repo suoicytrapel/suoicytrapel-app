@@ -1,6 +1,7 @@
 package lepartycious.services.implementations;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -80,6 +81,7 @@ public class EntertainmentServiceImpl implements EntertainmentService {
 			searchResponseDTO.setLocality(rental.getLocality().getDescription());
 			searchResponseDTO.setStartingPrice(rental.getStartingPrice());
 			searchResponseDTO.setMainImagerURL(rental.getAttachments().get(0).getImageURL());
+			searchResponseDTO.setStartingPrice(rental.getStartingPrice());
 			searchResponseDTOList.add(searchResponseDTO);
 		}
 	}
@@ -90,6 +92,10 @@ public class EntertainmentServiceImpl implements EntertainmentService {
 		List<AttachmentResponseDTO> attachmentList = new ArrayList<AttachmentResponseDTO>();
 		Map<String, List<TabResponseDTO>> tabMap = new HashMap<String, List<TabResponseDTO>>();
 		List<TabResponseDTO> serviceList = new ArrayList<TabResponseDTO>();
+		Map<String, String> policiesTabMap = new HashMap<String, String>();
+		int currentYear = Calendar.getInstance().get(Calendar.YEAR);
+		int servingSinceYear = Integer.parseInt(rental.getServingSince());
+		int experienceInYears = currentYear - servingSinceYear;
 		Address address = rental.getAddresses().get(0);
 		for(Attachment attachment : rental.getAttachments()){
 			AttachmentResponseDTO attachmentDTO = new AttachmentResponseDTO(attachment.getImageURL(), attachment.getHelpText());
@@ -103,6 +109,10 @@ public class EntertainmentServiceImpl implements EntertainmentService {
 		if(!CollectionUtils.isEmpty(serviceList)){
 			tabMap.put("Services", serviceList);
 		}
+		TabResponseDTO additionalInfoTabData = new TabResponseDTO();
+		additionalInfoTabData.setOutstationExpenses(rental.getTravelStayExpenses());
+		additionalInfoTabData.setGenre(rental.getGenre());
+		additionalInfoTabData.setExperience(Integer.toString(experienceInYears));
 		DetailResponseDTO detailResponseDTO = new DetailResponseDTO();
 		detailResponseDTO.setName(rental.getName());
 		detailResponseDTO.setDescription(rental.getDescription());
@@ -114,9 +124,15 @@ public class EntertainmentServiceImpl implements EntertainmentService {
 		detailResponseDTO.setSecondaryPhoneNumber(address.getSecondaryPhone());
 		detailResponseDTO.setLatitude(address.getLatitude());
 		detailResponseDTO.setLongitude(address.getLongitude());
-		detailResponseDTO.setTabMap(tabMap);
+		if(!CollectionUtils.isEmpty(tabMap)){
+			detailResponseDTO.setServiceAmenityTabMap(tabMap);
+		}
 		detailResponseDTO.setAttachments(attachmentList);
-		//detailResponseDTO.setServices(serviceList);
+		detailResponseDTO.setServingSince(rental.getServingSince());
+		detailResponseDTO.setStartingFrom(rental.getStartingPrice());
+		detailResponseDTO.setPolicies(rental.getPolicies());
+		detailResponseDTO.setAdditionalInfo(additionalInfoTabData);
+		detailResponseDTO.setGroup(rental.isGroup());
 		return detailResponseDTO;
 	}
 

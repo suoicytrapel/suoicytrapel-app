@@ -82,6 +82,9 @@ public class CatererServiceImpl implements CatererService {
 			searchResponseDTO.setLocality(caterer.getLocality().getDescription());
 			searchResponseDTO.setStartingPrice(caterer.getStartingPrice());
 			searchResponseDTO.setMainImagerURL(caterer.getAttachments().get(0).getImageURL());
+			searchResponseDTO.setMaxCapacity(caterer.getMaxCapacity());
+			searchResponseDTO.setIsPureVeg(caterer.getIsPureVeg());
+			searchResponseDTO.setMinCapacity(caterer.getMinCapacity());
 			searchResponseDTOList.add(searchResponseDTO);
 		}
 	}
@@ -133,9 +136,17 @@ public class CatererServiceImpl implements CatererService {
 		detailResponseDTO.setSecondaryPhoneNumber(address.getSecondaryPhone());
 		detailResponseDTO.setLatitude(address.getLatitude());
 		detailResponseDTO.setLongitude(address.getLongitude());
-		detailResponseDTO.setTabMap(tabMap);
+		if(!CollectionUtils.isEmpty(tabMap)){
+			detailResponseDTO.setServiceAmenityTabMap(tabMap);
+		}
 		detailResponseDTO.setAttachments(attachmentList);
 		detailResponseDTO.setMenuImages(menuImageList);
+		detailResponseDTO.setIsPureVeg(caterer.getIsPureVeg());
+		detailResponseDTO.setPolicies(caterer.getPolicies());
+		detailResponseDTO.setServingSince(caterer.getServingSince());
+		detailResponseDTO.setMaxCapacity(caterer.getMaxCapacity());
+		detailResponseDTO.setStartingFrom(caterer.getStartingPrice());
+		detailResponseDTO.setMinCapacity(caterer.getMinCapacity());
 		return detailResponseDTO;
 	}
 
@@ -148,10 +159,14 @@ public class CatererServiceImpl implements CatererService {
 		List<FilterResponseDTO> events = new ArrayList<FilterResponseDTO>();
 		City city = cityDAO.getCityById(cityId);
 		List<Locality> localityList = city.getLocalities();
+		List<FilterResponseDTO> capacity = new ArrayList<FilterResponseDTO>();
+		List<FilterResponseDTO> catererType = new ArrayList<FilterResponseDTO>();
 		
 		List<lepartycious.models.Service> serviceList = commonDAO.getServiceFilters("CATERER", "SERVICE");
 		List<Filter> eventList = commonDAO.getRequiredFilters("ALL", "EVENT");
 		List<Filter> priceRangeList = commonDAO.getRequiredFilters("CATERER", "PRICE");
+		List<Filter> capacityFilters = commonDAO.getRequiredFilters("CATERER", "CAPACITY");
+		List<Filter> typeFilters = commonDAO.getRequiredFilters("CATERER", "TYPE");
 		
 		for(lepartycious.models.Service service : serviceList){
 			FilterResponseDTO filter = new FilterResponseDTO(service.getFilterDataName(), service.getServiceType(), service.getServiceId());
@@ -169,10 +184,20 @@ public class CatererServiceImpl implements CatererService {
 			FilterResponseDTO filter = new FilterResponseDTO(locality.getDescription(), null, locality.getLocalityId());
 			localities.add(filter);
 		}
+		for(Filter capFilter : capacityFilters){
+			FilterResponseDTO filter = new FilterResponseDTO(capFilter.getFilterName(), capFilter.getFilterType(), capFilter.getFilterid());
+			capacity.add(filter);
+		}
+		for(Filter typeFilter : typeFilters){
+			FilterResponseDTO filter = new FilterResponseDTO(typeFilter.getFilterName(), typeFilter.getFilterType(), typeFilter.getFilterid());
+			catererType.add(filter);
+		}
 		filterResponseWrapperDTO.setServices(services);
 		filterResponseWrapperDTO.setLocalities(localities);
 		filterResponseWrapperDTO.setPriceRange(prices);
 		filterResponseWrapperDTO.setEventType(events);
+		filterResponseWrapperDTO.setCapacity(capacity);
+		filterResponseWrapperDTO.setCatererType(catererType);
 		return filterResponseWrapperDTO;
 	}
 

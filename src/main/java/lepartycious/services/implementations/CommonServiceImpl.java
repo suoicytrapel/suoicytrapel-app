@@ -110,15 +110,8 @@ public class CommonServiceImpl implements CommonService {
 
 	@Override
 	public DetailResponseDTO fetchDetails(DataRequestDTO dataRequestDTO) {
-		String entityName = dataRequestDTO.getName();
-		if(entityName.contains("&type=")){
-			entityName = entityName.replaceAll("&type=", "+");
-			StringTokenizer strTokens = new StringTokenizer(entityName, "+");
-			dataRequestDTO.setName(strTokens.nextToken());
-			dataRequestDTO.setSearchType(strTokens.nextToken());
-		}
 		if(SearchTypeEnum.VENUE.toString().equals(dataRequestDTO.getSearchType())){
-			return venueService.fetchVenueDetails(dataRequestDTO);
+			return venueService.fetchVenueDetails(dataRequestDTO.getCityId(), dataRequestDTO.getName());
 		}
 		else if(SearchTypeEnum.CATERER.toString().equals(dataRequestDTO.getSearchType())){
 			return catererService.fetchCatererDetails(dataRequestDTO);

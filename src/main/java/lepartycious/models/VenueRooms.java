@@ -59,6 +59,9 @@ public class VenueRooms implements Serializable{
 	@Column(name = "added_on")
 	private Date addedOn;
 	
+	@Column(name = "number_of_rooms")
+	private Integer numberOfRooms;
+	
 	public long getId() {
 		return id;
 	}
@@ -146,5 +149,12 @@ public class VenueRooms implements Serializable{
 	public void setHotWaterAvailability(Boolean hotWaterAvailability) {
 		this.hotWaterAvailability = hotWaterAvailability;
 	}
-	
+
+	public Integer getNumberOfRooms() {
+		return numberOfRooms;
+	}
+
+	public void setNumberOfRooms(Integer numberOfRooms) {
+		this.numberOfRooms = numberOfRooms;
+	}
 }

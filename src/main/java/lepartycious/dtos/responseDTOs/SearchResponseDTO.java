@@ -9,6 +9,9 @@ public class SearchResponseDTO {
 	private String mainImagerURL;
 	private String startingPrice;
 	private String locality;
+	private String maxCapacity;
+	private Boolean isPureVeg;
+	private String minCapacity;
 	
 	public SearchResponseDTO() {
 		super();
@@ -49,5 +52,22 @@ public class SearchResponseDTO {
 	public void setLocality(String locality) {
 		this.locality = locality;
 	}
-	
+	public String getMaxCapacity() {
+		return maxCapacity;
+	}
+	public void setMaxCapacity(String maxCapacity) {
+		this.maxCapacity = maxCapacity;
+	}
+	public Boolean getIsPureVeg() {
+		return isPureVeg;
+	}
+	public void setIsPureVeg(Boolean isPureVeg) {
+		this.isPureVeg = isPureVeg;
+	}
+	public String getMinCapacity() {
+		return minCapacity;
+	}
+	public void setMinCapacity(String minCapacity) {
+		this.minCapacity = minCapacity;
+	}
 }

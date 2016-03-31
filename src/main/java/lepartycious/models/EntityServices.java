@@ -43,6 +43,17 @@ public class EntityServices implements Serializable{
 	@Column(name = "added_on")
 	private Date addedOn;
 	
+	@Column(name = "max_capacity")
+	private String maxCapacity;
+	
+	public String getMaxCapacity() {
+		return maxCapacity;
+	}
+
+	public void setMaxCapacity(String maxCapacity) {
+		this.maxCapacity = maxCapacity;
+	}
+	
 	public Service getServiceId() {
 		return serviceId;
 	}

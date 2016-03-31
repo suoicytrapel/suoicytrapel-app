@@ -102,6 +102,12 @@
 	    </sql>
     </changeSet>
     
+     <changeSet author="msingla" id="1.4.1">
+	    <sql>
+	    	insert into amenities (amenity_type, description, is_indoor_amenity, amenity_dimensions, added_on, is_filter) values ('INHOUSEDECOR', 'In House Decor', true, null, now(), true);
+	    </sql>
+    </changeSet>
+    
     <!-- Create Room Specific Data -->
     
     <changeSet author="msingla" id="1.5">
@@ -151,108 +157,27 @@
 	    </sql>
     </changeSet>
     
-	<!-- Create Venue Related Data -->    
-	
-    <!--  <changeSet author="msingla" id="1.6">
+	    <!-- Creating Capacity related filters -->
+    
+    <changeSet author="msingla" id="1.6.1">
 	    <sql>
-	    	insert into venue (name, description, type, comments, rating, added_on, city_id, locality_id, priority) values ('Yo China!', 'Yo China!', 'RESTAURANT', null, null, now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Chandigarh'), 1);
-	    	insert into address (address_line_1, address_line_2, city, state, pincode, primary_phone, secondary_phone, email, entity_id, version, added_on, latitude, longitude) values ('SCO 4 &amp; 5, Sector 9 D', 'Sector 9', 'Chandigarh', 'Chandigarh', 160101, '+91-9876556789', '0171-987678', 'venue@gmail.com', (select id from venue where name = 'Yo China!'), 0, now(), '30.7398', '76.7827');
-	    	insert into attachment (name, image_url, entity_id, version, added_on, attachment_type, help_text) values ('YoChina.jpg', 'yochina.jpg', (select id from venue where name = 'Yo China!'), 0, now(), 'COVER', 'Yo China Front View');
-	    	insert into entity_services (entity_id, service_id, min_service_cost, max_service_cost, version, added_on) values ((select id from venue where name = 'Yo China!'), (select id from service where tab_data_name = 'Dine In'), null, null, 0, now());
-	    	insert into entity_filters (entity_id, filter_id, version, added_on) values ((select id from venue where name = 'Yo China!'), (select id from filters where filter_type = 'ESTABLISHMENT' and filter_for_entity = 'VENUE' and filter_name = 'Restaurant'), 0, now());
+	    	insert into filters (filter_type, filter_for_entity, filter_name, added_on) values ('CAPACITY', 'VENUE', 'Upto 300 Persons', now());
+			insert into filters (filter_type, filter_for_entity, filter_name, added_on) values ('CAPACITY', 'VENUE', '300-600 Persons', now());
+			insert into filters (filter_type, filter_for_entity, filter_name, added_on) values ('CAPACITY', 'VENUE', '600-1000 Persons', now());
+			insert into filters (filter_type, filter_for_entity, filter_name, added_on) values ('CAPACITY', 'VENUE', 'More than 1000 Persons', now());
+			insert into filters (filter_type, filter_for_entity, filter_name, added_on) values ('CAPACITY', 'CATERER', 'Upto 300 Persons', now());
+			insert into filters (filter_type, filter_for_entity, filter_name, added_on) values ('CAPACITY', 'CATERER', '300-600 Persons', now());
+			insert into filters (filter_type, filter_for_entity, filter_name, added_on) values ('CAPACITY', 'CATERER', '600-1000 Persons', now());
+			insert into filters (filter_type, filter_for_entity, filter_name, added_on) values ('CAPACITY', 'CATERER', 'More than 1000 Persons', now());
+			insert into filters (filter_type, filter_for_entity, filter_name, added_on) values ('ESTABLISHMENT', 'VENUE', 'Marriage Gardens', now());
+			insert into filters (filter_type, filter_for_entity, filter_name, added_on) values ('ESTABLISHMENT', 'VENUE', 'Club/Lounge', now());
+			insert into filters (filter_type, filter_for_entity, filter_name, added_on) values ('ESTABLISHMENT', 'VENUE', 'Others', now());
+			insert into filters (filter_type, filter_for_entity, filter_name, added_on) values ('TYPE', 'CATERER', 'Pure Veg', now());
+			insert into filters (filter_type, filter_for_entity, filter_name, added_on) values ('TYPE', 'CATERER', 'Veg/Non-Veg', now());
+			insert into filters (filter_type, filter_for_entity, filter_name, added_on) values ('TYPE', 'CATERER', 'Bartenders', now());
 	    </sql>
     </changeSet>
-    
-    <changeSet author="msingla" id="1.7">
-	    <sql>
-			insert into venue (name, description, type, comments, rating, added_on, city_id, locality_id, priority) values ('Midnight Chef', 'Midnight Chef', 'RESTAURANT', null, null, now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Chandigarh'), 10);
-	    	insert into address (address_line_1, address_line_2, city, state, pincode, primary_phone, secondary_phone, email, entity_id, version, added_on, latitude, longitude) values ('Sector 35', 'Sector 35', 'Chandigarh', 'Chandigarh', 160101, '+91-0172-2254375', '+91-9876543219', 'venue@gmail.com', (select id from venue where name = 'Midnight Chef'), 0, now(), '30.7398', '76.7827');
-			insert into attachment (name, image_url, entity_id, version, added_on, attachment_type, help_text) values ('MidnightChef.jpg', 'midnightchef.jpg', (select id from venue where name = 'Midnight Chef'), 0, now(), 'COVER', 'Midnight Chef Image');
-	    	insert into entity_services (entity_id, service_id, min_service_cost, max_service_cost, version, added_on) values ((select id from venue where name = 'Midnight Chef'), (select id from service where tab_data_name = 'Dine In'), null, null, 0, now());
-	    	insert into entity_filters (entity_id, filter_id, version, added_on) values ((select id from venue where name = 'Midnight Chef'), (select id from filters where filter_type = 'ESTABLISHMENT' and filter_for_entity = 'VENUE' and filter_name = 'Restaurant'), 0, now());
-	    </sql>
-    </changeSet>
-    
-    <changeSet author="msingla" id="1.8">
-	    <sql>
-			insert into venue (name, description, type, comments, rating, added_on, city_id, locality_id, priority) values ('La Pino''z Pizza', 'La Pino''z Pizza', 'RESTAURANT', null, null, now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Chandigarh'), 20);	    	
-			insert into address (address_line_1, address_line_2, city, state, pincode, primary_phone, secondary_phone, email, entity_id, version, added_on, latitude, longitude) values ('Shop 10, Inner Market, Sector 9D', 'Sector 9', 'Chandigarh', 'Chandigarh', 160101, '+91-0172-256987', '+91-9879877890', 'venue@gmail.com', (select id from venue where name = 'La Pino''z Pizza'), 0, now(), '30.7398', '76.7827');	    	
-			insert into attachment (name, image_url, entity_id, version, added_on, attachment_type, help_text) values ('LaPinoPizza.jpg', 'lapinopizza.jpg', (select id from venue where name = 'La Pino''z Pizza'), 0, now(), 'COVER', 'Lapino Pizza Image');
-	    	insert into entity_services (entity_id, service_id, min_service_cost, max_service_cost, version, added_on) values ((select id from venue where name = 'La Pino''z Pizza'), (select id from service where tab_data_name = 'Dine In'), null, null, 0, now());
-	    	insert into entity_filters (entity_id, filter_id, version, added_on) values ((select id from venue where name = 'La Pino''z Pizza'), (select id from filters where filter_type = 'ESTABLISHMENT' and filter_for_entity = 'VENUE' and filter_name = 'Restaurant'), 0, now());
-	    </sql>
-    </changeSet>
-    
-     <changeSet author="msingla" id="1.9">
-	    <sql>
-	    	insert into venue (name, description, type, comments, rating, added_on, city_id, locality_id, priority) values ('Burger Point', 'Burger Point', 'RESTAURANT', null, null, now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Chandigarh'), 30);
-	    	insert into address (address_line_1, address_line_2, city, state, pincode, primary_phone, secondary_phone, email, entity_id, version, added_on, latitude, longitude) values ('Shop No. 348, Sector 32 D', 'Sector 32', 'Chandigarh', 'Chandigarh', 160101, '+91-0172-2254375', '+91-9876543219', 'venue@gmail.com', (select id from venue where name = 'Burger Point'), 0, now(), '30.7398', '76.7827');
-	    	insert into attachment (name, image_url, entity_id, version, added_on, attachment_type, help_text) values ('BurgerPoint.jpg', 'burgerpoint.jpg', (select id from venue where name = 'Burger Point'), 0, now(), 'COVER', 'Burger Point Image');
-	    	insert into entity_services (entity_id, service_id, min_service_cost, max_service_cost, version, added_on) values ((select id from venue where name = 'Burger Point'), (select id from service where tab_data_name = 'Dine In'), null, null, 0, now());
-	    	insert into entity_filters (entity_id, filter_id, version, added_on) values ((select id from venue where name = 'Burger Point'), (select id from filters where filter_type = 'ESTABLISHMENT' and filter_for_entity = 'VENUE' and filter_name = 'Restaurant'), 0, now());
-	    </sql>
-    </changeSet>
-    
-    <changeSet author="msingla" id="1.10">
-	    <sql>
-	    	insert into venue (name, description, type, comments, rating, added_on, city_id, locality_id, priority) values ('Puzzles - The Cove', 'Puzzles - The Cove', 'RESTAURANT', null, null, now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Panchkula'), 40);
-	    	insert into address (address_line_1, address_line_2, city, state, pincode, primary_phone, secondary_phone, email, entity_id, version, added_on, latitude, longitude) values ('The Cove, SCO 1 to 2', 'Sector 5', 'Panchkula', 'Chandigarh', 160101, '+91-0172-2254375', '+91-9876543219', 'venue@gmail.com', (select id from venue where name = 'Puzzles - The Cove'), 0, now(), '30.7398', '76.7827');
-	    	insert into attachment (name, image_url, entity_id, version, added_on, attachment_type, help_text) values ('Puzzles.jpg', 'puzzles.jpg', (select id from venue where name = 'Puzzles - The Cove'), 0, now(), 'COVER', 'Puzzles Image');
-	    	insert into entity_services (entity_id, service_id, min_service_cost, max_service_cost, version, added_on) values ((select id from venue where name = 'Puzzles - The Cove'), (select id from service where tab_data_name = 'Dine In'), null, null, 0, now());
-	    	insert into entity_filters (entity_id, filter_id, version, added_on) values ((select id from venue where name = 'Puzzles - The Cove'), (select id from filters where filter_type = 'ESTABLISHMENT' and filter_for_entity = 'VENUE' and filter_name = 'Restaurant'), 0, now());
-	    </sql>
-    </changeSet>
-    
-    <changeSet author="msingla" id="1.11">
-	    <sql>
-	    	insert into venue (name, description, type, comments, rating, added_on, city_id, locality_id, priority) values ('Pashtun', 'Pashtun', 'RESTAURANT', null, null, now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Chandigarh'), 50);
-	    	insert into address (address_line_1, address_line_2, city, state, pincode, primary_phone, secondary_phone, email, entity_id, version, added_on, latitude, longitude) values ('SCO 333 &amp; 334, Sector 35 B', 'Sector 35', 'Chandigarh', 'Chandigarh', 160101, '+91-0172-2254375', '+91-9876543219', 'venue@gmail.com', (select id from venue where name = 'Pashtun'), 0, now(), '30.7398', '76.7827');
-	    	insert into attachment (name, image_url, entity_id, version, added_on, attachment_type, help_text) values ('Pashtun.jpg', 'pashtun.jpg', (select id from venue where name = 'Pashtun'), 0, now(), 'COVER', 'Pashtun Image');
-	    	insert into entity_services (entity_id, service_id, min_service_cost, max_service_cost, version, added_on) values ((select id from venue where name = 'Pashtun'), (select id from service where tab_data_name = 'Dine In'), null, null, 0, now());
-	    	insert into entity_filters (entity_id, filter_id, version, added_on) values ((select id from venue where name = 'Pashtun'), (select id from filters where filter_type = 'ESTABLISHMENT' and filter_for_entity = 'VENUE' and filter_name = 'Restaurant'), 0, now());
-	    </sql>
-    </changeSet>
-    
-    <changeSet author="msingla" id="1.12">
-	    <sql>
-	    	insert into venue (name, description, type, comments, rating, added_on, city_id, locality_id, priority) values ('Sindhi Sweets', 'Sindhi Sweets', 'RESTAURANT', null, null, now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Chandigarh'), 60);
-	    	insert into address (address_line_1, address_line_2, city, state, pincode, primary_phone, secondary_phone, email, entity_id, version, added_on, latitude, longitude) values ('SCO 108 &amp; 109, Sindhi''s Veg Food Court', 'Sector 17C', 'Chandigarh', 'Chandigarh', 160101, '+91-0172-2254375', '+91-9876543219', 'venue@gmail.com', (select id from venue where name = 'Sindhi Sweets'), 0, now(), '30.7398', '76.7827');
-	    	insert into attachment (name, image_url, entity_id, version, added_on, attachment_type, help_text) values ('SindhiSweets.jpg', 'sindhisweets.jpg', (select id from venue where name = 'Sindhi Sweets'), 0, now(), 'COVER', 'Sindhi Sweets Image');
-	    	insert into entity_services (entity_id, service_id, min_service_cost, max_service_cost, version, added_on) values ((select id from venue where name = 'Sindhi Sweets'), (select id from service where tab_data_name = 'Dine In'), null, null, 0, now());
-	    	insert into entity_filters (entity_id, filter_id, version, added_on) values ((select id from venue where name = 'Sindhi Sweets'), (select id from filters where filter_type = 'ESTABLISHMENT' and filter_for_entity = 'VENUE' and filter_name = 'Restaurant'), 0, now());
-	    </sql>
-    </changeSet>
-    
-     <changeSet author="msingla" id="1.13">
-	    <sql>
-	    	insert into venue (name, description, type, comments, rating, added_on, city_id, locality_id, priority) values ('Underdoggs Sports Bar &amp; Grill', 'Underdoggs Sports Bar &amp; Grill', 'RESTAURANT', null, null, now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Chandigarh'), 70);
-	    	insert into address (address_line_1, address_line_2, city, state, pincode, primary_phone, secondary_phone, email, entity_id, version, added_on, latitude, longitude) values ('178 A, 3rd Floor, Elante Mall', 'Chandigarh Industrial Area Phase 1', 'Chandigarh', 'Chandigarh', 160101, '+91-0172-2254375', '+91-9876543219', 'venue@gmail.com', (select id from venue where name = 'Underdoggs Sports Bar &amp; Grill'), 0, now(), '30.7398', '76.7827');
-	    	insert into attachment (name, image_url, entity_id, version, added_on, attachment_type, help_text) values ('Underdoggs.jpg', 'underdoggs.jpg', (select id from venue where name = 'Underdoggs Sports Bar &amp; Grill'), 0, now(), 'COVER', 'Underdoggs Image');
-	    	insert into entity_services (entity_id, service_id, min_service_cost, max_service_cost, version, added_on) values ((select id from venue where name = 'Underdoggs Sports Bar &amp; Grill'), (select id from service where tab_data_name = 'Dine In'), null, null, 0, now());
-	    	insert into entity_filters (entity_id, filter_id, version, added_on) values ((select id from venue where name = 'Underdoggs Sports Bar &amp; Grill'), (select id from filters where filter_type = 'ESTABLISHMENT' and filter_for_entity = 'VENUE' and filter_name = 'Restaurant'), 0, now());
-	    </sql>
-    </changeSet>
-    
-    <changeSet author="msingla" id="1.14">
-	    <sql>
-	    	insert into venue (name, description, type, comments, rating, added_on, city_id, locality_id, priority) values ('The Kitchen Knight', 'The Kitchen Knight', 'RESTAURANT', null, null, now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Chandigarh'), 80);
-	    	insert into address (address_line_1, address_line_2, city, state, pincode, primary_phone, secondary_phone, email, entity_id, version, added_on, latitude, longitude) values ('Chandigarh Industrial Area', null, 'Chandigarh', 'Chandigarh', 160101, '+91-0172-2254375', '+91-9876543219', 'venue@gmail.com', (select id from venue where name = 'The Kitchen Knight'), 0, now(), '30.7398', '76.7827');
-	    	insert into attachment (name, image_url, entity_id, version, added_on, attachment_type, help_text) values ('TheKitchenKnight.jpg', 'thekitchenknight.jpg', (select id from venue where name = 'The Kitchen Knight'), 0, now(), 'Cover', 'The Kitchen Knight Image');
-	    	insert into entity_services (entity_id, service_id, min_service_cost, max_service_cost, version, added_on) values ((select id from venue where name = 'The Kitchen Knight'), (select id from service where tab_data_name = 'Dine In'), null, null, 0, now());
-	    	insert into entity_filters (entity_id, filter_id, version, added_on) values ((select id from venue where name = 'The Kitchen Knight'), (select id from filters where filter_type = 'ESTABLISHMENT' and filter_for_entity = 'VENUE' and filter_name = 'Restaurant'), 0, now());
-	    </sql>
-    </changeSet>
-    
-    <changeSet author="msingla" id="1.15">
-	    <sql>
-	    	insert into venue (name, description, type, comments, rating, added_on, city_id, locality_id, priority) values ('Hot Millions', 'Hot Millions', 'RESTAURANT', null, null, now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Chandigarh'), 90);
-	    	insert into address (address_line_1, address_line_2, city, state, pincode, primary_phone, secondary_phone, email, entity_id, version, added_on, latitude, longitude) values ('SCO 196 &amp; 197, Sector 17 C', 'Sector 17', 'Chandigarh', 'Chandigarh', 160101, '+91-0172-2254375', '+91-9876543219', 'venue@gmail.com', (select id from venue where name = 'Hot Millions'), 0, now(), '30.7398', '76.7827');
-	    	insert into attachment (name, image_url, entity_id, version, added_on, attachment_type, help_text) values ('HotMillions.jpg', 'hotmillions.jpg', (select id from venue where name = 'Hot Millions'), 0, now(), 'COVER', 'Hot Millions Image');
-	    	insert into entity_services (entity_id, service_id, min_service_cost, max_service_cost, version, added_on) values ((select id from venue where name = 'Hot Millions'), (select id from service where tab_data_name = 'Dine In'), null, null, 0, now());
-	    	insert into entity_filters (entity_id, filter_id, version, added_on) values ((select id from venue where name = 'Hot Millions'), (select id from filters where filter_type = 'ESTABLISHMENT' and filter_for_entity = 'VENUE' and filter_name = 'Restaurant'), 0, now());
-	    </sql>
-    </changeSet> -->
-    
+
     <!-- Venue Specific Data -->
     
     <changeSet author="msingla" id="1.7">
@@ -544,6 +469,8 @@
 	    </sql>
     </changeSet>
     
+    <!-- Setting Default Starting Price for all the entities -->
+    
      <changeSet author="msingla" id="1.17">
 	    <sql>
 	    	update venue set starting_price = '100,000';
@@ -552,6 +479,84 @@
 	    	update decorater set starting_price = '20,000';
 	    	update entertainment set starting_price = '5,000';
 	    	update miscellaneous set starting_price = '2,000';
+	    </sql>
+    </changeSet>
+    
+    <!-- Setting Default Max Capacity for all the entities -->
+    
+    <changeSet author="msingla" id="1.18">
+	    <sql>
+	    	update venue set max_capacity = '2000';
+	    	update caterer set max_capacity = '2000';
+	    </sql>
+    </changeSet>
+    
+      <changeSet author="msingla" id="1.18.1">
+	    <sql>
+    		insert into venue_amenities (venue_id, amenities_id, min_amenity_cost, max_amenity_cost, version, added_on) values ((select id from venue where name = 'JW Marriott'), (select id from amenities where amenity_type = 'INHOUSEDECOR'), null, null, 0, now());
+	    </sql>
+    </changeSet>
+    
+    <!-- Setting Capacity Filters for Venues & Caterers -->
+    
+    <changeSet author="msingla" id="1.19">
+	    <sql>
+	    	insert into entity_filters (entity_id, filter_id, version, added_on) values ((select id from venue where name = 'Brooklyn Central'), (select id from filters where filter_type = 'CAPACITY' and filter_for_entity = 'VENUE' and filter_name = 'Upto 300 Persons'), 0, now());
+			insert into entity_filters (entity_id, filter_id, version, added_on) values ((select id from venue where name = 'Lallgarh'), (select id from filters where filter_type = 'CAPACITY' and filter_for_entity = 'VENUE' and filter_name = '600-1000 Persons'), 0, now());
+			insert into entity_filters (entity_id, filter_id, version, added_on) values ((select id from venue where name = 'JW Marriott'), (select id from filters where filter_type = 'CAPACITY' and filter_for_entity = 'VENUE' and filter_name = 'More than 1000 Persons'), 0, now());
+			
+			insert into entity_filters (entity_id, filter_id, version, added_on) values ((select id from caterer where name = 'Gopal''s'), (select id from filters where filter_type = 'CAPACITY' and filter_for_entity = 'CATERER' and filter_name = 'Upto 300 Persons'), 0, now());
+			insert into entity_filters (entity_id, filter_id, version, added_on) values ((select id from caterer where name = 'Vijay Vargiya'), (select id from filters where filter_type = 'CAPACITY' and filter_for_entity = 'CATERER' and filter_name = 'More than 1000 Persons'), 0, now());
+	    </sql>
+    </changeSet>
+    
+    <changeSet author="msingla" id="1.20">
+	    <sql>
+			update venue set max_capacity = '2,000';
+			update caterer set max_capacity = '2,000';
+			update decorater set max_capacity = '2,000';
+			update photographer set max_capacity = '2,000';
+			update entertainment set max_capacity = '2,000';
+			update miscellaneous set max_capacity = '2,000';
+			update entity_services set max_capacity = '2,000';
+			update venue_rooms set number_of_rooms = 10;
+			update venue set policies = 'No Refund', serving_since='2007';
+			update caterer set min_capacity = '200', serving_since = '2010', starting_price_nonveg = '500';
+			update decorater set serving_since = '2010';
+			update photographer set serving_since = '2010', travel_stay_expenses = 'To be beared';
+			update entertainment set serving_since = '2010', travel_stay_expenses = 'To be beared', additional_info='Additional Details', genre = 'Pop', is_group=false;
+			update miscellaneous set serving_since = '2010', min_capacity='50';
+			update venue_amenities set max_accomodation_capacity = '1,500', amenity_name='Party Hall', is_fully_ac=true, min_accomodation='100', additional_info = 'Additional Info', min_veg_cost = '400', max_veg_cost = '700', min_nonveg_cost='500', max_nonveg_cost='1,000';
+			update caterer set policies = 'Refund Not Allowed', is_pure_veg=true;
+			update entertainment set policies = 'Refund Not Allowed';
+			update miscellaneous set policies = 'Refund Not Allowed';
+			update photographer set policies = 'Refund Not Allowed';
+			update decorater set policies = 'Refund Not Allowed';
+			update venue_amenities set tent_avlbl=true, floral_avlbl=true, lighting_avlbl=false, balloons_avlbl=false, candles_avlbl=true;
+	    </sql>
+    </changeSet>
+    
+    <changeSet author="msingla" id="1.21">
+	    <sql>
+			update venue_amenities set min_amenity_cost=50000;
+	    </sql>
+    </changeSet>
+    
+     <changeSet author="msingla" id="1.22">
+	    <sql>
+			insert into attachment (name, image_url, entity_id, version, added_on, attachment_type, help_text) values ('JWMarriottPool.jpg', 'caterers/chd_gopals/g5.jpg', (select id from venue where name = 'JW Marriott'), 0, now(), 'MENU', 'Pool Side');
+			insert into attachment (name, image_url, entity_id, version, added_on, attachment_type, help_text) values ('JWMarriottRestaurant.jpg', 'caterers/chd_gopals/g6.jpg', (select id from venue where name = 'JW Marriott'), 0, now(), 'MENU', 'Restaurant');
+	    </sql>
+    </changeSet>
+    
+    <changeSet author="msingla" id="1.23">
+	    <sql>
+	    	update venue set min_capacity = '200';
+	    	update caterer set min_capacity = '200';
+	    	update decorater set min_capacity = '200';
+	    	update photographer set min_capacity = '200';
+	    	update entertainment set min_capacity = '200';
+	    	update miscellaneous set min_capacity = '200';
 	    </sql>
     </changeSet>
     

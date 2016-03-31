@@ -72,6 +72,40 @@ public class Caterer implements Serializable{
 	
 	@Column(name = "starting_price")
 	private String startingPrice;
+	
+	@Column(name = "max_capacity")
+	private String maxCapacity;
+	
+	@Column(name = "min_capacity")
+	private String minCapacity;
+	
+	@Column(name = "serving_since")
+	private String servingSince;
+	
+	@Column(name = "starting_price_nonveg")
+	private String startingPriceNonVeg;
+	
+	@Column(name = "policies")
+	private String policies;
+	
+	@Column(name = "is_pure_veg")
+	private Boolean isPureVeg;
+
+	public String getPolicies() {
+		return policies;
+	}
+
+	public void setPolicies(String policies) {
+		this.policies = policies;
+	}
+
+	public String getMaxCapacity() {
+		return maxCapacity;
+	}
+
+	public void setMaxCapacity(String maxCapacity) {
+		this.maxCapacity = maxCapacity;
+	}
 
 	public Long getPriority() {
 		return priority;
@@ -192,6 +226,36 @@ public class Caterer implements Serializable{
 	public void setStartingPrice(String startingPrice) {
 		this.startingPrice = startingPrice;
 	}
-	
-	
+
+	public String getMinCapacity() {
+		return minCapacity;
+	}
+
+	public void setMinCapacity(String minCapacity) {
+		this.minCapacity = minCapacity;
+	}
+
+	public String getServingSince() {
+		return servingSince;
+	}
+
+	public void setServingSince(String servingSince) {
+		this.servingSince = servingSince;
+	}
+
+	public String getStartingPriceNonVeg() {
+		return startingPriceNonVeg;
+	}
+
+	public void setStartingPriceNonVeg(String startingPriceNonVeg) {
+		this.startingPriceNonVeg = startingPriceNonVeg;
+	}
+
+	public Boolean getIsPureVeg() {
+		return isPureVeg;
+	}
+
+	public void setIsPureVeg(Boolean isPureVeg) {
+		this.isPureVeg = isPureVeg;
+	}
 }

@@ -115,8 +115,13 @@ public class PhotographerServiceImpl implements PhotographerService {
 		detailResponseDTO.setSecondaryPhoneNumber(address.getSecondaryPhone());
 		detailResponseDTO.setLatitude(address.getLatitude());
 		detailResponseDTO.setLongitude(address.getLongitude());
-		detailResponseDTO.setTabMap(tabMap);
+		if(!CollectionUtils.isEmpty(tabMap)){
+			detailResponseDTO.setServiceAmenityTabMap(tabMap);
+		}
+		detailResponseDTO.setPolicies(photographer.getPolicies());
 		detailResponseDTO.setAttachments(attachmentList);
+		detailResponseDTO.setServingSince(photographer.getServingSince());
+		detailResponseDTO.setStartingFrom(photographer.getStartingPrice());
 		return detailResponseDTO;
 	}
 

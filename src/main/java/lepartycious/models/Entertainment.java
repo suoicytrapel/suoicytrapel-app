@@ -75,6 +75,62 @@ public class Entertainment implements Serializable{
 	
 	@Column(name = "starting_price")
 	private String startingPrice;
+	
+	@Column(name = "max_capacity")
+	private String maxCapacity;
+	
+	@Column(name = "genre")
+	private String genre;
+	
+	@Column(name = "travel_stay_expenses")
+	private String travelStayExpenses;
+	
+	@Column(name = "is_group")
+	private Boolean isGroup;
+	
+	@Column(name = "additional_info")
+	private String additionalInfo;
+	
+	@Column(name = "serving_since")
+	private String servingSince;
+	
+	@Column(name = "policies")
+	private String policies;
+
+	@Column(name = "min_capacity")
+	private String minCapacity;
+	
+	public String getMinCapacity() {
+		return minCapacity;
+	}
+
+	public void setMinCapacity(String minCapacity) {
+		this.minCapacity = minCapacity;
+	}
+	
+	public String getPolicies() {
+		return policies;
+	}
+
+	public void setPolicies(String policies) {
+		this.policies = policies;
+	}
+	
+	public String getServingSince() {
+		return servingSince;
+	}
+
+	public void setServingSince(String servingSince) {
+		this.servingSince = servingSince;
+	}
+
+	public String getMaxCapacity() {
+		return maxCapacity;
+	}
+
+	public void setMaxCapacity(String maxCapacity) {
+		this.maxCapacity = maxCapacity;
+	}
 
 	public long getEntertainmentId() {
 		return entertainmentId;
@@ -202,5 +258,37 @@ public class Entertainment implements Serializable{
 
 	public void setStartingPrice(String startingPrice) {
 		this.startingPrice = startingPrice;
+	}
+
+	public String getGenre() {
+		return genre;
+	}
+
+	public void setGenre(String genre) {
+		this.genre = genre;
+	}
+
+	public String getTravelStayExpenses() {
+		return travelStayExpenses;
+	}
+
+	public void setTravelStayExpenses(String travelStayExpenses) {
+		this.travelStayExpenses = travelStayExpenses;
+	}
+
+	public Boolean isGroup() {
+		return isGroup;
+	}
+
+	public void setGroup(Boolean isGroup) {
+		this.isGroup = isGroup;
+	}
+
+	public String getAdditionalInfo() {
+		return additionalInfo;
+	}
+
+	public void setAdditionalInfo(String additionalInfo) {
+		this.additionalInfo = additionalInfo;
 	}
 }

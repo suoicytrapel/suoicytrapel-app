@@ -44,6 +44,9 @@ public class Amenities implements Serializable{
 	
 	@OneToMany(mappedBy="amenitiesId")
 	private List<VenueAmenities> venueamenities;
+	
+	@Column(name = "is_filter")
+	private Boolean isFilter;
 
 	public long getAmenitiesId() {
 		return amenitiesId;
@@ -99,5 +102,13 @@ public class Amenities implements Serializable{
 
 	public void setVenueamenities(List<VenueAmenities> venueamenities) {
 		this.venueamenities = venueamenities;
+	}
+
+	public Boolean getIsFilter() {
+		return isFilter;
+	}
+
+	public void setIsFilter(Boolean isFilter) {
+		this.isFilter = isFilter;
 	}
 }

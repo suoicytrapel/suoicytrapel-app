@@ -80,6 +80,7 @@ public class DecoratorServiceImpl implements DecoratorService {
 			searchResponseDTO.setLocality(decorator.getLocality().getDescription());
 			searchResponseDTO.setStartingPrice(decorator.getStartingPrice());
 			searchResponseDTO.setMainImagerURL(decorator.getAttachments().get(0).getImageURL());
+			searchResponseDTO.setStartingPrice(decorator.getStartingPrice());
 			searchResponseDTOList.add(searchResponseDTO);
 		}
 	}
@@ -114,8 +115,13 @@ public class DecoratorServiceImpl implements DecoratorService {
 		detailResponseDTO.setSecondaryPhoneNumber(address.getSecondaryPhone());
 		detailResponseDTO.setLatitude(address.getLatitude());
 		detailResponseDTO.setLongitude(address.getLongitude());
-		detailResponseDTO.setTabMap(tabMap);
+		if(!CollectionUtils.isEmpty(tabMap)){
+			detailResponseDTO.setServiceAmenityTabMap(tabMap);
+		}
+		detailResponseDTO.setPolicies(decorator.getPolicies());
 		detailResponseDTO.setAttachments(attachmentList);
+		detailResponseDTO.setServingSince(decorator.getServingSince());
+		detailResponseDTO.setStartingFrom(decorator.getStartingPrice());
 		return detailResponseDTO;
 	}
 

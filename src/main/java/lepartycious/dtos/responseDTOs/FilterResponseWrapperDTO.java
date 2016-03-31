@@ -14,6 +14,9 @@ public class FilterResponseWrapperDTO implements Serializable{
 	private List<FilterResponseDTO> entertainmentType;
 	private List<FilterResponseDTO> eventType;
 	private List<FilterResponseDTO> othersType;
+	private List<FilterResponseDTO> capacity;
+	private List<FilterResponseDTO> catererType;
+	
 	public List<FilterResponseDTO> getServices() {
 		return services;
 	}
@@ -68,5 +71,16 @@ public class FilterResponseWrapperDTO implements Serializable{
 	public void setOthersType(List<FilterResponseDTO> othersType) {
 		this.othersType = othersType;
 	}
-	
+	public List<FilterResponseDTO> getCapacity() {
+		return capacity;
+	}
+	public void setCapacity(List<FilterResponseDTO> capacity) {
+		this.capacity = capacity;
+	}
+	public List<FilterResponseDTO> getCatererType() {
+		return catererType;
+	}
+	public void setCatererType(List<FilterResponseDTO> catererType) {
+		this.catererType = catererType;
+	}
 }

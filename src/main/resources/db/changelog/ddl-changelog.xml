@@ -553,4 +553,91 @@
 		</sql>
 	</changeSet>
 	
+	<changeSet author="msingla" id="1.33">
+		<sql>
+			ALTER TABLE venue ADD COLUMN max_capacity varchar (10);
+			ALTER TABLE caterer ADD COLUMN max_capacity varchar (10);
+			ALTER TABLE decorater ADD COLUMN max_capacity varchar (10);
+			ALTER TABLE photographer ADD COLUMN max_capacity varchar (10);
+			ALTER TABLE entertainment ADD COLUMN max_capacity varchar (10);
+			ALTER TABLE miscellaneous ADD COLUMN max_capacity varchar (10);
+		</sql>
+	</changeSet>
+	
+	<changeSet author="msingla" id="1.34">
+		<sql>
+			ALTER TABLE entity_services ADD COLUMN max_capacity varchar (10);
+		</sql>
+	</changeSet>
+	
+	<changeSet author="msingla" id="1.35">
+		<sql>
+			ALTER TABLE venue_rooms ADD COLUMN number_of_rooms bigint;
+			ALTER TABLE venue ADD COLUMN policies varchar (3000);
+			ALTER TABLE venue ADD COLUMN serving_since varchar (20);
+			ALTER TABLE caterer ADD COLUMN min_capacity varchar (10);
+			ALTER TABLE caterer ADD COLUMN serving_since varchar (20);
+			ALTER TABLE caterer ADD COLUMN starting_price_nonveg varchar (10);
+			ALTER TABLE decorater ADD COLUMN serving_since varchar (20);
+			ALTER TABLE photographer ADD COLUMN serving_since varchar (20);
+			ALTER TABLE photographer ADD COLUMN travel_stay_expenses varchar (20);
+			ALTER TABLE entertainment ADD COLUMN serving_since varchar (20);
+			ALTER TABLE entertainment ADD COLUMN travel_stay_expenses varchar (20);
+			ALTER TABLE entertainment ADD COLUMN additional_info varchar (2000);
+			ALTER TABLE entertainment ADD COLUMN genre varchar (50);
+			ALTER TABLE entertainment ADD COLUMN is_group boolean;
+			ALTER TABLE miscellaneous ADD COLUMN serving_since varchar (20);
+			ALTER TABLE miscellaneous ADD COLUMN min_capacity varchar (20);
+		</sql>
+	</changeSet>
+	
+	<changeSet author="msingla" id="1.36">
+		<sql>
+			ALTER TABLE venue_amenities ADD COLUMN max_accomodation_capacity varchar (10);
+			ALTER TABLE venue_amenities ADD COLUMN amenity_name varchar (20);
+			ALTER TABLE venue_amenities ADD COLUMN is_fully_ac boolean;
+			ALTER TABLE venue_amenities ADD COLUMN min_accomodation varchar (10);
+			ALTER TABLE venue_amenities ADD COLUMN additional_info varchar (2000);
+			ALTER TABLE venue_amenities ADD COLUMN min_veg_cost varchar (10);
+			ALTER TABLE venue_amenities ADD COLUMN max_veg_cost varchar (10);
+			ALTER TABLE venue_amenities ADD COLUMN min_nonveg_cost varchar (10);
+			ALTER TABLE venue_amenities ADD COLUMN max_nonveg_cost varchar (10);
+		</sql>
+	</changeSet>
+	
+	<changeSet author="msingla" id="1.37">
+		<sql>
+			ALTER TABLE caterer ADD COLUMN policies varchar (3000);
+			ALTER TABLE entertainment ADD COLUMN policies varchar (3000);
+			ALTER TABLE miscellaneous ADD COLUMN policies varchar (3000);
+			ALTER TABLE photographer ADD COLUMN policies varchar (3000);
+			ALTER TABLE decorater ADD COLUMN policies varchar (3000);
+		</sql>
+	</changeSet>
+	
+	<changeSet author="msingla" id="1.38">
+		<sql>
+			ALTER TABLE venue_amenities ADD COLUMN tent_avlbl boolean;
+			ALTER TABLE venue_amenities ADD COLUMN floral_avlbl boolean;
+			ALTER TABLE venue_amenities ADD COLUMN lighting_avlbl boolean;
+			ALTER TABLE venue_amenities ADD COLUMN balloons_avlbl boolean;
+			ALTER TABLE venue_amenities ADD COLUMN candles_avlbl boolean;
+		</sql>
+	</changeSet>
+	
+	<changeSet author="msingla" id="1.39">
+		<sql>
+			ALTER TABLE caterer ADD COLUMN is_pure_veg boolean;
+		</sql>
+	</changeSet>
+	
+	<changeSet author="msingla" id="1.40">
+		<sql>
+			ALTER TABLE venue ADD COLUMN min_capacity varchar (20);
+			ALTER TABLE decorater ADD COLUMN min_capacity varchar (20);
+			ALTER TABLE photographer ADD COLUMN min_capacity varchar (20);
+			ALTER TABLE entertainment ADD COLUMN min_capacity varchar (20);
+		</sql>
+	</changeSet>
+	
 </databaseChangeLog>

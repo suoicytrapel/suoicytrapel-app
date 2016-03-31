@@ -88,6 +88,11 @@ public class VenueDAOImpl extends BaseDAOImpl implements VenueDAO {
 				criteria.createAlias("vf.filterId", "filters");
 				criteria.add(Restrictions.and(Restrictions.in("filters.filterId", filters.getPriceRangeList()), Restrictions.eq("filters.filterType", "PRICE")));
 			}
+			if(!CollectionUtils.isEmpty(filters.getCapacityList())){
+				criteria.createAlias("venue.venueFilters", "vf"); // inner join by default
+				criteria.createAlias("vf.filterId", "filters");
+				criteria.add(Restrictions.and(Restrictions.in("filters.filterId", filters.getCapacityList()), Restrictions.eq("filters.filterType", "CAPACITY")));
+			}
 		}
 			
 		if(StringUtils.isNotBlank(searchString)){
@@ -124,6 +129,4 @@ public class VenueDAOImpl extends BaseDAOImpl implements VenueDAO {
 		List<Venue> venues = criteria.list();
 		return venues;
 	}
-
-
 }

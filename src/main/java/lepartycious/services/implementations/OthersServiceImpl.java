@@ -83,6 +83,8 @@ public class OthersServiceImpl implements OthersService {
 			searchResponseDTO.setLocality(other.getLocality().getDescription());
 			searchResponseDTO.setStartingPrice(other.getStartingPrice());
 			searchResponseDTO.setMainImagerURL(other.getAttachments().get(0).getImageURL());
+			searchResponseDTO.setStartingPrice(other.getStartingPrice());
+			searchResponseDTO.setMinCapacity(other.getMinCapacity());
 			searchResponseDTOList.add(searchResponseDTO);
 		}
 	}
@@ -117,9 +119,13 @@ public class OthersServiceImpl implements OthersService {
 		detailResponseDTO.setSecondaryPhoneNumber(address.getSecondaryPhone());
 		detailResponseDTO.setLatitude(address.getLatitude());
 		detailResponseDTO.setLongitude(address.getLongitude());
-		detailResponseDTO.setTabMap(tabMap);
+		if(!CollectionUtils.isEmpty(tabMap)){
+			detailResponseDTO.setServiceAmenityTabMap(tabMap);
+		}
+		detailResponseDTO.setPolicies(other.getPolicies());
 		detailResponseDTO.setAttachments(attachmentList);
-		//detailResponseDTO.setServices(serviceList);
+		detailResponseDTO.setServingSince(other.getServingSince());
+		detailResponseDTO.setStartingFrom(other.getStartingPrice());
 		return detailResponseDTO;
 	}
 

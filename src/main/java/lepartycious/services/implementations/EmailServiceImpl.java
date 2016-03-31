@@ -25,7 +25,7 @@ public class EmailServiceImpl implements EmailService {
 	public void sendMail(ContactRequestDTO emailContent) {
 		SimpleMailMessage message = new SimpleMailMessage(custommessage);
 		message.setFrom("no-reply@gmail.com");
-		message.setTo("mohitsingla2256@gmail.com");
+		message.setTo("lepartycious@gmail.com");
 		message.setSubject("LePartycious : Enquiry Mail");
 		message.setText(generateMailContent(emailContent));
 		javaMailSender.send(message);

@@ -112,6 +112,7 @@ public class CommonDAOImpl extends BaseDAOImpl implements CommonDAO{
 	@Cacheable
 	public List<Amenities> getAmenities(String amenity) {
 		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Amenities.class);
+		criteria.add(Restrictions.eq("isFilter", true));
 		List<Amenities> amenities = criteria.list();
 		return amenities;
 	}

@@ -31,7 +31,10 @@ import lepartycious.models.VenueAmenities;
 import lepartycious.models.VenueRooms;
 import lepartycious.services.VenueService;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
@@ -85,18 +88,23 @@ public class VenueServiceImpl implements VenueService {
 			searchResponseDTO.setLocality(venue.getLocality().getDescription());
 			searchResponseDTO.setStartingPrice(venue.getStartingPrice());
 			searchResponseDTO.setMainImagerURL(venue.getAttachments().get(0).getImageURL());
+			searchResponseDTO.setMaxCapacity(venue.getMaxCapacity());
+			searchResponseDTO.setMinCapacity(venue.getMinCapacity());
 			searchResponseDTOList.add(searchResponseDTO);
 		}
 	}
 
 	@Override
-	public DetailResponseDTO fetchVenueDetails(DataRequestDTO dataRequestDTO) {
-		Venue venue = venueDAO.fetchVenueDetails(dataRequestDTO.getCityId(), dataRequestDTO.getName());
+	public DetailResponseDTO fetchVenueDetails(Long cityId, String name) {
+		Venue venue = venueDAO.fetchVenueDetails(cityId, name);
 		List<TabResponseDTO> serviceList = new ArrayList<TabResponseDTO>();
 		List<TabResponseDTO> amenitiesList = new ArrayList<TabResponseDTO>();
 		List<TabResponseDTO> roomList = new ArrayList<TabResponseDTO>();
 		List<AttachmentResponseDTO> attachmentList = new ArrayList<AttachmentResponseDTO>();
-		Map<String, List<TabResponseDTO>> tabMap = new HashMap<String, List<TabResponseDTO>>();
+		Map<String, List<TabResponseDTO>> amenityDetailTabMap = new HashMap<String, List<TabResponseDTO>>();
+		Map<String, TabResponseDTO> inHouseOfferingsTabMap = new HashMap<String, TabResponseDTO>();
+		List<AttachmentResponseDTO> menuImageList = new ArrayList<AttachmentResponseDTO>();
+		Map<String, List<TabResponseDTO>> serviceAmenityTabMap = new HashMap<String, List<TabResponseDTO>>();
 
 		Address address = venue.getAddresses().get(0);
 		for(EntityServices venueService : venue.getVenueServices()){
@@ -104,27 +112,73 @@ public class VenueServiceImpl implements VenueService {
 			serviceDTO.setName(venueService.getServiceId().getTabDataName());
 			serviceList.add(serviceDTO);
 		}
+		for(Attachment attachment : venue.getAttachments()){
+			AttachmentResponseDTO attachmentDTO = new AttachmentResponseDTO(attachment.getImageURL(), attachment.getHelpText());
+			if(StringUtils.isNotBlank(attachment.getAttachmentType()) && attachment.getAttachmentType().equalsIgnoreCase("MENU")){
+				menuImageList.add(attachmentDTO);
+			}
+			else{
+				attachmentList.add(attachmentDTO);
+			}
+		}
 		for(VenueAmenities venueAmenities : venue.getVenueamenities()){
 			TabResponseDTO amenityDTO = new TabResponseDTO();
 			amenityDTO.setName(venueAmenities.getAmenitiesId().getDescription());
 			amenitiesList.add(amenityDTO);
+			if("INHOUSECATERING".equalsIgnoreCase(venueAmenities.getAmenitiesId().getAmenityType())){
+				TabResponseDTO houseCaterDTO = new TabResponseDTO();
+				houseCaterDTO.setMinVegPrice(venueAmenities.getMinVegCost());
+				houseCaterDTO.setMinNonVegPrice(venueAmenities.getMinNonVegCost());
+				houseCaterDTO.setMinCapacity(venueAmenities.getMinAccomodation());
+				houseCaterDTO.setMaxCapacity(venueAmenities.getMaxAccomodationCapacity());
+				houseCaterDTO.setAttachments(menuImageList);
+				inHouseOfferingsTabMap.put(venueAmenities.getAmenitiesId().getDescription(), houseCaterDTO);
+			}
+			else if("INHOUSEDECOR".equalsIgnoreCase(venueAmenities.getAmenitiesId().getAmenityType())){
+				TabResponseDTO houseDecorDTO = new TabResponseDTO();
+				houseDecorDTO.setMinCost(venueAmenities.getMinCost());
+				houseDecorDTO.setTentingAvlbl(venueAmenities.getTentingAvlbl());
+				houseDecorDTO.setFloralAvlbl(venueAmenities.getFloralAvlbl());
+				houseDecorDTO.setLightingAvlbl(venueAmenities.getLightingAvlbl());
+				houseDecorDTO.setBalloonsAvlbl(venueAmenities.getBalloonsAvlbl());
+				houseDecorDTO.setCandlesAvlbl(venueAmenities.getCandlesAvlbl());
+				inHouseOfferingsTabMap.put(venueAmenities.getAmenitiesId().getDescription(), houseDecorDTO);
+			}else{
+				if(amenityDetailTabMap.containsKey(venueAmenities.getAmenitiesId().getDescription())){
+					List<TabResponseDTO> tabList = amenityDetailTabMap.get(venueAmenities.getAmenitiesId().getDescription());
+					TabResponseDTO venueAmenityDTO = new TabResponseDTO();
+					venueAmenityDTO.setAmenityName(venueAmenities.getAmenityName());
+					venueAmenityDTO.setMinCapacity(venueAmenities.getMinAccomodation());
+					venueAmenityDTO.setMaxCapacity(venueAmenities.getMaxAccomodationCapacity());
+					venueAmenityDTO.setMinCost(venueAmenities.getMinCost());
+					tabList.add(venueAmenityDTO);
+				}
+				else{
+					List<TabResponseDTO> tabList = new ArrayList<TabResponseDTO>();
+					TabResponseDTO venueAmenityDTO = new TabResponseDTO();
+					venueAmenityDTO.setAmenityName(venueAmenities.getAmenityName());
+					venueAmenityDTO.setMinCapacity(venueAmenities.getMinAccomodation());
+					venueAmenityDTO.setMaxCapacity(venueAmenities.getMaxAccomodationCapacity());
+					venueAmenityDTO.setMinCost(venueAmenities.getMinCost());
+					tabList.add(venueAmenityDTO);
+					amenityDetailTabMap.put(venueAmenities.getAmenitiesId().getDescription(), tabList);
+				}
+			}
+			
 		}
 		for(VenueRooms room : venue.getVenueRooms()){
 			TabResponseDTO roomDTO = new TabResponseDTO(room.getRoomId().getDescription(), room.getAcAvailability(), room.getFridgeAvailability(), room.getLockerAvailability(), room.getLedAvailability(), room.getAttachedBathroomAvailability(), room.getHotWaterAvailability(), room.getMinCost());
 			roomList.add(roomDTO);
 		}
-		for(Attachment attachment : venue.getAttachments()){
-			AttachmentResponseDTO attachmentDTO = new AttachmentResponseDTO(attachment.getImageURL(), attachment.getHelpText());
-			attachmentList.add(attachmentDTO);
-		}
+		
 		if(!CollectionUtils.isEmpty(serviceList)){
-			tabMap.put("Services", serviceList);
+			serviceAmenityTabMap.put("Services", serviceList);
 		}
 		if(!CollectionUtils.isEmpty(amenitiesList)){
-			tabMap.put("Amenities", amenitiesList);
+			serviceAmenityTabMap.put("Amenities", amenitiesList);
 		}
 		if(!CollectionUtils.isEmpty(roomList)){
-			tabMap.put("Rooms", roomList);
+			amenityDetailTabMap.put("Rooms", roomList);
 		}
 		DetailResponseDTO detailResponseDTO = new DetailResponseDTO();
 		detailResponseDTO.setName(venue.getName());
@@ -137,14 +191,24 @@ public class VenueServiceImpl implements VenueService {
 		detailResponseDTO.setSecondaryPhoneNumber(address.getSecondaryPhone());
 		detailResponseDTO.setLatitude(address.getLatitude());
 		detailResponseDTO.setLongitude(address.getLongitude());
-		detailResponseDTO.setTabMap(tabMap);
+		if(!CollectionUtils.isEmpty(serviceAmenityTabMap)){
+			detailResponseDTO.setServiceAmenityTabMap(serviceAmenityTabMap);
+		}
+		if(!CollectionUtils.isEmpty(inHouseOfferingsTabMap)){
+			detailResponseDTO.setInHouseOfferingsTabMap(inHouseOfferingsTabMap);
+		}
+		if(!CollectionUtils.isEmpty(amenityDetailTabMap)){
+			detailResponseDTO.setAmenityDetailsTabMap(amenityDetailTabMap);
+		}
+		detailResponseDTO.setPolicies(venue.getPolicies());;
 		detailResponseDTO.setAttachments(attachmentList);
+		detailResponseDTO.setServingSince(venue.getServingSince());
+		detailResponseDTO.setStartingFrom(venue.getStartingPrice());
 		return detailResponseDTO;
 	}
 
 	@Override
 	public FilterResponseWrapperDTO loadFilters(Long cityId) {
-		
 		FilterResponseWrapperDTO filterResponseWrapperDTO = new FilterResponseWrapperDTO();
 		List<FilterResponseDTO> services = new ArrayList<FilterResponseDTO>();
 		List<FilterResponseDTO> amenities = new ArrayList<FilterResponseDTO>();
@@ -153,6 +217,7 @@ public class VenueServiceImpl implements VenueService {
 		List<FilterResponseDTO> establishments = new ArrayList<FilterResponseDTO>();
 		List<FilterResponseDTO> prices = new ArrayList<FilterResponseDTO>();
 		List<FilterResponseDTO> events = new ArrayList<FilterResponseDTO>();
+		List<FilterResponseDTO> capacity = new ArrayList<FilterResponseDTO>();
 
 		List<lepartycious.models.Service> serviceList = commonDAO.getServiceFilters("VENUE", "SERVICE");
 		List<Amenities> amenityList = commonDAO.getAmenities("amenity");
@@ -162,6 +227,7 @@ public class VenueServiceImpl implements VenueService {
 		List<Filter> establishmentList = commonDAO.getRequiredFilters("VENUE", "ESTABLISHMENT");
 		List<Filter> eventList = commonDAO.getRequiredFilters("ALL", "EVENT");
 		List<Filter> priceRangeList = commonDAO.getRequiredFilters("VENUE", "PRICE");
+		List<Filter> capacityFilters = commonDAO.getRequiredFilters("VENUE", "CAPACITY");
 
 		for(lepartycious.models.Service service : serviceList){
 			FilterResponseDTO filter = new FilterResponseDTO(service.getFilterDataName(), service.getServiceType(), service.getServiceId());
@@ -191,6 +257,10 @@ public class VenueServiceImpl implements VenueService {
 			FilterResponseDTO filter = new FilterResponseDTO(eventFilter.getFilterName(), eventFilter.getFilterType(), eventFilter.getFilterid());
 			events.add(filter);
 		}
+		for(Filter capFilter : capacityFilters){
+			FilterResponseDTO filter = new FilterResponseDTO(capFilter.getFilterName(), capFilter.getFilterType(), capFilter.getFilterid());
+			capacity.add(filter);
+		}
 		
 		filterResponseWrapperDTO.setServices(services);
 		filterResponseWrapperDTO.setAmenities(amenities);
@@ -199,6 +269,7 @@ public class VenueServiceImpl implements VenueService {
 		filterResponseWrapperDTO.setEstablishments(establishments);
 		filterResponseWrapperDTO.setPriceRange(prices);
 		filterResponseWrapperDTO.setEventType(events);
+		filterResponseWrapperDTO.setCapacity(capacity);
 		return filterResponseWrapperDTO;
 	}
 

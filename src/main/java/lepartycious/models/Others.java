@@ -75,6 +75,42 @@ public class Others implements Serializable{
 	
 	@Column(name = "starting_price")
 	private String startingPrice;
+	
+	@Column(name = "max_capacity")
+	private String maxCapacity;
+	
+	@Column(name = "serving_since")
+	private String servingSince;
+	
+	@Column(name = "min_capacity")
+	private String minCapacity;
+	
+	@Column(name = "policies")
+	private String policies;
+
+	public String getPolicies() {
+		return policies;
+	}
+
+	public void setPolicies(String policies) {
+		this.policies = policies;
+	}
+	
+	public String getServingSince() {
+		return servingSince;
+	}
+
+	public void setServingSince(String servingSince) {
+		this.servingSince = servingSince;
+	}
+
+	public String getMaxCapacity() {
+		return maxCapacity;
+	}
+
+	public void setMaxCapacity(String maxCapacity) {
+		this.maxCapacity = maxCapacity;
+	}
 
 	public long getOthersId() {
 		return othersId;
@@ -203,4 +239,13 @@ public class Others implements Serializable{
 	public void setStartingPrice(String startingPrice) {
 		this.startingPrice = startingPrice;
 	}
+
+	public String getMinCapacity() {
+		return minCapacity;
+	}
+
+	public void setMinCapacity(String minCapacity) {
+		this.minCapacity = minCapacity;
+	}
+	
 }

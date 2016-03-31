@@ -14,6 +14,8 @@ public class FilterWrapperDTO implements Serializable{
 	private List<Long> eventList;
 	private List<Long> rentalList;
 	private List<Long> othersList;
+	private List<Long> capacityList;
+	private List<Long> catererTypeList;
 	
 	public List<Long> getServiceList() {
 		return serviceList;
@@ -69,5 +71,16 @@ public class FilterWrapperDTO implements Serializable{
 	public void setOthersList(List<Long> othersList) {
 		this.othersList = othersList;
 	}
-	
+	public List<Long> getCapacityList() {
+		return capacityList;
+	}
+	public void setCapacityList(List<Long> capacityList) {
+		this.capacityList = capacityList;
+	}
+	public List<Long> getCatererTypeList() {
+		return catererTypeList;
+	}
+	public void setCatererTypeList(List<Long> catererTypeList) {
+		this.catererTypeList = catererTypeList;
+	}
 }

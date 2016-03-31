@@ -69,6 +69,53 @@ public class Photographer implements Serializable{
 	
 	@OneToMany(mappedBy="entityId")
 	private List<EntityFilters> photographerFilters;
+	
+	@Column(name = "max_capacity")
+	private String maxCapacity;
+	
+	@Column(name = "travel_stay_expenses")
+	private String travelStayExpenses;
+	
+	@Column(name = "serving_since")
+	private String servingSince;
+	
+	@Column(name = "policies")
+	private String policies;
+	
+	@Column(name = "min_capacity")
+	private String minCapacity;
+	
+	public String getMinCapacity() {
+		return minCapacity;
+	}
+
+	public void setMinCapacity(String minCapacity) {
+		this.minCapacity = minCapacity;
+	}
+
+	public String getPolicies() {
+		return policies;
+	}
+
+	public void setPolicies(String policies) {
+		this.policies = policies;
+	}
+	
+	public String getServingSince() {
+		return servingSince;
+	}
+
+	public void setServingSince(String servingSince) {
+		this.servingSince = servingSince;
+	}
+
+	public String getMaxCapacity() {
+		return maxCapacity;
+	}
+
+	public void setMaxCapacity(String maxCapacity) {
+		this.maxCapacity = maxCapacity;
+	}
 
 	public Long getPriority() {
 		return priority;
@@ -181,5 +228,12 @@ public class Photographer implements Serializable{
 	public void setStartingPrice(String startingPrice) {
 		this.startingPrice = startingPrice;
 	}
-	
+
+	public String getTravelStayExpenses() {
+		return travelStayExpenses;
+	}
+
+	public void setTravelStayExpenses(String travelStayExpenses) {
+		this.travelStayExpenses = travelStayExpenses;
+	}
 }

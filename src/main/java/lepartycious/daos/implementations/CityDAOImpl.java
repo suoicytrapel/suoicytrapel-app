@@ -39,10 +39,13 @@ public class CityDAOImpl extends BaseDAOImpl implements CityDAO {
 		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(City.class);
 		criteria.add(Restrictions.eq("cityId", cityId));
 		List<City> cities = criteria.list();
+		City city = null;
 		if(!CollectionUtils.isEmpty(cities)){
-			return cities.get(0);
+			city = cities.get(0);
+			if(!CollectionUtils.isEmpty(city.getLocalities()))
+				city.setLocalities(city.getLocalities());
 		}
-		return null;
+		return city;
 	}
 
 }

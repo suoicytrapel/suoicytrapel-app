@@ -77,6 +77,16 @@ public class CatererDAOImpl extends BaseDAOImpl implements CatererDAO {
 				criteria.createAlias("cf.filterId", "filters");
 				criteria.add(Restrictions.and(Restrictions.in("filters.filterId", filters.getPriceRangeList()), Restrictions.eq("filters.filterType", "PRICE")));
 			}
+			if(!CollectionUtils.isEmpty(filters.getCapacityList())){
+				criteria.createAlias("caterer.catererFilters", "cf"); // inner join by default
+				criteria.createAlias("cf.filterId", "filters");
+				criteria.add(Restrictions.and(Restrictions.in("filters.filterId", filters.getCapacityList()), Restrictions.eq("filters.filterType", "CAPACITY")));
+			}
+			if(!CollectionUtils.isEmpty(filters.getCatererTypeList())){
+				criteria.createAlias("caterer.catererFilters", "cf"); // inner join by default
+				criteria.createAlias("cf.filterId", "filters");
+				criteria.add(Restrictions.and(Restrictions.in("filters.filterId", filters.getCatererTypeList()), Restrictions.eq("filters.filterType", "TYPE")));
+			}
 		}
 		if(StringUtils.isNotBlank(searchString)){
 			criteria.add(Restrictions.ilike("name", searchString + "%"));

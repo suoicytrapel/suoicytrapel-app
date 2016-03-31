@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 import lepartycious.Error.Error;
 import lepartycious.dtos.requestDTOs.SearchRequestDTO;
 import lepartycious.dtos.responseDTOs.AddedDTO;
-import lepartycious.dtos.responseDTOs.SearchResponseDTOWrapper;
 import lepartycious.services.CityService;
 import lepartycious.services.CommonService;
 
@@ -36,7 +35,7 @@ public class HomeSearchController {
 	private CityService cityService;
 	
 	@RequestMapping(method=RequestMethod.POST, value="/populateList")
-	public List<String> loadList(@RequestBody SearchRequestDTO searchRequestDTO) {
+	public List<String> loadList(@RequestBody SearchRequestDTO searchRequestDTO) throws Exception {
 		List<String> list = new ArrayList<String>();
 		list = commonService.loadList(searchRequestDTO);
 		return list;
