@@ -99,8 +99,6 @@ public class DecoratorDAOImpl extends BaseDAOImpl implements DecoratorDAO {
 		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Decorator.class);
 		criteria.add(Restrictions.eq("city.cityId", cityId));
 		criteria.add(Restrictions.isNotNull("priority"));
-		criteria.setFirstResult(0);
-		criteria.setMaxResults(3);
 		criteria.addOrder(Order.asc("priority"));
 		List<Decorator> decoratorList = criteria.list();
 		return decoratorList;

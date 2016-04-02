@@ -27,6 +27,7 @@ import lepartycious.models.Filter;
 import lepartycious.models.Locality;
 import lepartycious.models.Entertainment;
 import lepartycious.models.Others;
+import lepartycious.services.CommonService;
 import lepartycious.services.EntertainmentService;
 import lepartycious.services.OthersService;
 
@@ -45,6 +46,9 @@ public class OthersServiceImpl implements OthersService {
 	
 	@Autowired
 	private CommonDAO commonDAO;
+	
+	@Autowired
+	private CommonService commonService;
 
 	@Override
 	public SearchResponseDTOWrapper getOthers(SearchRequestDTO searchDTO) {
@@ -78,6 +82,10 @@ public class OthersServiceImpl implements OthersService {
 			List<SearchResponseDTO> searchResponseDTOList, SearchRequestDTO searchDTO, FilterWrapperDTO filters) {
 		List<Others> others = othersDAO.getOthers(searchDTO.getCityId(), searchDTO.getSearchString(), searchDTO.getOffset(), searchDTO.getLimit(), searchDTO.getSortField(), searchDTO.getSortOrder(), filters);
 		for(Others other : others){
+			if(CollectionUtils.isEmpty(other.getAttachments())){
+				List<Attachment> defaultImageList = commonService.getDefaultImageList();
+				other.setAttachments(defaultImageList);;
+			}
 			SearchResponseDTO searchResponseDTO = new SearchResponseDTO();
 			searchResponseDTO.setName(other.getName());
 			searchResponseDTO.setLocality(other.getLocality().getDescription());
@@ -134,6 +142,10 @@ public class OthersServiceImpl implements OthersService {
 		List<SearchResponseDTO> recommendationList = new ArrayList<SearchResponseDTO>();
 		List<Others> othersList = othersDAO.fetchRecomendations(cityId);
 		for(Others other : othersList){
+			if(CollectionUtils.isEmpty(other.getAttachments())){
+				List<Attachment> defaultImageList = commonService.getDefaultImageList();
+				other.setAttachments(defaultImageList);;
+			}
 			SearchResponseDTO searchResponseDTO = new SearchResponseDTO();
 			searchResponseDTO.setName(other.getName());
 			searchResponseDTO.setLocality(other.getLocality().getDescription());

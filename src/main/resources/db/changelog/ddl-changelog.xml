@@ -640,4 +640,14 @@
 		</sql>
 	</changeSet>
 	
+	<changeSet author="msingla" id="1.41">
+		<sql>
+			ALTER TABLE venue MODIFY name VARCHAR(100);
+			ALTER TABLE decorater MODIFY name VARCHAR(100);
+			ALTER TABLE caterer MODIFY name VARCHAR(100);
+			ALTER TABLE photographer MODIFY name VARCHAR(100);
+			ALTER TABLE entertainment MODIFY name VARCHAR(100);
+			ALTER TABLE miscellaneous MODIFY name VARCHAR(100);
+		</sql>
+	</changeSet>
 </databaseChangeLog>

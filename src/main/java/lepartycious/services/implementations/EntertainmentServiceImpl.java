@@ -26,6 +26,7 @@ import lepartycious.models.EntityServices;
 import lepartycious.models.Filter;
 import lepartycious.models.Locality;
 import lepartycious.models.Entertainment;
+import lepartycious.services.CommonService;
 import lepartycious.services.EntertainmentService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +44,9 @@ public class EntertainmentServiceImpl implements EntertainmentService {
 	
 	@Autowired
 	private CommonDAO commonDAO;
+	
+	@Autowired
+	private CommonService commonService;
 
 	@Override
 	public SearchResponseDTOWrapper getRentals(SearchRequestDTO searchDTO) {
@@ -76,6 +80,10 @@ public class EntertainmentServiceImpl implements EntertainmentService {
 			List<SearchResponseDTO> searchResponseDTOList, SearchRequestDTO searchDTO, FilterWrapperDTO filters) {
 		List<Entertainment> Rentals = entertainmentDAO.getRentals(searchDTO.getCityId(), searchDTO.getSearchString(), searchDTO.getOffset(), searchDTO.getLimit(), searchDTO.getSortField(), searchDTO.getSortOrder(), filters);
 		for(Entertainment rental : Rentals){
+			if(CollectionUtils.isEmpty(rental.getAttachments())){
+				List<Attachment> defaultImageList = commonService.getDefaultImageList();
+				rental.setAttachments(defaultImageList);;
+			}
 			SearchResponseDTO searchResponseDTO = new SearchResponseDTO();
 			searchResponseDTO.setName(rental.getName());
 			searchResponseDTO.setLocality(rental.getLocality().getDescription());
@@ -141,6 +149,10 @@ public class EntertainmentServiceImpl implements EntertainmentService {
 		List<SearchResponseDTO> recommendationList = new ArrayList<SearchResponseDTO>();
 		List<Entertainment> rentalList = entertainmentDAO.fetchRecomendations(cityId);
 		for(Entertainment rental : rentalList){
+			if(CollectionUtils.isEmpty(rental.getAttachments())){
+				List<Attachment> defaultImageList = commonService.getDefaultImageList();
+				rental.setAttachments(defaultImageList);;
+			}
 			SearchResponseDTO searchResponseDTO = new SearchResponseDTO();
 			searchResponseDTO.setName(rental.getName());
 			searchResponseDTO.setLocality(rental.getLocality().getDescription());

@@ -27,6 +27,7 @@ import lepartycious.models.EntityServices;
 import lepartycious.models.Filter;
 import lepartycious.models.Locality;
 import lepartycious.services.CatererService;
+import lepartycious.services.CommonService;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +45,9 @@ public class CatererServiceImpl implements CatererService {
 	
 	@Autowired
 	private CommonDAO commonDAO;
+	
+	@Autowired
+	private CommonService commonService;
 
 	@Override
 	public SearchResponseDTOWrapper getCaterers(SearchRequestDTO searchDTO) {
@@ -77,6 +81,10 @@ public class CatererServiceImpl implements CatererService {
 			List<SearchResponseDTO> searchResponseDTOList, SearchRequestDTO searchDTO, FilterWrapperDTO filters) {
 		List<Caterer> caterers = catererDAO.getCaterers(searchDTO.getCityId(), searchDTO.getSearchString(), searchDTO.getOffset(), searchDTO.getLimit(), searchDTO.getSortField(), searchDTO.getSortOrder(), filters);
 		for(Caterer caterer : caterers){
+			if(CollectionUtils.isEmpty(caterer.getAttachments())){
+				List<Attachment> defaultImageList = commonService.getDefaultImageList();
+				caterer.setAttachments(defaultImageList);;
+			}
 			SearchResponseDTO searchResponseDTO = new SearchResponseDTO();
 			searchResponseDTO.setName(caterer.getName());
 			searchResponseDTO.setLocality(caterer.getLocality().getDescription());
@@ -206,6 +214,10 @@ public class CatererServiceImpl implements CatererService {
 		List<SearchResponseDTO> recommendationList = new ArrayList<SearchResponseDTO>();
 		List<Caterer> catererList = catererDAO.fetchRecomendations(cityId);
 		for(Caterer caterer : catererList){
+			if(CollectionUtils.isEmpty(caterer.getAttachments())){
+				List<Attachment> defaultImageList = commonService.getDefaultImageList();
+				caterer.setAttachments(defaultImageList);;
+			}
 			SearchResponseDTO searchResponseDTO = new SearchResponseDTO();
 			searchResponseDTO.setName(caterer.getName());
 			searchResponseDTO.setLocality(caterer.getLocality().getDescription());

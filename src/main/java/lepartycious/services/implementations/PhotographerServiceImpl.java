@@ -25,6 +25,7 @@ import lepartycious.models.EntityServices;
 import lepartycious.models.Filter;
 import lepartycious.models.Locality;
 import lepartycious.models.Photographer;
+import lepartycious.services.CommonService;
 import lepartycious.services.PhotographerService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +44,9 @@ public class PhotographerServiceImpl implements PhotographerService {
 
 	@Autowired
 	private CommonDAO commonDAO;
+	
+	@Autowired
+	private CommonService commonService;
 
 	@Override
 	public SearchResponseDTOWrapper getPhotographers(SearchRequestDTO searchDTO) {
@@ -76,6 +80,10 @@ public class PhotographerServiceImpl implements PhotographerService {
 			List<SearchResponseDTO> searchResponseDTOList, SearchRequestDTO searchDTO, FilterWrapperDTO filters) {
 		List<Photographer> Photographers = photographerDAO.getPhotographers(searchDTO.getCityId(), searchDTO.getSearchString(), searchDTO.getOffset(), searchDTO.getLimit(), searchDTO.getSortField(), searchDTO.getSortOrder(), filters);
 		for(Photographer photographer : Photographers){
+			if(CollectionUtils.isEmpty(photographer.getAttachments())){
+				List<Attachment> defaultImageList = commonService.getDefaultImageList();
+				photographer.setAttachments(defaultImageList);;
+			}
 			SearchResponseDTO searchResponseDTO = new SearchResponseDTO();
 			searchResponseDTO.setName(photographer.getName());
 			searchResponseDTO.setMainImagerURL(photographer.getAttachments().get(0).getImageURL());
@@ -160,6 +168,10 @@ public class PhotographerServiceImpl implements PhotographerService {
 		List<SearchResponseDTO> recommendationList = new ArrayList<SearchResponseDTO>();
 		List<Photographer> photographerList = photographerDAO.fetchRecomendations(cityId);
 		for(Photographer photographer : photographerList){
+			if(CollectionUtils.isEmpty(photographer.getAttachments())){
+				List<Attachment> defaultImageList = commonService.getDefaultImageList();
+				photographer.setAttachments(defaultImageList);;
+			}
 			SearchResponseDTO searchResponseDTO = new SearchResponseDTO();
 			searchResponseDTO.setName(photographer.getName());
 			searchResponseDTO.setLocality(photographer.getLocality().getDescription());

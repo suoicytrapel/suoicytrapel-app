@@ -115,8 +115,6 @@ public class CatererDAOImpl extends BaseDAOImpl implements CatererDAO {
 		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Caterer.class);
 		criteria.add(Restrictions.eq("city.cityId", cityId));
 		criteria.add(Restrictions.isNotNull("priority"));
-		criteria.setFirstResult(0);
-		criteria.setMaxResults(3);
 		criteria.addOrder(Order.asc("priority"));
 		List<Caterer> catererList = criteria.list();
 		return catererList;

@@ -25,6 +25,7 @@ import lepartycious.models.Decorator;
 import lepartycious.models.EntityServices;
 import lepartycious.models.Filter;
 import lepartycious.models.Locality;
+import lepartycious.services.CommonService;
 import lepartycious.services.DecoratorService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +43,9 @@ public class DecoratorServiceImpl implements DecoratorService {
 
 	@Autowired
 	private CommonDAO commonDAO;
+	
+	@Autowired
+	private CommonService commonService;
 
 	@Override
 	public SearchResponseDTOWrapper getDecorators(SearchRequestDTO searchDTO) {
@@ -75,6 +79,10 @@ public class DecoratorServiceImpl implements DecoratorService {
 			List<SearchResponseDTO> searchResponseDTOList, SearchRequestDTO searchDTO, FilterWrapperDTO filters) {
 		List<Decorator> Decorators = decoratorDAO.getDecorators(searchDTO.getCityId(), searchDTO.getSearchString(), searchDTO.getOffset(), searchDTO.getLimit(), searchDTO.getSortField(), searchDTO.getSortOrder(), filters);
 		for(Decorator decorator : Decorators){
+			if(CollectionUtils.isEmpty(decorator.getAttachments())){
+				List<Attachment> defaultImageList = commonService.getDefaultImageList();
+				decorator.setAttachments(defaultImageList);;
+			}
 			SearchResponseDTO searchResponseDTO = new SearchResponseDTO();
 			searchResponseDTO.setName(decorator.getName());
 			searchResponseDTO.setLocality(decorator.getLocality().getDescription());
@@ -160,6 +168,10 @@ public class DecoratorServiceImpl implements DecoratorService {
 		List<SearchResponseDTO> recommendationList = new ArrayList<SearchResponseDTO>();
 		List<Decorator> decoratorList = decoratorDAO.fetchRecomendations(cityId);
 		for(Decorator decorator : decoratorList){
+			if(CollectionUtils.isEmpty(decorator.getAttachments())){
+				List<Attachment> defaultImageList = commonService.getDefaultImageList();
+				decorator.setAttachments(defaultImageList);;
+			}
 			SearchResponseDTO searchResponseDTO = new SearchResponseDTO();
 			searchResponseDTO.setName(decorator.getName());
 			searchResponseDTO.setLocality(decorator.getLocality().getDescription());

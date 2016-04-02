@@ -97,8 +97,6 @@ public class EntertainmentDAOImpl extends BaseDAOImpl implements EntertainmentDA
 		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Entertainment.class);
 		criteria.add(Restrictions.eq("city.cityId", cityId));
 		criteria.add(Restrictions.isNotNull("priority"));
-		criteria.setFirstResult(0);
-		criteria.setMaxResults(3);
 		criteria.addOrder(Order.asc("priority"));
 		List<Entertainment> rentalList = criteria.list();
 		return rentalList;

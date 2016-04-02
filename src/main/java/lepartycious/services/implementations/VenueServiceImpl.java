@@ -29,6 +29,7 @@ import lepartycious.models.Room;
 import lepartycious.models.Venue;
 import lepartycious.models.VenueAmenities;
 import lepartycious.models.VenueRooms;
+import lepartycious.services.CommonService;
 import lepartycious.services.VenueService;
 
 import org.apache.commons.lang3.StringUtils;
@@ -49,6 +50,9 @@ public class VenueServiceImpl implements VenueService {
 	
 	@Autowired
 	private CommonDAO commonDAO;
+	
+	@Autowired
+	private CommonService commonService;
 
 	@Override
 	public SearchResponseDTOWrapper getVenues(SearchRequestDTO searchDTO) {
@@ -83,6 +87,10 @@ public class VenueServiceImpl implements VenueService {
 			List<SearchResponseDTO> searchResponseDTOList, SearchRequestDTO searchDTO, FilterWrapperDTO filters) {
 		List<Venue> venues = venueDAO.getVenues(searchDTO.getCityId(), searchDTO.getSearchString(), searchDTO.getOffset(), searchDTO.getLimit(), searchDTO.getSortField(), searchDTO.getSortOrder(), filters);
 		for(Venue venue : venues){
+			if(CollectionUtils.isEmpty(venue.getAttachments())){
+				List<Attachment> defaultImageList = commonService.getDefaultImageList();
+				venue.setAttachments(defaultImageList);;
+			}
 			SearchResponseDTO searchResponseDTO = new SearchResponseDTO();
 			searchResponseDTO.setName(venue.getName());
 			searchResponseDTO.setLocality(venue.getLocality().getDescription());
@@ -278,6 +286,10 @@ public class VenueServiceImpl implements VenueService {
 		List<SearchResponseDTO> recommendationList = new ArrayList<SearchResponseDTO>();
 		List<Venue> venueList = venueDAO.fetchRecomendations(cityId);
 		for(Venue venue : venueList){
+			if(CollectionUtils.isEmpty(venue.getAttachments())){
+				List<Attachment> defaultImageList = commonService.getDefaultImageList();
+				venue.setAttachments(defaultImageList);;
+			}
 			SearchResponseDTO searchResponseDTO = new SearchResponseDTO();
 			searchResponseDTO.setName(venue.getName());
 			searchResponseDTO.setLocality(venue.getLocality().getDescription());

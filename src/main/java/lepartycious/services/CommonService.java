@@ -11,6 +11,7 @@ import lepartycious.dtos.responseDTOs.DetailResponseDTO;
 import lepartycious.dtos.responseDTOs.FilterResponseWrapperDTO;
 import lepartycious.dtos.responseDTOs.SearchResponseDTO;
 import lepartycious.dtos.responseDTOs.SearchResponseDTOWrapper;
+import lepartycious.models.Attachment;
 
 import org.springframework.transaction.annotation.Transactional;
 
@@ -33,6 +34,6 @@ public interface CommonService {
 	@Transactional(readOnly=false)
 	public boolean pushDataToDatabase(String query);
 	
-	
+	public List<Attachment> getDefaultImageList();
 
 }

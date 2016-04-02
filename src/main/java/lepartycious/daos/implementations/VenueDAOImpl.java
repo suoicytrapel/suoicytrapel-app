@@ -123,8 +123,6 @@ public class VenueDAOImpl extends BaseDAOImpl implements VenueDAO {
 		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Venue.class);
 		criteria.add(Restrictions.eq("city.cityId", cityId));
 		criteria.add(Restrictions.isNotNull("priority"));
-		criteria.setFirstResult(1);
-		criteria.setMaxResults(3);
 		criteria.addOrder(Order.asc("priority"));
 		List<Venue> venues = criteria.list();
 		return venues;

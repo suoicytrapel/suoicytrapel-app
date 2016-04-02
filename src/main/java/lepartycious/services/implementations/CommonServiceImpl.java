@@ -1,6 +1,7 @@
 package lepartycious.services.implementations;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,6 +16,7 @@ import lepartycious.dtos.responseDTOs.DetailResponseDTO;
 import lepartycious.dtos.responseDTOs.FilterResponseWrapperDTO;
 import lepartycious.dtos.responseDTOs.SearchResponseDTO;
 import lepartycious.dtos.responseDTOs.SearchResponseDTOWrapper;
+import lepartycious.models.Attachment;
 import lepartycious.models.Caterer;
 import lepartycious.models.Decorator;
 import lepartycious.models.Entertainment;
@@ -259,6 +261,17 @@ public class CommonServiceImpl implements CommonService {
 	@Override
 	public boolean pushDataToDatabase(String query) {
 		return commonDAO.pushDataToDatabase(query);
+	}
+	
+	public List<Attachment> getDefaultImageList(){
+		List<Attachment> attachments = new ArrayList<Attachment>();
+		Attachment attachment = new Attachment();
+		attachment.setImageURL("defaultimage.jpg");
+		attachment.setAddedOn(new Date());
+		attachment.setAttachmentType("COVER");
+		attachment.setHelpText("No Image");
+		attachments.add(attachment);
+		return attachments;
 	}
 
 }
