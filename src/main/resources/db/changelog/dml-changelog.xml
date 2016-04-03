@@ -644,7 +644,7 @@
     
     <changeSet author="msingla" id="1.27">
 	    <sql>
-	    	insert into entertainment (name, description, comments, rating, version, added_on, city_id, locality_id, priority, is_group, starting_price, genre, travel_stay_expenses) values ('Dance Crew Bikaner', 'We provide Decoration servces in tricity', null, null, 0, now(), (select id from city where name = 'Bikaner'), (select id from locality where name = 'Bikaner'), 10, false, '10,000', 'Rock', 'To be beared');
+	    	insert into entertainment (name, description, comments, rating, version, added_on, city_id, locality_id, priority, is_group, starting_price, genre, travel_stay_expenses) values ('Dance Crew Bikaner', 'We provide Decoration servces in tricity', null, null, 0, now(), (select id from city where name = 'Bikaner'), (select id from locality where name = 'Delhi Road'), 10, false, '10,000', 'Rock', 'To be beared');
 			insert into address (address_line_1, address_line_2, city, state, pincode, primary_phone, secondary_phone, email, entity_id, version, added_on, latitude, longitude) values ('Dance Crew Bikaner', 'Near Shiv Mandir, Delhi Road', 'Bikaner', 'Rajasthan', 160101, '+91-9876556789', '0171-987678', 'enter@gmail.com', (select id from entertainment where name = 'Dance Crew Bikaner'), 0, now(), '28.0167', '73.3119');
 			insert into entity_filters (entity_id, filter_id, version, added_on) values ((select id from entertainment where name = 'Dance Crew Bikaner'), (select id from filters where filter_type = 'ENTERTAINMENT' and filter_for_entity = 'ENTERTAINMENT' and filter_name = 'Dancers'), 0, now());
 	    </sql>
@@ -652,7 +652,7 @@
     
     <changeSet author="msingla" id="1.28">
 	    <sql>
-	    	insert into entertainment (name, description, comments, rating, version, added_on, city_id, locality_id, priority, is_group, starting_price, genre, travel_stay_expenses) values ('Singer Crew Bikaner', 'We provide Decoration servces in tricity', null, null, 0, now(), (select id from city where name = 'Bikaner'), (select id from locality where name = 'Bikaner'), 10, false, '10,000', 'Rock', 'To be beared');
+	    	insert into entertainment (name, description, comments, rating, version, added_on, city_id, locality_id, priority, is_group, starting_price, genre, travel_stay_expenses) values ('Singer Crew Bikaner', 'We provide Decoration servces in tricity', null, null, 0, now(), (select id from city where name = 'Bikaner'), (select id from locality where name = 'Delhi Road'), 10, false, '10,000', 'Rock', 'To be beared');
 			insert into address (address_line_1, address_line_2, city, state, pincode, primary_phone, secondary_phone, email, entity_id, version, added_on, latitude, longitude) values ('Dance Crew Bikaner', 'Near Shiv Mandir, Delhi Road', 'Bikaner', 'Rajasthan', 160101, '+91-9876556789', '0171-987678', 'enter@gmail.com', (select id from entertainment where name = 'Dance Crew Bikaner'), 0, now(), '28.0167', '73.3119');
 			insert into entity_filters (entity_id, filter_id, version, added_on) values ((select id from entertainment where name = 'Singer Crew Bikaner'), (select id from filters where filter_type = 'ENTERTAINMENT' and filter_for_entity = 'ENTERTAINMENT' and filter_name = 'Singers'), 0, now());
 	    </sql>
@@ -676,7 +676,7 @@
     
     <changeSet author="msingla" id="1.31">
 	    <sql>
-	    	insert into entertainment (name, description, comments, rating, version, added_on, city_id, locality_id, priority, is_group, starting_price, genre, travel_stay_expenses) values ('Musicians Crew Bikaner', 'We provide Musicians servces in tricity', null, null, 0, now(), (select id from city where name = 'Bikaner'), (select id from locality where name = 'Bikaner'), 10, false, '10,000', 'Rock', 'To be beared');
+	    	insert into entertainment (name, description, comments, rating, version, added_on, city_id, locality_id, priority, is_group, starting_price, genre, travel_stay_expenses) values ('Musicians Crew Bikaner', 'We provide Musicians servces in tricity', null, null, 0, now(), (select id from city where name = 'Bikaner'), (select id from locality where name = 'Delhi Road'), 10, false, '10,000', 'Rock', 'To be beared');
 			insert into address (address_line_1, address_line_2, city, state, pincode, primary_phone, secondary_phone, email, entity_id, version, added_on, latitude, longitude) values ('Musicians Crew Bikaner', 'Near Shiv Mandir, Delhi Road', 'Bikaner', 'Rajasthan', 160101, '+91-9876556789', '0171-987678', 'enter@gmail.com', (select id from entertainment where name = 'Musicians Crew Bikaner'), 0, now(), '28.0167', '73.3119');
 			insert into entity_filters (entity_id, filter_id, version, added_on) values ((select id from entertainment where name = 'Musicians Crew Bikaner'), (select id from filters where filter_type = 'ENTERTAINMENT' and filter_for_entity = 'ENTERTAINMENT' and filter_name = 'Musicians'), 0, now());
 	    </sql>
@@ -684,7 +684,7 @@
     
     <changeSet author="msingla" id="1.32">
 	    <sql>
-	    	insert into entertainment (name, description, comments, rating, version, added_on, city_id, locality_id, priority, is_group, starting_price, genre, travel_stay_expenses) values ('Choreographer Crew Bikaner', 'We provide Choreographer servces in tricity', null, null, 0, now(), (select id from city where name = 'Bikaner'), (select id from locality where name = 'Bikaner'), 10, null, '10,000', 'Rock', 'To be beared');
+	    	insert into entertainment (name, description, comments, rating, version, added_on, city_id, locality_id, priority, is_group, starting_price, genre, travel_stay_expenses) values ('Choreographer Crew Bikaner', 'We provide Choreographer servces in tricity', null, null, 0, now(), (select id from city where name = 'Bikaner'), (select id from locality where name = 'Delhi Road'), 10, null, '10,000', 'Rock', 'To be beared');
 			insert into address (address_line_1, address_line_2, city, state, pincode, primary_phone, secondary_phone, email, entity_id, version, added_on, latitude, longitude) values ('Choreographer Crew Bikaner', 'Near Shiv Mandir, Delhi Road', 'Bikaner', 'Rajasthan', 160101, '+91-9876556789', '0171-987678', 'enter@gmail.com', (select id from entertainment where name = 'Choreographer Crew Bikaner'), 0, now(), '28.0167', '73.3119');
 			insert into entity_filters (entity_id, filter_id, version, added_on) values ((select id from entertainment where name = 'Choreographer Crew Bikaner'), (select id from filters where filter_type = 'ENTERTAINMENT' and filter_for_entity = 'ENTERTAINMENT' and filter_name = 'Choreographer'), 0, now());
 	    </sql>
@@ -981,6 +981,49 @@
 	    </sql>
     </changeSet>
     
+    <changeSet author="msingla" id="1.55">
+	    <sql>
+	    	insert into address (address_line_1, address_line_2, city, state, pincode, primary_phone, secondary_phone, email, entity_id, version, added_on, latitude, longitude) values ('Singer Crew Chandigarh', 'Near Shiv Mandir, Delhi Road', 'Chandigarh', 'Chandigarh', 160101, '+91-9876556789', '0171-987678', 'enter@gmail.com', (select id from entertainment where name = 'Singer Crew Chandigarh'), 0, now(), '28.0167', '73.3119');
+			insert into address (address_line_1, address_line_2, city, state, pincode, primary_phone, secondary_phone, email, entity_id, version, added_on, latitude, longitude) values ('Singer Crew Bikaner', 'Near Shiv Mandir, Delhi Road', 'Bikaner', 'Rajasthan', 160101, '+91-9876556789', '0171-987678', 'enter@gmail.com', (select id from entertainment where name = 'Singer Crew Bikaner'), 0, now(), '28.0167', '73.3119');
+	    </sql>
+    </changeSet>
     
+    <changeSet author="msingla" id="1.56">
+	    <sql>
+	    	insert into attachment (name, image_url, entity_id, version, added_on, attachment_type, help_text) values ('YoChina.jpg', 'entertainment/chd_anchor_anchoring/a1.jpg', (select id from entertainment where name = 'Anchoring' and city_id = (select id from city where name = 'Chandigarh')), 0, now(), 'COVER', 'Anchor');
+			insert into attachment (name, image_url, entity_id, version, added_on, attachment_type, help_text) values ('YoChina.jpg', 'entertainment/chd_choreographer_crew/c1.jpg', (select id from entertainment where name = 'Choreographer Crew Chandigarh' and city_id = (select id from city where name = 'Chandigarh')), 0, now(), 'COVER', 'Choreographer');
+			insert into attachment (name, image_url, entity_id, version, added_on, attachment_type, help_text) values ('YoChina.jpg', 'entertainment/chd_dancer_crew/c1.jpg', (select id from entertainment where name = 'Dance Crew Chandigarh' and city_id = (select id from city where name = 'Chandigarh')), 0, now(), 'COVER', 'Choreographer');
+			insert into attachment (name, image_url, entity_id, version, added_on, attachment_type, help_text) values ('YoChina.jpg', 'entertainment/chd_fireworks_ravindra/r1.jpg', (select id from entertainment where name = 'Ravindra Fireworks' and city_id = (select id from city where name = 'Chandigarh')), 0, now(), 'COVER', 'Choreographer');
+			insert into attachment (name, image_url, entity_id, version, added_on, attachment_type, help_text) values ('YoChina.jpg', 'entertainment/chd_musician_crew/c1.jpg', (select id from entertainment where name = 'Musicians Crew Chandigarh' and city_id = (select id from city where name = 'Chandigarh')), 0, now(), 'COVER', 'Musicians');
+			insert into attachment (name, image_url, entity_id, version, added_on, attachment_type, help_text) values ('YoChina.jpg', 'entertainment/chd_singer_crew/c1.jpg', (select id from entertainment where name = 'Singer Crew Chandigarh' and city_id = (select id from city where name = 'Chandigarh')), 0, now(), 'COVER', 'Singer');
+			insert into attachment (name, image_url, entity_id, version, added_on, attachment_type, help_text) values ('YoChina.jpg', 'miscellaneous/chd_bakery_bakerlounge/b1.jpg', (select id from miscellaneous where name = 'Bakers Lounge' and city_id = (select id from city where name = 'Chandigarh')), 0, now(), 'COVER', 'Bakers');
+			insert into attachment (name, image_url, entity_id, version, added_on, attachment_type, help_text) values ('YoChina.jpg', 'miscellaneous/chd_cinema_rohan/r1.jpg', (select id from miscellaneous where name = 'Rohan Cinemas' and city_id = (select id from city where name = 'Chandigarh')), 0, now(), 'COVER', 'Cinema');
+			insert into attachment (name, image_url, entity_id, version, added_on, attachment_type, help_text) values ('YoChina.jpg', 'miscellaneous/chd_coverage_singla/s1.jpg', (select id from miscellaneous where name = 'Singla Coverage Agency' and city_id = (select id from city where name = 'Chandigarh')), 0, now(), 'COVER', 'Coverage');
+			insert into attachment (name, image_url, entity_id, version, added_on, attachment_type, help_text) values ('YoChina.jpg', 'miscellaneous/chd_giftshop_archies/a1.jpg', (select id from miscellaneous where name = 'Archies Gallery' and city_id = (select id from city where name = 'Chandigarh')), 0, now(), 'COVER', 'Giftshop');
+			insert into attachment (name, image_url, entity_id, version, added_on, attachment_type, help_text) values ('YoChina.jpg', 'miscellaneous/chd_invites_sodhi/s1.jpg', (select id from miscellaneous where name = 'Sodhi Printing' and city_id = (select id from city where name = 'Chandigarh')), 0, now(), 'COVER', 'Invites');
+			insert into attachment (name, image_url, entity_id, version, added_on, attachment_type, help_text) values ('YoChina.jpg', 'miscellaneous/chd_jwellers_ranka/r1.jpg', (select id from miscellaneous where name = 'Ranka Jwellers' and city_id = (select id from city where name = 'Chandigarh')), 0, now(), 'COVER', 'Jwellers');
+			insert into attachment (name, image_url, entity_id, version, added_on, attachment_type, help_text) values ('YoChina.jpg', 'miscellaneous/chd_saloon_lakme/l1.jpg', (select id from miscellaneous where name = 'Lakme Unisex Saloon' and city_id = (select id from city where name = 'Chandigarh')), 0, now(), 'COVER', 'Saloon');
+			insert into attachment (name, image_url, entity_id, version, added_on, attachment_type, help_text) values ('YoChina.jpg', 'miscellaneous/chd_travels_balaji/b1.jpg', (select id from miscellaneous where name = 'Balaji Tours &amp; Travels' and city_id = (select id from city where name = 'Chandigarh')), 0, now(), 'COVER', 'Travels');
+	    </sql>
+    </changeSet>
+    
+    <changeSet author="msingla" id="1.57">
+	    <sql>
+	    	insert into attachment (name, image_url, entity_id, version, added_on, attachment_type, help_text) values ('YoChina.jpg', 'entertainment/bikaner_anchor_anchoring/a1.jpg', (select id from entertainment where name = 'Anchoring' and city_id = (select id from city where name = 'Bikaner')), 0, now(), 'COVER', 'Anchor');
+			insert into attachment (name, image_url, entity_id, version, added_on, attachment_type, help_text) values ('YoChina.jpg', 'entertainment/bikaner_choreographer_crew/c1.jpg', (select id from entertainment where name = 'Choreographer Crew Bikaner' and city_id = (select id from city where name = 'Bikaner')), 0, now(), 'COVER', 'Choreographer');
+			insert into attachment (name, image_url, entity_id, version, added_on, attachment_type, help_text) values ('YoChina.jpg', 'entertainment/bikaner_dancer_crew/c1.jpg', (select id from entertainment where name = 'Dance Crew Bikaner' and city_id = (select id from city where name = 'Bikaner')), 0, now(), 'COVER', 'Dancer');
+			insert into attachment (name, image_url, entity_id, version, added_on, attachment_type, help_text) values ('YoChina.jpg', 'entertainment/bikaner_fireworks_ravindra/r1.jpg', (select id from entertainment where name = 'Ravindra Fireworks' and city_id = (select id from city where name = 'Bikaner')), 0, now(), 'COVER', 'Fireworks');
+			insert into attachment (name, image_url, entity_id, version, added_on, attachment_type, help_text) values ('YoChina.jpg', 'entertainment/bikaner_musician_crew/c1.jpg', (select id from entertainment where name = 'Musicians Crew Bikaner' and city_id = (select id from city where name = 'Bikaner')), 0, now(), 'COVER', 'Musicians');
+			insert into attachment (name, image_url, entity_id, version, added_on, attachment_type, help_text) values ('YoChina.jpg', 'entertainment/bikaner_singer_crew/c1.jpg', (select id from entertainment where name = 'Singer Crew Bikaner' and city_id = (select id from city where name = 'Bikaner')), 0, now(), 'COVER', 'Singer');
+			insert into attachment (name, image_url, entity_id, version, added_on, attachment_type, help_text) values ('YoChina.jpg', 'miscellaneous/bikaner_bakery_bakerlounge/b1.jpg', (select id from miscellaneous where name = 'Bakers Lounge' and city_id = (select id from city where name = 'Bikaner')), 0, now(), 'COVER', 'Bakers');
+			insert into attachment (name, image_url, entity_id, version, added_on, attachment_type, help_text) values ('YoChina.jpg', 'miscellaneous/bikaner_cinema_rohan/r1.jpg', (select id from miscellaneous where name = 'Rohan Cinemas' and city_id = (select id from city where name = 'Bikaner')), 0, now(), 'COVER', 'Cinema');
+			insert into attachment (name, image_url, entity_id, version, added_on, attachment_type, help_text) values ('YoChina.jpg', 'miscellaneous/bikaner_coverage_singla/s1.jpg', (select id from miscellaneous where name = 'Singla Coverage Agency' and city_id = (select id from city where name = 'Bikaner')), 0, now(), 'COVER', 'Coverage');
+			insert into attachment (name, image_url, entity_id, version, added_on, attachment_type, help_text) values ('YoChina.jpg', 'miscellaneous/bikaner_giftshop_archies/a1.jpg', (select id from miscellaneous where name = 'Archies Gallery' and city_id = (select id from city where name = 'Bikaner')), 0, now(), 'COVER', 'Giftshop');
+			insert into attachment (name, image_url, entity_id, version, added_on, attachment_type, help_text) values ('YoChina.jpg', 'miscellaneous/bikaner_invites_krishna/k1.jpg', (select id from miscellaneous where name = 'Krishna Printing' and city_id = (select id from city where name = 'Bikaner')), 0, now(), 'COVER', 'Invites');
+			insert into attachment (name, image_url, entity_id, version, added_on, attachment_type, help_text) values ('YoChina.jpg', 'miscellaneous/bikaner_jwellers_ranka/r1.jpg', (select id from miscellaneous where name = 'Ranka Jwellers' and city_id = (select id from city where name = 'Bikaner')), 0, now(), 'COVER', 'Jwellers');
+			insert into attachment (name, image_url, entity_id, version, added_on, attachment_type, help_text) values ('YoChina.jpg', 'miscellaneous/bikaner_saloon_lakme/l1.jpg', (select id from miscellaneous where name = 'Lakme Unisex Saloon' and city_id = (select id from city where name = 'Bikaner')), 0, now(), 'COVER', 'Saloon');
+			insert into attachment (name, image_url, entity_id, version, added_on, attachment_type, help_text) values ('YoChina.jpg', 'miscellaneous/bikaner_travels_balaji/b1.jpg', (select id from miscellaneous where name = 'Balaji Tours &amp; Travels' and city_id = (select id from city where name = 'Bikaner')), 0, now(), 'COVER', 'Travels');
+	    </sql>
+    </changeSet>
 	
 </databaseChangeLog>
