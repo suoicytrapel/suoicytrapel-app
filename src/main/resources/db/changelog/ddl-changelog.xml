@@ -650,4 +650,11 @@
 			ALTER TABLE miscellaneous MODIFY name VARCHAR(100);
 		</sql>
 	</changeSet>
+	
+	<changeSet author="msingla" id="1.42">
+		<sql>
+			ALTER TABLE amenities ADD COLUMN is_detailed_amenity boolean;
+		</sql>
+	</changeSet>
+	
 </databaseChangeLog>

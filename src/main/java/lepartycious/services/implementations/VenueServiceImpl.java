@@ -151,7 +151,7 @@ public class VenueServiceImpl implements VenueService {
 				houseDecorDTO.setBalloonsAvlbl(venueAmenities.getBalloonsAvlbl());
 				houseDecorDTO.setCandlesAvlbl(venueAmenities.getCandlesAvlbl());
 				inHouseOfferingsTabMap.put(venueAmenities.getAmenitiesId().getDescription(), houseDecorDTO);
-			}else{
+			}else if(venueAmenities.getAmenitiesId().getIsDetailedAmenity()){
 				if(amenityDetailTabMap.containsKey(venueAmenities.getAmenitiesId().getDescription())){
 					List<TabResponseDTO> tabList = amenityDetailTabMap.get(venueAmenities.getAmenitiesId().getDescription());
 					TabResponseDTO venueAmenityDTO = new TabResponseDTO();

@@ -1026,4 +1026,16 @@
 	    </sql>
     </changeSet>
 	
+	<changeSet author="msingla" id="1.58">
+	    <sql>
+	    	update amenities set is_detailed_amenity = true where amenity_type = 'BNQTHALL';
+	    	update amenities set is_detailed_amenity = false where amenity_type = 'CLUBROOM';
+	    	update amenities set is_detailed_amenity = false where amenity_type = 'PARLOUR';
+	    	update amenities set is_detailed_amenity = false where amenity_type = 'GYM';
+	    	update amenities set is_detailed_amenity = false where amenity_type = 'INHOUSECATERING';
+	    	update amenities set is_detailed_amenity = false where amenity_type = 'LOBBY';
+	    	update amenities set is_detailed_amenity = false where amenity_type = 'CONFERENCE';
+	    	update amenities set is_detailed_amenity = false where amenity_type = 'INHOUSEDECOR';
+	    </sql>
+    </changeSet>
 </databaseChangeLog>

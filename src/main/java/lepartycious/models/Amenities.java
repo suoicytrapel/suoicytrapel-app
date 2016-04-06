@@ -47,6 +47,17 @@ public class Amenities implements Serializable{
 	
 	@Column(name = "is_filter")
 	private Boolean isFilter;
+	
+	@Column(name = "is_detailed_amenity")
+	private Boolean isDetailedAmenity;
+	
+	public Boolean getIsDetailedAmenity() {
+		return isDetailedAmenity;
+	}
+
+	public void setIsDetailedAmenity(Boolean isDetailedAmenity) {
+		this.isDetailedAmenity = isDetailedAmenity;
+	}
 
 	public long getAmenitiesId() {
 		return amenitiesId;
