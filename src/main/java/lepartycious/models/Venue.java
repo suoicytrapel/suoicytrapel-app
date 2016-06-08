@@ -90,6 +90,9 @@ public class Venue implements Serializable{
 	@Column(name = "min_capacity")
 	private String minCapacity;
 	
+	@OneToMany(mappedBy="venue")
+	private List<VenuePackages> venuePackages;
+	
 	public String getMinCapacity() {
 		return minCapacity;
 	}
@@ -257,4 +260,13 @@ public class Venue implements Serializable{
 	public void setServingSince(String servingSince) {
 		this.servingSince = servingSince;
 	}
+
+	public List<VenuePackages> getVenuePackages() {
+		return venuePackages;
+	}
+
+	public void setVenuePackages(List<VenuePackages> venuePackages) {
+		this.venuePackages = venuePackages;
+	}
+	
 }

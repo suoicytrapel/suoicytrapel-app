@@ -32,6 +32,7 @@ public class DetailResponseDTO implements Serializable{
 	private TabResponseDTO additionalInfo;
 	private Map<String, TabResponseDTO> inHouseOfferingsTabMap;
 	private Boolean isPureVeg;
+	private List<VenuePackageDTO> venuePackages;
 	
 	public String getName() {
 		return name;
@@ -197,5 +198,11 @@ public class DetailResponseDTO implements Serializable{
 	}
 	public void setAdditionalInfo(TabResponseDTO additionalInfo) {
 		this.additionalInfo = additionalInfo;
+	}
+	public List<VenuePackageDTO> getVenuePackages() {
+		return venuePackages;
+	}
+	public void setVenuePackages(List<VenuePackageDTO> venuePackages) {
+		this.venuePackages = venuePackages;
 	}
 }

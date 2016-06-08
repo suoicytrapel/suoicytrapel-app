@@ -2,6 +2,7 @@ package lepartycious.services.implementations;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -18,6 +19,7 @@ import lepartycious.dtos.responseDTOs.FilterResponseWrapperDTO;
 import lepartycious.dtos.responseDTOs.SearchResponseDTO;
 import lepartycious.dtos.responseDTOs.SearchResponseDTOWrapper;
 import lepartycious.dtos.responseDTOs.TabResponseDTO;
+import lepartycious.dtos.responseDTOs.VenuePackageDTO;
 import lepartycious.models.Address;
 import lepartycious.models.Amenities;
 import lepartycious.models.Attachment;
@@ -28,6 +30,7 @@ import lepartycious.models.Locality;
 import lepartycious.models.Room;
 import lepartycious.models.Venue;
 import lepartycious.models.VenueAmenities;
+import lepartycious.models.VenuePackages;
 import lepartycious.models.VenueRooms;
 import lepartycious.services.CommonService;
 import lepartycious.services.VenueService;
@@ -113,6 +116,7 @@ public class VenueServiceImpl implements VenueService {
 		Map<String, TabResponseDTO> inHouseOfferingsTabMap = new HashMap<String, TabResponseDTO>();
 		List<AttachmentResponseDTO> menuImageList = new ArrayList<AttachmentResponseDTO>();
 		Map<String, List<TabResponseDTO>> serviceAmenityTabMap = new HashMap<String, List<TabResponseDTO>>();
+		List<VenuePackageDTO> venuePackageDTOs = new ArrayList<VenuePackageDTO>();
 
 		Address address = venue.getAddresses().get(0);
 		for(EntityServices venueService : venue.getVenueServices()){
@@ -128,6 +132,26 @@ public class VenueServiceImpl implements VenueService {
 			else{
 				attachmentList.add(attachmentDTO);
 			}
+		}
+		for(VenuePackages venuePackage : venue.getVenuePackages()){
+			VenuePackageDTO venuePackageDTO = new VenuePackageDTO();
+			Map<String, String> packageItems = new LinkedHashMap<String, String>();
+			packageItems.put("welcome drinks",venuePackage.getWelcomeDrinks());
+			packageItems.put("soups",venuePackage.getSoups());
+			packageItems.put("salads",venuePackage.getSalads());
+			packageItems.put("veg starters",venuePackage.getVegStarters());
+			packageItems.put("non-veg starters",venuePackage.getNonVegStarters());
+			packageItems.put("veg main course",venuePackage.getVegMainCourse());
+			packageItems.put("non-veg main course",venuePackage.getNonvegMainCourse());
+			packageItems.put("raita",venuePackage.getRaita());
+			packageItems.put("dal",venuePackage.getDal());
+			packageItems.put("rice/biryani",venuePackage.getRiceBiryani());
+			packageItems.put("assorted breads",venuePackage.getAssortedBreads());
+			packageItems.put("deserts",venuePackage.getDeserts());
+			venuePackageDTO.setPackagePrice(venuePackage.getPackagePrice());
+			venuePackageDTO.setPackageItems(packageItems);
+			venuePackageDTO.setPackageType(venuePackage.getPackageType());
+			venuePackageDTOs.add(venuePackageDTO);
 		}
 		for(VenueAmenities venueAmenities : venue.getVenueamenities()){
 			TabResponseDTO amenityDTO = new TabResponseDTO();
@@ -212,6 +236,9 @@ public class VenueServiceImpl implements VenueService {
 		detailResponseDTO.setAttachments(attachmentList);
 		detailResponseDTO.setServingSince(venue.getServingSince());
 		detailResponseDTO.setStartingFrom(venue.getStartingPrice());
+		if(!CollectionUtils.isEmpty(venuePackageDTOs)){
+			detailResponseDTO.setVenuePackages(venuePackageDTOs);
+		}
 		return detailResponseDTO;
 	}
 

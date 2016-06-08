@@ -1038,4 +1038,11 @@
 	    	update amenities set is_detailed_amenity = false where amenity_type = 'INHOUSEDECOR';
 	    </sql>
     </changeSet>
+    
+    <changeSet author="msingla" id="1.59">
+	    <sql>
+	    	insert into venue_packages (venue_id, welcome_drinks, soups, salads, veg_starters, non_veg_starters, veg_main_course, nonveg_main_course, raita, dal, rice_biryani, assorted_breads, deserts, package_price, package_type, added_on) values ((select id from venue where name = 'JW Marriott'), '2', '2', '5', '4', '-', '3', '-', '3', '2', '2', 'Any', '3', '400', 'Veg', now());
+			insert into venue_packages (venue_id, welcome_drinks, soups, salads, veg_starters, non_veg_starters, veg_main_course, nonveg_main_course, raita, dal, rice_biryani, assorted_breads, deserts, package_price, package_type, added_on) values ((select id from venue where name = 'JW Marriott'), '2', '2', '5', '4', '3', '3', '4', '3', '2', '2', 'Any', '3', '500', 'Non-Veg', now());
+	    </sql>
+    </changeSet>
 </databaseChangeLog>

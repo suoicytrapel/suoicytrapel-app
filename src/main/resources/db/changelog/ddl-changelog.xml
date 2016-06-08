@@ -657,4 +657,35 @@
 		</sql>
 	</changeSet>
 	
+	<changeSet author="msingla" id="1.43">
+		<sql>
+			CREATE TABLE venue_packages(
+			id bigint PRIMARY KEY AUTO_INCREMENT,
+			venue_id bigint,
+			welcome_drinks varchar (25),
+			soups varchar (25),
+			salads varchar (25),
+			veg_starters varchar (25),
+			non_veg_starters varchar (25),
+			veg_main_course varchar (25),
+			nonveg_main_course varchar (25),
+			raita varchar (25),
+			dal varchar (25),
+			rice_biryani varchar (25),
+			assorted_breads varchar (25),
+			deserts varchar (25),
+			package_type varchar (50),
+			package_price varchar (10),
+			added_on timestamp NOT NULL DEFAULT now(),
+			FOREIGN KEY (venue_id) REFERENCES venue (id)
+			);
+		</sql>
+	</changeSet>
+	
+	<changeSet author="msingla" id="1.44">
+		<sql>
+			ALTER TABLE venue_packages AUTO_INCREMENT = 700000;
+		</sql>
+	</changeSet>
+	
 </databaseChangeLog>
