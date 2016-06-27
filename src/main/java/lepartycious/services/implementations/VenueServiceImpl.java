@@ -1,10 +1,12 @@
 package lepartycious.services.implementations;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.StringTokenizer;
 
 import lepartycious.daos.CityDAO;
 import lepartycious.daos.CommonDAO;
@@ -20,6 +22,7 @@ import lepartycious.dtos.responseDTOs.SearchResponseDTO;
 import lepartycious.dtos.responseDTOs.SearchResponseDTOWrapper;
 import lepartycious.dtos.responseDTOs.TabResponseDTO;
 import lepartycious.dtos.responseDTOs.VenuePackageDTO;
+import lepartycious.models.AdditionalEntityServices;
 import lepartycious.models.Address;
 import lepartycious.models.Amenities;
 import lepartycious.models.Attachment;
@@ -117,13 +120,11 @@ public class VenueServiceImpl implements VenueService {
 		List<AttachmentResponseDTO> menuImageList = new ArrayList<AttachmentResponseDTO>();
 		Map<String, List<TabResponseDTO>> serviceAmenityTabMap = new HashMap<String, List<TabResponseDTO>>();
 		List<VenuePackageDTO> venuePackageDTOs = new ArrayList<VenuePackageDTO>();
+		List<String> policiList  = new ArrayList<String>();
+		Map<String, String> keyHighlighs = new LinkedHashMap<String, String>();
+		Map<String, String> additionalServices = new HashMap<String, String>();
 
 		Address address = venue.getAddresses().get(0);
-		for(EntityServices venueService : venue.getVenueServices()){
-			TabResponseDTO serviceDTO = new TabResponseDTO();
-			serviceDTO.setName(venueService.getServiceId().getTabDataName());
-			serviceList.add(serviceDTO);
-		}
 		for(Attachment attachment : venue.getAttachments()){
 			AttachmentResponseDTO attachmentDTO = new AttachmentResponseDTO(attachment.getImageURL(), attachment.getHelpText());
 			if(StringUtils.isNotBlank(attachment.getAttachmentType()) && attachment.getAttachmentType().equalsIgnoreCase("MENU")){
@@ -156,6 +157,16 @@ public class VenueServiceImpl implements VenueService {
 		for(VenueAmenities venueAmenities : venue.getVenueamenities()){
 			TabResponseDTO amenityDTO = new TabResponseDTO();
 			amenityDTO.setName(venueAmenities.getAmenitiesId().getDescription());
+			if(StringUtils.isNotEmpty(venueAmenities.getMinVegCost())){
+				keyHighlighs.put("Veg", venueAmenities.getMinVegCost());
+				if(StringUtils.isNotEmpty(venueAmenities.getMinNonVegCost())){
+					keyHighlighs.put("Non-Veg", venueAmenities.getMinNonVegCost());
+				}
+				else{
+					keyHighlighs.put("Non-Veg", "-");
+				}
+					
+			}
 			amenitiesList.add(amenityDTO);
 			if("INHOUSECATERING".equalsIgnoreCase(venueAmenities.getAmenitiesId().getAmenityType())){
 				TabResponseDTO houseCaterDTO = new TabResponseDTO();
@@ -198,6 +209,21 @@ public class VenueServiceImpl implements VenueService {
 			}
 			
 		}
+		for(EntityServices venueService : venue.getVenueServices()){
+			TabResponseDTO serviceDTO = new TabResponseDTO();
+			String serviceName = venueService.getServiceId().getTabDataName();
+			String mapValue = venueService.getMinCost() != null ? venueService.getMinCost().toString():"";
+			if(venueService.getServiceId().getIsKeyHighlight()){
+				keyHighlighs.put(serviceName, mapValue);
+			}
+			serviceDTO.setName(serviceName);
+			serviceList.add(serviceDTO);
+		}
+		for(AdditionalEntityServices additionalVenueService : venue.getAdditionalVenueServices()){
+			String serviceName = additionalVenueService.getAdditionalServiceId().getTabDataName();
+			String mapValue = additionalVenueService.getMinCost() != null ? additionalVenueService.getMinCost().toString():"";
+			additionalServices.put(serviceName, mapValue);
+		}
 		for(VenueRooms room : venue.getVenueRooms()){
 			TabResponseDTO roomDTO = new TabResponseDTO(room.getRoomId().getDescription(), room.getAcAvailability(), room.getFridgeAvailability(), room.getLockerAvailability(), room.getLedAvailability(), room.getAttachedBathroomAvailability(), room.getHotWaterAvailability(), room.getMinCost());
 			roomList.add(roomDTO);
@@ -212,6 +238,12 @@ public class VenueServiceImpl implements VenueService {
 		if(!CollectionUtils.isEmpty(roomList)){
 			amenityDetailTabMap.put("Rooms", roomList);
 		}
+		if(StringUtils.isNotBlank(venue.getPolicies())){
+			StringTokenizer strTokenizer = new StringTokenizer(venue.getPolicies(), "<br>");
+			while(strTokenizer.hasMoreElements()){
+				policiList.add((String) strTokenizer.nextElement());
+			}
+		}
 		DetailResponseDTO detailResponseDTO = new DetailResponseDTO();
 		detailResponseDTO.setName(venue.getName());
 		detailResponseDTO.setDescription(venue.getDescription());
@@ -223,6 +255,7 @@ public class VenueServiceImpl implements VenueService {
 		detailResponseDTO.setSecondaryPhoneNumber(address.getSecondaryPhone());
 		detailResponseDTO.setLatitude(address.getLatitude());
 		detailResponseDTO.setLongitude(address.getLongitude());
+		detailResponseDTO.setEmail(address.getEmail());
 		if(!CollectionUtils.isEmpty(serviceAmenityTabMap)){
 			detailResponseDTO.setServiceAmenityTabMap(serviceAmenityTabMap);
 		}
@@ -232,7 +265,13 @@ public class VenueServiceImpl implements VenueService {
 		if(!CollectionUtils.isEmpty(amenityDetailTabMap)){
 			detailResponseDTO.setAmenityDetailsTabMap(amenityDetailTabMap);
 		}
-		detailResponseDTO.setPolicies(venue.getPolicies());;
+		if(!CollectionUtils.isEmpty(keyHighlighs)){
+			detailResponseDTO.setKeyHighlighs(keyHighlighs);
+		}
+		if(!CollectionUtils.isEmpty(additionalServices)){
+			detailResponseDTO.setAdditionalServices(additionalServices);
+		}
+		detailResponseDTO.setPolicies(policiList);
 		detailResponseDTO.setAttachments(attachmentList);
 		detailResponseDTO.setServingSince(venue.getServingSince());
 		detailResponseDTO.setStartingFrom(venue.getStartingPrice());

@@ -2,8 +2,10 @@ package lepartycious.services.implementations;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.StringTokenizer;
 
 import lepartycious.daos.CityDAO;
 import lepartycious.daos.CommonDAO;
@@ -28,6 +30,7 @@ import lepartycious.models.Locality;
 import lepartycious.services.CommonService;
 import lepartycious.services.DecoratorService;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
@@ -99,9 +102,22 @@ public class DecoratorServiceImpl implements DecoratorService {
 		List<TabResponseDTO> serviceList = new ArrayList<TabResponseDTO>();
 		List<AttachmentResponseDTO> attachmentList = new ArrayList<AttachmentResponseDTO>();
 		Map<String, List<TabResponseDTO>> tabMap = new HashMap<String, List<TabResponseDTO>>();
+		List<String> policiList = new ArrayList<String>();
+		Map<String, String> keyHighlighs = new LinkedHashMap<String, String>();
+		Map<String, String> additionalServices = new HashMap<String, String>();
 		Address address = decorator.getAddresses().get(0);
+		
+		keyHighlighs.put("Package Starts From", decorator.getStartingPrice());
 		for(EntityServices decoratorService : decorator.getDecoratorServices()){
 			TabResponseDTO serviceDTO = new TabResponseDTO();
+			String serviceName = decoratorService.getServiceId().getTabDataName();
+			String mapValue = decoratorService.getMinCost() != null ? decoratorService.getMinCost().toString():"";
+			if(decoratorService.getServiceId().getIsKeyHighlight()){
+				keyHighlighs.put(serviceName, mapValue);
+			}
+			else if(decoratorService.getServiceId().getIsAdditionalService()){
+				additionalServices.put(serviceName, mapValue);
+			}
 			serviceDTO.setName(decoratorService.getServiceId().getTabDataName());
 			serviceList.add(serviceDTO);
 		}
@@ -111,6 +127,12 @@ public class DecoratorServiceImpl implements DecoratorService {
 		}
 		if(!CollectionUtils.isEmpty(serviceList)){
 			tabMap.put("Services", serviceList);
+		}
+		if(StringUtils.isNotBlank(decorator.getPolicies())){
+			StringTokenizer strTokenizer = new StringTokenizer(decorator.getPolicies(), "<br>");
+			while(strTokenizer.hasMoreElements()){
+				policiList.add((String) strTokenizer.nextElement());
+			}
 		}
 		DetailResponseDTO detailResponseDTO = new DetailResponseDTO();
 		detailResponseDTO.setName(decorator.getName());
@@ -123,10 +145,17 @@ public class DecoratorServiceImpl implements DecoratorService {
 		detailResponseDTO.setSecondaryPhoneNumber(address.getSecondaryPhone());
 		detailResponseDTO.setLatitude(address.getLatitude());
 		detailResponseDTO.setLongitude(address.getLongitude());
+		detailResponseDTO.setEmail(address.getEmail());
 		if(!CollectionUtils.isEmpty(tabMap)){
 			detailResponseDTO.setServiceAmenityTabMap(tabMap);
 		}
-		detailResponseDTO.setPolicies(decorator.getPolicies());
+		if(!CollectionUtils.isEmpty(keyHighlighs)){
+			detailResponseDTO.setKeyHighlighs(keyHighlighs);
+		}
+		if(!CollectionUtils.isEmpty(additionalServices)){
+			detailResponseDTO.setAdditionalServices(additionalServices);
+		}
+		detailResponseDTO.setPolicies(policiList);
 		detailResponseDTO.setAttachments(attachmentList);
 		detailResponseDTO.setServingSince(decorator.getServingSince());
 		detailResponseDTO.setStartingFrom(decorator.getStartingPrice());

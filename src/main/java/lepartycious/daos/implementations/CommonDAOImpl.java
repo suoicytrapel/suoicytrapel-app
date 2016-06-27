@@ -1,7 +1,11 @@
 package lepartycious.daos.implementations;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.StringTokenizer;
 
 import lepartycious.daos.CommonDAO;
 import lepartycious.models.Amenities;
@@ -76,9 +80,7 @@ public class CommonDAOImpl extends BaseDAOImpl implements CommonDAO{
 	public Criteria createRecentAddedCriteria(Criteria criteria, Long cityId){
 		Criteria additionCriteria = criteria;
 		Calendar cal = Calendar.getInstance();
-		cal.add(Calendar.DATE, -30);
 		additionCriteria.add(Restrictions.eq("city.cityId", cityId));
-		additionCriteria.add(Restrictions.ge("addedOn", cal.getTime()));
 		additionCriteria.addOrder(Order.desc("addedOn"));
 		additionCriteria.setFirstResult(0);
 		additionCriteria.setMaxResults(3);
@@ -87,14 +89,19 @@ public class CommonDAOImpl extends BaseDAOImpl implements CommonDAO{
 
 	@Override
 	@CacheEvict(value = {"commonCache", "cityCache", "decoratorCache", "venueCache", "photographerCache", "catererCache", "entertainmentCache", "othersCache"}, allEntries = true)
-	public boolean pushDataToDatabase(String query) {
-		boolean isQuerySaved = false;
-		SQLQuery sqlQuery = sessionFactory.getCurrentSession().createSQLQuery(query);
-		int rowsAffected = sqlQuery.executeUpdate();
-		if(rowsAffected > 0){
-			isQuerySaved = true;
+	public Map<String, String> pushDataToDatabase(String query) {
+		StringTokenizer strTokens = new StringTokenizer(query, ";");
+		Map<String, String> failedQueries = new HashMap<String, String>();
+		while(strTokens.hasMoreElements()){
+			String queryToExecute = (String) strTokens.nextElement();
+			try{
+				SQLQuery sqlQuery = sessionFactory.getCurrentSession().createSQLQuery(queryToExecute);
+			}
+			catch(Exception exception){
+				failedQueries.put(queryToExecute, exception.getMessage());
+			}
 		}
-		return isQuerySaved;
+		return failedQueries;
 	}
 
 	@Override

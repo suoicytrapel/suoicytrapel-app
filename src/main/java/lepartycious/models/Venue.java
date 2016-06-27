@@ -93,6 +93,9 @@ public class Venue implements Serializable{
 	@OneToMany(mappedBy="venue")
 	private List<VenuePackages> venuePackages;
 	
+	@OneToMany(mappedBy="entityId")
+	private List<AdditionalEntityServices> additionalVenueServices;
+	
 	public String getMinCapacity() {
 		return minCapacity;
 	}
@@ -267,6 +270,15 @@ public class Venue implements Serializable{
 
 	public void setVenuePackages(List<VenuePackages> venuePackages) {
 		this.venuePackages = venuePackages;
+	}
+
+	public List<AdditionalEntityServices> getAdditionalVenueServices() {
+		return additionalVenueServices;
+	}
+
+	public void setAdditionalVenueServices(
+			List<AdditionalEntityServices> additionalVenueServices) {
+		this.additionalVenueServices = additionalVenueServices;
 	}
 	
 }

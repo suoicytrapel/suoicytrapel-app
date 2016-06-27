@@ -26,13 +26,16 @@ public class DetailResponseDTO implements Serializable{
 	private String startingFrom;
 	private String minNonVegPrice;
 	private String minCapacity;
-	private String policies;
+	private List<String> policies;
 	private Map<String, List<TabResponseDTO>> serviceAmenityTabMap;
 	private Map<String, List<TabResponseDTO>> amenityDetailsTabMap;
 	private TabResponseDTO additionalInfo;
 	private Map<String, TabResponseDTO> inHouseOfferingsTabMap;
 	private Boolean isPureVeg;
 	private List<VenuePackageDTO> venuePackages;
+	private Map<String, String> keyHighlighs;
+	private Map<String, String> additionalServices;
+	public String email;
 	
 	public String getName() {
 		return name;
@@ -154,12 +157,6 @@ public class DetailResponseDTO implements Serializable{
 	public void setMinCapacity(String minCapacity) {
 		this.minCapacity = minCapacity;
 	}
-	public String getPolicies() {
-		return policies;
-	}
-	public void setPolicies(String policies) {
-		this.policies = policies;
-	}
 	public Map<String, List<TabResponseDTO>> getServiceAmenityTabMap() {
 		return serviceAmenityTabMap;
 	}
@@ -204,5 +201,29 @@ public class DetailResponseDTO implements Serializable{
 	}
 	public void setVenuePackages(List<VenuePackageDTO> venuePackages) {
 		this.venuePackages = venuePackages;
+	}
+	public Map<String, String> getKeyHighlighs() {
+		return keyHighlighs;
+	}
+	public void setKeyHighlighs(Map<String, String> keyHighlighs) {
+		this.keyHighlighs = keyHighlighs;
+	}
+	public Map<String, String> getAdditionalServices() {
+		return additionalServices;
+	}
+	public void setAdditionalServices(Map<String, String> additionalServices) {
+		this.additionalServices = additionalServices;
+	}
+	public List<String> getPolicies() {
+		return policies;
+	}
+	public void setPolicies(List<String> policies) {
+		this.policies = policies;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
 	}
 }

@@ -14,18 +14,18 @@ import javax.persistence.Table;
 import javax.persistence.Version;
 
 @Entity
-@Table(name="service")
-public class Service implements Serializable{
+@Table(name="additional_service")
+public class AdditionalService implements Serializable{
 	
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 14656908230933423L;
+	private static final long serialVersionUID = 14656915450933423L;
 
 	@Id
 	@Column(name="id")
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long serviceId;
+	private long additionalServiceId;
 	
 	@Column(name = "service_type", nullable=false)
 	private String serviceType;
@@ -45,22 +45,8 @@ public class Service implements Serializable{
 	@Column(name = "added_on")
 	private Date addedOn;
 	
-	@OneToMany(mappedBy="serviceId")
-	private List<EntityServices> venueServices;
-	
-	@Column(name = "is_key_highlight")
-	private Boolean isKeyHighlight;
-	
-	@Column(name = "is_additional_service")
-	private Boolean isAdditionalService;
-
-	public long getServiceId() {
-		return serviceId;
-	}
-
-	public void setServiceId(long serviceId) {
-		this.serviceId = serviceId;
-	}
+	@OneToMany(mappedBy="additionalServiceId")
+	private List<AdditionalEntityServices> addiionalEntityServices;
 
 	public String getServiceType() {
 		return serviceType;
@@ -110,28 +96,21 @@ public class Service implements Serializable{
 		this.addedOn = addedOn;
 	}
 
-	public List<EntityServices> getVenueServices() {
-		return venueServices;
+	public long getAdditionalServiceId() {
+		return additionalServiceId;
 	}
 
-	public void setVenueServices(List<EntityServices> venueServices) {
-		this.venueServices = venueServices;
+	public void setAdditionalServiceId(long additionalServiceId) {
+		this.additionalServiceId = additionalServiceId;
 	}
 
-	public Boolean getIsKeyHighlight() {
-		return isKeyHighlight;
+	public List<AdditionalEntityServices> getAddiionalEntityServices() {
+		return addiionalEntityServices;
 	}
 
-	public void setIsKeyHighlight(Boolean isKeyHighlight) {
-		this.isKeyHighlight = isKeyHighlight;
-	}
-
-	public Boolean getIsAdditionalService() {
-		return isAdditionalService;
-	}
-
-	public void setIsAdditionalService(Boolean isAdditionalService) {
-		this.isAdditionalService = isAdditionalService;
+	public void setAddiionalEntityServices(
+			List<AdditionalEntityServices> addiionalEntityServices) {
+		this.addiionalEntityServices = addiionalEntityServices;
 	}
 	
 }

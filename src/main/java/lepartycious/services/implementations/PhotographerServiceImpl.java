@@ -2,8 +2,10 @@ package lepartycious.services.implementations;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.StringTokenizer;
 
 import lepartycious.daos.CityDAO;
 import lepartycious.daos.CommonDAO;
@@ -28,6 +30,7 @@ import lepartycious.models.Photographer;
 import lepartycious.services.CommonService;
 import lepartycious.services.PhotographerService;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
@@ -99,9 +102,22 @@ public class PhotographerServiceImpl implements PhotographerService {
 		List<TabResponseDTO> serviceList = new ArrayList<TabResponseDTO>();
 		List<AttachmentResponseDTO> attachmentList = new ArrayList<AttachmentResponseDTO>();
 		Map<String, List<TabResponseDTO>> tabMap = new HashMap<String, List<TabResponseDTO>>();
+		List<String> policiList = new ArrayList<String>();
+		Map<String, String> keyHighlighs = new LinkedHashMap<String, String>();
+		Map<String, String> additionalServices = new HashMap<String, String>();
 		Address address = photographer.getAddresses().get(0);
+		
+		keyHighlighs.put("Package Starts From", photographer.getStartingPrice());
 		for(EntityServices photographerService : photographer.getPhotographerServices()){
 			TabResponseDTO serviceDTO = new TabResponseDTO();
+			String serviceName = photographerService.getServiceId().getTabDataName();
+			String mapValue = photographerService.getMinCost() != null ? photographerService.getMinCost().toString():"";
+			if(photographerService.getServiceId().getIsKeyHighlight()){
+				keyHighlighs.put(serviceName, mapValue);
+			}
+			else if(photographerService.getServiceId().getIsAdditionalService()){
+				additionalServices.put(serviceName, mapValue);
+			}
 			serviceDTO.setName(photographerService.getServiceId().getTabDataName());
 			serviceList.add(serviceDTO);
 		}
@@ -111,6 +127,12 @@ public class PhotographerServiceImpl implements PhotographerService {
 		}
 		if(!CollectionUtils.isEmpty(serviceList)){
 			tabMap.put("Services", serviceList);
+		}
+		if(StringUtils.isNotBlank(photographer.getPolicies())){
+			StringTokenizer strTokenizer = new StringTokenizer(photographer.getPolicies(), "<br>");
+			while(strTokenizer.hasMoreElements()){
+				policiList.add((String) strTokenizer.nextElement());
+			}
 		}
 		DetailResponseDTO detailResponseDTO = new DetailResponseDTO();
 		detailResponseDTO.setName(photographer.getName());
@@ -123,10 +145,17 @@ public class PhotographerServiceImpl implements PhotographerService {
 		detailResponseDTO.setSecondaryPhoneNumber(address.getSecondaryPhone());
 		detailResponseDTO.setLatitude(address.getLatitude());
 		detailResponseDTO.setLongitude(address.getLongitude());
+		detailResponseDTO.setEmail(address.getEmail());
 		if(!CollectionUtils.isEmpty(tabMap)){
 			detailResponseDTO.setServiceAmenityTabMap(tabMap);
 		}
-		detailResponseDTO.setPolicies(photographer.getPolicies());
+		if(!CollectionUtils.isEmpty(keyHighlighs)){
+			detailResponseDTO.setKeyHighlighs(keyHighlighs);
+		}
+		if(!CollectionUtils.isEmpty(additionalServices)){
+			detailResponseDTO.setAdditionalServices(additionalServices);
+		}
+		detailResponseDTO.setPolicies(policiList);
 		detailResponseDTO.setAttachments(attachmentList);
 		detailResponseDTO.setServingSince(photographer.getServingSince());
 		detailResponseDTO.setStartingFrom(photographer.getStartingPrice());

@@ -1045,4 +1045,85 @@
 			insert into venue_packages (venue_id, welcome_drinks, soups, salads, veg_starters, non_veg_starters, veg_main_course, nonveg_main_course, raita, dal, rice_biryani, assorted_breads, deserts, package_price, package_type, added_on) values ((select id from venue where name = 'JW Marriott'), '2', '2', '5', '4', '3', '3', '4', '3', '2', '2', 'Any', '3', '500', 'Non-Veg', now());
 	    </sql>
     </changeSet>
+    
+    <changeSet author="msingla" id="1.60">
+	    <sql>
+	    	insert into service (service_type, service_for_entity, tab_data_name, filter_data_name, is_filter, added_on, is_key_highlight, is_additional_service) values ('SERVICE', 'VENUE', 'Inhouse Catering', 'Inhouse Catering', false, now(), true, false);
+			insert into service (service_type, service_for_entity, tab_data_name, filter_data_name, is_filter, added_on, is_key_highlight, is_additional_service) values ('SERVICE', 'VENUE', 'Outhouse Catering Allowed', 'Outhouse Catering', false, now(), true, false);
+			insert into service (service_type, service_for_entity, tab_data_name, filter_data_name, is_filter, added_on, is_key_highlight, is_additional_service) values ('SERVICE', 'VENUE', 'Non-Veg Food Allowed', 'Non-Veg Food', false, now(), true, false);
+			insert into service (service_type, service_for_entity, tab_data_name, filter_data_name, is_filter, added_on, is_key_highlight, is_additional_service) values ('SERVICE', 'VENUE', 'Inhouse Alcohol Allowed', 'Inhouse Alcohol', false, now(), true, false);
+			insert into service (service_type, service_for_entity, tab_data_name, filter_data_name, is_filter, added_on, is_key_highlight, is_additional_service) values ('SERVICE', 'VENUE', 'Outhouse alocohol Allowed', 'Outhouse alocohol', false, now(), true, false);
+			insert into service (service_type, service_for_entity, tab_data_name, filter_data_name, is_filter, added_on, is_key_highlight, is_additional_service) values ('SERVICE', 'VENUE', 'Inhouse DJ', 'Inhouse DJ', false, now(), true, false);
+			insert into service (service_type, service_for_entity, tab_data_name, filter_data_name, is_filter, added_on, is_key_highlight, is_additional_service) values ('SERVICE', 'VENUE', 'Outhouse DJ Allowed', 'Outhouse DJ', false, now(), true, false);
+	    </sql>
+    </changeSet>
+    
+     <changeSet author="msingla" id="1.61">
+	    <sql>
+	    	update service set is_key_highlight = true, tab_data_name='Live Counters' where service_for_entity = 'CATERER' and tab_data_name = 'Live Tandoor';
+			update service set is_key_highlight = true where service_for_entity = 'CATERER' and tab_data_name = 'Pure Veg';	    
+			
+			update service set is_key_highlight = true where service_for_entity = 'ENTERTAINMENT' and tab_data_name = 'Military Band';
+			update service set is_key_highlight = true where service_for_entity = 'ENTERTAINMENT' and tab_data_name = 'Baghi';	
+			
+			update service set is_key_highlight = true where service_for_entity = 'ENTERTAINMENT' and tab_data_name = 'Niagara falls';
+			update service set is_key_highlight = true where service_for_entity = 'ENTERTAINMENT' and tab_data_name = 'CO2 flames';			
+			
+			update service set is_key_highlight = true where service_for_entity = 'DECORATOR' and tab_data_name = 'Venue Decoration';
+			update service set is_key_highlight = true where service_for_entity = 'DECORATOR' and tab_data_name = 'Event Lighting';	
+			
+			update service set is_key_highlight = true where service_for_entity = 'PHOTOGRAPHER' and tab_data_name = 'Candid Photo Shoots';
+			update service set is_key_highlight = true where service_for_entity = 'PHOTOGRAPHER' and tab_data_name = 'Pre Wedding Shoots';		
+			
+			update service set is_key_highlight = true where service_for_entity = 'OTHERS' and tab_data_name = 'Bus Service';
+			update service set is_key_highlight = true where service_for_entity = 'OTHERS' and tab_data_name = 'Digital invites';
+			
+			update service set is_key_highlight = true where service_for_entity = 'OTHERS' and tab_data_name = 'Graphic or logo designing';
+			update service set is_key_highlight = true where service_for_entity = 'OTHERS' and tab_data_name = 'Animated videos';
+			
+			update service set is_key_highlight = true where service_for_entity = 'OTHERS' and tab_data_name = 'Local sightseeing';
+			update service set is_key_highlight = true where service_for_entity = 'OTHERS' and tab_data_name = 'Animated videos';
+			
+			update service set is_key_highlight = true where service_for_entity = 'OTHERS' and tab_data_name = 'Decorative items';
+			update service set is_key_highlight = true where service_for_entity = 'OTHERS' and tab_data_name = 'Art Gallery';
+			
+			update service set is_key_highlight = true where service_for_entity = 'OTHERS' and tab_data_name = 'Chocolates';
+			update service set is_key_highlight = true where service_for_entity = 'OTHERS' and tab_data_name = 'Gems';
+	    </sql>
+    </changeSet>
+    
+    <changeSet author="msingla" id="1.62">
+	    <sql>
+	    	insert into entity_services (entity_id, service_id, min_service_cost, max_service_cost, version, added_on) values ((select id from venue where name = 'JW Marriott'), (select id from service where tab_data_name = 'Inhouse Catering'), null, null, 0, now());
+			insert into entity_services (entity_id, service_id, min_service_cost, max_service_cost, version, added_on) values ((select id from venue where name = 'JW Marriott'), (select id from service where tab_data_name = 'Outhouse Catering Allowed'), null, null, 0, now());
+			insert into entity_services (entity_id, service_id, min_service_cost, max_service_cost, version, added_on) values ((select id from venue where name = 'JW Marriott'), (select id from service where tab_data_name = 'Non-Veg Food Allowed'), null, null, 0, now());
+			insert into entity_services (entity_id, service_id, min_service_cost, max_service_cost, version, added_on) values ((select id from venue where name = 'JW Marriott'), (select id from service where tab_data_name = 'Inhouse Alcohol Allowed'), null, null, 0, now());
+			insert into entity_services (entity_id, service_id, min_service_cost, max_service_cost, version, added_on) values ((select id from venue where name = 'JW Marriott'), (select id from service where tab_data_name = 'Outhouse alocohol Allowed'), null, null, 0, now());
+			insert into entity_services (entity_id, service_id, min_service_cost, max_service_cost, version, added_on) values ((select id from venue where name = 'JW Marriott'), (select id from service where tab_data_name = 'Inhouse DJ'), null, null, 0, now());
+			insert into entity_services (entity_id, service_id, min_service_cost, max_service_cost, version, added_on) values ((select id from venue where name = 'JW Marriott'), (select id from service where tab_data_name = 'Outhouse DJ Allowed'), null, null, 0, now());
+	    </sql>
+    </changeSet>
+    
+    <changeSet author="msingla" id="1.63">
+	    <sql>
+	    	insert into additional_service (service_type, service_for_entity, tab_data_name, filter_data_name, is_filter, added_on) values ('ADDITIONAL_SERVICE', 'VENUE', 'Corkage per bottle', 'Corkage', false, now());
+			insert into additional_service (service_type, service_for_entity, tab_data_name, filter_data_name, is_filter, added_on) values ('ADDITIONAL_SERVICE', 'VENUE', 'DJ cost starts at', 'DJ cost', false, now());
+			insert into additional_service (service_type, service_for_entity, tab_data_name, filter_data_name, is_filter, added_on) values ('ADDITIONAL_SERVICE', 'VENUE', 'Decoration starts at', 'Decoration', false, now());
+	    </sql>
+    </changeSet>
+    
+	<!-- <changeSet author="msingla" id="1.64">
+	    <sql>
+	    
+	    	update venue set policies = 'In case you do not show up at the hotel, no refund is applicable on the booking.';
+	    </sql>
+    </changeSet> -->
+	<changeSet author="msingla" id="1.64">
+	    <sql>
+	    	insert into additional_entity_services (entity_id, additional_service_id, min_service_cost, max_service_cost, version, added_on) values ((select id from venue where name = 'JW Marriott'), (select id from additional_service where tab_data_name = 'Corkage per bottle'), 600, null, 0, now());
+			insert into additional_entity_services (entity_id, additional_service_id, min_service_cost, max_service_cost, version, added_on) values ((select id from venue where name = 'JW Marriott'), (select id from additional_service where tab_data_name = 'DJ cost starts at'), 5000, null, 0, now());
+			insert into additional_entity_services (entity_id, additional_service_id, min_service_cost, max_service_cost, version, added_on) values ((select id from venue where name = 'JW Marriott'), (select id from additional_service where tab_data_name = 'Decoration starts at'), 10000, null, 0, now());
+	    </sql>
+    </changeSet>
+    
 </databaseChangeLog>

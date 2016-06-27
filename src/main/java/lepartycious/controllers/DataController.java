@@ -2,6 +2,7 @@ package lepartycious.controllers;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -61,7 +62,7 @@ public class DataController {
 	}
 	
 	@RequestMapping(method=RequestMethod.POST, value="/pushData")
-	public boolean pushDataToDatabase(@RequestBody String query){
+	public Map<String, String> pushDataToDatabase(@RequestBody String query){
 		return commonService.pushDataToDatabase(query);
 	}
 

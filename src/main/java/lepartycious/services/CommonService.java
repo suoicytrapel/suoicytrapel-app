@@ -32,7 +32,7 @@ public interface CommonService {
 	public Map<String, List<AddedDTO>> getRecentAdditions(Long cityId);
 	
 	@Transactional(readOnly=false)
-	public boolean pushDataToDatabase(String query);
+	public Map<String, String> pushDataToDatabase(String query);
 	
 	public List<Attachment> getDefaultImageList();
 

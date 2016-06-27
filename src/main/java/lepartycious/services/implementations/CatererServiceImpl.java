@@ -2,6 +2,7 @@ package lepartycious.services.implementations;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
@@ -107,7 +108,12 @@ public class CatererServiceImpl implements CatererService {
 		Address address = caterer.getAddresses().get(0);
 		List<AttachmentResponseDTO> menuImageList = new ArrayList<AttachmentResponseDTO>();
 		String cuisinesOffered = caterer.getCuisineOffered();
+		List<String> policiList = new ArrayList<String>();
+		Map<String, String> keyHighlighs = new LinkedHashMap<String, String>();
+		Map<String, String> additionalServices = new HashMap<String, String>();
 		StringTokenizer tokens = new StringTokenizer(cuisinesOffered, ",");
+		keyHighlighs.put("Veg", caterer.getStartingPrice());
+		keyHighlighs.put("Non-Veg", caterer.getStartingPriceNonVeg());
 		while(tokens.hasMoreTokens()){
 			TabResponseDTO cuisine = new TabResponseDTO();
 			cuisine.setName(tokens.nextToken());
@@ -115,6 +121,14 @@ public class CatererServiceImpl implements CatererService {
 		}
 		for(EntityServices catererService : caterer.getCatererServices()){
 			TabResponseDTO serviceDTO = new TabResponseDTO();
+			String serviceName = catererService.getServiceId().getTabDataName();
+			String mapValue = catererService.getMinCost() != null ? catererService.getMinCost().toString():"";
+			if(catererService.getServiceId().getIsKeyHighlight()){
+				keyHighlighs.put(serviceName, mapValue);
+			}
+			else if(catererService.getServiceId().getIsAdditionalService()){
+				additionalServices.put(serviceName, mapValue);
+			}
 			serviceDTO.setName(catererService.getServiceId().getTabDataName());
 			serviceList.add(serviceDTO);
 		}
@@ -133,6 +147,13 @@ public class CatererServiceImpl implements CatererService {
 		if(!CollectionUtils.isEmpty(menuList)){
 			tabMap.put("Cuisines", menuList);
 		}
+		
+		if(StringUtils.isNotBlank(caterer.getPolicies())){
+			StringTokenizer strTokenizer = new StringTokenizer(caterer.getPolicies(), "<br>");
+			while(strTokenizer.hasMoreElements()){
+				policiList.add((String) strTokenizer.nextElement());
+			}
+		}
 		DetailResponseDTO detailResponseDTO = new DetailResponseDTO();
 		detailResponseDTO.setName(caterer.getName());
 		detailResponseDTO.setDescription(caterer.getDescription());
@@ -144,13 +165,20 @@ public class CatererServiceImpl implements CatererService {
 		detailResponseDTO.setSecondaryPhoneNumber(address.getSecondaryPhone());
 		detailResponseDTO.setLatitude(address.getLatitude());
 		detailResponseDTO.setLongitude(address.getLongitude());
+		detailResponseDTO.setEmail(address.getEmail());
 		if(!CollectionUtils.isEmpty(tabMap)){
 			detailResponseDTO.setServiceAmenityTabMap(tabMap);
+		}
+		if(!CollectionUtils.isEmpty(keyHighlighs)){
+			detailResponseDTO.setKeyHighlighs(keyHighlighs);
+		}
+		if(!CollectionUtils.isEmpty(additionalServices)){
+			detailResponseDTO.setAdditionalServices(additionalServices);
 		}
 		detailResponseDTO.setAttachments(attachmentList);
 		detailResponseDTO.setMenuImages(menuImageList);
 		detailResponseDTO.setIsPureVeg(caterer.getIsPureVeg());
-		detailResponseDTO.setPolicies(caterer.getPolicies());
+		detailResponseDTO.setPolicies(policiList);
 		detailResponseDTO.setServingSince(caterer.getServingSince());
 		detailResponseDTO.setMaxCapacity(caterer.getMaxCapacity());
 		detailResponseDTO.setStartingFrom(caterer.getStartingPrice());

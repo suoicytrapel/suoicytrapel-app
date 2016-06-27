@@ -1,6 +1,7 @@
 package lepartycious.daos;
 
 import java.util.List;
+import java.util.Map;
 
 import lepartycious.models.Amenities;
 import lepartycious.models.Caterer;
@@ -20,7 +21,7 @@ public interface CommonDAO {
 	public List<Photographer> getRecentlyAddedPhotographers(Long cityId);
 	public List<Entertainment> getRecentlyAddedEntertainers(Long cityId);
 	public List<Decorator> getRecentlyAddedDecorators(Long cityId);
-	public boolean pushDataToDatabase(String query);
+	public Map<String, String> pushDataToDatabase(String query);
 	public List<Service> getServiceFilters(String forEntity, String ofType);
 	public List<Amenities> getAmenities(String amenity);
 	public List<Room> getRooms(String room);

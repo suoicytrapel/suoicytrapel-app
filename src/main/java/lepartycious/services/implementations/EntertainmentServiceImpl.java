@@ -5,6 +5,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.StringTokenizer;
 
 import lepartycious.daos.CityDAO;
 import lepartycious.daos.CommonDAO;
@@ -29,6 +30,7 @@ import lepartycious.models.Entertainment;
 import lepartycious.services.CommonService;
 import lepartycious.services.EntertainmentService;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
@@ -104,18 +106,37 @@ public class EntertainmentServiceImpl implements EntertainmentService {
 		int currentYear = Calendar.getInstance().get(Calendar.YEAR);
 		int servingSinceYear = Integer.parseInt(rental.getServingSince());
 		int experienceInYears = currentYear - servingSinceYear;
+		List<String> policiList = new ArrayList<String>();
+		Map<String, String> keyHighlighs = new HashMap<String, String>();
+		Map<String, String> additionalServices = new HashMap<String, String>();
 		Address address = rental.getAddresses().get(0);
+		
+		keyHighlighs.put("Package Starts From", rental.getStartingPrice());
 		for(Attachment attachment : rental.getAttachments()){
 			AttachmentResponseDTO attachmentDTO = new AttachmentResponseDTO(attachment.getImageURL(), attachment.getHelpText());
 			attachmentList.add(attachmentDTO);
 		}
 		for(EntityServices rentalService : rental.getServices()){
 			TabResponseDTO serviceDTO = new TabResponseDTO();
+			String serviceName = rentalService.getServiceId().getTabDataName();
+			String mapValue = rentalService.getMinCost() != null ? rentalService.getMinCost().toString():"";
+			if(rentalService.getServiceId().getIsKeyHighlight()){
+				keyHighlighs.put(serviceName, mapValue);
+			}
+			else if(rentalService.getServiceId().getIsAdditionalService()){
+				additionalServices.put(serviceName, mapValue);
+			}
 			serviceDTO.setName(rentalService.getServiceId().getTabDataName());
 			serviceList.add(serviceDTO);
 		}
 		if(!CollectionUtils.isEmpty(serviceList)){
 			tabMap.put("Services", serviceList);
+		}
+		if(StringUtils.isNotBlank(rental.getPolicies())){
+			StringTokenizer strTokenizer = new StringTokenizer(rental.getPolicies(), "<br>");
+			while(strTokenizer.hasMoreElements()){
+				policiList.add((String) strTokenizer.nextElement());
+			}
 		}
 		TabResponseDTO additionalInfoTabData = new TabResponseDTO();
 		additionalInfoTabData.setOutstationExpenses(rental.getTravelStayExpenses());
@@ -132,13 +153,20 @@ public class EntertainmentServiceImpl implements EntertainmentService {
 		detailResponseDTO.setSecondaryPhoneNumber(address.getSecondaryPhone());
 		detailResponseDTO.setLatitude(address.getLatitude());
 		detailResponseDTO.setLongitude(address.getLongitude());
+		detailResponseDTO.setEmail(address.getEmail());
 		if(!CollectionUtils.isEmpty(tabMap)){
 			detailResponseDTO.setServiceAmenityTabMap(tabMap);
+		}
+		if(!CollectionUtils.isEmpty(keyHighlighs)){
+			detailResponseDTO.setKeyHighlighs(keyHighlighs);
+		}
+		if(!CollectionUtils.isEmpty(additionalServices)){
+			detailResponseDTO.setAdditionalServices(additionalServices);
 		}
 		detailResponseDTO.setAttachments(attachmentList);
 		detailResponseDTO.setServingSince(rental.getServingSince());
 		detailResponseDTO.setStartingFrom(rental.getStartingPrice());
-		detailResponseDTO.setPolicies(rental.getPolicies());
+		detailResponseDTO.setPolicies(policiList);
 		detailResponseDTO.setAdditionalInfo(additionalInfoTabData);
 		detailResponseDTO.setGroup(rental.isGroup());
 		return detailResponseDTO;

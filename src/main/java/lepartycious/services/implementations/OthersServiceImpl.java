@@ -2,8 +2,10 @@ package lepartycious.services.implementations;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.StringTokenizer;
 
 import lepartycious.daos.CityDAO;
 import lepartycious.daos.CommonDAO;
@@ -31,6 +33,7 @@ import lepartycious.services.CommonService;
 import lepartycious.services.EntertainmentService;
 import lepartycious.services.OthersService;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
@@ -103,18 +106,37 @@ public class OthersServiceImpl implements OthersService {
 		List<AttachmentResponseDTO> attachmentList = new ArrayList<AttachmentResponseDTO>();
 		Map<String, List<TabResponseDTO>> tabMap = new HashMap<String, List<TabResponseDTO>>();
 		List<TabResponseDTO> serviceList = new ArrayList<TabResponseDTO>();
+		List<String> policiList = new ArrayList<String>();
+		Map<String, String> keyHighlighs = new LinkedHashMap<String, String>();
+		Map<String, String> additionalServices = new HashMap<String, String>();
 		Address address = other.getAddresses().get(0);
+		
+		keyHighlighs.put("Package Starts From", other.getStartingPrice());
 		for(Attachment attachment : other.getAttachments()){
 			AttachmentResponseDTO attachmentDTO = new AttachmentResponseDTO(attachment.getImageURL(), attachment.getHelpText());
 			attachmentList.add(attachmentDTO);
 		}
-		for(EntityServices rentalService : other.getServices()){
+		for(EntityServices otherService : other.getServices()){
 			TabResponseDTO serviceDTO = new TabResponseDTO();
-			serviceDTO.setName(rentalService.getServiceId().getTabDataName());
+			String serviceName = otherService.getServiceId().getTabDataName();
+			String mapValue = otherService.getMinCost() != null ? otherService.getMinCost().toString():"";
+			if(otherService.getServiceId().getIsKeyHighlight()){
+				keyHighlighs.put(serviceName, mapValue);
+			}
+			else if(otherService.getServiceId().getIsAdditionalService()){
+				additionalServices.put(serviceName, mapValue);
+			}
+			serviceDTO.setName(otherService.getServiceId().getTabDataName());
 			serviceList.add(serviceDTO);
 		}
 		if(!CollectionUtils.isEmpty(serviceList)){
 			tabMap.put("Services", serviceList);
+		}
+		if(StringUtils.isNotBlank(other.getPolicies())){
+			StringTokenizer strTokenizer = new StringTokenizer(other.getPolicies(), "<br>");
+			while(strTokenizer.hasMoreElements()){
+				policiList.add((String) strTokenizer.nextElement());
+			}
 		}
 		DetailResponseDTO detailResponseDTO = new DetailResponseDTO();
 		detailResponseDTO.setName(other.getName());
@@ -127,10 +149,17 @@ public class OthersServiceImpl implements OthersService {
 		detailResponseDTO.setSecondaryPhoneNumber(address.getSecondaryPhone());
 		detailResponseDTO.setLatitude(address.getLatitude());
 		detailResponseDTO.setLongitude(address.getLongitude());
+		detailResponseDTO.setEmail(address.getEmail());
 		if(!CollectionUtils.isEmpty(tabMap)){
 			detailResponseDTO.setServiceAmenityTabMap(tabMap);
 		}
-		detailResponseDTO.setPolicies(other.getPolicies());
+		if(!CollectionUtils.isEmpty(keyHighlighs)){
+			detailResponseDTO.setKeyHighlighs(keyHighlighs);
+		}
+		if(!CollectionUtils.isEmpty(additionalServices)){
+			detailResponseDTO.setAdditionalServices(additionalServices);
+		}
+		detailResponseDTO.setPolicies(policiList);
 		detailResponseDTO.setAttachments(attachmentList);
 		detailResponseDTO.setServingSince(other.getServingSince());
 		detailResponseDTO.setStartingFrom(other.getStartingPrice());

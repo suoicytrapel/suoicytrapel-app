@@ -259,7 +259,7 @@ public class CommonServiceImpl implements CommonService {
 	}
 
 	@Override
-	public boolean pushDataToDatabase(String query) {
+	public Map<String, String> pushDataToDatabase(String query) {
 		return commonDAO.pushDataToDatabase(query);
 	}
 	

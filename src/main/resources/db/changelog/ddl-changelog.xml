@@ -688,4 +688,73 @@
 		</sql>
 	</changeSet>
 	
+	<changeSet author="msingla" id="1.45">
+		<sql>
+			ALTER TABLE service add column is_key_highlight boolean default false;
+		</sql>
+	</changeSet>
+	
+	<changeSet author="msingla" id="1.46">
+		<sql>
+			ALTER TABLE service add column is_additional_service boolean default false;
+		</sql>
+	</changeSet>
+	
+	<changeSet author="msingla" id="1.47">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<tableExists tableName="additional_service" />
+			</not>
+		</preConditions>
+		<sql>
+			CREATE TABLE additional_service (
+			id bigint PRIMARY KEY AUTO_INCREMENT,
+			service_type varchar (20) NOT NULL,
+			service_for_entity varchar(20),
+			tab_data_name varchar (50),
+			filter_data_name varchar (20),
+			is_filter boolean,
+			added_on timestamp NOT NULL DEFAULT now()
+			);
+		</sql>
+	</changeSet>
+	
+	<changeSet author="msingla" id="1.48">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<tableExists tableName="additional_entity_services" />
+			</not>
+		</preConditions>
+		<sql>
+			CREATE TABLE additional_entity_services(
+			id bigint PRIMARY KEY AUTO_INCREMENT,
+			entity_id bigint,
+			additional_service_id bigint,
+			min_service_cost bigint,
+			max_service_cost bigint,
+			version bigint,
+			added_on timestamp NOT NULL DEFAULT now(),
+			FOREIGN KEY (additional_service_id) REFERENCES additional_service (id)
+			);
+		</sql>
+	</changeSet>
+	
+	<changeSet author="msingla" id="1.49">
+		<sql>
+			ALTER TABLE additional_service AUTO_INCREMENT = 800000;
+		</sql>
+	</changeSet>
+	
+	<changeSet author="msingla" id="1.50">
+		<sql>
+			ALTER TABLE additional_entity_services AUTO_INCREMENT = 900000;
+		</sql>
+	</changeSet>
+	
+	<changeSet author="msingla" id="1.51">
+		<sql>
+			ALTER TABLE additional_entity_services ADD COLUMN max_capacity varchar (10);
+		</sql>
+	</changeSet>
+	
 </databaseChangeLog>
