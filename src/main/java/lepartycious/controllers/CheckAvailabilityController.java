@@ -45,8 +45,9 @@ public class CheckAvailabilityController {
 		sbf.append("\nRequestor Name : " + emailContent.getName());
 		sbf.append("\nRequestor Mobile : " + emailContent.getPhoneNumber());
 		sbf.append("\nRequestor Email Address : " + emailContent.getEmail());
-		sbf.append("\nRequestor Enquiry:" + emailContent.getMessage());
 		sbf.append("\nRequested Booking Date:" + emailContent.getBookingDate());
+		sbf.append("\nExpected Gathering:" + emailContent.getGathering());
+		sbf.append("\nOccassion:" + emailContent.getOccassion());
 		sbf.append("\nRequest for Vendor:" + emailContent.getVendorName() + " (" + emailContent.getVendorType() + ")");
 		sbf.append("\n\nThis is a system generated mail, no one is tracking this mail address.");
 		sbf.append("\n\nCheers,\nLepartycious Team");
@@ -57,6 +58,8 @@ public class CheckAvailabilityController {
 		StringBuffer sbf = new StringBuffer();
 		sbf.append("Hi " + emailContent.getVendorName() +  " Team,\n\nA customer has enquired for booking. Please find the details below :-\n");
 		sbf.append("\nRequested Booking Date:" + emailContent.getBookingDate());
+		sbf.append("\nExpected Gathering:" + emailContent.getGathering());
+		sbf.append("\nOccassion:" + emailContent.getOccassion());
 		sbf.append("\n\nPlease reply to this mail and confirm the availablity for this date");
 		sbf.append("\n\nCheers,\nLepartycious Team");
 		return sbf.toString();
