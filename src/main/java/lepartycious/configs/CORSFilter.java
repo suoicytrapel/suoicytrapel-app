@@ -35,8 +35,4 @@ public class CORSFilter implements Filter{
 		// TODO Auto-generated method stub
 		
 	}
-
-	
-
-
 }

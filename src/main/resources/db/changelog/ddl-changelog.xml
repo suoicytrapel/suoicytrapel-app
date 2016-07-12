@@ -757,4 +757,27 @@
 		</sql>
 	</changeSet>
 	
+	<changeSet author="msingla" id="1.52"> 
+		<preConditions onFail="MARK_RAN"> 
+			<not> 
+				<tableExists tableName="user" /> 
+			</not> 
+		</preConditions> 
+		<sql> 
+			CREATE TABLE user ( 
+			id bigint PRIMARY KEY AUTO_INCREMENT, 
+			username varchar (250) NOT NULL, 
+			password varchar (2500), 
+			email varchar (2000),
+			added_on timestamp NOT NULL DEFAULT now() 
+			); 
+		</sql> 
+	</changeSet>
+	
+	<changeSet author="msingla" id="1.53">
+		<sql>
+			ALTER TABLE user AUTO_INCREMENT = 1000000;
+		</sql>
+	</changeSet>
+	
 </databaseChangeLog>
