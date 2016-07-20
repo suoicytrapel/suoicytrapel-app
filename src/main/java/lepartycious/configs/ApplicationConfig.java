@@ -82,14 +82,14 @@ public class ApplicationConfig {
 		return transactionManager;
 	}
 
-	@Bean
+	/*@Bean
 	public FilterRegistrationBean shallowEtagHeaderFilter() {
 		FilterRegistrationBean registration = new FilterRegistrationBean();
 		registration.setFilter(new CORSFilter());
 		registration.setDispatcherTypes(EnumSet.allOf(DispatcherType.class));
 		registration.addUrlPatterns("/*");
 		return registration;
-	}
+	}*/
 
 	@Bean
 	public SpringLiquibase liquibase() {

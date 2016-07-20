@@ -1,4 +1,4 @@
-package lepartycious.configs;
+/*package lepartycious.configs;
 
 import java.io.IOException;
 
@@ -36,3 +36,4 @@ public class CORSFilter implements Filter{
 		
 	}
 }
+*/
