@@ -168,15 +168,21 @@ public class PhotographerServiceImpl implements PhotographerService {
 		List<FilterResponseDTO> localities = new ArrayList<FilterResponseDTO>();
 		List<FilterResponseDTO> prices = new ArrayList<FilterResponseDTO>();
 		List<FilterResponseDTO> events = new ArrayList<FilterResponseDTO>();
+		List<FilterResponseDTO> services = new ArrayList<FilterResponseDTO>();
 		City city = cityDAO.getCityById(cityId);
 		List<Locality> localityList = city.getLocalities();
 
 		List<Filter> eventList = commonDAO.getRequiredFilters("ALL", "EVENT");
 		List<Filter> priceRangeList = commonDAO.getRequiredFilters("PHOTOGRAPHER", "PRICE");
+		List<Filter> serviceList = commonDAO.getRequiredFilters("PHOTOGRAPHER", "TYPE");
 
 		for(Filter priceFilter : priceRangeList){
 			FilterResponseDTO filter = new FilterResponseDTO(priceFilter.getFilterName(), priceFilter.getFilterType(), priceFilter.getFilterid());
 			prices.add(filter);
+		}
+		for(Filter serviceFilter : serviceList){
+			FilterResponseDTO filter = new FilterResponseDTO(serviceFilter.getFilterName(), serviceFilter.getFilterType(), serviceFilter.getFilterid());
+			services.add(filter);
 		}
 		for(Filter eventFilter : eventList){
 			FilterResponseDTO filter = new FilterResponseDTO(eventFilter.getFilterName(), eventFilter.getFilterType(), eventFilter.getFilterid());
@@ -189,6 +195,7 @@ public class PhotographerServiceImpl implements PhotographerService {
 		filterResponseWrapperDTO.setLocalities(localities);
 		filterResponseWrapperDTO.setPriceRange(prices);
 		filterResponseWrapperDTO.setEventType(events);
+		filterResponseWrapperDTO.setPhotographerType(services);
 		return filterResponseWrapperDTO;
 	}
 

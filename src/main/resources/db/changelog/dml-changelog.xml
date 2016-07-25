@@ -1126,4 +1126,60 @@
 	    </sql>
     </changeSet>
     
+    <changeSet author="msingla" id="1.65">
+	    <sql>
+	    	insert into filters (filter_type, filter_for_entity, filter_name, added_on) values ('TYPE', 'PHOTOGRAPHER', 'photography', now());
+			insert into filters (filter_type, filter_for_entity, filter_name, added_on) values ('TYPE', 'PHOTOGRAPHER', 'videography', now());
+			
+			update service set filter_data_name = 'floral' where service_for_entity = 'DECORATOR' and filter_data_name = 'Floral';
+			update service set filter_data_name = 'lighting' where service_for_entity = 'DECORATOR' and filter_data_name = 'Lighting';
+			insert into service (service_type, service_for_entity, tab_data_name, filter_data_name, is_filter, added_on) values ('SERVICE', 'DECORATOR', 'Tenting', 'tenting', true, now());
+			insert into service (service_type, service_for_entity, tab_data_name, filter_data_name, is_filter, added_on) values ('SERVICE', 'DECORATOR', 'Candles', 'candles', true, now());
+			insert into service (service_type, service_for_entity, tab_data_name, filter_data_name, is_filter, added_on) values ('SERVICE', 'DECORATOR', 'Balloons', 'balloons', true, now());
+			
+			update filters set filter_name = 'cab-services' where filter_for_entity = 'OTHERS' and filter_type = 'OTHERS' and filter_name = 'Cab Services';
+			update filters set filter_name = 'makeup-artist' where filter_for_entity = 'OTHERS' and filter_type = 'OTHERS' and filter_name = 'Tent House';
+			update filters set filter_name = 'invites' where filter_for_entity = 'OTHERS' and filter_type = 'OTHERS' and filter_name = 'Invites/Printing';
+			update filters set filter_name = 'ecoverage' where filter_for_entity = 'OTHERS' and filter_type = 'OTHERS' and filter_name = 'E-coverage';
+			update filters set filter_name = 'accessories' where filter_for_entity = 'OTHERS' and filter_type = 'OTHERS' and filter_name = 'Beauty Saloons';
+			update filters set filter_name = 'trousseau-packer' where filter_for_entity = 'OTHERS' and filter_type = 'OTHERS' and filter_name = 'Trousseau Packers';
+			update filters set filter_name = 'gift-shops' where filter_for_entity = 'OTHERS' and filter_type = 'OTHERS' and filter_name = 'Gift Shops';
+			update filters set filter_name = 'clothing' where filter_for_entity = 'OTHERS' and filter_type = 'OTHERS' and filter_name = 'Clothing';
+			update filters set filter_name = 'jewellery' where filter_for_entity = 'OTHERS' and filter_type = 'OTHERS' and filter_name = 'Jewelry';
+			update filters set filter_name = 'mehendi-artist' where filter_for_entity = 'OTHERS' and filter_type = 'OTHERS' and filter_name = 'Bakery';
+			
+			update filters set filter_name = 'dj' where filter_for_entity = 'ENTERTAINMENT' and filter_type = 'ENTERTAINMENT' and filter_name = 'DJ Services';
+			update filters set filter_name = 'dancers' where filter_for_entity = 'ENTERTAINMENT' and filter_type = 'ENTERTAINMENT' and filter_name = 'Dancers';
+			update filters set filter_name = 'singers' where filter_for_entity = 'ENTERTAINMENT' and filter_type = 'ENTERTAINMENT' and filter_name = 'Singers';
+			update filters set filter_name = 'musicians' where filter_for_entity = 'ENTERTAINMENT' and filter_type = 'ENTERTAINMENT' and filter_name = 'Musicians';
+			update filters set filter_name = 'choreographers' where filter_for_entity = 'ENTERTAINMENT' and filter_type = 'ENTERTAINMENT' and filter_name = 'Choreographer';
+			update filters set filter_name = 'anchors' where filter_for_entity = 'ENTERTAINMENT' and filter_type = 'ENTERTAINMENT' and filter_name = 'Anchor/Emcee/Host';
+			update filters set filter_name = 'fireworks' where filter_for_entity = 'ENTERTAINMENT' and filter_type = 'ENTERTAINMENT' and filter_name = 'Fireworks';
+			update filters set filter_name = 'other-acts' where filter_for_entity = 'ENTERTAINMENT' and filter_type = 'ENTERTAINMENT' and filter_name = 'Others';
+			
+			update filters set filter_name = 'hotels' where filter_for_entity = 'VENUE' and filter_type = 'ESTABLISHMENT' and filter_name = 'Hotel';
+			update filters set filter_name = 'restaurants' where filter_for_entity = 'VENUE' and filter_type = 'ESTABLISHMENT' and filter_name = 'Restaurant';
+			update filters set filter_name = 'marriage-palaces' where filter_for_entity = 'VENUE' and filter_type = 'ESTABLISHMENT' and filter_name = 'Palace';
+			update filters set filter_name = 'banquet-halls' where filter_for_entity = 'VENUE' and filter_type = 'ESTABLISHMENT' and filter_name = 'Banquet Hall';
+			update filters set filter_name = 'clubs' where filter_for_entity = 'VENUE' and filter_type = 'ESTABLISHMENT' and filter_name = 'Club/Lounge';
+			update filters set filter_name = 'others' where filter_for_entity = 'VENUE' and filter_type = 'ESTABLISHMENT' and filter_name = 'Others';
+			
+			update filters set filter_name = 'veg' where filter_for_entity = 'CATERER' and filter_type = 'TYPE' and filter_name = 'Pure Veg';
+			update filters set filter_name = 'non-veg' where filter_for_entity = 'CATERER' and filter_type = 'TYPE' and filter_name = 'Veg/Non-Veg';
+			update filters set filter_name = 'bartender' where filter_for_entity = 'CATERER' and filter_type = 'TYPE' and filter_name = 'Bartenders';
+	    </sql>
+    </changeSet>
+    
+    <changeSet author="msingla" id="1.66">
+	    <sql>
+		    delete from entity_filters where filter_id = (select id from filters where filter_type = 'OTHERS' and filter_for_entity = 'OTHERS' and filter_name = 'Cinematography');
+			delete from entity_filters where filter_id = (select id from filters where filter_type = 'OTHERS' and filter_for_entity = 'OTHERS' and filter_name = 'Honeymoon package/Travel agents');
+			delete from entity_filters where filter_id = (select id from filters where filter_type = 'ENTERTAINMENT' and filter_for_entity = 'ENTERTAINMENT' and filter_name = 'Band Services');
+	    	delete from filters where filter_type = 'ESTABLISHMENT' and filter_name = 'Marriage Gardens';
+			delete from filters where filter_type = 'OTHERS' and filter_name = 'Cinematography';
+			delete from filters where filter_type = 'OTHERS' and filter_name = 'Honeymoon package/Travel agents';
+			delete from filters where filter_type = 'ENTERTAINMENT' and filter_name = 'Band Services';
+	    </sql>
+    </changeSet>
+    
 </databaseChangeLog>

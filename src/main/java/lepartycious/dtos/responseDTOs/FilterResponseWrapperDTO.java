@@ -16,6 +16,7 @@ public class FilterResponseWrapperDTO implements Serializable{
 	private List<FilterResponseDTO> othersType;
 	private List<FilterResponseDTO> capacity;
 	private List<FilterResponseDTO> catererType;
+	private List<FilterResponseDTO> photographerType;
 	
 	public List<FilterResponseDTO> getServices() {
 		return services;
@@ -82,5 +83,11 @@ public class FilterResponseWrapperDTO implements Serializable{
 	}
 	public void setCatererType(List<FilterResponseDTO> catererType) {
 		this.catererType = catererType;
+	}
+	public List<FilterResponseDTO> getPhotographerType() {
+		return photographerType;
+	}
+	public void setPhotographerType(List<FilterResponseDTO> photographerType) {
+		this.photographerType = photographerType;
 	}
 }

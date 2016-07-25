@@ -3,6 +3,7 @@ package lepartycious.services.implementations;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
@@ -13,6 +14,7 @@ import lepartycious.dtos.requestDTOs.DataRequestDTO;
 import lepartycious.dtos.requestDTOs.SearchRequestDTO;
 import lepartycious.dtos.responseDTOs.AddedDTO;
 import lepartycious.dtos.responseDTOs.DetailResponseDTO;
+import lepartycious.dtos.responseDTOs.FilterResponseDTO;
 import lepartycious.dtos.responseDTOs.FilterResponseWrapperDTO;
 import lepartycious.dtos.responseDTOs.SearchResponseDTO;
 import lepartycious.dtos.responseDTOs.SearchResponseDTOWrapper;
@@ -20,6 +22,7 @@ import lepartycious.models.Attachment;
 import lepartycious.models.Caterer;
 import lepartycious.models.Decorator;
 import lepartycious.models.Entertainment;
+import lepartycious.models.Filter;
 import lepartycious.models.Others;
 import lepartycious.models.Photographer;
 import lepartycious.models.Venue;
@@ -272,6 +275,61 @@ public class CommonServiceImpl implements CommonService {
 		attachment.setHelpText("No Image");
 		attachments.add(attachment);
 		return attachments;
+	}
+
+	@Override
+	public Map<String, List<FilterResponseDTO>> fetchSubCategories() {
+		
+		Map<String, List<FilterResponseDTO>> subCategoriesMap = new LinkedHashMap<String, List<FilterResponseDTO>>();
+		
+		List<FilterResponseDTO> establishments = new ArrayList<FilterResponseDTO>();
+		List<FilterResponseDTO> catererType = new ArrayList<FilterResponseDTO>();
+		List<FilterResponseDTO> services = new ArrayList<FilterResponseDTO>();
+		List<FilterResponseDTO> entertainmentTypes = new ArrayList<FilterResponseDTO>();
+		List<FilterResponseDTO> otherTypes = new ArrayList<FilterResponseDTO>();
+		List<FilterResponseDTO> photographerTypes = new ArrayList<FilterResponseDTO>();
+		
+		List<Filter> establishmentList = commonDAO.getRequiredFilters("VENUE", "ESTABLISHMENT");
+		List<Filter> typeFilters = commonDAO.getRequiredFilters("CATERER", "TYPE");
+		List<lepartycious.models.Service> serviceList = commonDAO.getServiceFilters("DECORATOR", "SERVICE");
+		List<Filter> entertainmentTypeList = commonDAO.getRequiredFilters("ENTERTAINMENT", "ENTERTAINMENT");
+		List<Filter> otherTypeList = commonDAO.getRequiredFilters("OTHERS", "OTHERS");
+		List<Filter> photographerTypeList = commonDAO.getRequiredFilters("PHOTOGRAPHER", "TYPE");
+		
+		for(Filter estFilter : establishmentList){
+			FilterResponseDTO filter = new FilterResponseDTO(estFilter.getFilterName(), estFilter.getFilterType(), estFilter.getFilterid());
+			establishments.add(filter);
+		}
+		for(Filter typeFilter : typeFilters){
+			FilterResponseDTO filter = new FilterResponseDTO(typeFilter.getFilterName(), typeFilter.getFilterType(), typeFilter.getFilterid());
+			catererType.add(filter);
+		}
+		for(lepartycious.models.Service service : serviceList){
+			FilterResponseDTO filter = new FilterResponseDTO(service.getFilterDataName(), service.getServiceType(), service.getServiceId());
+			services.add(filter);
+		}
+		for(Filter rentTypeFilter : entertainmentTypeList){
+			FilterResponseDTO filter = new FilterResponseDTO(rentTypeFilter.getFilterName(), rentTypeFilter.getFilterType(), rentTypeFilter.getFilterid());
+			entertainmentTypes.add(filter);
+		}
+		for(Filter rentTypeFilter : otherTypeList){
+			FilterResponseDTO filter = new FilterResponseDTO(rentTypeFilter.getFilterName(), rentTypeFilter.getFilterType(), rentTypeFilter.getFilterid());
+			otherTypes.add(filter);
+		}
+		for(Filter serviceFilter : photographerTypeList){
+			FilterResponseDTO filter = new FilterResponseDTO(serviceFilter.getFilterName(), serviceFilter.getFilterType(), serviceFilter.getFilterid());
+			photographerTypes.add(filter);
+		}
+		
+		subCategoriesMap.put("VENUE", establishments);
+		subCategoriesMap.put("CATERER", catererType);
+		subCategoriesMap.put("DECORATOR", services);
+		subCategoriesMap.put("PHOTOGRAPHER", photographerTypes);
+		subCategoriesMap.put("ENTERTAINMENT", entertainmentTypes);
+		subCategoriesMap.put("OTHERS", otherTypes);
+		
+		// TODO Auto-generated method stub
+		return subCategoriesMap;
 	}
 
 }

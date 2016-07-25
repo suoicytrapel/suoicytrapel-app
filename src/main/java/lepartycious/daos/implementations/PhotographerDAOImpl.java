@@ -71,6 +71,11 @@ public class PhotographerDAOImpl extends BaseDAOImpl implements PhotographerDAO 
 				criteria.createAlias("ff.filterId", "filters");
 				criteria.add(Restrictions.and(Restrictions.in("filters.filterId", filters.getPriceRangeList()), Restrictions.eq("filters.filterType", "PRICE")));
 			}
+			if(!CollectionUtils.isEmpty(filters.getPhotographerTypeList())){
+				criteria.createAlias("photographer.photographerFilters", "fft"); // inner join by default
+				criteria.createAlias("fft.filterId", "typeFilters");
+				criteria.add(Restrictions.and(Restrictions.in("typeFilters.filterId", filters.getPhotographerTypeList()), Restrictions.eq("typeFilters.filterType", "TYPE")));
+			}
 		}
 		if(StringUtils.isNotBlank(searchString)){
 			criteria.add(Restrictions.ilike("name", searchString + "%"));
