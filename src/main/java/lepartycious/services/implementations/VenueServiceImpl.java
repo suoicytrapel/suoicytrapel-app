@@ -100,16 +100,14 @@ public class VenueServiceImpl implements VenueService {
 			SearchResponseDTO searchResponseDTO = new SearchResponseDTO();
 			searchResponseDTO.setName(venue.getName());
 			searchResponseDTO.setLocality(venue.getLocality().getDescription());
-			searchResponseDTO.setStartingPrice(venue.getStartingPrice());
-			if(CollectionUtils.isEmpty(venue.getAttachments())){
-				searchResponseDTO.setMainImagerURL("defaultimage.jpg");
-			}
-			else{
-				searchResponseDTO.setMainImagerURL(venue.getAttachments().get(0).getImageURL());
-			}
-			
+			searchResponseDTO.setMainImagerURL(venue.getAttachments().get(0).getImageURL());
 			searchResponseDTO.setMaxCapacity(venue.getMaxCapacity());
 			searchResponseDTO.setMinCapacity(venue.getMinCapacity());
+			for(VenueAmenities venueAmenities : venue.getVenueamenities()){
+				if(StringUtils.isNotEmpty(venueAmenities.getMinVegCost())){
+					searchResponseDTO.setStartingPrice(venueAmenities.getMinVegCost());
+				}
+			}
 			searchResponseDTOList.add(searchResponseDTO);
 		}
 	}
