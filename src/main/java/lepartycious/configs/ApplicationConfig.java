@@ -8,11 +8,18 @@ import javax.sql.DataSource;
 
 import liquibase.integration.spring.SpringLiquibase;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
 import org.springframework.boot.context.embedded.FilterRegistrationBean;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.Resource;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
@@ -25,6 +32,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement
 @EnableAsync
 @EnableCaching
+@PropertySource({"classpath:application.${spring.profiles.active}.properties"})
 public class ApplicationConfig {
 
 	@Value("${db.driver}")
@@ -94,10 +102,10 @@ public class ApplicationConfig {
 	@Bean
 	public SpringLiquibase liquibase() {
 		SpringLiquibase liquibase = new SpringLiquibase();
-		//LiquibaseProperties properties = new LiquibaseProperties();
 		liquibase.setChangeLog("classpath:/db/changelog/master-changelog.xml");
 		liquibase.setDataSource(dataSource());
 		liquibase.setShouldRun(true);
+		liquibase.setContexts(System.getProperty("spring.profiles.active"));
 		return liquibase;
 	}
 
@@ -126,6 +134,11 @@ public class ApplicationConfig {
 		mailProperties.put("mail.smtp.EnableSSL.enable","true");
 		return mailProperties;
 	}
+	
+	/*@Bean
+    public static PropertySourcesPlaceholderConfigurer propertyConfigurer() {
+       return new PropertySourcesPlaceholderConfigurer();
+    }*/
 
 	/*@Bean
 	public CacheManager getEhCacheManager(){

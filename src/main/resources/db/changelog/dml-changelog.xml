@@ -1182,4 +1182,47 @@
 	    </sql>
     </changeSet>
     
+    <changeSet author="msingla" id="1.67">
+	    <sql>
+		    insert into service (service_type, service_for_entity, tab_data_name, filter_data_name, is_filter, added_on) values ('SERVICE', 'VENUE', 'Open Sand Dine In', '', false, now());
+			insert into service (service_type, service_for_entity, tab_data_name, filter_data_name, is_filter, added_on) values ('SERVICE', 'VENUE', 'Camel Cart', '', false, now());
+			insert into service (service_type, service_for_entity, tab_data_name, filter_data_name, is_filter, added_on) values ('SERVICE', 'VENUE', 'Laundry', '', false, now());
+			insert into service (service_type, service_for_entity, tab_data_name, filter_data_name, is_filter, added_on) values ('SERVICE', 'VENUE', 'Bar', '', false, now());
+			insert into service (service_type, service_for_entity, tab_data_name, filter_data_name, is_filter, added_on) values ('SERVICE', 'VENUE', 'Medical', '', false, now());
+			insert into service (service_type, service_for_entity, tab_data_name, filter_data_name, is_filter, added_on) values ('SERVICE', 'VENUE', 'Room Service', '', false, now());
+			insert into service (service_type, service_for_entity, tab_data_name, filter_data_name, is_filter, added_on) values ('SERVICE', 'VENUE', 'Pool', '', false, now());
+			insert into service (service_type, service_for_entity, tab_data_name, filter_data_name, is_filter, added_on) values ('SERVICE', 'VENUE', 'Parking', '', false, now());
+			insert into filters (filter_type, filter_for_entity, filter_name, added_on) values ('ESTABLISHMENT', 'VENUE', 'Resort', now());
+			insert into locality (name, description, added_on, city_id) values ('Kanoi Sam Desert Road', 'Kanoi Sam Desert Road', now(), (select id from city where name = 'Bikaner'));
+			insert into room (room_type, description, room_dimensions, added_on) values ('COTTAGE', 'Cottage', '', now());
+			insert into room (room_type, description, room_dimensions, added_on) values ('SWISSTENT', 'Swiss Tent', '', now());
+			insert into amenities (amenity_type, description, is_indoor_amenity, amenity_dimensions, added_on, is_filter) values ('DESERTGRND', 'Desert Ground', false, '', now(), false);
+	    </sql>
+    </changeSet>
+    
+    <!-- Data:Venue:Raj Resort -->
+    
+     <changeSet author="msingla" id="1.68" context="dev, prod">
+	    <sql>
+			insert into venue (name, description, type, comments, rating, added_on, city_id, locality_id, priority) values ('Raj Resort', 'Raj Resort is a wild Deser Resort which is unique, calm, peaceful, natural and 5th largest desert.', 'RESORT', null, null, now(), (select id from city where name = 'Bikaner'), (select id from locality where name = 'Kanoi Sam Desert Road'), 120);
+			insert into address (address_line_1, address_line_2, city, state, pincode, primary_phone, secondary_phone, email, entity_id, version, added_on, latitude, longitude) values ('Raj Resort, 7 Milestone', 'Kanoi Sam Desert Road', 'Bikaner', 'Rajasthan', 334003, '+91-0151-2522651', '9214404100', 'www.raobikajigroups.com, www.raobikajicamelsafari.com', (select id from venue where name = 'Raj Resort'), 0, now(), '28.0229', '73.3119');
+			insert into entity_services (entity_id, service_id, min_service_cost, max_service_cost, version, added_on) values ((select id from venue where name = 'Raj Resort'), (select id from service where tab_data_name = 'Open Sand Dine In'), null, null, 0, now());
+			insert into entity_services (entity_id, service_id, min_service_cost, max_service_cost, version, added_on) values ((select id from venue where name = 'Raj Resort'), (select id from service where tab_data_name = 'Camel Cart'), null, null, 0, now());
+			insert into entity_services (entity_id, service_id, min_service_cost, max_service_cost, version, added_on) values ((select id from venue where name = 'Raj Resort'), (select id from service where tab_data_name = 'Dine In'), null, null, 0, now());
+			insert into entity_services (entity_id, service_id, min_service_cost, max_service_cost, version, added_on) values ((select id from venue where name = 'Raj Resort'), (select id from service where tab_data_name = 'Bar'), null, null, 0, now());
+			insert into entity_services (entity_id, service_id, min_service_cost, max_service_cost, version, added_on) values ((select id from venue where name = 'Raj Resort'), (select id from service where tab_data_name = 'Medical'), null, null, 0, now());
+			insert into entity_services (entity_id, service_id, min_service_cost, max_service_cost, version, added_on) values ((select id from venue where name = 'Raj Resort'), (select id from service where tab_data_name = 'Room Service'), null, null, 0, now());
+			insert into entity_services (entity_id, service_id, min_service_cost, max_service_cost, version, added_on) values ((select id from venue where name = 'Raj Resort'), (select id from service where tab_data_name = 'Laundry'), null, null, 0, now());
+			insert into entity_services (entity_id, service_id, min_service_cost, max_service_cost, version, added_on) values ((select id from venue where name = 'Raj Resort'), (select id from service where tab_data_name = 'Parking'), null, null, 0, now());
+			insert into venue_amenities (venue_id, amenities_id, min_amenity_cost, max_amenity_cost, version, added_on, max_accomodation_capacity, amenity_name) values ((select id from venue where name = 'Raj Resort'), (select id from amenities where amenity_type = 'DESERTGRND'), 140000, null, 0, now(), '10,000', '100 Bigha''s');
+			insert into entity_filters (entity_id, filter_id, version, added_on) values ((select id from venue where name = 'Raj Resort'), (select id from filters where filter_type = 'ESTABLISHMENT' and filter_for_entity = 'VENUE' and filter_name = 'Resort'), 0, now());
+		</sql>
+    </changeSet>
+    
+    <changeSet author="msingla" id="1.69">
+	    <sql>
+	    	update amenities set is_detailed_amenity = false where amenity_type = 'DESERTGRND';
+		</sql>
+    </changeSet>
+    
 </databaseChangeLog>
