@@ -1,4 +1,4 @@
-package lepartycious.configs;
+/*package lepartycious.configs;
 
 import java.util.Collection;
 
@@ -44,3 +44,4 @@ public class CustomAuthenticationProvider implements AuthenticationProvider{
     }
  
 }
+*/

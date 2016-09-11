@@ -1,4 +1,4 @@
-package lepartycious.configs;
+/*package lepartycious.configs;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
@@ -41,26 +41,26 @@ class SecurityConfig extends WebSecurityConfigurerAdapter {
 		    .logout().logoutSuccessUrl("/login?logout")
 		.and()
 		    .csrf(); 	
-		/*http
+		http
         .authorizeRequests().anyRequest().authenticated()
         .and()
-        .httpBasic();*/
-		/*http
+        .httpBasic();
+		http
 		.formLogin()
 		.loginProcessingUrl("/login")
 		.and().
 	    csrf().disable()
 		.authorizeRequests()
 		.antMatchers("/index.html", "/home.html", "/login.html", "/").permitAll()
-		.anyRequest().authenticated();*/
+		.anyRequest().authenticated();
 	}
 
-	/*@Override
+	@Override
 	public void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth
 		.userDetailsService(userDetailsService)
 		.passwordEncoder(new BCryptPasswordEncoder());
-	}*/
+	}
 
 	private CsrfTokenRepository csrfTokenRepository() {
 		HttpSessionCsrfTokenRepository repository = new HttpSessionCsrfTokenRepository();
@@ -68,4 +68,4 @@ class SecurityConfig extends WebSecurityConfigurerAdapter {
 		return repository;
 	}
 
-}
+}*/

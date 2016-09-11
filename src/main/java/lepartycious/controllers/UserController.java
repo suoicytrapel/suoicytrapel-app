@@ -1,16 +1,14 @@
 package lepartycious.controllers;
 
+import java.security.Principal;
+
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
-
-import java.security.Principal;
-
-import lepartycious.models.User;
-import lepartycious.services.implementations.UserService;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
  *
@@ -24,32 +22,10 @@ public class UserController {
 
     private static final Logger LOGGER = Logger.getLogger(UserController.class);
 
-    @Autowired
-    UserService userService;
-
-    @ResponseBody
-    @ResponseStatus(HttpStatus.OK)
-    @RequestMapping(method = RequestMethod.GET)
-    public String getUserInfo(Principal principal) {
-
-        User user = userService.findUserByUsername(principal.getName());
-        return user.getUsername();
+    @RequestMapping(value="/current", method = RequestMethod.GET)
+    public Principal getUser(Principal principal) {
+    	return principal;
     }
-
-   /* @ResponseBody
-    @ResponseStatus(HttpStatus.OK)
-    @RequestMapping(method = RequestMethod.PUT)
-    public void updateUserMaxCaloriesPerDay(Principal principal, @RequestBody Long newMaxCalories) {
-        userService.updateUserMaxCaloriesPerDay(principal.getName(), newMaxCalories);
-    }*/
-
-
-    /*@ResponseStatus(HttpStatus.OK)
-    @RequestMapping(method = RequestMethod.POST)
-    public void createUser(@RequestBody NewUserDTO user) {
-        userService.createUser(user.getUsername(), user.getEmail(), user.getPlainTextPassword());
-    }*/
-
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<String> errorHandler(Exception exc) {

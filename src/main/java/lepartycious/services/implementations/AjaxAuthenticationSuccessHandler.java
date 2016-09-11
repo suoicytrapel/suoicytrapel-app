@@ -1,4 +1,4 @@
-package lepartycious.services.implementations;
+/*package lepartycious.services.implementations;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-/**
+*//**
  *
  * Authentication success handler for integration with SPA applications that need to login using Ajax instead of
  * a form post.
@@ -16,7 +16,7 @@ import java.io.IOException;
  * Detects if its a ajax login request, and if so sends a customized response in the body, otherwise defaults
  * to the existing behaviour for none-ajax login attempts.
  *
- */
+ *//*
 public class AjaxAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
 
     private AuthenticationSuccessHandler defaultHandler;
@@ -39,4 +39,4 @@ public class AjaxAuthenticationSuccessHandler implements AuthenticationSuccessHa
         }
 
     }
-}
+}*/

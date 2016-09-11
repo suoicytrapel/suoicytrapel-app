@@ -1,8 +1,8 @@
 package lepartycious.daos;
 
-import org.springframework.security.core.userdetails.UserDetails;
+import lepartycious.models.User;
 
 public interface UserDAO {
 
-	public UserDetails loadUserByUsername(String username);
+	public User loadUserByUsername(String username) throws Exception;
 }
