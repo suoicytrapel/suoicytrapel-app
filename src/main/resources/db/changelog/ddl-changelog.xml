@@ -769,6 +769,8 @@
 			username varchar (250) NOT NULL, 
 			password varchar (2500), 
 			email varchar (2000),
+			firstname varchar (2000),
+			lastname varchar (2000),
 			added_on timestamp NOT NULL DEFAULT now() 
 			); 
 		</sql> 
