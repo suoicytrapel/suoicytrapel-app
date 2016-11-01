@@ -1225,4 +1225,63 @@
 		</sql>
     </changeSet>
     
+    <changeSet author="msingla" id="1.5">
+	    <sql>
+	    	insert into room (room_type, description, room_dimensions, added_on) values ('PREMIUIMSUITE', 'Premium Suite', '15in X 15in X 15in', now());
+	    	insert into room (room_type, description, room_dimensions, added_on) values ('SUPERIORSUITE', 'Superior Suite', '15in X 15in X 15in', now());
+	    	insert into room (room_type, description, room_dimensions, added_on) values ('FAMILYSUITE', 'Family Suite', '15in X 15in X 15in', now());
+			delete from amenities where amenity_type='INHOUSECATERING';
+			delete from amenities where amenity_type='INHOUSEDECOR';
+			insert into service (service_type, service_for_entity, tab_data_name, filter_data_name, is_filter, added_on) values ('SERVICE', 'VENUE', 'Inhouse Decor', 'Inhouse Decor', false, now());
+			insert into service (service_type, service_for_entity, tab_data_name, filter_data_name, is_filter, added_on) values ('SERVICE', 'VENUE', 'Outhouse Decor Allowed', 'Outhouse Decor Allowed', false, now());
+			insert into service (service_type, service_for_entity, tab_data_name, filter_data_name, is_filter, added_on) values ('SERVICE', 'VENUE', 'Spa', 'Spa', false, now());
+
+	    </sql>
+    </changeSet>
+
+
+<changeSet author="msingla" id="1.68" context="dev, prod">
+	    <sql>
+			insert into venue (name, description, type, comments, rating, added_on, city_id, locality_id, priority, policies) values ('KC CROSS ROAD', 'A range of spacious banquet halls with state of the art meeting rooms that can cater up to 500 pax for conferences, seminars, weddings, theme parties and other social functions. Our 49 well appointed rooms are a live examples of these characteristics. With most of the rooms promising a panoramic view of the scenic Shivalik foothills, each room is a class in itself with most modern aminities and unparalleled service.', 'HOTEL', null, null, now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Panchkula'), 130,'25% at the times of booking,25% before one week,final payment at start of party,no refund');
+			insert into address (address_line_1, address_line_2, city, state, pincode, primary_phone, secondary_phone, email, entity_id, version, added_on, latitude, longitude) values ('SECTOR-10,OPP. Bus Stand', '', 'Panchkula', 'Chandigarh', 134109, '', '', '', (select id from venue where name = 'KC CROSS ROAD'), 0, now(), '30.7398', '76.7827');
+			insert into attachment (name, image_url, entity_id, version, added_on, attachment_type, help_text) values ('Image1.jpg', 'venues/chd_kccrossroad/kc_crossroad1.jpg', (select id from venue where name = 'KC CROSS ROAD'), 0, now(), 'COVER', 'Outer View');
+			insert into attachment (name, image_url, entity_id, version, added_on, attachment_type, help_text) values ('Image2.jpg', 'venues/chd_kccrossroad/kc_crossroad2.jpg', (select id from venue where name = 'KC CROSS ROAD'), 0, now(), 'GALLERY', 'Lobby Area1');
+			insert into attachment (name, image_url, entity_id, version, added_on, attachment_type, help_text) values ('Image3.jpg', 'venues/chd_kccrossroad/kc_crossroad3.jpg', (select id from venue where name = 'KC CROSS ROAD'), 0, now(), 'GALLERY', 'Lobby Area2');
+			insert into attachment (name, image_url, entity_id, version, added_on, attachment_type, help_text) values ('Image4.jpg', 'venues/chd_kccrossroad/kc_crossroad4.jpg', (select id from venue where name = 'KC CROSS ROAD'), 0, now(), 'GALLERY', 'Dining Area');
+			insert into attachment (name, image_url, entity_id, version, added_on, attachment_type, help_text) values ('Image5.jpg', 'venues/chd_kccrossroad/kc_crossroad5.jpg', (select id from venue where name = 'KC CROSS ROAD'), 0, now(), 'GALLERY', 'Banquet Hall1');
+			insert into attachment (name, image_url, entity_id, version, added_on, attachment_type, help_text) values ('Image6.jpg', 'venues/chd_kccrossroad/kc_crossroad6.jpg', (select id from venue where name = 'KC CROSS ROAD'), 0, now(), 'GALLERY', 'Banquet Hall2');
+			insert into attachment (name, image_url, entity_id, version, added_on, attachment_type, help_text) values ('Image7.jpg', 'venues/chd_kccrossroad/kc_crossroad7.jpg', (select id from venue where name = 'KC CROSS ROAD'), 0, now(), 'GALLERY', 'Bedroom1');
+			insert into attachment (name, image_url, entity_id, version, added_on, attachment_type, help_text) values ('Image8.jpg', 'venues/chd_kccrossroad/kc_crossroad8.jpg', (select id from venue where name = 'KC CROSS ROAD'), 0, now(), 'GALLERY', 'Bedroom2');
+			insert into attachment (name, image_url, entity_id, version, added_on, attachment_type, help_text) values ('Image9.jpg', 'venues/chd_kccrossroad/kc_crossroad9.jpg', (select id from venue where name = 'KC CROSS ROAD'), 0, now(), 'GALLERY', 'Bedroom3');
+			insert into venue_rooms (venue_id, room_id, min_cost, ac_availability,fridge_availability,locker_availability,led_availability,attached_bathroom_availability, version, added_on, hot_water_availability, number_of_rooms) values ((select id from venue where name = 'KC CROSS ROAD'), (select id from room where room_type = 'DELUXE'), 4500, true, true, true, true, true, 0, now(), true, 14);
+			insert into venue_rooms (venue_id, room_id, min_cost, ac_availability,fridge_availability,locker_availability,led_availability,attached_bathroom_availability, version, added_on, hot_water_availability, number_of_rooms) values ((select id from venue where name = 'KC CROSS ROAD'), (select id from room where room_type = 'SUPERDELUXE'), 5000, true, true, true, true, true, 0, now(), true, 16);
+			insert into venue_rooms (venue_id, room_id, min_cost, ac_availability,fridge_availability,locker_availability,led_availability,attached_bathroom_availability, version, added_on, hot_water_availability, number_of_rooms) values ((select id from venue where name = 'KC CROSS ROAD'), (select id from room where room_type = 'PREMIUIMSUITE'), 5000, true, true, true, true, true, 0, now(), true, 8);
+			insert into venue_rooms (venue_id, room_id, min_cost, ac_availability,fridge_availability,locker_availability,led_availability,attached_bathroom_availability, version, added_on, hot_water_availability, number_of_rooms) values ((select id from venue where name = 'KC CROSS ROAD'), (select id from room where room_type = 'SUPERIORSUITE'), 5500, true, true, true, true, true, 0, now(), true, 10);
+			insert into venue_rooms (venue_id, room_id, min_cost, ac_availability,fridge_availability,locker_availability,led_availability,attached_bathroom_availability, version, added_on, hot_water_availability, number_of_rooms) values ((select id from venue where name = 'KC CROSS ROAD'), (select id from room where room_type = 'FAMILYSUITE'), 8000, true, true, true, true, true, 0, now(), true, 1);
+			
+			insert into entity_services (entity_id, service_id, min_service_cost, max_service_cost, version, added_on) values ((select id from venue where name = 'KC CROSS ROAD'), (select id from service where tab_data_name = 'Dine In'), null, null, 0, now());
+			insert into entity_services (entity_id, service_id, min_service_cost, max_service_cost, version, added_on) values ((select id from venue where name = 'KC CROSS ROAD'), (select id from service where tab_data_name = 'Spa'), null, null, 0, now());
+			insert into entity_services (entity_id, service_id, min_service_cost, max_service_cost, version, added_on) values ((select id from venue where name = 'KC CROSS ROAD'), (select id from service where tab_data_name = 'Medical'), null, null, 0, now());
+			insert into entity_services (entity_id, service_id, min_service_cost, max_service_cost, version, added_on) values ((select id from venue where name = 'KC CROSS ROAD'), (select id from service where tab_data_name = 'Laundry'), null, null, 0, now());
+			insert into entity_services (entity_id, service_id, min_service_cost, max_service_cost, version, added_on) values ((select id from venue where name = 'KC CROSS ROAD'), (select id from service where tab_data_name = 'Parking'), null, null, 0, now());
+			insert into entity_services (entity_id, service_id, min_service_cost, max_service_cost, version, added_on) values ((select id from venue where name = 'KC CROSS ROAD'), (select id from service where tab_data_name = 'Room Service'), null, null, 0, now());
+			insert into entity_services (entity_id, service_id, min_service_cost, max_service_cost, version, added_on) values ((select id from venue where name = 'KC CROSS ROAD'), (select id from service where tab_data_name = 'High-speed Wi-Fi Internet'), null, null, 0, now());
+			insert into entity_services (entity_id, service_id, min_service_cost, max_service_cost, version, added_on) values ((select id from venue where name = 'KC CROSS ROAD'), (select id from service where tab_data_name = 'Inhouse DJ'), 5000, null, 0, now());
+			insert into entity_services (entity_id, service_id, min_service_cost, max_service_cost, version, added_on) values ((select id from venue where name = 'KC CROSS ROAD'), (select id from service where tab_data_name = 'Inhouse Catering'), null, null, 0, now());
+			insert into entity_services (entity_id, service_id, min_service_cost, max_service_cost, version, added_on) values ((select id from venue where name = 'KC CROSS ROAD'), (select id from service where tab_data_name = 'Outhouse alocohol Allowed'), null, null, 0, now());
+			insert into entity_services (entity_id, service_id, min_service_cost, max_service_cost, version, added_on) values ((select id from venue where name = 'KC CROSS ROAD'), (select id from service where tab_data_name = 'Inhouse Decor'), null, null, 0, now());
+			
+			insert into venue_amenities (venue_id, amenities_id, min_amenity_cost, max_amenity_cost, version, added_on, amenity_name,max_accomodation_capacity) values ((select id from venue where name = 'KC CROSS ROAD'), (select id from amenities where amenity_type = 'BNQTHALL'), 50000, 50000, 0, now(),'Down Town1','300');
+			insert into venue_amenities (venue_id, amenities_id, min_amenity_cost, max_amenity_cost, version, added_on, amenity_name,max_accomodation_capacity) values ((select id from venue where name = 'KC CROSS ROAD'), (select id from amenities where amenity_type = 'BNQTHALL'), 25000, 25000, 0, now(),'Down Town2','200');
+			insert into venue_amenities (venue_id, amenities_id, min_amenity_cost, max_amenity_cost, version, added_on, amenity_name,max_accomodation_capacity) values ((select id from venue where name = 'KC CROSS ROAD'), (select id from amenities where amenity_type = 'BNQTHALL'), 15000, 15000, 0, now(),'Down Town3','75');
+			insert into venue_amenities (venue_id, amenities_id, min_amenity_cost, max_amenity_cost, version, added_on, amenity_name,max_accomodation_capacity) values ((select id from venue where name = 'KC CROSS ROAD'), (select id from amenities where amenity_type = 'BNQTHALL'), 18000, 18000, 0, now(),'Down Town4','100');
+			insert into venue_amenities (venue_id, amenities_id, min_amenity_cost, max_amenity_cost, version, added_on, amenity_name,max_accomodation_capacity) values ((select id from venue where name = 'KC CROSS ROAD'), (select id from amenities where amenity_type = 'CONFERENCE'), null, null, 0, now(),'Down Town4','35');
+			insert into venue_amenities (venue_id, amenities_id, min_amenity_cost, max_amenity_cost, version, added_on, amenity_name,max_accomodation_capacity) values ((select id from venue where name = 'KC CROSS ROAD'), (select id from amenities where amenity_type = 'Gym'), null, null, 0, now(), null, null);
+			
+			insert into entity_filters (entity_id, filter_id, version, added_on) values ((select id from venue where name = 'KC CROSS ROAD'), (select id from filters where filter_type = 'ESTABLISHMENT' and filter_for_entity = 'VENUE' and filter_name = 'Hotel'), 0, now());
+			
+			
+		</sql>
+    </changeSet>
+    
 </databaseChangeLog>

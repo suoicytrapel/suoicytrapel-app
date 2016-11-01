@@ -23,6 +23,7 @@ public class VenueDTO implements Serializable{
 	private List<EntityServicesDTO> venueServices;
 	private List<VenueRoomsDTO> venueRooms;
 	private List<VenuePackagesDTO> venuePackages;
+	private List<EntityFiltersDTO> venueFilters;
 	private List<AdditionalEntityServicesDTO> additionalVenueServices;
 	
 	public String getName() {

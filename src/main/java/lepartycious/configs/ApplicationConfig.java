@@ -66,6 +66,7 @@ public class ApplicationConfig {
 		dataSource.setUrl(DB_URL);
 		dataSource.setUsername(DB_USERNAME);
 		dataSource.setPassword(DB_PASSWORD);
+		System.out.println("DB Password is:" + DB_PASSWORD);
 		return dataSource;
 	}
 

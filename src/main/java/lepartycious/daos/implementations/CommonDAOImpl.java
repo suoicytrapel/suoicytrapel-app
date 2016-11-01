@@ -91,17 +91,24 @@ public class CommonDAOImpl extends BaseDAOImpl implements CommonDAO{
 	@CacheEvict(value = {"commonCache", "cityCache", "decoratorCache", "venueCache", "photographerCache", "catererCache", "entertainmentCache", "othersCache"}, allEntries = true)
 	public Map<String, String> pushDataToDatabase(String query) {
 		StringTokenizer strTokens = new StringTokenizer(query, ";");
-		Map<String, String> failedQueries = new HashMap<String, String>();
+		Map<String, String> data = new HashMap<String, String>();
+		int success = 0;
+		int failure = 0;
 		while(strTokens.hasMoreElements()){
 			String queryToExecute = (String) strTokens.nextElement();
 			try{
-				SQLQuery sqlQuery = sessionFactory.getCurrentSession().createSQLQuery(queryToExecute);
+				SQLQuery sqlQuery = sessionFactory.getCurrentSession().createSQLQuery(queryToExecute.trim());
+				sqlQuery.executeUpdate();
+				success++;
 			}
 			catch(Exception exception){
-				failedQueries.put(queryToExecute, exception.getMessage());
+				data.put(queryToExecute, exception.getMessage());
+				failure++;
 			}
 		}
-		return failedQueries;
+		data.put("Processed Queries",Integer.toString(success));
+		data.put("Failed Queries",Integer.toString(failure));
+		return data;
 	}
 
 	@Override
