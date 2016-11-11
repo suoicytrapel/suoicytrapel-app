@@ -60,7 +60,7 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
     
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers(HttpMethod.OPTIONS, "*/**").antMatchers("/api/rest/v1/**");
+        web.ignoring().antMatchers(HttpMethod.OPTIONS, "*/**").antMatchers(HttpMethod.OPTIONS, "/oauth/token").antMatchers("/api/rest/v1/**");
     }
     
     @Bean

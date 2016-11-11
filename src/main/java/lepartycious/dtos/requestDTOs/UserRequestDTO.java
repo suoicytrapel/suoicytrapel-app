@@ -7,9 +7,9 @@ public class UserRequestDTO implements Serializable{
 	private String username;
 	private String password;
 	private String email;
-	private String mobileNumber;
-	private String firstName;
-	private String lastName;
+	private String userRole;
+	private String name;
+	private Boolean isAppuser = Boolean.FALSE;
 	
 	public String getUsername() {
 		return username;
@@ -29,22 +29,22 @@ public class UserRequestDTO implements Serializable{
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getMobileNumber() {
-		return mobileNumber;
+	public String getName() {
+		return name;
 	}
-	public void setMobileNumber(String mobileNumber) {
-		this.mobileNumber = mobileNumber;
+	public void setName(String name) {
+		this.name = name;
 	}
-	public String getFirstName() {
-		return firstName;
+	public Boolean getIsAppuser() {
+		return isAppuser;
 	}
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+	public void setIsAppuser(Boolean isAppuser) {
+		this.isAppuser = isAppuser;
 	}
-	public String getLastName() {
-		return lastName;
+	public String getUserRole() {
+		return userRole;
 	}
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
+	public void setUserRole(String userRole) {
+		this.userRole = userRole;
 	}
 }

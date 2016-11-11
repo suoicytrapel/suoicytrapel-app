@@ -11,6 +11,7 @@ import lepartycious.models.User;
 import lepartycious.services.EmailService;
 import lepartycious.services.SecurityUserDetailsService;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -29,6 +30,7 @@ import sun.misc.BASE64Encoder;
 public class SecurityUserDetailsServiceImpl implements SecurityUserDetailsService {
 
     private static final Logger LOGGER = Logger.getLogger(SecurityUserDetailsServiceImpl.class);
+    private static final String DEFAULT_PASSWORD = "Dummy";
 
     @Autowired
     private UserDAO userDAO;
@@ -67,7 +69,7 @@ public class SecurityUserDetailsServiceImpl implements SecurityUserDetailsServic
 
 	@Override
 	public void resetPassword(UserRequestDTO userDTO) throws Exception {
-		User user = userDAO.loadUserByUsername(userDTO.getUsername());
+		User user = userDAO.loadUserByUsername(userDTO.getEmail());
 		if(user != null){
 			String rawPassword = userDTO.getPassword();
 			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
@@ -83,15 +85,17 @@ public class SecurityUserDetailsServiceImpl implements SecurityUserDetailsServic
 
 	@Override
 	public void createUser(UserRequestDTO userDTO) {
+		String username = StringUtils.isEmpty(userDTO.getUsername()) ? userDTO.getEmail() : userDTO.getUsername();
 		User user = new User();
-		String rawPassword = userDTO.getPassword();
+		String rawPassword = userDTO.getIsAppuser() ? userDTO.getPassword() : DEFAULT_PASSWORD;
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-		user.setUsername(userDTO.getUsername().toUpperCase());
+		user.setUsername(username.toUpperCase());
 		user.setPasswordDigest(encoder.encode(rawPassword));
 		user.setEmail(userDTO.getEmail());
 		user.setAddedOn(new Date());
-		user.setFirstName(userDTO.getFirstName());
-		user.setLastName(userDTO.getLastName());
+		user.setName(userDTO.getName());
+		user.setIsAppUser(userDTO.getIsAppuser());
+		user.setUserRole(userDTO.getUserRole());
 		userDAO.saveOrUpdateUser(user);
 	}
 
@@ -110,7 +114,7 @@ public class SecurityUserDetailsServiceImpl implements SecurityUserDetailsServic
 		StringBuffer sbf = new StringBuffer();
 		BASE64Encoder encoder = new BASE64Encoder();
 		String resetToken = encoder.encode(user.getUsername().getBytes());
-		sbf.append("Hi" + user.getFirstName() +",\n\nWe have recieved a password reset request from your end.\n");
+		sbf.append("Hi" + user.getName() +",\n\nWe have recieved a password reset request from your end.\n");
 		sbf.append("Please click <a href=www.lepartycious.com/resetPasswprd?reset_token=" + resetToken +">Here</a> to go to the password reset page:-\n.");
 		sbf.append("\n\nCheers,\nLepartycious Team");
 		return sbf.toString();

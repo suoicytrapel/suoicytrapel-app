@@ -39,11 +39,14 @@ public class User implements UserDetails{
 	@Column(name = "added_on")
 	private Date addedOn;
 	
-	@Column(name = "firstname", nullable=false)
-	private String firstName;
-
-	@Column(name = "lastname", nullable=false)
-	private String lastName;
+	@Column(name = "user_role")
+	private String userRole;
+	
+	@Column(name = "name")
+	private String name;
+	
+	@Column(name = "is_app_user", nullable=false)
+	private Boolean isAppUser = Boolean.FALSE;
 
 	public long getUserId() {
 		return userId;
@@ -115,19 +118,28 @@ public class User implements UserDetails{
 		return true;
 	}
 
-	public String getFirstName() {
-		return firstName;
+	public String getName() {
+		return name;
 	}
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public String getLastName() {
-		return lastName;
+	public Boolean getIsAppUser() {
+		return isAppUser;
 	}
 
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
+	public void setIsAppUser(Boolean isAppUser) {
+		this.isAppUser = isAppUser;
 	}
+
+	public String getUserRole() {
+		return userRole;
+	}
+
+	public void setUserRole(String userRole) {
+		this.userRole = userRole;
+	}
+	
 }
