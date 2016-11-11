@@ -783,4 +783,16 @@
 		</sql>
 	</changeSet>
 	
+	<changeSet author="msingla" id="1.52">
+		<sql>
+			ALTER TABLE address MODIFY email VARCHAR(225);
+		</sql>
+	</changeSet>
+	
+	<changeSet author="msingla" id="1.53">
+		<sql>
+			ALTER TABLE amenities ALTER COLUMN is_detailed_amenity SET DEFAULT false;;
+		</sql>
+	</changeSet>
+	
 </databaseChangeLog>

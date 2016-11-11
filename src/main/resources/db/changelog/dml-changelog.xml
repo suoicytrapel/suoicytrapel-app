@@ -1126,4 +1126,162 @@
 	    </sql>
     </changeSet>
     
+    <changeSet author="msingla" id="1.65">
+	    <sql>
+	    	insert into filters (filter_type, filter_for_entity, filter_name, added_on) values ('TYPE', 'PHOTOGRAPHER', 'photography', now());
+			insert into filters (filter_type, filter_for_entity, filter_name, added_on) values ('TYPE', 'PHOTOGRAPHER', 'videography', now());
+			
+			update service set filter_data_name = 'floral' where service_for_entity = 'DECORATOR' and filter_data_name = 'Floral';
+			update service set filter_data_name = 'lighting' where service_for_entity = 'DECORATOR' and filter_data_name = 'Lighting';
+			insert into service (service_type, service_for_entity, tab_data_name, filter_data_name, is_filter, added_on) values ('SERVICE', 'DECORATOR', 'Tenting', 'tenting', true, now());
+			insert into service (service_type, service_for_entity, tab_data_name, filter_data_name, is_filter, added_on) values ('SERVICE', 'DECORATOR', 'Candles', 'candles', true, now());
+			insert into service (service_type, service_for_entity, tab_data_name, filter_data_name, is_filter, added_on) values ('SERVICE', 'DECORATOR', 'Balloons', 'balloons', true, now());
+			
+			update filters set filter_name = 'cab-services' where filter_for_entity = 'OTHERS' and filter_type = 'OTHERS' and filter_name = 'Cab Services';
+			update filters set filter_name = 'makeup-artist' where filter_for_entity = 'OTHERS' and filter_type = 'OTHERS' and filter_name = 'Tent House';
+			update filters set filter_name = 'invites' where filter_for_entity = 'OTHERS' and filter_type = 'OTHERS' and filter_name = 'Invites/Printing';
+			update filters set filter_name = 'ecoverage' where filter_for_entity = 'OTHERS' and filter_type = 'OTHERS' and filter_name = 'E-coverage';
+			update filters set filter_name = 'accessories' where filter_for_entity = 'OTHERS' and filter_type = 'OTHERS' and filter_name = 'Beauty Saloons';
+			update filters set filter_name = 'trousseau-packer' where filter_for_entity = 'OTHERS' and filter_type = 'OTHERS' and filter_name = 'Trousseau Packers';
+			update filters set filter_name = 'gift-shops' where filter_for_entity = 'OTHERS' and filter_type = 'OTHERS' and filter_name = 'Gift Shops';
+			update filters set filter_name = 'clothing' where filter_for_entity = 'OTHERS' and filter_type = 'OTHERS' and filter_name = 'Clothing';
+			update filters set filter_name = 'jewellery' where filter_for_entity = 'OTHERS' and filter_type = 'OTHERS' and filter_name = 'Jewelry';
+			update filters set filter_name = 'mehendi-artist' where filter_for_entity = 'OTHERS' and filter_type = 'OTHERS' and filter_name = 'Bakery';
+			
+			update filters set filter_name = 'dj' where filter_for_entity = 'ENTERTAINMENT' and filter_type = 'ENTERTAINMENT' and filter_name = 'DJ Services';
+			update filters set filter_name = 'dancers' where filter_for_entity = 'ENTERTAINMENT' and filter_type = 'ENTERTAINMENT' and filter_name = 'Dancers';
+			update filters set filter_name = 'singers' where filter_for_entity = 'ENTERTAINMENT' and filter_type = 'ENTERTAINMENT' and filter_name = 'Singers';
+			update filters set filter_name = 'musicians' where filter_for_entity = 'ENTERTAINMENT' and filter_type = 'ENTERTAINMENT' and filter_name = 'Musicians';
+			update filters set filter_name = 'choreographers' where filter_for_entity = 'ENTERTAINMENT' and filter_type = 'ENTERTAINMENT' and filter_name = 'Choreographer';
+			update filters set filter_name = 'anchors' where filter_for_entity = 'ENTERTAINMENT' and filter_type = 'ENTERTAINMENT' and filter_name = 'Anchor/Emcee/Host';
+			update filters set filter_name = 'fireworks' where filter_for_entity = 'ENTERTAINMENT' and filter_type = 'ENTERTAINMENT' and filter_name = 'Fireworks';
+			update filters set filter_name = 'other-acts' where filter_for_entity = 'ENTERTAINMENT' and filter_type = 'ENTERTAINMENT' and filter_name = 'Others';
+			
+			update filters set filter_name = 'hotels' where filter_for_entity = 'VENUE' and filter_type = 'ESTABLISHMENT' and filter_name = 'Hotel';
+			update filters set filter_name = 'restaurants' where filter_for_entity = 'VENUE' and filter_type = 'ESTABLISHMENT' and filter_name = 'Restaurant';
+			update filters set filter_name = 'marriage-palaces' where filter_for_entity = 'VENUE' and filter_type = 'ESTABLISHMENT' and filter_name = 'Palace';
+			update filters set filter_name = 'banquet-halls' where filter_for_entity = 'VENUE' and filter_type = 'ESTABLISHMENT' and filter_name = 'Banquet Hall';
+			update filters set filter_name = 'clubs' where filter_for_entity = 'VENUE' and filter_type = 'ESTABLISHMENT' and filter_name = 'Club/Lounge';
+			update filters set filter_name = 'others' where filter_for_entity = 'VENUE' and filter_type = 'ESTABLISHMENT' and filter_name = 'Others';
+			
+			update filters set filter_name = 'veg' where filter_for_entity = 'CATERER' and filter_type = 'TYPE' and filter_name = 'Pure Veg';
+			update filters set filter_name = 'non-veg' where filter_for_entity = 'CATERER' and filter_type = 'TYPE' and filter_name = 'Veg/Non-Veg';
+			update filters set filter_name = 'bartender' where filter_for_entity = 'CATERER' and filter_type = 'TYPE' and filter_name = 'Bartenders';
+	    </sql>
+    </changeSet>
+    
+    <changeSet author="msingla" id="1.66">
+	    <sql>
+		    delete from entity_filters where filter_id = (select id from filters where filter_type = 'OTHERS' and filter_for_entity = 'OTHERS' and filter_name = 'Cinematography');
+			delete from entity_filters where filter_id = (select id from filters where filter_type = 'OTHERS' and filter_for_entity = 'OTHERS' and filter_name = 'Honeymoon package/Travel agents');
+			delete from entity_filters where filter_id = (select id from filters where filter_type = 'ENTERTAINMENT' and filter_for_entity = 'ENTERTAINMENT' and filter_name = 'Band Services');
+	    	delete from filters where filter_type = 'ESTABLISHMENT' and filter_name = 'Marriage Gardens';
+			delete from filters where filter_type = 'OTHERS' and filter_name = 'Cinematography';
+			delete from filters where filter_type = 'OTHERS' and filter_name = 'Honeymoon package/Travel agents';
+			delete from filters where filter_type = 'ENTERTAINMENT' and filter_name = 'Band Services';
+	    </sql>
+    </changeSet>
+    
+    <changeSet author="msingla" id="1.67">
+	    <sql>
+		    insert into service (service_type, service_for_entity, tab_data_name, filter_data_name, is_filter, added_on) values ('SERVICE', 'VENUE', 'Open Sand Dine In', '', false, now());
+			insert into service (service_type, service_for_entity, tab_data_name, filter_data_name, is_filter, added_on) values ('SERVICE', 'VENUE', 'Camel Cart', '', false, now());
+			insert into service (service_type, service_for_entity, tab_data_name, filter_data_name, is_filter, added_on) values ('SERVICE', 'VENUE', 'Laundry', '', false, now());
+			insert into service (service_type, service_for_entity, tab_data_name, filter_data_name, is_filter, added_on) values ('SERVICE', 'VENUE', 'Bar', '', false, now());
+			insert into service (service_type, service_for_entity, tab_data_name, filter_data_name, is_filter, added_on) values ('SERVICE', 'VENUE', 'Medical', '', false, now());
+			insert into service (service_type, service_for_entity, tab_data_name, filter_data_name, is_filter, added_on) values ('SERVICE', 'VENUE', 'Room Service', '', false, now());
+			insert into service (service_type, service_for_entity, tab_data_name, filter_data_name, is_filter, added_on) values ('SERVICE', 'VENUE', 'Pool', '', false, now());
+			insert into service (service_type, service_for_entity, tab_data_name, filter_data_name, is_filter, added_on) values ('SERVICE', 'VENUE', 'Parking', '', false, now());
+			insert into filters (filter_type, filter_for_entity, filter_name, added_on) values ('ESTABLISHMENT', 'VENUE', 'Resort', now());
+			insert into locality (name, description, added_on, city_id) values ('Kanoi Sam Desert Road', 'Kanoi Sam Desert Road', now(), (select id from city where name = 'Bikaner'));
+			insert into room (room_type, description, room_dimensions, added_on) values ('COTTAGE', 'Cottage', '', now());
+			insert into room (room_type, description, room_dimensions, added_on) values ('SWISSTENT', 'Swiss Tent', '', now());
+			insert into amenities (amenity_type, description, is_indoor_amenity, amenity_dimensions, added_on, is_filter) values ('DESERTGRND', 'Desert Ground', false, '', now(), false);
+	    </sql>
+    </changeSet>
+    
+    <!-- Data:Venue:Raj Resort -->
+    
+     <changeSet author="msingla" id="1.68" context="dev, prod">
+	    <sql>
+			insert into venue (name, description, type, comments, rating, added_on, city_id, locality_id, priority) values ('Raj Resort', 'Raj Resort is a wild Deser Resort which is unique, calm, peaceful, natural and 5th largest desert.', 'RESORT', null, null, now(), (select id from city where name = 'Bikaner'), (select id from locality where name = 'Kanoi Sam Desert Road'), 120);
+			insert into address (address_line_1, address_line_2, city, state, pincode, primary_phone, secondary_phone, email, entity_id, version, added_on, latitude, longitude) values ('Raj Resort, 7 Milestone', 'Kanoi Sam Desert Road', 'Bikaner', 'Rajasthan', 334003, '+91-0151-2522651', '9214404100', 'www.raobikajigroups.com, www.raobikajicamelsafari.com', (select id from venue where name = 'Raj Resort'), 0, now(), '28.0229', '73.3119');
+			insert into entity_services (entity_id, service_id, min_service_cost, max_service_cost, version, added_on) values ((select id from venue where name = 'Raj Resort'), (select id from service where tab_data_name = 'Open Sand Dine In'), null, null, 0, now());
+			insert into entity_services (entity_id, service_id, min_service_cost, max_service_cost, version, added_on) values ((select id from venue where name = 'Raj Resort'), (select id from service where tab_data_name = 'Camel Cart'), null, null, 0, now());
+			insert into entity_services (entity_id, service_id, min_service_cost, max_service_cost, version, added_on) values ((select id from venue where name = 'Raj Resort'), (select id from service where tab_data_name = 'Dine In'), null, null, 0, now());
+			insert into entity_services (entity_id, service_id, min_service_cost, max_service_cost, version, added_on) values ((select id from venue where name = 'Raj Resort'), (select id from service where tab_data_name = 'Bar'), null, null, 0, now());
+			insert into entity_services (entity_id, service_id, min_service_cost, max_service_cost, version, added_on) values ((select id from venue where name = 'Raj Resort'), (select id from service where tab_data_name = 'Medical'), null, null, 0, now());
+			insert into entity_services (entity_id, service_id, min_service_cost, max_service_cost, version, added_on) values ((select id from venue where name = 'Raj Resort'), (select id from service where tab_data_name = 'Room Service'), null, null, 0, now());
+			insert into entity_services (entity_id, service_id, min_service_cost, max_service_cost, version, added_on) values ((select id from venue where name = 'Raj Resort'), (select id from service where tab_data_name = 'Laundry'), null, null, 0, now());
+			insert into entity_services (entity_id, service_id, min_service_cost, max_service_cost, version, added_on) values ((select id from venue where name = 'Raj Resort'), (select id from service where tab_data_name = 'Parking'), null, null, 0, now());
+			insert into venue_amenities (venue_id, amenities_id, min_amenity_cost, max_amenity_cost, version, added_on, max_accomodation_capacity, amenity_name) values ((select id from venue where name = 'Raj Resort'), (select id from amenities where amenity_type = 'DESERTGRND'), 140000, null, 0, now(), '10,000', '100 Bigha''s');
+			insert into entity_filters (entity_id, filter_id, version, added_on) values ((select id from venue where name = 'Raj Resort'), (select id from filters where filter_type = 'ESTABLISHMENT' and filter_for_entity = 'VENUE' and filter_name = 'Resort'), 0, now());
+		</sql>
+    </changeSet>
+    
+    <changeSet author="msingla" id="1.69">
+	    <sql>
+	    	update amenities set is_detailed_amenity = false where amenity_type = 'DESERTGRND';
+		</sql>
+    </changeSet>
+    
+    <changeSet author="msingla" id="1.5">
+	    <sql>
+	    	insert into room (room_type, description, room_dimensions, added_on) values ('PREMIUIMSUITE', 'Premium Suite', '15in X 15in X 15in', now());
+	    	insert into room (room_type, description, room_dimensions, added_on) values ('SUPERIORSUITE', 'Superior Suite', '15in X 15in X 15in', now());
+	    	insert into room (room_type, description, room_dimensions, added_on) values ('FAMILYSUITE', 'Family Suite', '15in X 15in X 15in', now());
+			delete from amenities where amenity_type='INHOUSECATERING';
+			delete from amenities where amenity_type='INHOUSEDECOR';
+			insert into service (service_type, service_for_entity, tab_data_name, filter_data_name, is_filter, added_on) values ('SERVICE', 'VENUE', 'Inhouse Decor', 'Inhouse Decor', false, now());
+			insert into service (service_type, service_for_entity, tab_data_name, filter_data_name, is_filter, added_on) values ('SERVICE', 'VENUE', 'Outhouse Decor Allowed', 'Outhouse Decor Allowed', false, now());
+			insert into service (service_type, service_for_entity, tab_data_name, filter_data_name, is_filter, added_on) values ('SERVICE', 'VENUE', 'Spa', 'Spa', false, now());
+
+	    </sql>
+    </changeSet>
+
+
+<changeSet author="msingla" id="1.68" context="dev, prod">
+	    <sql>
+			insert into venue (name, description, type, comments, rating, added_on, city_id, locality_id, priority, policies) values ('KC CROSS ROAD', 'A range of spacious banquet halls with state of the art meeting rooms that can cater up to 500 pax for conferences, seminars, weddings, theme parties and other social functions. Our 49 well appointed rooms are a live examples of these characteristics. With most of the rooms promising a panoramic view of the scenic Shivalik foothills, each room is a class in itself with most modern aminities and unparalleled service.', 'HOTEL', null, null, now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Panchkula'), 130,'25% at the times of booking,25% before one week,final payment at start of party,no refund');
+			insert into address (address_line_1, address_line_2, city, state, pincode, primary_phone, secondary_phone, email, entity_id, version, added_on, latitude, longitude) values ('SECTOR-10,OPP. Bus Stand', '', 'Panchkula', 'Chandigarh', 134109, '', '', '', (select id from venue where name = 'KC CROSS ROAD'), 0, now(), '30.7398', '76.7827');
+			insert into attachment (name, image_url, entity_id, version, added_on, attachment_type, help_text) values ('Image1.jpg', 'venues/chd_kccrossroad/kc_crossroad1.jpg', (select id from venue where name = 'KC CROSS ROAD'), 0, now(), 'COVER', 'Outer View');
+			insert into attachment (name, image_url, entity_id, version, added_on, attachment_type, help_text) values ('Image2.jpg', 'venues/chd_kccrossroad/kc_crossroad2.jpg', (select id from venue where name = 'KC CROSS ROAD'), 0, now(), 'GALLERY', 'Lobby Area1');
+			insert into attachment (name, image_url, entity_id, version, added_on, attachment_type, help_text) values ('Image3.jpg', 'venues/chd_kccrossroad/kc_crossroad3.jpg', (select id from venue where name = 'KC CROSS ROAD'), 0, now(), 'GALLERY', 'Lobby Area2');
+			insert into attachment (name, image_url, entity_id, version, added_on, attachment_type, help_text) values ('Image4.jpg', 'venues/chd_kccrossroad/kc_crossroad4.jpg', (select id from venue where name = 'KC CROSS ROAD'), 0, now(), 'GALLERY', 'Dining Area');
+			insert into attachment (name, image_url, entity_id, version, added_on, attachment_type, help_text) values ('Image5.jpg', 'venues/chd_kccrossroad/kc_crossroad5.jpg', (select id from venue where name = 'KC CROSS ROAD'), 0, now(), 'GALLERY', 'Banquet Hall1');
+			insert into attachment (name, image_url, entity_id, version, added_on, attachment_type, help_text) values ('Image6.jpg', 'venues/chd_kccrossroad/kc_crossroad6.jpg', (select id from venue where name = 'KC CROSS ROAD'), 0, now(), 'GALLERY', 'Banquet Hall2');
+			insert into attachment (name, image_url, entity_id, version, added_on, attachment_type, help_text) values ('Image7.jpg', 'venues/chd_kccrossroad/kc_crossroad7.jpg', (select id from venue where name = 'KC CROSS ROAD'), 0, now(), 'GALLERY', 'Bedroom1');
+			insert into attachment (name, image_url, entity_id, version, added_on, attachment_type, help_text) values ('Image8.jpg', 'venues/chd_kccrossroad/kc_crossroad8.jpg', (select id from venue where name = 'KC CROSS ROAD'), 0, now(), 'GALLERY', 'Bedroom2');
+			insert into attachment (name, image_url, entity_id, version, added_on, attachment_type, help_text) values ('Image9.jpg', 'venues/chd_kccrossroad/kc_crossroad9.jpg', (select id from venue where name = 'KC CROSS ROAD'), 0, now(), 'GALLERY', 'Bedroom3');
+			insert into venue_rooms (venue_id, room_id, min_cost, ac_availability,fridge_availability,locker_availability,led_availability,attached_bathroom_availability, version, added_on, hot_water_availability, number_of_rooms) values ((select id from venue where name = 'KC CROSS ROAD'), (select id from room where room_type = 'DELUXE'), 4500, true, true, true, true, true, 0, now(), true, 14);
+			insert into venue_rooms (venue_id, room_id, min_cost, ac_availability,fridge_availability,locker_availability,led_availability,attached_bathroom_availability, version, added_on, hot_water_availability, number_of_rooms) values ((select id from venue where name = 'KC CROSS ROAD'), (select id from room where room_type = 'SUPERDELUXE'), 5000, true, true, true, true, true, 0, now(), true, 16);
+			insert into venue_rooms (venue_id, room_id, min_cost, ac_availability,fridge_availability,locker_availability,led_availability,attached_bathroom_availability, version, added_on, hot_water_availability, number_of_rooms) values ((select id from venue where name = 'KC CROSS ROAD'), (select id from room where room_type = 'PREMIUIMSUITE'), 5000, true, true, true, true, true, 0, now(), true, 8);
+			insert into venue_rooms (venue_id, room_id, min_cost, ac_availability,fridge_availability,locker_availability,led_availability,attached_bathroom_availability, version, added_on, hot_water_availability, number_of_rooms) values ((select id from venue where name = 'KC CROSS ROAD'), (select id from room where room_type = 'SUPERIORSUITE'), 5500, true, true, true, true, true, 0, now(), true, 10);
+			insert into venue_rooms (venue_id, room_id, min_cost, ac_availability,fridge_availability,locker_availability,led_availability,attached_bathroom_availability, version, added_on, hot_water_availability, number_of_rooms) values ((select id from venue where name = 'KC CROSS ROAD'), (select id from room where room_type = 'FAMILYSUITE'), 8000, true, true, true, true, true, 0, now(), true, 1);
+			
+			insert into entity_services (entity_id, service_id, min_service_cost, max_service_cost, version, added_on) values ((select id from venue where name = 'KC CROSS ROAD'), (select id from service where tab_data_name = 'Dine In'), null, null, 0, now());
+			insert into entity_services (entity_id, service_id, min_service_cost, max_service_cost, version, added_on) values ((select id from venue where name = 'KC CROSS ROAD'), (select id from service where tab_data_name = 'Spa'), null, null, 0, now());
+			insert into entity_services (entity_id, service_id, min_service_cost, max_service_cost, version, added_on) values ((select id from venue where name = 'KC CROSS ROAD'), (select id from service where tab_data_name = 'Medical'), null, null, 0, now());
+			insert into entity_services (entity_id, service_id, min_service_cost, max_service_cost, version, added_on) values ((select id from venue where name = 'KC CROSS ROAD'), (select id from service where tab_data_name = 'Laundry'), null, null, 0, now());
+			insert into entity_services (entity_id, service_id, min_service_cost, max_service_cost, version, added_on) values ((select id from venue where name = 'KC CROSS ROAD'), (select id from service where tab_data_name = 'Parking'), null, null, 0, now());
+			insert into entity_services (entity_id, service_id, min_service_cost, max_service_cost, version, added_on) values ((select id from venue where name = 'KC CROSS ROAD'), (select id from service where tab_data_name = 'Room Service'), null, null, 0, now());
+			insert into entity_services (entity_id, service_id, min_service_cost, max_service_cost, version, added_on) values ((select id from venue where name = 'KC CROSS ROAD'), (select id from service where tab_data_name = 'High-speed Wi-Fi Internet'), null, null, 0, now());
+			insert into entity_services (entity_id, service_id, min_service_cost, max_service_cost, version, added_on) values ((select id from venue where name = 'KC CROSS ROAD'), (select id from service where tab_data_name = 'Inhouse DJ'), 5000, null, 0, now());
+			insert into entity_services (entity_id, service_id, min_service_cost, max_service_cost, version, added_on) values ((select id from venue where name = 'KC CROSS ROAD'), (select id from service where tab_data_name = 'Inhouse Catering'), null, null, 0, now());
+			insert into entity_services (entity_id, service_id, min_service_cost, max_service_cost, version, added_on) values ((select id from venue where name = 'KC CROSS ROAD'), (select id from service where tab_data_name = 'Outhouse alocohol Allowed'), null, null, 0, now());
+			insert into entity_services (entity_id, service_id, min_service_cost, max_service_cost, version, added_on) values ((select id from venue where name = 'KC CROSS ROAD'), (select id from service where tab_data_name = 'Inhouse Decor'), null, null, 0, now());
+			
+			insert into venue_amenities (venue_id, amenities_id, min_amenity_cost, max_amenity_cost, version, added_on, amenity_name,max_accomodation_capacity) values ((select id from venue where name = 'KC CROSS ROAD'), (select id from amenities where amenity_type = 'BNQTHALL'), 50000, 50000, 0, now(),'Down Town1','300');
+			insert into venue_amenities (venue_id, amenities_id, min_amenity_cost, max_amenity_cost, version, added_on, amenity_name,max_accomodation_capacity) values ((select id from venue where name = 'KC CROSS ROAD'), (select id from amenities where amenity_type = 'BNQTHALL'), 25000, 25000, 0, now(),'Down Town2','200');
+			insert into venue_amenities (venue_id, amenities_id, min_amenity_cost, max_amenity_cost, version, added_on, amenity_name,max_accomodation_capacity) values ((select id from venue where name = 'KC CROSS ROAD'), (select id from amenities where amenity_type = 'BNQTHALL'), 15000, 15000, 0, now(),'Down Town3','75');
+			insert into venue_amenities (venue_id, amenities_id, min_amenity_cost, max_amenity_cost, version, added_on, amenity_name,max_accomodation_capacity) values ((select id from venue where name = 'KC CROSS ROAD'), (select id from amenities where amenity_type = 'BNQTHALL'), 18000, 18000, 0, now(),'Down Town4','100');
+			insert into venue_amenities (venue_id, amenities_id, min_amenity_cost, max_amenity_cost, version, added_on, amenity_name,max_accomodation_capacity) values ((select id from venue where name = 'KC CROSS ROAD'), (select id from amenities where amenity_type = 'CONFERENCE'), null, null, 0, now(),'Down Town4','35');
+			insert into venue_amenities (venue_id, amenities_id, min_amenity_cost, max_amenity_cost, version, added_on, amenity_name,max_accomodation_capacity) values ((select id from venue where name = 'KC CROSS ROAD'), (select id from amenities where amenity_type = 'Gym'), null, null, 0, now(), null, null);
+			
+			insert into entity_filters (entity_id, filter_id, version, added_on) values ((select id from venue where name = 'KC CROSS ROAD'), (select id from filters where filter_type = 'ESTABLISHMENT' and filter_for_entity = 'VENUE' and filter_name = 'Hotel'), 0, now());
+			
+			
+		</sql>
+    </changeSet>
+    
 </databaseChangeLog>

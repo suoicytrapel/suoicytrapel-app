@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import lepartycious.Error.Error;
 import lepartycious.dtos.requestDTOs.SearchRequestDTO;
 import lepartycious.dtos.responseDTOs.AddedDTO;
+import lepartycious.dtos.responseDTOs.FilterResponseDTO;
 import lepartycious.services.CityService;
 import lepartycious.services.CommonService;
 
@@ -51,6 +52,11 @@ public class HomeSearchController {
 	@RequestMapping(method=RequestMethod.POST, value="/city/recentAdditions")
 	public Map<String, List<AddedDTO>> getRecentAdditions(@RequestBody Long cityId){
 		return commonService.getRecentAdditions(cityId);
+	}
+	
+	@RequestMapping(method=RequestMethod.GET, value="/subCategories")
+	public Map<String, List<FilterResponseDTO>> fetchSubCategories(){
+		return commonService.fetchSubCategories();
 	}
 	
 	@ExceptionHandler(IllegalArgumentException.class)

@@ -8,6 +8,7 @@ import lepartycious.dtos.requestDTOs.FilterRequestDTO;
 import lepartycious.dtos.requestDTOs.SearchRequestDTO;
 import lepartycious.dtos.responseDTOs.AddedDTO;
 import lepartycious.dtos.responseDTOs.DetailResponseDTO;
+import lepartycious.dtos.responseDTOs.FilterResponseDTO;
 import lepartycious.dtos.responseDTOs.FilterResponseWrapperDTO;
 import lepartycious.dtos.responseDTOs.SearchResponseDTO;
 import lepartycious.dtos.responseDTOs.SearchResponseDTOWrapper;
@@ -35,5 +36,7 @@ public interface CommonService {
 	public Map<String, String> pushDataToDatabase(String query);
 	
 	public List<Attachment> getDefaultImageList();
+
+	public Map<String, List<FilterResponseDTO>> fetchSubCategories();
 
 }

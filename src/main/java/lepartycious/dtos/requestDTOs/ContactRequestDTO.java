@@ -13,6 +13,8 @@ public class ContactRequestDTO implements Serializable{
 	private String vendorEmailAddress;
 	private String vendorType;
 	private String bookingDate;
+	private String occassion;
+	private String gathering;
 	
 	public String getName() {
 		return name;
@@ -61,5 +63,17 @@ public class ContactRequestDTO implements Serializable{
 	}
 	public void setBookingDate(String bookingDate) {
 		this.bookingDate = bookingDate;
+	}
+	public String getOccassion() {
+		return occassion;
+	}
+	public void setOccassion(String occassion) {
+		this.occassion = occassion;
+	}
+	public String getGathering() {
+		return gathering;
+	}
+	public void setGathering(String gathering) {
+		this.gathering = gathering;
 	}
 }
