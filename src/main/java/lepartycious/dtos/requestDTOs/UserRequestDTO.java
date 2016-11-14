@@ -9,7 +9,9 @@ public class UserRequestDTO implements Serializable{
 	private String email;
 	private String userRole;
 	private String name;
-	private Boolean isAppuser = Boolean.FALSE;
+	private Boolean isAppUser = Boolean.FALSE;
+	private String vendorType;
+	private String entityName;
 	
 	public String getUsername() {
 		return username;
@@ -35,16 +37,28 @@ public class UserRequestDTO implements Serializable{
 	public void setName(String name) {
 		this.name = name;
 	}
-	public Boolean getIsAppuser() {
-		return isAppuser;
+	public Boolean getIsAppUser() {
+		return isAppUser;
 	}
-	public void setIsAppuser(Boolean isAppuser) {
-		this.isAppuser = isAppuser;
+	public void setIsAppUser(Boolean isAppUser) {
+		this.isAppUser = isAppUser;
 	}
 	public String getUserRole() {
 		return userRole;
 	}
 	public void setUserRole(String userRole) {
 		this.userRole = userRole;
+	}
+	public String getVendorType() {
+		return vendorType;
+	}
+	public void setVendorType(String vendorType) {
+		this.vendorType = vendorType;
+	}
+	public String getEntityName() {
+		return entityName;
+	}
+	public void setEntityName(String entityName) {
+		this.entityName = entityName;
 	}
 }

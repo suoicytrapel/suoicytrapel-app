@@ -21,6 +21,7 @@ import lepartycious.models.Venue;
 
 import org.hibernate.Criteria;
 import org.hibernate.SQLQuery;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
@@ -155,5 +156,12 @@ public class CommonDAOImpl extends BaseDAOImpl implements CommonDAO{
 		criteria = createRecentAddedCriteria(criteria, cityId);
 		List<Others> rentalList = criteria.list();
 		return rentalList;
+	}
+	
+	@Override
+	public void createEntity(String entityType, String entityName){
+		Session session = sessionFactory.getCurrentSession();
+		//session.save();
+		
 	}
 }

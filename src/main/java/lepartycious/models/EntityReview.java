@@ -44,6 +44,9 @@ public class EntityReview implements Serializable{
 	
 	@Column(name = "star_rating")
 	private Float starRating;
+	
+	@Column(name = "review_money")
+	private String reviewMoney;
 
 	
 	public EntityReview() {
@@ -52,13 +55,14 @@ public class EntityReview implements Serializable{
 	}
 
 	public EntityReview(Long entityId, String ratedBy, String imageURL,
-			String reviewComment, Float starRating) {
+			String reviewComment, Float starRating, String reviewMoney) {
 		super();
 		this.entityId = entityId;
 		this.ratedBy = ratedBy;
 		this.imageURL = imageURL;
 		this.reviewComment = reviewComment;
 		this.starRating = starRating;
+		this.reviewMoney = reviewMoney;
 	}
 
 	public long getId() {
@@ -123,5 +127,13 @@ public class EntityReview implements Serializable{
 
 	public void setStarRating(Float starRating) {
 		this.starRating = starRating;
+	}
+
+	public String getReviewMoney() {
+		return reviewMoney;
+	}
+
+	public void setReviewMoney(String reviewMoney) {
+		this.reviewMoney = reviewMoney;
 	}
 }

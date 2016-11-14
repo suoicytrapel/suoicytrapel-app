@@ -9,6 +9,7 @@ public class ReviewCommentRequestDTO implements Serializable{
 	private String reviewComment;
 	private Float starRating;
 	private Long entityId;
+	private String reviewMoney;
 	
 	public ReviewCommentRequestDTO() {
 		super();
@@ -55,4 +56,12 @@ public class ReviewCommentRequestDTO implements Serializable{
 		this.entityId = entityId;
 	}
 
+	public String getReviewMoney() {
+		return reviewMoney;
+	}
+
+	public void setReviewMoney(String reviewMoney) {
+		this.reviewMoney = reviewMoney;
+	}
+	
 }

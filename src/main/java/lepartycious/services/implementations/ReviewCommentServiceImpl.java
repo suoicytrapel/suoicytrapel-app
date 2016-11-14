@@ -22,7 +22,7 @@ public class ReviewCommentServiceImpl implements ReviewCommentService {
 	public void submitReview(ReviewCommentRequestDTO reviewCommentRequestDTO) {
 		EntityReview entityReview = new EntityReview(reviewCommentRequestDTO.getEntityId(), 
 				reviewCommentRequestDTO.getReviewedBy(), reviewCommentRequestDTO.getUserImageURL(), 
-				reviewCommentRequestDTO.getReviewComment(), reviewCommentRequestDTO.getStarRating());
+				reviewCommentRequestDTO.getReviewComment(), reviewCommentRequestDTO.getStarRating(), reviewCommentRequestDTO.getReviewMoney());
 		reviewCommentDAO.submitReview(entityReview);
 	}
 
@@ -36,6 +36,7 @@ public class ReviewCommentServiceImpl implements ReviewCommentService {
 		for(EntityReview review : reviewCommentList){
 			ReviewCommentRequestDTO reviewCommentRequestDTO = new ReviewCommentRequestDTO(review.getRatedBy(), 
 					review.getImageURL(), review.getReviewComment(), review.getStarRating(), review.getEntityId());
+			reviewCommentRequestDTO.setReviewMoney(review.getReviewMoney());
 			reviewCommentRequestList.add(reviewCommentRequestDTO);
 		}
 		reviewCommentWrapperDTO.setAveragetRating(averagetRating);

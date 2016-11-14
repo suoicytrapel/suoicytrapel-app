@@ -15,6 +15,32 @@
 			CREATE SEQUENCE hibernate_sequence START 1;
 		</sql>
 	</changeSet> -->
+	
+	<changeSet author="msingla" id="1.0"> 
+		<preConditions onFail="MARK_RAN"> 
+			<not> 
+				<tableExists tableName="user" /> 
+			</not> 
+		</preConditions> 
+		<sql> 
+			CREATE TABLE user ( 
+			id bigint PRIMARY KEY AUTO_INCREMENT, 
+			username varchar (250) NOT NULL, 
+			password varchar (2500), 
+			email varchar (2000),
+			name varchar (2000),
+			user_role varchar (20),
+			is_app_user boolean default false,
+			added_on timestamp NOT NULL DEFAULT now() 
+			); 
+		</sql> 
+	</changeSet>
+	
+	<changeSet author="msingla" id="1.0.1">
+		<sql>
+			ALTER TABLE user AUTO_INCREMENT = 1000000;
+		</sql>
+	</changeSet>
 
 	<changeSet author="msingla" id="1.1"> 
 		<preConditions onFail="MARK_RAN"> 
@@ -86,7 +112,8 @@
 			city_id bigint,
 			FOREIGN KEY (city_id) REFERENCES city (id),
 			locality_id bigint,
-			FOREIGN KEY (locality_id) REFERENCES locality (id)
+			FOREIGN KEY (locality_id) REFERENCES locality (id),
+			created_by bigint
 			);
 		</sql>
 	</changeSet>
@@ -108,7 +135,8 @@
 			city_id bigint,
 			FOREIGN KEY (city_id) REFERENCES city (id),
 			locality_id bigint,
-			FOREIGN KEY (locality_id) REFERENCES locality (id)
+			FOREIGN KEY (locality_id) REFERENCES locality (id),
+			created_by bigint
 			);
 		</sql>
 	</changeSet>
@@ -129,7 +157,8 @@
 			city_id bigint,
 			FOREIGN KEY (city_id) REFERENCES city (id),
 			locality_id bigint,
-			FOREIGN KEY (locality_id) REFERENCES locality (id)
+			FOREIGN KEY (locality_id) REFERENCES locality (id),
+			created_by bigint
 			);
 		</sql>
 	</changeSet>
@@ -150,7 +179,8 @@
 			city_id bigint,
 			FOREIGN KEY (city_id) REFERENCES city (id),
 			locality_id bigint,
-			FOREIGN KEY (locality_id) REFERENCES locality (id)
+			FOREIGN KEY (locality_id) REFERENCES locality (id),
+			created_by bigint
 			);
 		</sql>
 	</changeSet>
@@ -173,7 +203,8 @@
 			city_id bigint,
 			FOREIGN KEY (city_id) REFERENCES city (id),
 			locality_id bigint,
-			FOREIGN KEY (locality_id) REFERENCES locality (id)
+			FOREIGN KEY (locality_id) REFERENCES locality (id),
+			created_by bigint
 			);
 		</sql>
 	</changeSet>
@@ -197,7 +228,8 @@
 			priority bigint,
 			FOREIGN KEY (city_id) REFERENCES city (id),
 			locality_id bigint,
-			FOREIGN KEY (locality_id) REFERENCES locality (id)
+			FOREIGN KEY (locality_id) REFERENCES locality (id),
+			created_by bigint
 			);
 		</sql>
 	</changeSet>
@@ -757,33 +789,9 @@
 		</sql>
 	</changeSet>
 	
+	
+	
 	<changeSet author="msingla" id="1.54"> 
-		<preConditions onFail="MARK_RAN"> 
-			<not> 
-				<tableExists tableName="user" /> 
-			</not> 
-		</preConditions> 
-		<sql> 
-			CREATE TABLE user ( 
-			id bigint PRIMARY KEY AUTO_INCREMENT, 
-			username varchar (250) NOT NULL, 
-			password varchar (2500), 
-			email varchar (2000),
-			name varchar (2000),
-			user_role varchar (20),
-			is_app_user boolean default false,
-			added_on timestamp NOT NULL DEFAULT now() 
-			); 
-		</sql> 
-	</changeSet>
-	
-	<changeSet author="msingla" id="1.55">
-		<sql>
-			ALTER TABLE user AUTO_INCREMENT = 1000000;
-		</sql>
-	</changeSet>
-	
-	<changeSet author="msingla" id="1.56"> 
 		<preConditions onFail="MARK_RAN"> 
 			<not> 
 				<tableExists tableName="entity_review" /> 
@@ -798,12 +806,13 @@
 			user_image_url varchar (5000),
 			entity_id bigint,
 			is_deleted boolean default false,
-			reviewed_on timestamp NOT NULL DEFAULT now() 
+			reviewed_on timestamp NOT NULL DEFAULT now(),
+			review_money varchar(50) 
 			); 
 		</sql> 
 	</changeSet>
 	
-	<changeSet author="msingla" id="1.57">
+	<changeSet author="msingla" id="1.55">
 		<sql>
 			ALTER TABLE entity_review AUTO_INCREMENT = 4000000;
 		</sql>

@@ -8,6 +8,12 @@
          
     <!-- Create City Specific Data -->
          
+	<changeSet author="msingla" id="1.0">
+	    <sql>
+	    	insert into user (username, password, email, name, user_role, is_app_user, added_on) values ('LEPARTYCIOUS@GMAIL.COM', 'Chandigarh', 'lepartycious@gmail.com','Admin','ADMIN',true,now());
+	    </sql>
+    </changeSet>
+	
 	<changeSet author="msingla" id="1.1">
 	    <sql>
 	    	insert into city (name, state, added_on) values ('Chandigarh', 'Chandigarh', now());
@@ -182,7 +188,7 @@
     
     <changeSet author="msingla" id="1.7">
 	    <sql>
-	    	insert into venue (name, description, type, comments, rating, added_on, city_id, locality_id, priority) values ('Brooklyn Central', 'Brooklyn Central', 'RESTAURANT', null, null, now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Chandigarh'), 100);
+	    	insert into venue (name, description, type, added_on, city_id, locality_id, priority) values ('Brooklyn Central', 'Brooklyn Central', 'RESTAURANT', now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Chandigarh'), 100);
 	    	insert into address (address_line_1, address_line_2, city, state, pincode, primary_phone, secondary_phone, email, entity_id, version, added_on, latitude, longitude) values ('Courtyard, Elante Mall, Chandigarh Industrial Area (Phase 1)', 'Chandigarh Industrial Area', 'Chandigarh', 'Chandigarh', 160101, '+91-0172-2254375', '+91-9876543219', 'venue@gmail.com', (select id from venue where name = 'Brooklyn Central'), 0, now(), '30.7398', '76.7827');
 	    	insert into attachment (name, image_url, entity_id, version, added_on, attachment_type, help_text) values ('BrooklynCentral.jpg', 'venues/chd_brooklyncentral/bc1.jpg', (select id from venue where name = 'Brooklyn Central'), 0, now(), 'COVER', 'Brooklyn Central Image');
 	    	insert into attachment (name, image_url, entity_id, version, added_on, attachment_type, help_text) values ('BrooklynCentral.jpg', 'venues/chd_brooklyncentral/bc2.jpg', (select id from venue where name = 'Brooklyn Central'), 0, now(), 'GALLERY', 'Pool Side Seating');
@@ -201,7 +207,7 @@
     
      <changeSet author="msingla" id="1.8">
 	    <sql>
-	    	insert into venue (name, description, type, comments, rating, added_on, city_id, locality_id, priority) values ('Lallgarh', 'Lallgarh', 'HOTEL', null, null, now(), (select id from city where name = 'Bikaner'), (select id from locality where name = 'Jaisalmer Road'), 110);
+	    	insert into venue (name, description, type, added_on, city_id, locality_id, priority) values ('Lallgarh', 'Lallgarh', 'HOTEL', now(), (select id from city where name = 'Bikaner'), (select id from locality where name = 'Jaisalmer Road'), 110);
 	    	insert into address (address_line_1, address_line_2, city, state, pincode, primary_phone, secondary_phone, email, entity_id, version, added_on, latitude, longitude) values ('Lallgarh', null, 'Bikaner', 'Rajasthan', 160101, '+91-0172-2254375', '+91-9876543219', 'venue@gmail.com', (select id from venue where name = 'Lallgarh'), 0, now(), '28.0167', '73.3119');
 	    	insert into attachment (name, image_url, entity_id, version, added_on, attachment_type, help_text) values ('TheBrewEstate.jpg', 'venues/bikaner_lallgarh/lg1.jpg', (select id from venue where name = 'Lallgarh'), 0, now(), 'COVER', 'Lallgarh Palace Outer View');
 	    	insert into attachment (name, image_url, entity_id, version, added_on, attachment_type, help_text) values ('TheBrewEstate.jpg', 'venues/bikaner_lallgarh/lg2.jpg', (select id from venue where name = 'Lallgarh'), 0, now(), 'GALLERY', 'Lallgarh Palace Corridor');
@@ -228,7 +234,7 @@
     
     <changeSet author="msingla" id="1.9">
 	    <sql>
-			insert into venue (name, description, type, comments, rating, added_on, city_id, locality_id, priority) values ('JW Marriott', 'Treat yourself to five-star luxury at the JW Marriott Hotel Chandigarh. Located in Sector 17, our hotel is in the center of the city''s vibrant business district, offering convenient accessibility to an array of historic attractions and sites. Upon stepping into our top-rated hotel, guests will be immersed in the ultimate in luxury', 'HOTEL', null, null, now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Chandigarh'), 120);
+			insert into venue (name, description, type, added_on, city_id, locality_id, priority) values ('JW Marriott', 'Treat yourself to five-star luxury at the JW Marriott Hotel Chandigarh. Located in Sector 17, our hotel is in the center of the city''s vibrant business district, offering convenient accessibility to an array of historic attractions and sites. Upon stepping into our top-rated hotel, guests will be immersed in the ultimate in luxury', 'HOTEL', now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Chandigarh'), 120);
 			insert into address (address_line_1, address_line_2, city, state, pincode, primary_phone, secondary_phone, email, entity_id, version, added_on, latitude, longitude) values ('JW Marriott Hotel Chandigarh', 'Plot no: 6, Sector 35-B, Dakshin Marg', 'Chandigarh', 'Chandigarh', 160035, '+91-172-3955555', '1-800-102-5000', null, (select id from venue where name = 'JW Marriott'), 0, now(), '30.7398', '76.7827');
 			insert into attachment (name, image_url, entity_id, version, added_on, attachment_type, help_text) values ('JWMarriottCover.jpg', 'venues/chd_jwmarriot/jwm1.jpg', (select id from venue where name = 'JW Marriott'), 0, now(), 'COVER', 'Outer View');
 			insert into attachment (name, image_url, entity_id, version, added_on, attachment_type, help_text) values ('JWMarriottGuestRoom.jpg', 'venues/chd_jwmarriot/jwm2.jpg', (select id from venue where name = 'JW Marriott'), 0, now(), 'GALLERY', 'Guest Room');
@@ -259,7 +265,7 @@
     
     <changeSet author="msingla" id="1.10">
 	    <sql>
-	    	insert into caterer (name, description, comments, rating, version, cuisine_offered, added_on, city_id, locality_id, priority) values ('Gopal''s', 'Treat yourself to the taste at the Gopal''s. Located in Sector9, our chain is in the center of the city''s vibrant business district, offering convenient accessibility to an array of historic attractions and sites. Upon stepping into our top-rated hotel, guests will be immersed in the ultimate in luxury', null, null, 0, 'North Indian, South Indian, Continental, Chinese, Mexican', now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Panchkula'), 10);
+	    	insert into caterer (name, description, version, cuisine_offered, added_on, city_id, locality_id, priority) values ('Gopal''s', 'Treat yourself to the taste at the Gopal''s. Located in Sector9, our chain is in the center of the city''s vibrant business district, offering convenient accessibility to an array of historic attractions and sites. Upon stepping into our top-rated hotel, guests will be immersed in the ultimate in luxury', 0, 'North Indian, South Indian, Continental, Chinese, Mexican', now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Panchkula'), 10);
 			insert into address (address_line_1, address_line_2, city, state, pincode, primary_phone, secondary_phone, email, entity_id, version, added_on, latitude, longitude) values ('Gopal''s', 'Sector 9', 'Panchkula', 'Chandigarh', 160035, '+91-172-3955555', '1-800-102-5000', null, (select id from caterer where name = 'Gopal''s'), 0, now(), '30.7398', '76.7827');
 			insert into attachment (name, image_url, entity_id, version, added_on, attachment_type, help_text) values ('GopalCover.jpg', '/caterers/chd_gopals/g1.jpg', (select id from caterer where name = 'Gopal''s'), 0, now(), 'COVER', 'Outer View');
 			insert into attachment (name, image_url, entity_id, version, added_on, attachment_type, help_text) values ('GopalChat.jpg', '/caterers/chd_gopals/g2.jpg', (select id from caterer where name = 'Gopal''s'), 0, now(), 'GALLERY', 'Raj Kachori Chat');
@@ -277,7 +283,7 @@
     
      <changeSet author="msingla" id="1.11">
 	     <sql>
-	    	insert into caterer (name, description, comments, rating, version, cuisine_offered, added_on, city_id, locality_id, priority) values ('Vijay Vargiya', 'Treat yourself to the taste at the Vijay Vargiya. Located on Delhi Road, our chain is in the center of the city''s vibrant business district, offering convenient accessibility to an array of historic attractions and sites. Upon stepping into our top-rated hotel, guests will be immersed in the ultimate in luxury', null, null, 0, 'North Indian, South Indian, Continental, Chinese, Mexican', now(), (select id from city where name = 'Bikaner'), (select id from locality where name = 'Delhi Road'), 10);
+	    	insert into caterer (name, description, version, cuisine_offered, added_on, city_id, locality_id, priority) values ('Vijay Vargiya', 'Treat yourself to the taste at the Vijay Vargiya. Located on Delhi Road, our chain is in the center of the city''s vibrant business district, offering convenient accessibility to an array of historic attractions and sites. Upon stepping into our top-rated hotel, guests will be immersed in the ultimate in luxury', 0, 'North Indian, South Indian, Continental, Chinese, Mexican', now(), (select id from city where name = 'Bikaner'), (select id from locality where name = 'Delhi Road'), 10);
 			insert into address (address_line_1, address_line_2, city, state, pincode, primary_phone, secondary_phone, email, entity_id, version, added_on, latitude, longitude) values ('Vijay Vargiya', 'Delhi Road', 'Delhi Road', 'Bikaner', 160035, '+91-172-3955555', '1-800-102-5000', null, (select id from caterer where name = 'Vijay Vargiya'), 0, now(), '30.7398', '76.7827');
 			insert into attachment (name, image_url, entity_id, version, added_on, attachment_type, help_text) values ('GopalCover.jpg', '/caterers/bikaner_vijayvargiya/vv1.jpg', (select id from caterer where name = 'Vijay Vargiya'), 0, now(), 'COVER', 'Fruit Stall');
 			insert into attachment (name, image_url, entity_id, version, added_on, attachment_type, help_text) values ('GopalChat.jpg', '/caterers/bikaner_vijayvargiya/vv2.jpg', (select id from caterer where name = 'Vijay Vargiya'), 0, now(), 'GALLERY', 'Main Course Stall');
@@ -296,7 +302,7 @@
     <changeSet author="msingla" id="1.12">
 	    <sql>
 	    	
-			insert into miscellaneous (name, description, addition_details, comments, rating, version, miscellaneous_type, added_on, city_id, locality_id, priority) values ('Mega Cabs', 'We provide Cab services in tricity. Book Cabs from mega cabs to go anytime, anywhere.', null, null, null, 0, 'CAB', now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Chandigarh'), 10);	
+			insert into miscellaneous (name, description, addition_details, version, miscellaneous_type, added_on, city_id, locality_id, priority) values ('Mega Cabs', 'We provide Cab services in tricity. Book Cabs from mega cabs to go anytime, anywhere.', null, 0, 'CAB', now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Chandigarh'), 10);	
 			insert into address (address_line_1, address_line_2, city, state, pincode, primary_phone, secondary_phone, email, entity_id, version, added_on, latitude, longitude) values ('Mega Cabs', 'Sector 9', 'Panchkula', 'Chandigarh', 160035, '+91-172-3955555', '1-800-102-5000', null, (select id from miscellaneous where name = 'Mega Cabs'), 0, now(), '30.7398', '76.7827');
 			insert into attachment (name, image_url, entity_id, version, added_on, attachment_type, help_text) values ('GopalCover.jpg', 'miscellaneous/chd_cab_megacabs/mc1.jpg', (select id from miscellaneous where name = 'Mega Cabs'), 0, now(), 'COVER', 'Sedan');
 			insert into attachment (name, image_url, entity_id, version, added_on, attachment_type, help_text) values ('GopalChat.jpg', 'miscellaneous/chd_cab_megacabs/mc2.jpg', (select id from miscellaneous where name = 'Mega Cabs'), 0, now(), 'GALLERY', 'SUV');
@@ -308,7 +314,7 @@
 			insert into entity_services (entity_id, service_id, min_service_cost, max_service_cost, version, added_on) values ((select id from miscellaneous where name = 'Mega Cabs'), (select id from service where tab_data_name = 'Bus Service'), 5000, 20000, 0, now());
 			insert into entity_filters (entity_id, filter_id, version, added_on) values ((select id from miscellaneous where name = 'Mega Cabs'), (select id from filters where filter_type = 'OTHERS' and filter_for_entity = 'OTHERS' and filter_name = 'Cab Services'), 0, now());
 			
-			insert into miscellaneous (name, description, addition_details, comments, rating, version, miscellaneous_type, added_on, city_id, locality_id, priority) values ('Abhay', 'We provide Cab services in Bikaner. Book Cabs from Abhay to go anytime, anywhere.', null, null, null, 0, 'CAB', now(), (select id from city where name = 'Bikaner'), (select id from locality where name = 'Pawan Puri'), 10);	
+			insert into miscellaneous (name, description, addition_details, version, miscellaneous_type, added_on, city_id, locality_id, priority) values ('Abhay', 'We provide Cab services in Bikaner. Book Cabs from Abhay to go anytime, anywhere.', null, 0, 'CAB', now(), (select id from city where name = 'Bikaner'), (select id from locality where name = 'Pawan Puri'), 10);	
 			insert into address (address_line_1, address_line_2, city, state, pincode, primary_phone, secondary_phone, email, entity_id, version, added_on, latitude, longitude) values ('Abhay', 'Opposite Bus stand', 'Pawan Puri', 'Bikaner', 160035, '+91-172-3955555', '1-800-102-5000', null, (select id from miscellaneous where name = 'Abhay'), 0, now(), '28.0167', '73.3119');
 			insert into attachment (name, image_url, entity_id, version, added_on, attachment_type, help_text) values ('GopalCover.jpg', 'miscellaneous/bikaner_cab_abhay/a1.jpg', (select id from miscellaneous where name = 'Abhay'), 0, now(), 'COVER', 'Marriage Car');
 			insert into attachment (name, image_url, entity_id, version, added_on, attachment_type, help_text) values ('GopalChat.jpg', 'miscellaneous/bikaner_cab_abhay/a2.jpg', (select id from miscellaneous where name = 'Abhay'), 0, now(), 'GALLERY', 'Hatchback');
@@ -320,7 +326,7 @@
 			insert into entity_services (entity_id, service_id, min_service_cost, max_service_cost, version, added_on) values ((select id from miscellaneous where name = 'Abhay'), (select id from service where tab_data_name = 'Bus Service'), 5000, 20000, 0, now());
 			insert into entity_filters (entity_id, filter_id, version, added_on) values ((select id from miscellaneous where name = 'Abhay'), (select id from filters where filter_type = 'OTHERS' and filter_for_entity = 'OTHERS' and filter_name = 'Cab Services'), 0, now());
 			
-			insert into miscellaneous (name, description, addition_details, comments, rating, version, miscellaneous_type, added_on, city_id, locality_id, priority) values ('Sachdeva Tent House', 'We provide Tent services in tricity. Book Tents anytime, anywhere.', null, null, null, 0, 'TENT', now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Chandigarh'), 10);	
+			insert into miscellaneous (name, description, addition_details, version, miscellaneous_type, added_on, city_id, locality_id, priority) values ('Sachdeva Tent House', 'We provide Tent services in tricity. Book Tents anytime, anywhere.', null, 0, 'TENT', now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Chandigarh'), 10);	
 			insert into address (address_line_1, address_line_2, city, state, pincode, primary_phone, secondary_phone, email, entity_id, version, added_on, latitude, longitude) values ('Sachdeva Tent House', 'Sector 9', 'Panchkula', 'Chandigarh', 160035, '+91-172-3955555', '1-800-102-5000', null, (select id from miscellaneous where name = 'Sachdeva Tent House'), 0, now(), '30.7398', '76.7827');
 			insert into attachment (name, image_url, entity_id, version, added_on, attachment_type, help_text) values ('GopalCover.jpg', 'miscellaneous/chd_tent_sachdeva/s1.jpg', (select id from miscellaneous where name = 'Sachdeva Tent House'), 0, now(), 'COVER', 'Stage');
 			insert into attachment (name, image_url, entity_id, version, added_on, attachment_type, help_text) values ('GopalChat.jpg', 'miscellaneous/chd_tent_sachdeva/s2.jpg', (select id from miscellaneous where name = 'Sachdeva Tent House'), 0, now(), 'GALLERY', 'Sitting Area 1');
@@ -331,7 +337,7 @@
 			insert into entity_services (entity_id, service_id, min_service_cost, max_service_cost, version, added_on) values ((select id from miscellaneous where name = 'Sachdeva Tent House'), (select id from service where tab_data_name = 'Bedding'), 500, 1000, 0, now());
 			insert into entity_filters (entity_id, filter_id, version, added_on) values ((select id from miscellaneous where name = 'Sachdeva Tent House'), (select id from filters where filter_type = 'OTHERS' and filter_for_entity = 'OTHERS' and filter_name = 'Tent House'), 0, now());
 			
-			insert into miscellaneous (name, description, addition_details, comments, rating, version, miscellaneous_type, added_on, city_id, locality_id, priority) values ('Shivam Tent House', 'We provide Tent services in Bikaner. Book Tents anytime, anywhere.', null, null, null, 0, 'TENT', now(), (select id from city where name = 'Bikaner'), (select id from locality where name = 'Delhi Road'), 10);	
+			insert into miscellaneous (name, description, addition_details, version, miscellaneous_type, added_on, city_id, locality_id, priority) values ('Shivam Tent House', 'We provide Tent services in Bikaner. Book Tents anytime, anywhere.', null, 0, 'TENT', now(), (select id from city where name = 'Bikaner'), (select id from locality where name = 'Delhi Road'), 10);	
 			insert into address (address_line_1, address_line_2, city, state, pincode, primary_phone, secondary_phone, email, entity_id, version, added_on, latitude, longitude) values ('Shivam Tent House', 'Delhi Road', 'Bikaner', 'Rajasthan', 160035, '+91-172-3955555', '1-800-102-5000', null, (select id from miscellaneous where name = 'Shivam Tent House'), 0, now(), '28.0167', '73.3119');
 			insert into attachment (name, image_url, entity_id, version, added_on, attachment_type, help_text) values ('GopalCover.jpg', 'miscellaneous/bikaner_tent_shivam/s1.jpg', (select id from miscellaneous where name = 'Shivam Tent House'), 0, now(), 'COVER', 'Mandap Tent');
 			insert into attachment (name, image_url, entity_id, version, added_on, attachment_type, help_text) values ('GopalChat.jpg', 'miscellaneous/bikaner_tent_shivam/s2.jpg', (select id from miscellaneous where name = 'Shivam Tent House'), 0, now(), 'GALLERY', 'Sitting Area Tent');
@@ -341,7 +347,7 @@
 			insert into entity_services (entity_id, service_id, min_service_cost, max_service_cost, version, added_on) values ((select id from miscellaneous where name = 'Shivam Tent House'), (select id from service where tab_data_name = 'Bedding'), 500, 1000, 0, now());
 			insert into entity_filters (entity_id, filter_id, version, added_on) values ((select id from miscellaneous where name = 'Shivam Tent House'), (select id from filters where filter_type = 'OTHERS' and filter_for_entity = 'OTHERS' and filter_name = 'Tent House'), 0, now());
 			
-			insert into entertainment (name, description, addition_details, comments, rating, version, entertainment_type, added_on, city_id, locality_id, priority) values ('Maharaja', 'We provide Band services in tricity. Book bands anytime, anywhere.', null, null, null, 0, 'BAND', now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Chandigarh'), 10);	
+			insert into entertainment (name, description, addition_details, version, entertainment_type, added_on, city_id, locality_id, priority) values ('Maharaja', 'We provide Band services in tricity. Book bands anytime, anywhere.', null, 0, 'BAND', now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Chandigarh'), 10);	
 			insert into address (address_line_1, address_line_2, city, state, pincode, primary_phone, secondary_phone, email, entity_id, version, added_on, latitude, longitude) values ('Maharaja', 'Sector 9', 'Panchkula', 'Chandigarh', 160035, '+91-172-3955555', '1-800-102-5000', null, (select id from entertainment where name = 'Maharaja'), 0, now(), '30.7398', '76.7827');
 			insert into attachment (name, image_url, entity_id, version, added_on, attachment_type, help_text) values ('GopalCover.jpg', 'entertainment/chd_band_maharaja/m1.jpg', (select id from entertainment where name = 'Maharaja'), 0, now(), 'COVER', 'Cover Image');
 			insert into attachment (name, image_url, entity_id, version, added_on, attachment_type, help_text) values ('GopalChat.jpg', 'entertainment/chd_band_maharaja/m2.jpg', (select id from entertainment where name = 'Maharaja'), 0, now(), 'GALLERY', 'Baghi');
@@ -357,7 +363,7 @@
 			insert into entity_services (entity_id, service_id, min_service_cost, max_service_cost, version, added_on) values ((select id from entertainment where name = 'Maharaja'), (select id from service where tab_data_name = 'Rath'), 5000, 20000, 0, now());
 			insert into entity_filters (entity_id, filter_id, version, added_on) values ((select id from entertainment where name = 'Maharaja'), (select id from filters where filter_type = 'ENTERTAINMENT' and filter_for_entity = 'ENTERTAINMENT' and filter_name = 'Band Services'), 0, now());
 			
-			insert into entertainment (name, description, addition_details, comments, rating, version, entertainment_type, added_on, city_id, locality_id, priority) values ('Hari', 'We provide Band services in Bikaner. Book bands anytime, anywhere.', null, null, null, 0, 'BAND', now(), (select id from city where name = 'Bikaner'), (select id from locality where name = 'Jaisalmer Road'), 10);	
+			insert into entertainment (name, description, addition_details, version, entertainment_type, added_on, city_id, locality_id, priority) values ('Hari', 'We provide Band services in Bikaner. Book bands anytime, anywhere.', null, 0, 'BAND', now(), (select id from city where name = 'Bikaner'), (select id from locality where name = 'Jaisalmer Road'), 10);	
 			insert into address (address_line_1, address_line_2, city, state, pincode, primary_phone, secondary_phone, email, entity_id, version, added_on, latitude, longitude) values ('Hari', 'Jaisalmer Road', 'Bikaner', 'Rajasthan', 160035, '+91-172-3955555', '1-800-102-5000', null, (select id from entertainment where name = 'Hari'), 0, now(), '28.0167', '73.3119');
 			insert into attachment (name, image_url, entity_id, version, added_on, attachment_type, help_text) values ('GopalCover.jpg', 'entertainment/bikaner_band_hari/h1.jpg', (select id from entertainment where name = 'Hari'), 0, now(), 'COVER', 'Cover Image');
 			insert into attachment (name, image_url, entity_id, version, added_on, attachment_type, help_text) values ('GopalChat.jpg', 'entertainment/bikaner_band_hari/h2.jpg', (select id from entertainment where name = 'Hari'), 0, now(), 'GALLERY', 'Baghi');
@@ -375,7 +381,7 @@
 			insert into entity_filters (entity_id, filter_id, version, added_on) values ((select id from entertainment where name = 'Hari'), (select id from filters where filter_type = 'ENTERTAINMENT' and filter_for_entity = 'ENTERTAINMENT' and filter_name = 'Band Services'), 0, now());
 			
 			
-			<!-- insert into entertainment (name, description, addition_details, comments, rating, version, entertainment_type, added_on, city_id, locality_id, priority) values ('Rock n Roll DJ', 'We provide DJ services in tricity. Book DJs anytime, anywhere.', null, null, null, 0, 'DJ', now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Chandigarh'), 10);	
+			<!-- insert into entertainment (name, description, addition_details, version, entertainment_type, added_on, city_id, locality_id, priority) values ('Rock n Roll DJ', 'We provide DJ services in tricity. Book DJs anytime, anywhere.', null, 0, 'DJ', now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Chandigarh'), 10);	
 			insert into address (address_line_1, address_line_2, city, state, pincode, primary_phone, secondary_phone, email, entity_id, version, added_on, latitude, longitude) values ('Rock n Roll DJ', 'Sector 9', 'Panchkula', 'Chandigarh', 160035, '+91-172-3955555', '1-800-102-5000', null, (select id from entertainment where name = 'Rock n Roll DJ'), 0, now(), '30.7398', '76.7827');
 			insert into attachment (name, image_url, entity_id, version, added_on, attachment_type, help_text) values ('GopalCover.jpg', 'gopal_cover.jpg', (select id from entertainment where name = 'Rock n Roll DJ'), 0, now(), 'COVER', 'Outer View');
 			insert into attachment (name, image_url, entity_id, version, added_on, attachment_type, help_text) values ('GopalChat.jpg', 'gopal_chat.jpg', (select id from entertainment where name = 'Rock n Roll DJ'), 0, now(), 'GALLERY', 'Raj Kachori Chat');
@@ -394,7 +400,7 @@
     
     <changeSet author="msingla" id="1.13">
 	   	<sql>	
-	    	insert into photographer (name, description, comments, rating, version, added_on, city_id, locality_id, priority) values ('Abhishek', 'We provide photo and videography servces in tricity', null, null, 0, now(), (select id from city where name = 'Bikaner'), (select id from locality where name = 'Delhi Road'), 10);
+	    	insert into photographer (name, description, version, added_on, city_id, locality_id, priority) values ('Abhishek', 'We provide photo and videography servces in tricity', 0, now(), (select id from city where name = 'Bikaner'), (select id from locality where name = 'Delhi Road'), 10);
 			insert into address (address_line_1, address_line_2, city, state, pincode, primary_phone, secondary_phone, email, entity_id, version, added_on, latitude, longitude) values ('Abhishek', 'Near Shiv mandir', 'Bikaner', 'Rajasthan', 160101, '+91-9876556789', '0171-987678', 'photographer@gmail.com', (select id from photographer where name = 'Abhishek'), 0, now(), '28.0167', '73.3119');
 			insert into attachment (name, image_url, entity_id, version, added_on, attachment_type, help_text) values ('YoChina.jpg', '/photographers/bikaner_abhishek/a1.jpg', (select id from photographer where name = 'Abhishek'), 0, now(), 'COVER', 'Photo 1');
 			insert into attachment (name, image_url, entity_id, version, added_on, attachment_type, help_text) values ('YoChina.jpg', '/photographers/bikaner_abhishek/a2.jpg', (select id from photographer where name = 'Abhishek'), 0, now(), 'GALLERY', 'Photo 2');
@@ -414,7 +420,7 @@
     
     <changeSet author="msingla" id="1.14">
 	   	<sql>	
-	    	insert into photographer (name, description, comments, rating, version, added_on, city_id, locality_id, priority) values ('Sunny Dhiman', 'We provide photo and videography servces in tricity', null, null, 0, now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Chandigarh'), 10);
+	    	insert into photographer (name, description, version, added_on, city_id, locality_id, priority) values ('Sunny Dhiman', 'We provide photo and videography servces in tricity', 0, now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Chandigarh'), 10);
 			insert into address (address_line_1, address_line_2, city, state, pincode, primary_phone, secondary_phone, email, entity_id, version, added_on, latitude, longitude) values ('Sunny Dhiman', 'Sector 9-D', 'Chandigarh', 'Chandigarh', 160101, '+91-9876556789', '0171-987678', 'photographer@gmail.com', (select id from photographer where name = 'Sunny Dhiman'), 0, now(), '30.7398', '76.7827');
 			insert into attachment (name, image_url, entity_id, version, added_on, attachment_type, help_text) values ('YoChina.jpg', '/photographers/chd_sunnydhiman/sd1.jpg', (select id from photographer where name = 'Sunny Dhiman'), 0, now(), 'COVER', 'Photo 1');
 			insert into attachment (name, image_url, entity_id, version, added_on, attachment_type, help_text) values ('YoChina.jpg', '/photographers/chd_sunnydhiman/sd2.jpg', (select id from photographer where name = 'Sunny Dhiman'), 0, now(), 'GALLERY', 'Photo 2');
@@ -435,7 +441,7 @@
     
      <changeSet author="msingla" id="1.15">
 	    <sql>
-	    	insert into decorater (name, description, comments, rating, version, added_on, city_id, locality_id, priority) values ('Expert Decorators', 'We provide Decoration servces in tricity', null, null, 0, now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Zirakpur'), 10);
+	    	insert into decorater (name, description, version, added_on, city_id, locality_id, priority) values ('Expert Decorators', 'We provide Decoration servces in tricity', 0, now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Zirakpur'), 10);
 			insert into address (address_line_1, address_line_2, city, state, pincode, primary_phone, secondary_phone, email, entity_id, version, added_on, latitude, longitude) values ('Expert Decorators', 'VIP Road', 'Zirakpur', 'Chandigarh', 160101, '+91-9876556789', '0171-987678', 'decorator@gmail.com', (select id from decorater where name = 'Expert Decorators'), 0, now(), '30.7398', '76.7827');
 			insert into attachment (name, image_url, entity_id, version, added_on, attachment_type, help_text) values ('YoChina.jpg', 'decorators/chd_expertdecorators/ed1.jpg', (select id from decorater where name = 'Expert Decorators'), 0, now(), 'COVER', 'Stage 1');
 			insert into attachment (name, image_url, entity_id, version, added_on, attachment_type, help_text) values ('YoChina.jpg', 'decorators/chd_expertdecorators/ed2.jpg', (select id from decorater where name = 'Expert Decorators'), 0, now(), 'GALLERY', 'Stage 2');
@@ -454,7 +460,7 @@
     
      <changeSet author="msingla" id="1.16">
 	    <sql>
-	    	insert into decorater (name, description, comments, rating, version, added_on, city_id, locality_id, priority) values ('Ashoka', 'We provide Decoration servces in tricity', null, null, 0, now(), (select id from city where name = 'Bikaner'), (select id from locality where name = 'Delhi Road'), 10);
+	    	insert into decorater (name, description, version, added_on, city_id, locality_id, priority) values ('Ashoka', 'We provide Decoration servces in tricity', 0, now(), (select id from city where name = 'Bikaner'), (select id from locality where name = 'Delhi Road'), 10);
 			insert into address (address_line_1, address_line_2, city, state, pincode, primary_phone, secondary_phone, email, entity_id, version, added_on, latitude, longitude) values ('Ashoka', 'Near Shiv Mandir, Delhi Road', 'Delhi Road', 'Bikaner', 160101, '+91-9876556789', '0171-987678', 'decorator@gmail.com', (select id from decorater where name = 'Ashoka'), 0, now(), '28.0167', '73.3119');
 			insert into attachment (name, image_url, entity_id, version, added_on, attachment_type, help_text) values ('YoChina.jpg', 'decorators/bikaner_ashoka/a1.jpg', (select id from decorater where name = 'Ashoka'), 0, now(), 'COVER', 'Stage 1');
 			insert into attachment (name, image_url, entity_id, version, added_on, attachment_type, help_text) values ('YoChina.jpg', 'decorators/bikaner_ashoka/a2.jpg', (select id from decorater where name = 'Ashoka'), 0, now(), 'GALLERY', 'Stage 2');
@@ -636,7 +642,7 @@
     
     <changeSet author="msingla" id="1.26">
 	    <sql>
-	    	insert into entertainment (name, description, comments, rating, version, added_on, city_id, locality_id, priority, is_group, starting_price, genre, travel_stay_expenses) values ('Dance Crew Chandigarh', 'We provide Decoration servces in tricity', null, null, 0, now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Chandigarh'), 10, false, '10,000', 'Rock', 'To be beared');
+	    	insert into entertainment (name, description, version, added_on, city_id, locality_id, priority, is_group, starting_price, genre, travel_stay_expenses) values ('Dance Crew Chandigarh', 'We provide Decoration servces in tricity', 0, now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Chandigarh'), 10, false, '10,000', 'Rock', 'To be beared');
 			insert into address (address_line_1, address_line_2, city, state, pincode, primary_phone, secondary_phone, email, entity_id, version, added_on, latitude, longitude) values ('Dance Crew Chandigarh', 'Near Shiv Mandir, Delhi Road', 'Chandigarh', 'Chandigarh', 160101, '+91-9876556789', '0171-987678', 'enter@gmail.com', (select id from entertainment where name = 'Dance Crew Chandigarh'), 0, now(), '28.0167', '73.3119');
 			insert into entity_filters (entity_id, filter_id, version, added_on) values ((select id from entertainment where name = 'Dance Crew Chandigarh'), (select id from filters where filter_type = 'ENTERTAINMENT' and filter_for_entity = 'ENTERTAINMENT' and filter_name = 'Dancers'), 0, now());
 	    </sql>
@@ -644,7 +650,7 @@
     
     <changeSet author="msingla" id="1.27">
 	    <sql>
-	    	insert into entertainment (name, description, comments, rating, version, added_on, city_id, locality_id, priority, is_group, starting_price, genre, travel_stay_expenses) values ('Dance Crew Bikaner', 'We provide Decoration servces in tricity', null, null, 0, now(), (select id from city where name = 'Bikaner'), (select id from locality where name = 'Delhi Road'), 10, false, '10,000', 'Rock', 'To be beared');
+	    	insert into entertainment (name, description, version, added_on, city_id, locality_id, priority, is_group, starting_price, genre, travel_stay_expenses) values ('Dance Crew Bikaner', 'We provide Decoration servces in tricity', 0, now(), (select id from city where name = 'Bikaner'), (select id from locality where name = 'Delhi Road'), 10, false, '10,000', 'Rock', 'To be beared');
 			insert into address (address_line_1, address_line_2, city, state, pincode, primary_phone, secondary_phone, email, entity_id, version, added_on, latitude, longitude) values ('Dance Crew Bikaner', 'Near Shiv Mandir, Delhi Road', 'Bikaner', 'Rajasthan', 160101, '+91-9876556789', '0171-987678', 'enter@gmail.com', (select id from entertainment where name = 'Dance Crew Bikaner'), 0, now(), '28.0167', '73.3119');
 			insert into entity_filters (entity_id, filter_id, version, added_on) values ((select id from entertainment where name = 'Dance Crew Bikaner'), (select id from filters where filter_type = 'ENTERTAINMENT' and filter_for_entity = 'ENTERTAINMENT' and filter_name = 'Dancers'), 0, now());
 	    </sql>
@@ -652,7 +658,7 @@
     
     <changeSet author="msingla" id="1.28">
 	    <sql>
-	    	insert into entertainment (name, description, comments, rating, version, added_on, city_id, locality_id, priority, is_group, starting_price, genre, travel_stay_expenses) values ('Singer Crew Bikaner', 'We provide Decoration servces in tricity', null, null, 0, now(), (select id from city where name = 'Bikaner'), (select id from locality where name = 'Delhi Road'), 10, false, '10,000', 'Rock', 'To be beared');
+	    	insert into entertainment (name, description, version, added_on, city_id, locality_id, priority, is_group, starting_price, genre, travel_stay_expenses) values ('Singer Crew Bikaner', 'We provide Decoration servces in tricity', 0, now(), (select id from city where name = 'Bikaner'), (select id from locality where name = 'Delhi Road'), 10, false, '10,000', 'Rock', 'To be beared');
 			insert into address (address_line_1, address_line_2, city, state, pincode, primary_phone, secondary_phone, email, entity_id, version, added_on, latitude, longitude) values ('Dance Crew Bikaner', 'Near Shiv Mandir, Delhi Road', 'Bikaner', 'Rajasthan', 160101, '+91-9876556789', '0171-987678', 'enter@gmail.com', (select id from entertainment where name = 'Dance Crew Bikaner'), 0, now(), '28.0167', '73.3119');
 			insert into entity_filters (entity_id, filter_id, version, added_on) values ((select id from entertainment where name = 'Singer Crew Bikaner'), (select id from filters where filter_type = 'ENTERTAINMENT' and filter_for_entity = 'ENTERTAINMENT' and filter_name = 'Singers'), 0, now());
 	    </sql>
@@ -660,7 +666,7 @@
     
     <changeSet author="msingla" id="1.29">
 	    <sql>
-	    	insert into entertainment (name, description, comments, rating, version, added_on, city_id, locality_id, priority, is_group, starting_price, genre, travel_stay_expenses) values ('Singer Crew Chandigarh', 'We provide Decoration servces in tricity', null, null, 0, now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Chandigarh'), 10, false, '10,000', 'Rock', 'To be beared');
+	    	insert into entertainment (name, description, version, added_on, city_id, locality_id, priority, is_group, starting_price, genre, travel_stay_expenses) values ('Singer Crew Chandigarh', 'We provide Decoration servces in tricity', 0, now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Chandigarh'), 10, false, '10,000', 'Rock', 'To be beared');
 			insert into address (address_line_1, address_line_2, city, state, pincode, primary_phone, secondary_phone, email, entity_id, version, added_on, latitude, longitude) values ('Dance Crew Chandigarh', 'Near Shiv Mandir, Delhi Road', 'Chandigarh', 'Chandigarh', 160101, '+91-9876556789', '0171-987678', 'enter@gmail.com', (select id from entertainment where name = 'Dance Crew Chandigarh'), 0, now(), '28.0167', '73.3119');
 			insert into entity_filters (entity_id, filter_id, version, added_on) values ((select id from entertainment where name = 'Singer Crew Chandigarh'), (select id from filters where filter_type = 'ENTERTAINMENT' and filter_for_entity = 'ENTERTAINMENT' and filter_name = 'Singers'), 0, now());
 	    </sql>
@@ -668,7 +674,7 @@
     
     <changeSet author="msingla" id="1.30">
 	    <sql>
-	    	insert into entertainment (name, description, comments, rating, version, added_on, city_id, locality_id, priority, is_group, starting_price, genre, travel_stay_expenses) values ('Musicians Crew Chandigarh', 'We provide Musicians servces in tricity', null, null, 0, now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Chandigarh'), 10, false, '10,000', 'Rock', 'To be beared');
+	    	insert into entertainment (name, description, version, added_on, city_id, locality_id, priority, is_group, starting_price, genre, travel_stay_expenses) values ('Musicians Crew Chandigarh', 'We provide Musicians servces in tricity', 0, now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Chandigarh'), 10, false, '10,000', 'Rock', 'To be beared');
 			insert into address (address_line_1, address_line_2, city, state, pincode, primary_phone, secondary_phone, email, entity_id, version, added_on, latitude, longitude) values ('Musicians Crew Chandigarh', 'Near Shiv Mandir, Delhi Road', 'Chandigarh', 'Chandigarh', 160101, '+91-9876556789', '0171-987678', 'enter@gmail.com', (select id from entertainment where name = 'Musicians Crew Chandigarh'), 0, now(), '28.0167', '73.3119');
 			insert into entity_filters (entity_id, filter_id, version, added_on) values ((select id from entertainment where name = 'Musicians Crew Chandigarh'), (select id from filters where filter_type = 'ENTERTAINMENT' and filter_for_entity = 'ENTERTAINMENT' and filter_name = 'Musicians'), 0, now());
 	    </sql>
@@ -676,7 +682,7 @@
     
     <changeSet author="msingla" id="1.31">
 	    <sql>
-	    	insert into entertainment (name, description, comments, rating, version, added_on, city_id, locality_id, priority, is_group, starting_price, genre, travel_stay_expenses) values ('Musicians Crew Bikaner', 'We provide Musicians servces in tricity', null, null, 0, now(), (select id from city where name = 'Bikaner'), (select id from locality where name = 'Delhi Road'), 10, false, '10,000', 'Rock', 'To be beared');
+	    	insert into entertainment (name, description, version, added_on, city_id, locality_id, priority, is_group, starting_price, genre, travel_stay_expenses) values ('Musicians Crew Bikaner', 'We provide Musicians servces in tricity', 0, now(), (select id from city where name = 'Bikaner'), (select id from locality where name = 'Delhi Road'), 10, false, '10,000', 'Rock', 'To be beared');
 			insert into address (address_line_1, address_line_2, city, state, pincode, primary_phone, secondary_phone, email, entity_id, version, added_on, latitude, longitude) values ('Musicians Crew Bikaner', 'Near Shiv Mandir, Delhi Road', 'Bikaner', 'Rajasthan', 160101, '+91-9876556789', '0171-987678', 'enter@gmail.com', (select id from entertainment where name = 'Musicians Crew Bikaner'), 0, now(), '28.0167', '73.3119');
 			insert into entity_filters (entity_id, filter_id, version, added_on) values ((select id from entertainment where name = 'Musicians Crew Bikaner'), (select id from filters where filter_type = 'ENTERTAINMENT' and filter_for_entity = 'ENTERTAINMENT' and filter_name = 'Musicians'), 0, now());
 	    </sql>
@@ -684,7 +690,7 @@
     
     <changeSet author="msingla" id="1.32">
 	    <sql>
-	    	insert into entertainment (name, description, comments, rating, version, added_on, city_id, locality_id, priority, is_group, starting_price, genre, travel_stay_expenses) values ('Choreographer Crew Bikaner', 'We provide Choreographer servces in tricity', null, null, 0, now(), (select id from city where name = 'Bikaner'), (select id from locality where name = 'Delhi Road'), 10, null, '10,000', 'Rock', 'To be beared');
+	    	insert into entertainment (name, description, version, added_on, city_id, locality_id, priority, is_group, starting_price, genre, travel_stay_expenses) values ('Choreographer Crew Bikaner', 'We provide Choreographer servces in tricity', 0, now(), (select id from city where name = 'Bikaner'), (select id from locality where name = 'Delhi Road'), 10, null, '10,000', 'Rock', 'To be beared');
 			insert into address (address_line_1, address_line_2, city, state, pincode, primary_phone, secondary_phone, email, entity_id, version, added_on, latitude, longitude) values ('Choreographer Crew Bikaner', 'Near Shiv Mandir, Delhi Road', 'Bikaner', 'Rajasthan', 160101, '+91-9876556789', '0171-987678', 'enter@gmail.com', (select id from entertainment where name = 'Choreographer Crew Bikaner'), 0, now(), '28.0167', '73.3119');
 			insert into entity_filters (entity_id, filter_id, version, added_on) values ((select id from entertainment where name = 'Choreographer Crew Bikaner'), (select id from filters where filter_type = 'ENTERTAINMENT' and filter_for_entity = 'ENTERTAINMENT' and filter_name = 'Choreographer'), 0, now());
 	    </sql>
@@ -692,7 +698,7 @@
     
     <changeSet author="msingla" id="1.33">
 	    <sql>
-	    	insert into entertainment (name, description, comments, rating, version, added_on, city_id, locality_id, priority, is_group, starting_price, genre, travel_stay_expenses) values ('Choreographer Crew Chandigarh', 'We provide Choreographer servces in tricity', null, null, 0, now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Chandigarh'), 10, null, '10,000', 'Rock', 'To be beared');
+	    	insert into entertainment (name, description, version, added_on, city_id, locality_id, priority, is_group, starting_price, genre, travel_stay_expenses) values ('Choreographer Crew Chandigarh', 'We provide Choreographer servces in tricity', 0, now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Chandigarh'), 10, null, '10,000', 'Rock', 'To be beared');
 			insert into address (address_line_1, address_line_2, city, state, pincode, primary_phone, secondary_phone, email, entity_id, version, added_on, latitude, longitude) values ('Choreographer Crew Chandigarh', 'Near Shiv Mandir, Delhi Road', 'Chandigarh', 'Chandigarh', 160101, '+91-9876556789', '0171-987678', 'enter@gmail.com', (select id from entertainment where name = 'Choreographer Crew Chandigarh'), 0, now(), '28.0167', '73.3119');
 			insert into entity_filters (entity_id, filter_id, version, added_on) values ((select id from entertainment where name = 'Choreographer Crew Chandigarh'), (select id from filters where filter_type = 'ENTERTAINMENT' and filter_for_entity = 'ENTERTAINMENT' and filter_name = 'Choreographer'), 0, now());
 	    </sql>
@@ -700,7 +706,7 @@
 	
      <changeSet author="msingla" id="1.34">
 	    <sql>
-	    	insert into entertainment (name, description, comments, rating, version, added_on, city_id, locality_id, priority, is_group, starting_price, genre, travel_stay_expenses) values ('Anchoring', 'We provide Choreographer servces in tricity', null, null, 0, now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Chandigarh'), 10, null, '10,000', 'Rock', 'To be beared');
+	    	insert into entertainment (name, description, version, added_on, city_id, locality_id, priority, is_group, starting_price, genre, travel_stay_expenses) values ('Anchoring', 'We provide Choreographer servces in tricity', 0, now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Chandigarh'), 10, null, '10,000', 'Rock', 'To be beared');
 			insert into address (address_line_1, address_line_2, city, state, pincode, primary_phone, secondary_phone, email, entity_id, version, added_on, latitude, longitude) values ('Anchoring', 'Near Shiv Mandir, Delhi Road', 'Chandigarh', 'Chandigarh', 160101, '+91-9876556789', '0171-987678', 'enter@gmail.com', (select id from entertainment where name = 'Anchoring' and city_id = (select id from city where name = 'Chandigarh')), 0, now(), '28.0167', '73.3119');
 			insert into entity_filters (entity_id, filter_id, version, added_on) values ((select id from entertainment where name = 'Anchoring' and city_id = (select id from city where name = 'Chandigarh')), (select id from filters where filter_type = 'ENTERTAINMENT' and filter_for_entity = 'ENTERTAINMENT' and filter_name = 'Anchor/Emcee/Host'), 0, now());
 	    </sql>
@@ -708,7 +714,7 @@
     
     <changeSet author="msingla" id="1.35">
 	    <sql>
-	    	insert into entertainment (name, description, comments, rating, version, added_on, city_id, locality_id, priority, is_group, starting_price, genre, travel_stay_expenses) values ('Anchoring', 'We provide Choreographer servces in tricity', null, null, 0, now(), (select id from city where name = 'Bikaner'), (select id from locality where name = 'Delhi Road'), 10, null, '10,000', 'Rock', 'To be beared');
+	    	insert into entertainment (name, description, version, added_on, city_id, locality_id, priority, is_group, starting_price, genre, travel_stay_expenses) values ('Anchoring', 'We provide Choreographer servces in tricity', 0, now(), (select id from city where name = 'Bikaner'), (select id from locality where name = 'Delhi Road'), 10, null, '10,000', 'Rock', 'To be beared');
 			insert into address (address_line_1, address_line_2, city, state, pincode, primary_phone, secondary_phone, email, entity_id, version, added_on, latitude, longitude) values ('Anchoring', 'Near Shiv Mandir, Delhi Road', 'Bikaner', 'Rajasthan', 160101, '+91-9876556789', '0171-987678', 'enter@gmail.com', (select id from entertainment where name = 'Anchoring' and city_id = (select id from city where name = 'Bikaner')), 0, now(), '28.0167', '73.3119');
 			insert into entity_filters (entity_id, filter_id, version, added_on) values ((select id from entertainment where name = 'Anchoring' and city_id = (select id from city where name = 'Bikaner')), (select id from filters where filter_type = 'ENTERTAINMENT' and filter_for_entity = 'ENTERTAINMENT' and filter_name = 'Anchor/Emcee/Host'), 0, now());
 	    </sql>
@@ -716,7 +722,7 @@
     
     <changeSet author="msingla" id="1.36">
 	    <sql>
-	    	insert into entertainment (name, description, comments, rating, version, added_on, city_id, locality_id, priority, is_group, starting_price, genre, travel_stay_expenses) values ('Ravindra Fireworks', 'We provide Choreographer servces in tricity', null, null, 0, now(), (select id from city where name = 'Bikaner'), (select id from locality where name = 'Delhi Road'), 10, null, '10,000', 'Rock', 'To be beared');
+	    	insert into entertainment (name, description, version, added_on, city_id, locality_id, priority, is_group, starting_price, genre, travel_stay_expenses) values ('Ravindra Fireworks', 'We provide Choreographer servces in tricity', 0, now(), (select id from city where name = 'Bikaner'), (select id from locality where name = 'Delhi Road'), 10, null, '10,000', 'Rock', 'To be beared');
 			insert into address (address_line_1, address_line_2, city, state, pincode, primary_phone, secondary_phone, email, entity_id, version, added_on, latitude, longitude) values ('Ravindra Fireworks', 'Near Shiv Mandir, Delhi Road', 'Bikaner', 'Rajasthan', 160101, '+91-9876556789', '0171-987678', 'enter@gmail.com', (select id from entertainment where name = 'Ravindra Fireworks' and city_id = (select id from city where name = 'Bikaner')), 0, now(), '28.0167', '73.3119');
 			insert into entity_filters (entity_id, filter_id, version, added_on) values ((select id from entertainment where name = 'Ravindra Fireworks' and city_id = (select id from city where name = 'Bikaner')), (select id from filters where filter_type = 'ENTERTAINMENT' and filter_for_entity = 'ENTERTAINMENT' and filter_name = 'Fireworks'), 0, now());
 			insert into entity_services (entity_id, service_id, min_service_cost, max_service_cost, version, added_on) values ((select id from entertainment where name = 'Ravindra Fireworks' and city_id = (select id from city where name = 'Bikaner')), (select id from service where tab_data_name = 'Cold pyros'), null, null, 0, now());
@@ -729,7 +735,7 @@
     
     <changeSet author="msingla" id="1.37">
 	    <sql>
-	    	insert into entertainment (name, description, comments, rating, version, added_on, city_id, locality_id, priority, is_group, starting_price, genre, travel_stay_expenses) values ('Ravindra Fireworks', 'We provide Choreographer servces in tricity', null, null, 0, now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Chandigarh'), 10, null, '10,000', 'Rock', 'To be beared');
+	    	insert into entertainment (name, description, version, added_on, city_id, locality_id, priority, is_group, starting_price, genre, travel_stay_expenses) values ('Ravindra Fireworks', 'We provide Choreographer servces in tricity', 0, now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Chandigarh'), 10, null, '10,000', 'Rock', 'To be beared');
 			insert into address (address_line_1, address_line_2, city, state, pincode, primary_phone, secondary_phone, email, entity_id, version, added_on, latitude, longitude) values ('Ravindra Fireworks', 'Near Shiv Mandir, Delhi Road', 'Chandigarh', 'Chandigarh', 160101, '+91-9876556789', '0171-987678', 'enter@gmail.com', (select id from entertainment where name = 'Ravindra Fireworks' and city_id = (select id from city where name = 'Chandigarh')), 0, now(), '28.0167', '73.3119');
 			insert into entity_filters (entity_id, filter_id, version, added_on) values ((select id from entertainment where name = 'Ravindra Fireworks' and city_id = (select id from city where name = 'Chandigarh')), (select id from filters where filter_type = 'ENTERTAINMENT' and filter_for_entity = 'ENTERTAINMENT' and filter_name = 'Fireworks'), 0, now());
 			insert into entity_services (entity_id, service_id, min_service_cost, max_service_cost, version, added_on) values ((select id from entertainment where name = 'Ravindra Fireworks' and city_id = (select id from city where name = 'Chandigarh')), (select id from service where tab_data_name = 'Cold pyros'), null, null, 0, now());
@@ -742,7 +748,7 @@
     
     <changeSet author="msingla" id="1.38">
 	    <sql>
-	    	insert into miscellaneous (name, description, comments, rating, version, added_on, city_id, locality_id, priority, starting_price) values ('Sodhi Printing', 'We provide Choreographer servces in tricity', null, null, 0, now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Chandigarh'), 10, '10,000');
+	    	insert into miscellaneous (name, description, version, added_on, city_id, locality_id, priority, starting_price) values ('Sodhi Printing', 'We provide Choreographer servces in tricity', 0, now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Chandigarh'), 10, '10,000');
 			insert into address (address_line_1, address_line_2, city, state, pincode, primary_phone, secondary_phone, email, entity_id, version, added_on, latitude, longitude) values ('Sodhi Printing', 'Near Shiv Mandir, Delhi Road', 'Chandigarh', 'Chandigarh', 160101, '+91-9876556789', '0171-987678', 'enter@gmail.com', (select id from miscellaneous where name = 'Sodhi Printing' and city_id = (select id from city where name = 'Chandigarh')), 0, now(), '28.0167', '73.3119');
 			insert into entity_filters (entity_id, filter_id, version, added_on) values ((select id from miscellaneous where name = 'Sodhi Printing' and city_id = (select id from city where name = 'Chandigarh')), (select id from filters where filter_type = 'OTHERS' and filter_for_entity = 'OTHERS' and filter_name = 'Invites/Printing'), 0, now());
 			insert into entity_services (entity_id, service_id, min_service_cost, max_service_cost, version, added_on) values ((select id from miscellaneous where name = 'Sodhi Printing' and city_id = (select id from city where name = 'Chandigarh')), (select id from service where tab_data_name = 'Boxed invites'), null, null, 0, now());
@@ -756,7 +762,7 @@
     
     <changeSet author="msingla" id="1.39">
 	    <sql>
-	    	insert into miscellaneous (name, description, comments, rating, version, added_on, city_id, locality_id, priority, starting_price) values ('Krishna Printing', 'We provide Choreographer servces in tricity', null, null, 0, now(), (select id from city where name = 'Bikaner'), (select id from locality where name = 'Delhi Road'), 10, '10,000');
+	    	insert into miscellaneous (name, description, version, added_on, city_id, locality_id, priority, starting_price) values ('Krishna Printing', 'We provide Choreographer servces in tricity', 0, now(), (select id from city where name = 'Bikaner'), (select id from locality where name = 'Delhi Road'), 10, '10,000');
 			insert into address (address_line_1, address_line_2, city, state, pincode, primary_phone, secondary_phone, email, entity_id, version, added_on, latitude, longitude) values ('Krishna Printing', 'Near Shiv Mandir, Delhi Road', 'Bikaner', 'Rajasthan', 160101, '+91-9876556789', '0171-987678', 'enter@gmail.com', (select id from miscellaneous where name = 'Krishna Printing' and city_id = (select id from city where name = 'Bikaner')), 0, now(), '28.0167', '73.3119');
 			insert into entity_filters (entity_id, filter_id, version, added_on) values ((select id from miscellaneous where name = 'Krishna Printing' and city_id = (select id from city where name = 'Bikaner')), (select id from filters where filter_type = 'OTHERS' and filter_for_entity = 'OTHERS' and filter_name = 'Invites/Printing'), 0, now());
 			insert into entity_services (entity_id, service_id, min_service_cost, max_service_cost, version, added_on) values ((select id from miscellaneous where name = 'Krishna Printing' and city_id = (select id from city where name = 'Bikaner')), (select id from service where tab_data_name = 'Boxed invites'), null, null, 0, now());
@@ -770,7 +776,7 @@
     
     <changeSet author="msingla" id="1.40">
 	    <sql>
-	    	insert into miscellaneous (name, description, comments, rating, version, added_on, city_id, locality_id, priority, starting_price) values ('Singla Coverage Agency', 'We provide Choreographer servces in tricity', null, null, 0, now(), (select id from city where name = 'Bikaner'), (select id from locality where name = 'Delhi Road'), 10, '10,000');
+	    	insert into miscellaneous (name, description, version, added_on, city_id, locality_id, priority, starting_price) values ('Singla Coverage Agency', 'We provide Choreographer servces in tricity', 0, now(), (select id from city where name = 'Bikaner'), (select id from locality where name = 'Delhi Road'), 10, '10,000');
 			insert into address (address_line_1, address_line_2, city, state, pincode, primary_phone, secondary_phone, email, entity_id, version, added_on, latitude, longitude) values ('Singla Coverage Agency', 'Near Shiv Mandir, Delhi Road', 'Bikaner', 'Rajasthan', 160101, '+91-9876556789', '0171-987678', 'enter@gmail.com', (select id from miscellaneous where name = 'Singla Coverage Agency' and city_id = (select id from city where name = 'Bikaner')), 0, now(), '28.0167', '73.3119');
 			insert into entity_filters (entity_id, filter_id, version, added_on) values ((select id from miscellaneous where name = 'Singla Coverage Agency' and city_id = (select id from city where name = 'Bikaner')), (select id from filters where filter_type = 'OTHERS' and filter_for_entity = 'OTHERS' and filter_name = 'E-coverage'), 0, now());
 			insert into entity_services (entity_id, service_id, min_service_cost, max_service_cost, version, added_on) values ((select id from miscellaneous where name = 'Singla Coverage Agency' and city_id = (select id from city where name = 'Bikaner')), (select id from service where tab_data_name = 'Website designing'), null, null, 0, now());
@@ -781,7 +787,7 @@
     
     <changeSet author="msingla" id="1.41">
 	    <sql>
-	    	insert into miscellaneous (name, description, comments, rating, version, added_on, city_id, locality_id, priority, starting_price) values ('Singla Coverage Agency', 'We provide Choreographer servces in tricity', null, null, 0, now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Chandigarh'), 10, '10,000');
+	    	insert into miscellaneous (name, description, version, added_on, city_id, locality_id, priority, starting_price) values ('Singla Coverage Agency', 'We provide Choreographer servces in tricity', 0, now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Chandigarh'), 10, '10,000');
 			insert into address (address_line_1, address_line_2, city, state, pincode, primary_phone, secondary_phone, email, entity_id, version, added_on, latitude, longitude) values ('Singla Coverage Agency', 'Near Shiv Mandir, Delhi Road', 'Chandigarh', 'Chandigarh', 160101, '+91-9876556789', '0171-987678', 'enter@gmail.com', (select id from miscellaneous where name = 'Singla Coverage Agency' and city_id = (select id from city where name = 'Chandigarh')), 0, now(), '28.0167', '73.3119');
 			insert into entity_filters (entity_id, filter_id, version, added_on) values ((select id from miscellaneous where name = 'Singla Coverage Agency' and city_id = (select id from city where name = 'Chandigarh')), (select id from filters where filter_type = 'OTHERS' and filter_for_entity = 'OTHERS' and filter_name = 'E-coverage'), 0, now());
 			insert into entity_services (entity_id, service_id, min_service_cost, max_service_cost, version, added_on) values ((select id from miscellaneous where name = 'Singla Coverage Agency' and city_id = (select id from city where name = 'Chandigarh')), (select id from service where tab_data_name = 'Website designing'), null, null, 0, now());
@@ -792,7 +798,7 @@
     
     <changeSet author="msingla" id="1.42">
 	    <sql>
-	    	insert into miscellaneous (name, description, comments, rating, version, added_on, city_id, locality_id, priority, starting_price) values ('Lakme Unisex Saloon', 'We provide Choreographer servces in tricity', null, null, 0, now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Chandigarh'), 10, '10,000');
+	    	insert into miscellaneous (name, description, version, added_on, city_id, locality_id, priority, starting_price) values ('Lakme Unisex Saloon', 'We provide Choreographer servces in tricity', 0, now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Chandigarh'), 10, '10,000');
 			
 			insert into address (address_line_1, address_line_2, city, state, pincode, primary_phone, secondary_phone, email, entity_id, version, added_on, latitude, longitude) values ('Lakme Unisex Saloon', 'Near Shiv Mandir, Delhi Road', 'Chandigarh', 'Chandigarh', 160101, '+91-9876556789', '0171-987678', 'enter@gmail.com', (select id from miscellaneous where name = 'Lakme Unisex Saloon' and city_id = (select id from city where name = 'Chandigarh')), 0, now(), '28.0167', '73.3119');
 			
@@ -806,7 +812,7 @@
     
     <changeSet author="msingla" id="1.43">
 	    <sql>
-	    	insert into miscellaneous (name, description, comments, rating, version, added_on, city_id, locality_id, priority, starting_price) values ('Lakme Unisex Saloon', 'We provide Choreographer servces in tricity', null, null, 0, now(), (select id from city where name = 'Bikaner'), (select id from locality where name = 'Delhi Road'), 10, '10,000');
+	    	insert into miscellaneous (name, description, version, added_on, city_id, locality_id, priority, starting_price) values ('Lakme Unisex Saloon', 'We provide Choreographer servces in tricity', 0, now(), (select id from city where name = 'Bikaner'), (select id from locality where name = 'Delhi Road'), 10, '10,000');
 			
 			insert into address (address_line_1, address_line_2, city, state, pincode, primary_phone, secondary_phone, email, entity_id, version, added_on, latitude, longitude) values ('Lakme Unisex Saloon', 'Near Shiv Mandir, Delhi Road', 'Bikaner', 'Rajasthan', 160101, '+91-9876556789', '0171-987678', 'enter@gmail.com', (select id from miscellaneous where name = 'Lakme Unisex Saloon' and city_id = (select id from city where name = 'Bikaner')), 0, now(), '28.0167', '73.3119');
 			
@@ -820,7 +826,7 @@
 	
     <changeSet author="msingla" id="1.44">
 	    <sql>
-	    	insert into miscellaneous (name, description, comments, rating, version, added_on, city_id, locality_id, priority, starting_price) values ('Archies Gallery', 'We provide Choreographer servces in tricity', null, null, 0, now(), (select id from city where name = 'Bikaner'), (select id from locality where name = 'Delhi Road'), 10, '10,000');
+	    	insert into miscellaneous (name, description, version, added_on, city_id, locality_id, priority, starting_price) values ('Archies Gallery', 'We provide Choreographer servces in tricity', 0, now(), (select id from city where name = 'Bikaner'), (select id from locality where name = 'Delhi Road'), 10, '10,000');
 			
 			insert into address (address_line_1, address_line_2, city, state, pincode, primary_phone, secondary_phone, email, entity_id, version, added_on, latitude, longitude) values ('Archies Gallery', 'Near Shiv Mandir, Delhi Road', 'Bikaner', 'Rajasthan', 160101, '+91-9876556789', '0171-987678', 'enter@gmail.com', (select id from miscellaneous where name = 'Archies Gallery' and city_id = (select id from city where name = 'Bikaner')), 0, now(), '28.0167', '73.3119');
 			
@@ -837,7 +843,7 @@
     
     <changeSet author="msingla" id="1.45">
 	    <sql>
-	    	insert into miscellaneous (name, description, comments, rating, version, added_on, city_id, locality_id, priority, starting_price) values ('Archies Gallery', 'We provide Choreographer servces in tricity', null, null, 0, now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Chandigarh'), 10, '10,000');
+	    	insert into miscellaneous (name, description, version, added_on, city_id, locality_id, priority, starting_price) values ('Archies Gallery', 'We provide Choreographer servces in tricity', 0, now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Chandigarh'), 10, '10,000');
 			
 			insert into address (address_line_1, address_line_2, city, state, pincode, primary_phone, secondary_phone, email, entity_id, version, added_on, latitude, longitude) values ('Archies Gallery', 'Near Shiv Mandir, Delhi Road', 'Chandigarh', 'Chandigarh', 160101, '+91-9876556789', '0171-987678', 'enter@gmail.com', (select id from miscellaneous where name = 'Archies Gallery' and city_id = (select id from city where name = 'Chandigarh')), 0, now(), '28.0167', '73.3119');
 			
@@ -854,7 +860,7 @@
 	
     <changeSet author="msingla" id="1.46">
 	    <sql>
-	    	insert into miscellaneous (name, description, comments, rating, version, added_on, city_id, locality_id, priority, starting_price) values ('Ranka Jwellers', 'We provide Choreographer servces in tricity', null, null, 0, now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Chandigarh'), 10, '10,000');
+	    	insert into miscellaneous (name, description, version, added_on, city_id, locality_id, priority, starting_price) values ('Ranka Jwellers', 'We provide Choreographer servces in tricity', 0, now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Chandigarh'), 10, '10,000');
 			
 			insert into address (address_line_1, address_line_2, city, state, pincode, primary_phone, secondary_phone, email, entity_id, version, added_on, latitude, longitude) values ('Ranka Jwellers', 'Near Shiv Mandir, Delhi Road', 'Chandigarh', 'Chandigarh', 160101, '+91-9876556789', '0171-987678', 'enter@gmail.com', (select id from miscellaneous where name = 'Ranka Jwellers' and city_id = (select id from city where name = 'Chandigarh')), 0, now(), '28.0167', '73.3119');
 			
@@ -871,7 +877,7 @@
 	
     <changeSet author="msingla" id="1.47">
 	    <sql>
-	    	insert into miscellaneous (name, description, comments, rating, version, added_on, city_id, locality_id, priority, starting_price) values ('Ranka Jwellers', 'We provide Choreographer servces in tricity', null, null, 0, now(), (select id from city where name = 'Bikaner'), (select id from locality where name = 'Delhi Road'), 10, '10,000');
+	    	insert into miscellaneous (name, description, version, added_on, city_id, locality_id, priority, starting_price) values ('Ranka Jwellers', 'We provide Choreographer servces in tricity', 0, now(), (select id from city where name = 'Bikaner'), (select id from locality where name = 'Delhi Road'), 10, '10,000');
 			
 			insert into address (address_line_1, address_line_2, city, state, pincode, primary_phone, secondary_phone, email, entity_id, version, added_on, latitude, longitude) values ('Ranka Jwellers', 'Near Shiv Mandir, Delhi Road', 'Bikaner', 'Rajasthan', 160101, '+91-9876556789', '0171-987678', 'enter@gmail.com', (select id from miscellaneous where name = 'Ranka Jwellers' and city_id = (select id from city where name = 'Bikaner')), 0, now(), '28.0167', '73.3119');
 			
@@ -888,7 +894,7 @@
 	
     <changeSet author="msingla" id="1.48">
 	    <sql>
-	    	insert into miscellaneous (name, description, comments, rating, version, added_on, city_id, locality_id, priority, starting_price) values ('Rohan Cinemas', 'We provide Choreographer servces in tricity', null, null, 0, now(), (select id from city where name = 'Bikaner'), (select id from locality where name = 'Delhi Road'), 10, '10,000');
+	    	insert into miscellaneous (name, description, version, added_on, city_id, locality_id, priority, starting_price) values ('Rohan Cinemas', 'We provide Choreographer servces in tricity', 0, now(), (select id from city where name = 'Bikaner'), (select id from locality where name = 'Delhi Road'), 10, '10,000');
 			
 			insert into address (address_line_1, address_line_2, city, state, pincode, primary_phone, secondary_phone, email, entity_id, version, added_on, latitude, longitude) values ('Rohan Cinemas', 'Near Shiv Mandir, Delhi Road', 'Bikaner', 'Rajasthan', 160101, '+91-9876556789', '0171-987678', 'enter@gmail.com', (select id from miscellaneous where name = 'Rohan Cinemas' and city_id = (select id from city where name = 'Bikaner')), 0, now(), '28.0167', '73.3119');
 			
@@ -903,7 +909,7 @@
 	
     <changeSet author="msingla" id="1.49">
 	    <sql>
-	    	insert into miscellaneous (name, description, comments, rating, version, added_on, city_id, locality_id, priority, starting_price) values ('Rohan Cinemas', 'We provide Choreographer servces in tricity', null, null, 0, now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Chandigarh'), 10, '10,000');
+	    	insert into miscellaneous (name, description, version, added_on, city_id, locality_id, priority, starting_price) values ('Rohan Cinemas', 'We provide Choreographer servces in tricity', 0, now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Chandigarh'), 10, '10,000');
 			
 			insert into address (address_line_1, address_line_2, city, state, pincode, primary_phone, secondary_phone, email, entity_id, version, added_on, latitude, longitude) values ('Rohan Cinemas', 'Near Shiv Mandir, Delhi Road', 'Chandigarh', 'Chandigarh', 160101, '+91-9876556789', '0171-987678', 'enter@gmail.com', (select id from miscellaneous where name = 'Rohan Cinemas' and city_id = (select id from city where name = 'Chandigarh')), 0, now(), '28.0167', '73.3119');
 			
@@ -918,7 +924,7 @@
 	
     <changeSet author="msingla" id="1.50">
 	    <sql>
-	    	insert into miscellaneous (name, description, comments, rating, version, added_on, city_id, locality_id, priority, starting_price) values ('Balaji Tours &amp; Travels', 'We provide Choreographer servces in tricity', null, null, 0, now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Chandigarh'), 10, '10,000');
+	    	insert into miscellaneous (name, description, version, added_on, city_id, locality_id, priority, starting_price) values ('Balaji Tours &amp; Travels', 'We provide Choreographer servces in tricity', 0, now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Chandigarh'), 10, '10,000');
 			
 			insert into address (address_line_1, address_line_2, city, state, pincode, primary_phone, secondary_phone, email, entity_id, version, added_on, latitude, longitude) values ('Balaji Tours &amp; Travels', 'Near Shiv Mandir, Delhi Road', 'Chandigarh', 'Chandigarh', 160101, '+91-9876556789', '0171-987678', 'enter@gmail.com', (select id from miscellaneous where name = 'Balaji Tours &amp; Travels' and city_id = (select id from city where name = 'Chandigarh')), 0, now(), '28.0167', '73.3119');
 			
@@ -933,7 +939,7 @@
     
     <changeSet author="msingla" id="1.51">
 	    <sql>
-	    	insert into miscellaneous (name, description, comments, rating, version, added_on, city_id, locality_id, priority, starting_price) values ('Balaji Tours &amp; Travels', 'We provide Choreographer servces in tricity', null, null, 0, now(), (select id from city where name = 'Bikaner'), (select id from locality where name = 'Delhi Road'), 10, '10,000');
+	    	insert into miscellaneous (name, description, version, added_on, city_id, locality_id, priority, starting_price) values ('Balaji Tours &amp; Travels', 'We provide Choreographer servces in tricity', 0, now(), (select id from city where name = 'Bikaner'), (select id from locality where name = 'Delhi Road'), 10, '10,000');
 			
 			insert into address (address_line_1, address_line_2, city, state, pincode, primary_phone, secondary_phone, email, entity_id, version, added_on, latitude, longitude) values ('Balaji Tours &amp; Travels', 'Near Shiv Mandir, Delhi Road', 'Bikaner', 'Rajasthan', 160101, '+91-9876556789', '0171-987678', 'enter@gmail.com', (select id from miscellaneous where name = 'Balaji Tours &amp; Travels' and city_id = (select id from city where name = 'Bikaner')), 0, now(), '28.0167', '73.3119');
 			
@@ -948,7 +954,7 @@
 	
     <changeSet author="msingla" id="1.52">
 	    <sql>
-	    	insert into miscellaneous (name, description, comments, rating, version, added_on, city_id, locality_id, priority, starting_price) values ('Bakers Lounge', 'We provide Choreographer servces in tricity', null, null, 0, now(), (select id from city where name = 'Bikaner'), (select id from locality where name = 'Delhi Road'), 10, '10,000');
+	    	insert into miscellaneous (name, description, version, added_on, city_id, locality_id, priority, starting_price) values ('Bakers Lounge', 'We provide Choreographer servces in tricity', 0, now(), (select id from city where name = 'Bikaner'), (select id from locality where name = 'Delhi Road'), 10, '10,000');
 			
 			insert into address (address_line_1, address_line_2, city, state, pincode, primary_phone, secondary_phone, email, entity_id, version, added_on, latitude, longitude) values ('Bakers Lounge', 'Near Shiv Mandir, Delhi Road', 'Bikaner', 'Rajasthan', 160101, '+91-9876556789', '0171-987678', 'enter@gmail.com', (select id from miscellaneous where name = 'Bakers Lounge' and city_id = (select id from city where name = 'Bikaner')), 0, now(), '28.0167', '73.3119');
 			
@@ -962,7 +968,7 @@
 	
     <changeSet author="msingla" id="1.53">
 	    <sql>
-	    	insert into miscellaneous (name, description, comments, rating, version, added_on, city_id, locality_id, priority, starting_price) values ('Bakers Lounge', 'We provide Choreographer servces in tricity', null, null, 0, now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Chandigarh'), 10, '10,000');
+	    	insert into miscellaneous (name, description, version, added_on, city_id, locality_id, priority, starting_price) values ('Bakers Lounge', 'We provide Choreographer servces in tricity', 0, now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Chandigarh'), 10, '10,000');
 			
 			insert into address (address_line_1, address_line_2, city, state, pincode, primary_phone, secondary_phone, email, entity_id, version, added_on, latitude, longitude) values ('Bakers Lounge', 'Near Shiv Mandir, Delhi Road', 'Chandigarh', 'Chandigarh', 160101, '+91-9876556789', '0171-987678', 'enter@gmail.com', (select id from miscellaneous where name = 'Bakers Lounge' and city_id = (select id from city where name = 'Chandigarh')), 0, now(), '28.0167', '73.3119');
 			
@@ -1204,7 +1210,7 @@
     
      <changeSet author="msingla" id="1.68" context="dev, prod">
 	    <sql>
-			insert into venue (name, description, type, comments, rating, added_on, city_id, locality_id, priority) values ('Raj Resort', 'Raj Resort is a wild Deser Resort which is unique, calm, peaceful, natural and 5th largest desert.', 'RESORT', null, null, now(), (select id from city where name = 'Bikaner'), (select id from locality where name = 'Kanoi Sam Desert Road'), 120);
+			insert into venue (name, description, type, added_on, city_id, locality_id, priority) values ('Raj Resort', 'Raj Resort is a wild Deser Resort which is unique, calm, peaceful, natural and 5th largest desert.', 'RESORT', now(), (select id from city where name = 'Bikaner'), (select id from locality where name = 'Kanoi Sam Desert Road'), 120);
 			insert into address (address_line_1, address_line_2, city, state, pincode, primary_phone, secondary_phone, email, entity_id, version, added_on, latitude, longitude) values ('Raj Resort, 7 Milestone', 'Kanoi Sam Desert Road', 'Bikaner', 'Rajasthan', 334003, '+91-0151-2522651', '9214404100', 'www.raobikajigroups.com, www.raobikajicamelsafari.com', (select id from venue where name = 'Raj Resort'), 0, now(), '28.0229', '73.3119');
 			insert into entity_services (entity_id, service_id, min_service_cost, max_service_cost, version, added_on) values ((select id from venue where name = 'Raj Resort'), (select id from service where tab_data_name = 'Open Sand Dine In'), null, null, 0, now());
 			insert into entity_services (entity_id, service_id, min_service_cost, max_service_cost, version, added_on) values ((select id from venue where name = 'Raj Resort'), (select id from service where tab_data_name = 'Camel Cart'), null, null, 0, now());
@@ -1225,24 +1231,22 @@
 		</sql>
     </changeSet>
     
-    <changeSet author="msingla" id="1.5">
+    <changeSet author="msingla" id="1.70">
 	    <sql>
 	    	insert into room (room_type, description, room_dimensions, added_on) values ('PREMIUIMSUITE', 'Premium Suite', '15in X 15in X 15in', now());
 	    	insert into room (room_type, description, room_dimensions, added_on) values ('SUPERIORSUITE', 'Superior Suite', '15in X 15in X 15in', now());
 	    	insert into room (room_type, description, room_dimensions, added_on) values ('FAMILYSUITE', 'Family Suite', '15in X 15in X 15in', now());
-			delete from amenities where amenity_type='INHOUSECATERING';
-			delete from amenities where amenity_type='INHOUSEDECOR';
-			insert into service (service_type, service_for_entity, tab_data_name, filter_data_name, is_filter, added_on) values ('SERVICE', 'VENUE', 'Inhouse Decor', 'Inhouse Decor', false, now());
-			insert into service (service_type, service_for_entity, tab_data_name, filter_data_name, is_filter, added_on) values ('SERVICE', 'VENUE', 'Outhouse Decor Allowed', 'Outhouse Decor Allowed', false, now());
+			insert into service (service_type, service_for_entity, tab_data_name, filter_data_name, is_filter, added_on) values ('SERVICE', 'VENUE', 'Inhouse Decor', '', false, now());
+			insert into service (service_type, service_for_entity, tab_data_name, filter_data_name, is_filter, added_on) values ('SERVICE', 'VENUE', 'Outhouse Decor Allowed', '', false, now());
 			insert into service (service_type, service_for_entity, tab_data_name, filter_data_name, is_filter, added_on) values ('SERVICE', 'VENUE', 'Spa', 'Spa', false, now());
 
 	    </sql>
     </changeSet>
 
 
-<changeSet author="msingla" id="1.68" context="dev, prod">
+	<changeSet author="msingla" id="1.71" context="dev, prod">
 	    <sql>
-			insert into venue (name, description, type, comments, rating, added_on, city_id, locality_id, priority, policies) values ('KC CROSS ROAD', 'A range of spacious banquet halls with state of the art meeting rooms that can cater up to 500 pax for conferences, seminars, weddings, theme parties and other social functions. Our 49 well appointed rooms are a live examples of these characteristics. With most of the rooms promising a panoramic view of the scenic Shivalik foothills, each room is a class in itself with most modern aminities and unparalleled service.', 'HOTEL', null, null, now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Panchkula'), 130,'25% at the times of booking,25% before one week,final payment at start of party,no refund');
+			insert into venue (name, description, type, added_on, city_id, locality_id, priority, policies) values ('KC CROSS ROAD', 'A range of spacious banquet halls with state of the art meeting rooms that can cater up to 500 pax for conferences, seminars, weddings, theme parties and other social functions. Our 49 well appointed rooms are a live examples of these characteristics. With most of the rooms promising a panoramic view of the scenic Shivalik foothills, each room is a class in itself with most modern aminities and unparalleled service.', 'HOTEL', now(), (select id from city where name = 'Chandigarh'), (select id from locality where name = 'Panchkula'), 130,'25% at the times of booking,25% before one week,final payment at start of party,no refund');
 			insert into address (address_line_1, address_line_2, city, state, pincode, primary_phone, secondary_phone, email, entity_id, version, added_on, latitude, longitude) values ('SECTOR-10,OPP. Bus Stand', '', 'Panchkula', 'Chandigarh', 134109, '', '', '', (select id from venue where name = 'KC CROSS ROAD'), 0, now(), '30.7398', '76.7827');
 			insert into attachment (name, image_url, entity_id, version, added_on, attachment_type, help_text) values ('Image1.jpg', 'venues/chd_kccrossroad/kc_crossroad1.jpg', (select id from venue where name = 'KC CROSS ROAD'), 0, now(), 'COVER', 'Outer View');
 			insert into attachment (name, image_url, entity_id, version, added_on, attachment_type, help_text) values ('Image2.jpg', 'venues/chd_kccrossroad/kc_crossroad2.jpg', (select id from venue where name = 'KC CROSS ROAD'), 0, now(), 'GALLERY', 'Lobby Area1');
@@ -1275,13 +1279,24 @@
 			insert into venue_amenities (venue_id, amenities_id, min_amenity_cost, max_amenity_cost, version, added_on, amenity_name,max_accomodation_capacity) values ((select id from venue where name = 'KC CROSS ROAD'), (select id from amenities where amenity_type = 'BNQTHALL'), 25000, 25000, 0, now(),'Down Town2','200');
 			insert into venue_amenities (venue_id, amenities_id, min_amenity_cost, max_amenity_cost, version, added_on, amenity_name,max_accomodation_capacity) values ((select id from venue where name = 'KC CROSS ROAD'), (select id from amenities where amenity_type = 'BNQTHALL'), 15000, 15000, 0, now(),'Down Town3','75');
 			insert into venue_amenities (venue_id, amenities_id, min_amenity_cost, max_amenity_cost, version, added_on, amenity_name,max_accomodation_capacity) values ((select id from venue where name = 'KC CROSS ROAD'), (select id from amenities where amenity_type = 'BNQTHALL'), 18000, 18000, 0, now(),'Down Town4','100');
-			insert into venue_amenities (venue_id, amenities_id, min_amenity_cost, max_amenity_cost, version, added_on, amenity_name,max_accomodation_capacity) values ((select id from venue where name = 'KC CROSS ROAD'), (select id from amenities where amenity_type = 'CONFERENCE'), null, null, 0, now(),'Down Town4','35');
+			insert into venue_amenities (venue_id, amenities_id, min_amenity_cost, max_amenity_cost, version, added_on, amenity_name,max_accomodation_capacity) values ((select id from venue where name = 'KC CROSS ROAD'), (select id from amenities where amenity_type = 'CONFERENCE'), null, null,0, now(),'Down Town4','35');
 			insert into venue_amenities (venue_id, amenities_id, min_amenity_cost, max_amenity_cost, version, added_on, amenity_name,max_accomodation_capacity) values ((select id from venue where name = 'KC CROSS ROAD'), (select id from amenities where amenity_type = 'Gym'), null, null, 0, now(), null, null);
 			
 			insert into entity_filters (entity_id, filter_id, version, added_on) values ((select id from venue where name = 'KC CROSS ROAD'), (select id from filters where filter_type = 'ESTABLISHMENT' and filter_for_entity = 'VENUE' and filter_name = 'Hotel'), 0, now());
 			
 			
 		</sql>
+    </changeSet>
+    
+    <changeSet author="msingla" id="1.72">
+	    <sql>
+	    	update venue set created_by = (select id from user where username = 'LEPARTYCIOUS@GMAIL.COM');
+	    	update caterer set created_by = (select id from user where username = 'LEPARTYCIOUS@GMAIL.COM');
+	    	update photographer set created_by = (select id from user where username = 'LEPARTYCIOUS@GMAIL.COM');
+	    	update decorater set created_by = (select id from user where username = 'LEPARTYCIOUS@GMAIL.COM');
+	    	update entertainment set created_by = (select id from user where username = 'LEPARTYCIOUS@GMAIL.COM');
+	    	update miscellaneous set created_by = (select id from user where username = 'LEPARTYCIOUS@GMAIL.COM');
+	    </sql>
     </changeSet>
     
 </databaseChangeLog>

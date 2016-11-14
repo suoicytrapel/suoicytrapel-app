@@ -42,7 +42,7 @@ public class UserDAOImpl implements UserDAO {
 	@Override
 	public void saveOrUpdateUser(User user) {
 		Session session = sessionFactory.getCurrentSession();
-		session.saveOrUpdate(user);
+		session.save(user);
 	}
 
 }

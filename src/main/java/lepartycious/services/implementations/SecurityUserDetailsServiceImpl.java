@@ -4,10 +4,14 @@ package lepartycious.services.implementations;
 import java.io.IOException;
 import java.util.Date;
 
+import lepartycious.Enums.UserTypeEnum;
+import lepartycious.Enums.VendorTypeEnum;
+import lepartycious.daos.CommonDAO;
 import lepartycious.daos.UserDAO;
 import lepartycious.dtos.requestDTOs.ContactRequestDTO;
 import lepartycious.dtos.requestDTOs.UserRequestDTO;
 import lepartycious.models.User;
+import lepartycious.services.CommonService;
 import lepartycious.services.EmailService;
 import lepartycious.services.SecurityUserDetailsService;
 
@@ -38,6 +42,9 @@ public class SecurityUserDetailsServiceImpl implements SecurityUserDetailsServic
     
     @Autowired
     private EmailService emailService;
+    
+    @Autowired
+    private CommonDAO commonDAO;
 
     @Override
     public User loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -85,19 +92,30 @@ public class SecurityUserDetailsServiceImpl implements SecurityUserDetailsServic
 	}
 
 	@Override
-	public void createUser(UserRequestDTO userDTO) {
+	public void createUser(UserRequestDTO userDTO) throws Exception {
+		boolean isUserExists = false;
 		String username = StringUtils.isEmpty(userDTO.getUsername()) ? userDTO.getEmail() : userDTO.getUsername();
-		User user = new User();
-		String rawPassword = userDTO.getIsAppuser() ? userDTO.getPassword() : username;
-		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-		user.setUsername(username.toUpperCase());
-		user.setPasswordDigest(encoder.encode(rawPassword));
-		user.setEmail(userDTO.getEmail());
-		user.setAddedOn(new Date());
-		user.setName(userDTO.getName());
-		user.setIsAppUser(userDTO.getIsAppuser());
-		user.setUserRole(userDTO.getUserRole());
-		userDAO.saveOrUpdateUser(user);
+		if(!userDTO.getIsAppUser()){
+			isUserExists = isUsernameAvailable(username);
+		}
+		if(!isUserExists){
+			User user = new User();
+			String rawPassword = userDTO.getIsAppUser() ? userDTO.getPassword() : username;
+			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+			user.setUsername(username.toUpperCase());
+			user.setPasswordDigest(encoder.encode(rawPassword));
+			user.setEmail(userDTO.getEmail());
+			user.setAddedOn(new Date());
+			user.setName(userDTO.getName());
+			user.setIsAppUser(userDTO.getIsAppUser());
+			user.setUserRole(userDTO.getUserRole());
+			userDAO.saveOrUpdateUser(user);
+			/*if(UserTypeEnum.VENDOR.toString().equalsIgnoreCase(userDTO.getUserRole())){
+				String vendorType = userDTO.getVendorType();
+				String entityName = userDTO.getEntityName();
+				commonDAO.createEntity(vendorType, entityName);
+			}*/
+		}
 	}
 
 	@Override

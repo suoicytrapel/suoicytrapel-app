@@ -21,7 +21,7 @@ public interface SecurityUserDetailsService extends UserDetailsService{
 	public void resetPassword(UserRequestDTO user) throws Exception;
 	
 	@Transactional(readOnly=false)
-	public void createUser(UserRequestDTO user);
+	public void createUser(UserRequestDTO user) throws Exception;
 	
 	public boolean isUsernameAvailable(String username) throws Exception;
 	
