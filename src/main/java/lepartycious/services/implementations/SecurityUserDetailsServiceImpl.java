@@ -14,6 +14,7 @@ import lepartycious.services.SecurityUserDetailsService;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -87,7 +88,7 @@ public class SecurityUserDetailsServiceImpl implements SecurityUserDetailsServic
 	public void createUser(UserRequestDTO userDTO) {
 		String username = StringUtils.isEmpty(userDTO.getUsername()) ? userDTO.getEmail() : userDTO.getUsername();
 		User user = new User();
-		String rawPassword = userDTO.getIsAppuser() ? userDTO.getPassword() : DEFAULT_PASSWORD;
+		String rawPassword = userDTO.getIsAppuser() ? userDTO.getPassword() : username;
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		user.setUsername(username.toUpperCase());
 		user.setPasswordDigest(encoder.encode(rawPassword));
@@ -126,5 +127,15 @@ public class SecurityUserDetailsServiceImpl implements SecurityUserDetailsServic
 		byte[] decodedUsername = decoder.decodeBuffer(username);
 		String actualUsername = new String(decodedUsername);
 		return actualUsername;
+	}
+
+	@Override
+	public UserRequestDTO getLoggedInUser() {
+		User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		UserRequestDTO userRequestDTO = new UserRequestDTO();
+		userRequestDTO.setName(user.getName());
+		userRequestDTO.setUserRole(user.getUserRole());
+		userRequestDTO.setEmail(user.getEmail());
+		return userRequestDTO;
 	}
 }

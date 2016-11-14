@@ -26,4 +26,6 @@ public interface SecurityUserDetailsService extends UserDetailsService{
 	public boolean isUsernameAvailable(String username) throws Exception;
 	
 	public String decodeUserString(String username) throws IOException;
+
+	public UserRequestDTO getLoggedInUser();
 }

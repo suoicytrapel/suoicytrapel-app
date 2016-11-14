@@ -38,12 +38,6 @@ public class Entertainment implements Serializable{
 	@Column(name="entertainment_type")
 	private String entertainmentType;
 	
-	@Column(name = "comments")
-	private String comments;
-	
-	@Column(name = "rating")
-	private Float rating;
-	
 	@Column(name = "added_on")
 	private Date addedOn;
 	
@@ -99,6 +93,17 @@ public class Entertainment implements Serializable{
 
 	@Column(name = "min_capacity")
 	private String minCapacity;
+	
+	@OneToMany(mappedBy="entityId")
+	private List<EntityReview> comments;
+	
+	public List<EntityReview> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<EntityReview> comments) {
+		this.comments = comments;
+	}
 	
 	public String getMinCapacity() {
 		return minCapacity;
@@ -162,22 +167,6 @@ public class Entertainment implements Serializable{
 
 	public void setEntertainmentType(String entertainmentType) {
 		this.entertainmentType = entertainmentType;
-	}
-
-	public String getComments() {
-		return comments;
-	}
-
-	public void setComments(String comments) {
-		this.comments = comments;
-	}
-
-	public Float getRating() {
-		return rating;
-	}
-
-	public void setRating(Float rating) {
-		this.rating = rating;
 	}
 
 	public Date getAddedOn() {

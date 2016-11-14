@@ -80,8 +80,6 @@
 			id bigint PRIMARY KEY AUTO_INCREMENT,
 			name varchar (25) NOT NULL,
 			description varchar (2550),
-			comments varchar (3000),
-			rating float,
 			version bigint,
 			cuisine_offered varchar (5000),
 			added_on timestamp NOT NULL DEFAULT now(),
@@ -105,8 +103,6 @@
 			name varchar (255) NOT NULL,
 			description varchar (2550),
 			type varchar(20) NOT NULL,
-			comments varchar (3000),
-			rating float,
 			version bigint,
 			added_on timestamp NOT NULL DEFAULT now(),
 			city_id bigint,
@@ -128,8 +124,6 @@
 			id bigint PRIMARY KEY AUTO_INCREMENT,
 			name varchar(25) NOT NULL,
 			description varchar (2550),
-			comments varchar (3000),
-			rating float,
 			version bigint,
 			added_on timestamp NOT NULL DEFAULT now(),
 			city_id bigint,
@@ -151,8 +145,6 @@
 			id bigint PRIMARY KEY AUTO_INCREMENT,
 			name varchar (25) NOT NULL,
 			description varchar (2550),
-			comments varchar (3000),
-			rating float,
 			version bigint,
 			added_on timestamp NOT NULL DEFAULT now(),
 			city_id bigint,
@@ -175,8 +167,6 @@
 			name varchar (25) NOT NULL,
 			description varchar (2550),
 			addition_details varchar (3000),
-			comments varchar (3000),
-			rating float,
 			version bigint,
 			entertainment_type varchar(20),
 			added_on timestamp NOT NULL DEFAULT now(),
@@ -200,8 +190,6 @@
 			name varchar (25) NOT NULL,
 			description varchar (2550),
 			addition_details varchar (3000),
-			comments varchar (3000),
-			rating float,
 			version bigint,
 			miscellaneous_type varchar(20),
 			added_on timestamp NOT NULL DEFAULT now(),
@@ -757,7 +745,19 @@
 		</sql>
 	</changeSet>
 	
-	<changeSet author="msingla" id="1.52"> 
+	<changeSet author="msingla" id="1.52">
+		<sql>
+			ALTER TABLE address MODIFY email VARCHAR(225);
+		</sql>
+	</changeSet>
+	
+	<changeSet author="msingla" id="1.53">
+		<sql>
+			ALTER TABLE amenities ALTER COLUMN is_detailed_amenity SET DEFAULT false;;
+		</sql>
+	</changeSet>
+	
+	<changeSet author="msingla" id="1.54"> 
 		<preConditions onFail="MARK_RAN"> 
 			<not> 
 				<tableExists tableName="user" /> 
@@ -777,21 +777,35 @@
 		</sql> 
 	</changeSet>
 	
-	<changeSet author="msingla" id="1.53">
+	<changeSet author="msingla" id="1.55">
 		<sql>
 			ALTER TABLE user AUTO_INCREMENT = 1000000;
 		</sql>
 	</changeSet>
 	
-	<changeSet author="msingla" id="1.52">
-		<sql>
-			ALTER TABLE address MODIFY email VARCHAR(225);
-		</sql>
+	<changeSet author="msingla" id="1.56"> 
+		<preConditions onFail="MARK_RAN"> 
+			<not> 
+				<tableExists tableName="entity_review" /> 
+			</not> 
+		</preConditions> 
+		<sql> 
+			CREATE TABLE entity_review ( 
+			id bigint PRIMARY KEY AUTO_INCREMENT, 
+			reviewed_by varchar (250) NOT NULL, 
+			review_comment varchar (10000), 
+			star_rating float,
+			user_image_url varchar (5000),
+			entity_id bigint,
+			is_deleted boolean default false,
+			reviewed_on timestamp NOT NULL DEFAULT now() 
+			); 
+		</sql> 
 	</changeSet>
 	
-	<changeSet author="msingla" id="1.53">
+	<changeSet author="msingla" id="1.57">
 		<sql>
-			ALTER TABLE amenities ALTER COLUMN is_detailed_amenity SET DEFAULT false;;
+			ALTER TABLE entity_review AUTO_INCREMENT = 4000000;
 		</sql>
 	</changeSet>
 	

@@ -38,12 +38,6 @@ public class Others implements Serializable{
 	@Column(name="miscellaneous_type")
 	private String othersType;
 	
-	@Column(name = "comments")
-	private String comments;
-	
-	@Column(name = "rating")
-	private Float rating;
-	
 	@Column(name = "added_on")
 	private Date addedOn;
 	
@@ -87,6 +81,17 @@ public class Others implements Serializable{
 	
 	@Column(name = "policies")
 	private String policies;
+	
+	@OneToMany(mappedBy="entityId")
+	private List<EntityReview> comments;
+	
+	public List<EntityReview> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<EntityReview> comments) {
+		this.comments = comments;
+	}
 
 	public String getPolicies() {
 		return policies;
@@ -142,22 +147,6 @@ public class Others implements Serializable{
 
 	public void setOthersType(String othersType) {
 		this.othersType = othersType;
-	}
-
-	public String getComments() {
-		return comments;
-	}
-
-	public void setComments(String comments) {
-		this.comments = comments;
-	}
-
-	public Float getRating() {
-		return rating;
-	}
-
-	public void setRating(Float rating) {
-		this.rating = rating;
 	}
 
 	public Date getAddedOn() {

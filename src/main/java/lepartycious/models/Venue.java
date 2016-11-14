@@ -37,12 +37,6 @@ public class Venue implements Serializable{
 	@Column(name = "type", nullable=false)
 	private String type;
 	
-	@Column(name = "comments")
-	private String comments;
-	
-	@Column(name = "rating")
-	private Float rating;
-	
 	@Column(name = "added_on")
 	private Date addedOn;
 	
@@ -96,6 +90,17 @@ public class Venue implements Serializable{
 	@OneToMany(mappedBy="entityId")
 	private List<AdditionalEntityServices> additionalVenueServices;
 	
+	@OneToMany(mappedBy="entityId")
+	private List<EntityReview> comments;
+	
+	public List<EntityReview> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<EntityReview> comments) {
+		this.comments = comments;
+	}
+
 	public String getMinCapacity() {
 		return minCapacity;
 	}
@@ -142,22 +147,6 @@ public class Venue implements Serializable{
 
 	public void setType(String type) {
 		this.type = type;
-	}
-
-	public String getComments() {
-		return comments;
-	}
-
-	public void setComments(String comments) {
-		this.comments = comments;
-	}
-
-	public Float getRating() {
-		return rating;
-	}
-
-	public void setRating(Float rating) {
-		this.rating = rating;
 	}
 
 	public Date getAddedOn() {
