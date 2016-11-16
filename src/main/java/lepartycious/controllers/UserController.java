@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -35,8 +36,8 @@ public class UserController {
     private SecurityUserDetailsService securityuserDetailService;
 
     @RequestMapping(value="/secured/v1/getUserDetails", method=RequestMethod.GET)
-	public UserRequestDTO getLoggedInUser(){
-    	UserRequestDTO user = securityuserDetailService.getLoggedInUser();
+	public UserRequestDTO getLoggedInUser(@RequestParam String userType, @RequestParam Boolean isAppUser) throws Exception{
+    	UserRequestDTO user = securityuserDetailService.getLoggedInUser(userType, isAppUser);
 		return user;
 	}
     
@@ -66,6 +67,12 @@ public class UserController {
     @RequestMapping(value="/v1/user/decodeString/{username}", method = RequestMethod.GET)
     public String decodeUserString(@PathVariable  String username) throws Exception{
     	return securityuserDetailService.decodeUserString(username);
+    }
+    
+    @RequestMapping(value="/v1/user/activate", method = RequestMethod.GET)
+    @ResponseStatus(HttpStatus.OK)
+    public void activateAccount(@RequestParam  String activationLink) throws Exception{
+    	securityuserDetailService.activateAccount(activationLink);
     }
 
     @ExceptionHandler(Exception.class)

@@ -1299,4 +1299,10 @@
 	    </sql>
     </changeSet>
     
+    <changeSet author="msingla" id="1.73">
+	    <sql>
+	    	update user set is_active = true where id = (select id from user where username = 'LEPARTYCIOUS@GMAIL.COM');
+	    </sql>
+    </changeSet>
+    
 </databaseChangeLog>

@@ -50,6 +50,9 @@ public class User implements UserDetails{
 	@Column(name = "is_app_user", nullable=false)
 	private Boolean isAppUser = Boolean.FALSE;
 	
+	@Column(name = "is_active")
+	private Boolean isActive;
+	
 	public long getUserId() {
 		return userId;
 	}
@@ -142,6 +145,14 @@ public class User implements UserDetails{
 
 	public void setUserRole(String userRole) {
 		this.userRole = userRole;
+	}
+
+	public Boolean getIsActive() {
+		return isActive;
+	}
+
+	public void setIsActive(Boolean isActive) {
+		this.isActive = isActive;
 	}
 	
 }

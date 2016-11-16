@@ -12,6 +12,7 @@ public class UserRequestDTO implements Serializable{
 	private Boolean isAppUser = Boolean.FALSE;
 	private String vendorType;
 	private String entityName;
+	private Boolean isActive;
 	
 	public String getUsername() {
 		return username;
@@ -60,5 +61,11 @@ public class UserRequestDTO implements Serializable{
 	}
 	public void setEntityName(String entityName) {
 		this.entityName = entityName;
+	}
+	public Boolean getIsActive() {
+		return isActive;
+	}
+	public void setIsActive(Boolean isActive) {
+		this.isActive = isActive;
 	}
 }

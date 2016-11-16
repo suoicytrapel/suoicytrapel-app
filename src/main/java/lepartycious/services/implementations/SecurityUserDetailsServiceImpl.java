@@ -94,7 +94,7 @@ public class SecurityUserDetailsServiceImpl implements SecurityUserDetailsServic
 	@Override
 	public void createUser(UserRequestDTO userDTO) throws Exception {
 		boolean isUserExists = false;
-		String username = StringUtils.isEmpty(userDTO.getUsername()) ? userDTO.getEmail() : userDTO.getUsername();
+		String username = userDTO.getUsername();
 		if(!userDTO.getIsAppUser()){
 			isUserExists = isUsernameAvailable(username);
 		}
@@ -109,13 +109,32 @@ public class SecurityUserDetailsServiceImpl implements SecurityUserDetailsServic
 			user.setName(userDTO.getName());
 			user.setIsAppUser(userDTO.getIsAppUser());
 			user.setUserRole(userDTO.getUserRole());
+			user.setIsActive(!userDTO.getIsAppUser());
 			userDAO.saveOrUpdateUser(user);
+			sendActivationLink(user);
 			/*if(UserTypeEnum.VENDOR.toString().equalsIgnoreCase(userDTO.getUserRole())){
 				String vendorType = userDTO.getVendorType();
 				String entityName = userDTO.getEntityName();
 				commonDAO.createEntity(vendorType, entityName);
 			}*/
 		}
+	}
+
+	private void sendActivationLink(User user) {
+		String mailFrom = "no-reply@gmail.com";
+		String mailSubject = "Account Activation Request";
+		String mailContent = generateActivationLinkMailContent(user);
+		emailService.sendMail(user.getEmail(), mailFrom, mailSubject, mailContent);
+	}
+
+	private String generateActivationLinkMailContent(User user) {
+		StringBuffer sbf = new StringBuffer();
+		BASE64Encoder encoder = new BASE64Encoder();
+		String activationLink = encoder.encode(user.getUsername().getBytes());
+		sbf.append("Hi" + user.getName() +",\n\nWe have recieved a account activation request from your end.\n");
+		sbf.append("Please click <a href=www.lepartycious.com/activate?link=" + activationLink +">Here</a> to activate your accountcwith LePartycious:-\n.");
+		sbf.append("\n\nCheers,\nLepartycious Team");
+		return sbf.toString();
 	}
 
 	@Override
@@ -148,12 +167,31 @@ public class SecurityUserDetailsServiceImpl implements SecurityUserDetailsServic
 	}
 
 	@Override
-	public UserRequestDTO getLoggedInUser() {
+	public UserRequestDTO getLoggedInUser(String userType, Boolean isAppUser) throws Exception {
 		User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		UserRequestDTO userRequestDTO = new UserRequestDTO();
-		userRequestDTO.setName(user.getName());
-		userRequestDTO.setUserRole(user.getUserRole());
-		userRequestDTO.setEmail(user.getEmail());
-		return userRequestDTO;
+		if(user.getIsAppUser()==isAppUser && user.getUserRole()==userType){
+			UserRequestDTO userRequestDTO = new UserRequestDTO();
+			userRequestDTO.setName(user.getName());
+			userRequestDTO.setUserRole(user.getUserRole());
+			userRequestDTO.setEmail(user.getEmail());
+			return userRequestDTO;
+		}
+		else{
+			throw new Exception("User with username " + user.getUsername() + " does not exist");
+		}
+		
+	}
+
+	@Override
+	public void activateAccount(String activationLink) throws Exception {
+		String username = decodeUserString(activationLink);
+		User user = userDAO.loadUserByUsername(username);
+		if(user != null){
+			user.setIsActive(true);
+			userDAO.saveOrUpdateUser(user);
+		}
+		else{
+			throw new Exception("User with username " + user.getUsername() + " does not exist");
+		}
 	}
 }

@@ -27,5 +27,8 @@ public interface SecurityUserDetailsService extends UserDetailsService{
 	
 	public String decodeUserString(String username) throws IOException;
 
-	public UserRequestDTO getLoggedInUser();
+	public UserRequestDTO getLoggedInUser(String userType, Boolean isAppUser) throws Exception;
+	
+	@Transactional(readOnly=false)
+	public void activateAccount(String activationLink) throws Exception;
 }

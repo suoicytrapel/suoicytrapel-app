@@ -818,4 +818,10 @@
 		</sql>
 	</changeSet>
 	
+	<changeSet author="msingla" id="1.56">
+		<sql>
+			ALTER TABLE user ADD COLUMN is_active boolean default false;
+		</sql>
+	</changeSet>
+	
 </databaseChangeLog>

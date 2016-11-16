@@ -25,9 +25,10 @@ public class UserDAOImpl implements UserDAO {
 	public User loadUserByUsername(String username) throws Exception {
 		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(User.class);
 		criteria.add(Restrictions.eq("username", username.toUpperCase()));
+		criteria.add(Restrictions.eq("isActive", true));
 		List<User> userList = criteria.list();
 		if(CollectionUtils.isEmpty(userList)){
-			throw new Exception("User not found in the database");
+			throw new Exception("User with username " + username + " does not exist");
 		}
 		else{
 			return userList.get(0);
@@ -42,7 +43,7 @@ public class UserDAOImpl implements UserDAO {
 	@Override
 	public void saveOrUpdateUser(User user) {
 		Session session = sessionFactory.getCurrentSession();
-		session.save(user);
+		session.saveOrUpdate(user);
 	}
 
 }
