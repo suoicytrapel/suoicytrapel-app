@@ -93,12 +93,12 @@ public class SecurityUserDetailsServiceImpl implements SecurityUserDetailsServic
 
 	@Override
 	public void createUser(UserRequestDTO userDTO) throws Exception {
-		boolean isUserExists = false;
+		boolean isUsernameAvailable = true;
 		String username = userDTO.getUsername();
 		if(!userDTO.getIsAppUser()){
-			isUserExists = isUsernameAvailable(username);
+			isUsernameAvailable = isUsernameAvailable(username);
 		}
-		if(!isUserExists){
+		if(isUsernameAvailable){
 			User user = new User();
 			String rawPassword = userDTO.getIsAppUser() ? userDTO.getPassword() : username;
 			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
@@ -111,7 +111,8 @@ public class SecurityUserDetailsServiceImpl implements SecurityUserDetailsServic
 			user.setUserRole(userDTO.getUserRole());
 			user.setIsActive(!userDTO.getIsAppUser());
 			userDAO.saveOrUpdateUser(user);
-			sendActivationLink(user);
+			if(userDTO.getIsAppUser())
+				sendActivationLink(user);
 			/*if(UserTypeEnum.VENDOR.toString().equalsIgnoreCase(userDTO.getUserRole())){
 				String vendorType = userDTO.getVendorType();
 				String entityName = userDTO.getEntityName();
@@ -131,8 +132,8 @@ public class SecurityUserDetailsServiceImpl implements SecurityUserDetailsServic
 		StringBuffer sbf = new StringBuffer();
 		BASE64Encoder encoder = new BASE64Encoder();
 		String activationLink = encoder.encode(user.getUsername().getBytes());
-		sbf.append("Hi" + user.getName() +",\n\nWe have recieved a account activation request from your end.\n");
-		sbf.append("Please click <a href=www.lepartycious.com/activate?link=" + activationLink +">Here</a> to activate your accountcwith LePartycious:-\n.");
+		sbf.append("Hi " + user.getName() +",\n\nWe have recieved a account activation request from your end.\n");
+		sbf.append("Please click <html><body><a href=www.lepartycious.com/activate?link=" + activationLink +">Here</a></html></body> to activate your account with LePartycious:-\n.");
 		sbf.append("\n\nCheers,\nLepartycious Team");
 		return sbf.toString();
 	}
@@ -152,7 +153,7 @@ public class SecurityUserDetailsServiceImpl implements SecurityUserDetailsServic
 		StringBuffer sbf = new StringBuffer();
 		BASE64Encoder encoder = new BASE64Encoder();
 		String resetToken = encoder.encode(user.getUsername().getBytes());
-		sbf.append("Hi" + user.getName() +",\n\nWe have recieved a password reset request from your end.\n");
+		sbf.append("Hi " + user.getName() +",\n\nWe have recieved a password reset request from your end.\n");
 		sbf.append("Please click <a href=www.lepartycious.com/resetPasswprd?reset_token=" + resetToken +">Here</a> to go to the password reset page:-\n.");
 		sbf.append("\n\nCheers,\nLepartycious Team");
 		return sbf.toString();

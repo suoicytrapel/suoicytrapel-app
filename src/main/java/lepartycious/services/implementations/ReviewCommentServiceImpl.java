@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import lepartycious.daos.ReviewCommentDAO;
 import lepartycious.dtos.requestDTOs.ReviewCommentRequestDTO;
+import lepartycious.dtos.requestDTOs.SearchRequestDTO;
 import lepartycious.dtos.responseDTOs.ReviewCommentWrapperDTO;
 import lepartycious.models.EntityReview;
 import lepartycious.services.ReviewCommentService;
@@ -27,12 +28,13 @@ public class ReviewCommentServiceImpl implements ReviewCommentService {
 	}
 
 	@Override
-	public ReviewCommentWrapperDTO getReviewsByVendor(Long vendorId) {
+	public ReviewCommentWrapperDTO getReviewsByVendor(SearchRequestDTO searchRequestDTO) {
 		ReviewCommentWrapperDTO reviewCommentWrapperDTO = new ReviewCommentWrapperDTO();
 		List<ReviewCommentRequestDTO> reviewCommentRequestList = new ArrayList<ReviewCommentRequestDTO>();
-		Long totalCount = reviewCommentDAO.getReviewCount(vendorId);
-		Double averagetRating = reviewCommentDAO.getAverageRatingOfVendor(vendorId);
-		List<EntityReview> reviewCommentList = reviewCommentDAO.getReviewsByVendor(vendorId);
+		Long vendorId = searchRequestDTO.getVendorId();
+		Long totalCount = reviewCommentDAO.getReviewCount(searchRequestDTO);
+		Double averagetRating = reviewCommentDAO.getAverageRatingOfVendor(searchRequestDTO);
+		List<EntityReview> reviewCommentList = reviewCommentDAO.getReviewsByVendor(searchRequestDTO);
 		for(EntityReview review : reviewCommentList){
 			ReviewCommentRequestDTO reviewCommentRequestDTO = new ReviewCommentRequestDTO(review.getRatedBy(), 
 					review.getImageURL(), review.getReviewComment(), review.getStarRating(), review.getEntityId());

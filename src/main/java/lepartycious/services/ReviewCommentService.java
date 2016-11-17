@@ -1,6 +1,7 @@
 package lepartycious.services;
 
 import lepartycious.dtos.requestDTOs.ReviewCommentRequestDTO;
+import lepartycious.dtos.requestDTOs.SearchRequestDTO;
 import lepartycious.dtos.responseDTOs.ReviewCommentWrapperDTO;
 
 import org.springframework.transaction.annotation.Transactional;
@@ -11,6 +12,6 @@ public interface ReviewCommentService {
 	@Transactional(readOnly=false)
 	public void submitReview(ReviewCommentRequestDTO reviewCommentRequestDTO);
 
-	public ReviewCommentWrapperDTO getReviewsByVendor(Long vendorId);
+	public ReviewCommentWrapperDTO getReviewsByVendor(SearchRequestDTO searchRequestDTO);
 
 }

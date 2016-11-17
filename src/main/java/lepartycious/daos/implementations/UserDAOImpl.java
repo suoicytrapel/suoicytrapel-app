@@ -28,7 +28,7 @@ public class UserDAOImpl implements UserDAO {
 		criteria.add(Restrictions.eq("isActive", true));
 		List<User> userList = criteria.list();
 		if(CollectionUtils.isEmpty(userList)){
-			throw new Exception("User with username " + username + " does not exist");
+			return null;
 		}
 		else{
 			return userList.get(0);

@@ -10,6 +10,8 @@ import lepartycious.services.SecurityUserDetailsService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.oauth2.common.OAuth2AccessToken;
+import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -34,6 +36,9 @@ public class UserController {
     
     @Autowired
     private SecurityUserDetailsService securityuserDetailService;
+    
+   /* @Autowired
+    private TokenStore tokenStore;*/
 
     @RequestMapping(value="/secured/v1/getUserDetails", method=RequestMethod.GET)
 	public UserRequestDTO getLoggedInUser(@RequestParam String userType, @RequestParam Boolean isAppUser) throws Exception{
@@ -74,6 +79,17 @@ public class UserController {
     public void activateAccount(@RequestParam  String activationLink) throws Exception{
     	securityuserDetailService.activateAccount(activationLink);
     }
+    
+    /*@RequestMapping(value = "/secured/v1/logout", method = RequestMethod.GET)
+    @ResponseStatus(HttpStatus.OK)
+    public void logout(HttpServletRequest request) {
+        String authHeader = request.getHeader("Authorization");
+        if (authHeader != null) {
+            String tokenValue = authHeader.replace("Bearer", "").trim();
+            OAuth2AccessToken accessToken = tokenStore.readAccessToken(tokenValue);
+            tokenStore.removeAccessToken(accessToken);
+        }
+    }*/
 
     @ExceptionHandler(Exception.class)
 	public Error handleGenericError(HttpServletRequest req, HttpServletResponse response, Exception exception){

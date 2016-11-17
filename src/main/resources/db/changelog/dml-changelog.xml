@@ -10,7 +10,7 @@
          
 	<changeSet author="msingla" id="1.0">
 	    <sql>
-	    	insert into user (username, password, email, name, user_role, is_app_user, added_on) values ('LEPARTYCIOUS@GMAIL.COM', 'Chandigarh', 'lepartycious@gmail.com','Admin','ADMIN',true,now());
+	    	insert into user (username, password, email, name, user_role, is_app_user, added_on, is_active) values ('LEPARTYCIOUS@GMAIL.COM', 'Chandigarh', 'lepartycious@gmail.com','Admin','ADMIN',true,now(), true);
 	    </sql>
     </changeSet>
 	
@@ -1296,12 +1296,6 @@
 	    	update decorater set created_by = (select id from user where username = 'LEPARTYCIOUS@GMAIL.COM');
 	    	update entertainment set created_by = (select id from user where username = 'LEPARTYCIOUS@GMAIL.COM');
 	    	update miscellaneous set created_by = (select id from user where username = 'LEPARTYCIOUS@GMAIL.COM');
-	    </sql>
-    </changeSet>
-    
-    <changeSet author="msingla" id="1.73">
-	    <sql>
-	    	update user set is_active = true where id = (select id from user where username = 'LEPARTYCIOUS@GMAIL.COM');
 	    </sql>
     </changeSet>
     

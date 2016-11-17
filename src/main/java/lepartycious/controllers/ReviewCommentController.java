@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import lepartycious.Error.Error;
 import lepartycious.dtos.requestDTOs.ReviewCommentRequestDTO;
+import lepartycious.dtos.requestDTOs.SearchRequestDTO;
 import lepartycious.dtos.responseDTOs.ReviewCommentWrapperDTO;
 import lepartycious.services.ReviewCommentService;
 
@@ -32,8 +33,8 @@ public class ReviewCommentController {
 	}
 	
 	@RequestMapping(method=RequestMethod.GET, value="/v1/review/getAllReviews/{vendorId}")
-	public ReviewCommentWrapperDTO getReviewsByVendor(@PathVariable Long vendorId) throws Exception {
-		return reviewCommentService.getReviewsByVendor(vendorId);
+	public ReviewCommentWrapperDTO getReviewsByVendor(@RequestBody SearchRequestDTO searchRequestDTO) throws Exception {
+		return reviewCommentService.getReviewsByVendor(searchRequestDTO);
 	}
 	
 	@ExceptionHandler(IllegalArgumentException.class)
