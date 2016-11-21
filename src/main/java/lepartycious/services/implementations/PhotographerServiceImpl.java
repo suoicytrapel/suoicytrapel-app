@@ -10,6 +10,7 @@ import java.util.StringTokenizer;
 import lepartycious.daos.CityDAO;
 import lepartycious.daos.CommonDAO;
 import lepartycious.daos.PhotographerDAO;
+import lepartycious.daos.ReviewCommentDAO;
 import lepartycious.dtos.requestDTOs.DataRequestDTO;
 import lepartycious.dtos.requestDTOs.FilterWrapperDTO;
 import lepartycious.dtos.requestDTOs.SearchRequestDTO;
@@ -50,6 +51,9 @@ public class PhotographerServiceImpl implements PhotographerService {
 	
 	@Autowired
 	private CommonService commonService;
+	
+	@Autowired
+	private ReviewCommentDAO reviewCommentDAO;
 
 	@Override
 	public SearchResponseDTOWrapper getPhotographers(SearchRequestDTO searchDTO) {
@@ -89,6 +93,14 @@ public class PhotographerServiceImpl implements PhotographerService {
 			}
 			SearchResponseDTO searchResponseDTO = new SearchResponseDTO();
 			searchResponseDTO.setName(photographer.getName());
+
+			//Code to get average vendor rating
+			SearchRequestDTO searchRequestDTO = new SearchRequestDTO();
+			searchRequestDTO.setVendorId(photographer.getPhotographerId());
+			Double rating = reviewCommentDAO.getAverageRatingOfVendor(searchRequestDTO);
+			searchResponseDTO.setAverageRating(rating);
+			//code ends here 
+			
 			searchResponseDTO.setMainImagerURL(photographer.getAttachments().get(0).getImageURL());
 			searchResponseDTO.setLocality(photographer.getLocality().getDescription());
 			searchResponseDTO.setStartingPrice(photographer.getStartingPrice());
