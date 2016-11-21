@@ -100,7 +100,7 @@ public class SecurityUserDetailsServiceImpl implements SecurityUserDetailsServic
 		}
 		if(isUsernameAvailable){
 			User user = new User();
-			String rawPassword = userDTO.getIsAppUser() ? userDTO.getPassword() : username;
+			String rawPassword = userDTO.getPassword();
 			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 			user.setUsername(username.toUpperCase());
 			user.setPasswordDigest(encoder.encode(rawPassword));

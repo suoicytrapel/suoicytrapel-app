@@ -26,7 +26,7 @@ public class ReviewCommentServiceImpl implements ReviewCommentService {
 
 	@Override
 	public void submitReview(ReviewCommentRequestDTO reviewCommentRequestDTO) throws Exception {
-		Long entityId = commonService.getVendorIdByName(reviewCommentRequestDTO.getVendorName());
+		Long entityId = commonService.getVendorIdByName(reviewCommentRequestDTO.getVendorType(), reviewCommentRequestDTO.getVendorName());
 		EntityReview entityReview = new EntityReview(entityId, 
 				reviewCommentRequestDTO.getReviewedBy(), reviewCommentRequestDTO.getUserImageURL(), 
 				reviewCommentRequestDTO.getReviewComment(), reviewCommentRequestDTO.getStarRating(), reviewCommentRequestDTO.getReviewMoney());
@@ -37,7 +37,7 @@ public class ReviewCommentServiceImpl implements ReviewCommentService {
 	public ReviewCommentWrapperDTO getReviewsByVendor(SearchRequestDTO searchRequestDTO) throws Exception {
 		ReviewCommentWrapperDTO reviewCommentWrapperDTO = new ReviewCommentWrapperDTO();
 		List<ReviewCommentRequestDTO> reviewCommentRequestList = new ArrayList<ReviewCommentRequestDTO>();
-		Long vendorId = commonService.getVendorIdByName(searchRequestDTO.getVendorName());
+		Long vendorId = commonService.getVendorIdByName(searchRequestDTO.getVendorType(), searchRequestDTO.getVendorName());
 		searchRequestDTO.setVendorId(vendorId);
 		Long totalCount = reviewCommentDAO.getReviewCount(searchRequestDTO);
 		Double averagetRating = reviewCommentDAO.getAverageRatingOfVendor(searchRequestDTO);

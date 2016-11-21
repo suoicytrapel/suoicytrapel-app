@@ -372,8 +372,8 @@ public class CommonServiceImpl implements CommonService {
 	}
 	
 	@Override
-	public Long getVendorIdByName(String vendorName) throws Exception{
-		Map<String,Object> data = getDataclass(vendorName);
+	public Long getVendorIdByName(String vendorType, String vendorName) throws Exception{
+		Map<String,Object> data = getDataclass(vendorType);
 		String primaryKey = (String) data.get("id");
 		Class dataClass = (Class) data.get("class");
 		Long id = commonDAO.getVendorIdByName(vendorName, dataClass, primaryKey);
