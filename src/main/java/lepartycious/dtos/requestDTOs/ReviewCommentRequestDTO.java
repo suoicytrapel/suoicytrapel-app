@@ -1,6 +1,7 @@
 package lepartycious.dtos.requestDTOs;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class ReviewCommentRequestDTO implements Serializable{
 	
@@ -8,8 +9,10 @@ public class ReviewCommentRequestDTO implements Serializable{
 	private String userImageURL;
 	private String reviewComment;
 	private Float starRating;
-	private Long entityId;
 	private String reviewMoney;
+	private String vendorName;
+	private String vendorType;
+	private String reviewedOn;
 	
 	public ReviewCommentRequestDTO() {
 		super();
@@ -23,7 +26,6 @@ public class ReviewCommentRequestDTO implements Serializable{
 		this.userImageURL = userImageURL;
 		this.reviewComment = reviewComment;
 		this.starRating = starRating;
-		this.entityId = entityId;
 	}
 	public String getReviewedBy() {
 		return reviewedBy;
@@ -49,13 +51,6 @@ public class ReviewCommentRequestDTO implements Serializable{
 	public void setStarRating(Float starRating) {
 		this.starRating = starRating;
 	}
-	public Long getEntityId() {
-		return entityId;
-	}
-	public void setEntityId(Long entityId) {
-		this.entityId = entityId;
-	}
-
 	public String getReviewMoney() {
 		return reviewMoney;
 	}
@@ -63,5 +58,28 @@ public class ReviewCommentRequestDTO implements Serializable{
 	public void setReviewMoney(String reviewMoney) {
 		this.reviewMoney = reviewMoney;
 	}
-	
+
+	public String getVendorName() {
+		return vendorName;
+	}
+
+	public void setVendorName(String vendorName) {
+		this.vendorName = vendorName;
+	}
+
+	public String getVendorType() {
+		return vendorType;
+	}
+
+	public void setVendorType(String vendorType) {
+		this.vendorType = vendorType;
+	}
+
+	public String getReviewedOn() {
+		return reviewedOn;
+	}
+
+	public void setReviewedOn(String reviewedOn) {
+		this.reviewedOn = reviewedOn;
+	}
 }

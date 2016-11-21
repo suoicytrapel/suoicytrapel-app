@@ -10,8 +10,8 @@ import org.springframework.transaction.annotation.Transactional;
 public interface ReviewCommentService {
 
 	@Transactional(readOnly=false)
-	public void submitReview(ReviewCommentRequestDTO reviewCommentRequestDTO);
+	public void submitReview(ReviewCommentRequestDTO reviewCommentRequestDTO) throws Exception;
 
-	public ReviewCommentWrapperDTO getReviewsByVendor(SearchRequestDTO searchRequestDTO);
+	public ReviewCommentWrapperDTO getReviewsByVendor(SearchRequestDTO searchRequestDTO) throws Exception;
 
 }

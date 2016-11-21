@@ -28,7 +28,7 @@ public class Caterer implements Serializable{
 	@Id
 	@Column(name="id")
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long caterer_id;
+	private long catererId;
 	
 	@Column(name = "name", nullable=false)
 	private String name;
@@ -133,11 +133,11 @@ public class Caterer implements Serializable{
 	}
 
 	public long getCaterer_id() {
-		return caterer_id;
+		return catererId;
 	}
 
 	public void setCaterer_id(long caterer_id) {
-		this.caterer_id = caterer_id;
+		this.catererId = caterer_id;
 	}
 
 	public String getName() {

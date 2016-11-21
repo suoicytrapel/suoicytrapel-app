@@ -331,5 +331,53 @@ public class CommonServiceImpl implements CommonService {
 		// TODO Auto-generated method stub
 		return subCategoriesMap;
 	}
+	
+	private Map getDataclass(String vendorType) {
+		Map dataMap = new HashMap<String, Object>();
+		if(VendorTypeEnum.VENUE.toString().equals(vendorType)){
+			dataMap.put("class", Venue.class);
+			dataMap.put("id", "venueId");
+			dataMap.put("name", "name");
+		}
+		else if(VendorTypeEnum.CATERER.toString().equals(vendorType)){
+			dataMap.put("class", Caterer.class);
+			dataMap.put("id", "catererId");
+			dataMap.put("name", "name");
+		}
+		else if(VendorTypeEnum.PHOTOGRAPHER.toString().equals(vendorType)){
+			dataMap.put("class", Photographer.class);
+			dataMap.put("id", "photographerId");
+			dataMap.put("name", "name");
+		}
+		else if(VendorTypeEnum.DECORATOR.toString().equals(vendorType)){
+			dataMap.put("class", Decorator.class);
+			dataMap.put("id", "decoratorId");
+			dataMap.put("name", "name");
+		}
+		else if(VendorTypeEnum.ENTERTAINMENT.toString().equals(vendorType)){
+			dataMap.put("class", Entertainment.class);
+			dataMap.put("id", "entertainmentId");
+			dataMap.put("name", "name");
+		}
+		else if(VendorTypeEnum.OTHERS.toString().equals(vendorType)){
+			dataMap.put("class", Others.class);
+			dataMap.put("id", "othersId");
+			dataMap.put("name", "name");
+		}
+		else{
+			throw new IllegalArgumentException("Invalid Category");
+		}
+		return dataMap;
+
+	}
+	
+	@Override
+	public Long getVendorIdByName(String vendorName) throws Exception{
+		Map<String,Object> data = getDataclass(vendorName);
+		String primaryKey = (String) data.get("id");
+		Class dataClass = (Class) data.get("class");
+		Long id = commonDAO.getVendorIdByName(vendorName, dataClass, primaryKey);
+		return id;
+	}
 
 }

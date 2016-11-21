@@ -32,8 +32,13 @@ public class ReviewCommentController {
 		reviewCommentService.submitReview(reviewCommentRequestDTO);
 	}
 	
-	@RequestMapping(method=RequestMethod.GET, value="/v1/review/getAllReviews/{vendorId}")
+	@RequestMapping(method=RequestMethod.POST, value="/v1/review/getAllReviews")
 	public ReviewCommentWrapperDTO getReviewsByVendor(@RequestBody SearchRequestDTO searchRequestDTO) throws Exception {
+		if(searchRequestDTO.getLimit() == null){
+			searchRequestDTO.setLimit(50l);
+		}
+		Long offset = (searchRequestDTO.getOffset()-1)*searchRequestDTO.getLimit();
+		searchRequestDTO.setOffset(offset);
 		return reviewCommentService.getReviewsByVendor(searchRequestDTO);
 	}
 	

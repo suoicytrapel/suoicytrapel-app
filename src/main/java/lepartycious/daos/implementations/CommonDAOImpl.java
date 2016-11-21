@@ -24,12 +24,14 @@ import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Repository;
+import org.springframework.util.CollectionUtils;
 
 @Repository
 @CacheConfig(cacheNames = "commonCache")
@@ -163,5 +165,19 @@ public class CommonDAOImpl extends BaseDAOImpl implements CommonDAO{
 		Session session = sessionFactory.getCurrentSession();
 		//session.save();
 		
+	}
+
+	@Override
+	public Long getVendorIdByName(String vendorName, Class dataClass, String primaryKey) throws Exception {
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(dataClass);
+		criteria.add(Restrictions.eq("name", vendorName));
+		criteria.setProjection(Projections.property(primaryKey));
+		List result = criteria.list();
+		if(!CollectionUtils.isEmpty(result)){
+			return (Long) result.get(0);
+		}
+		else{
+			throw new Exception("Vendor with vendor name " + vendorName + "does not exist");
+		}
 	}
 }

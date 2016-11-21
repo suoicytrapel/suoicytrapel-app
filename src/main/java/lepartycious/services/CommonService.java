@@ -39,4 +39,6 @@ public interface CommonService {
 
 	public Map<String, List<FilterResponseDTO>> fetchSubCategories();
 
+	Long getVendorIdByName(String vendorName) throws Exception;
+
 }
