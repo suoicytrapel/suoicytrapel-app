@@ -824,4 +824,47 @@
 		</sql>
 	</changeSet>
 	
+	<changeSet author="msingla" id="1.57">
+		<sql>
+			ALTER TABLE venue ADD COLUMN is_active boolean default false;
+		</sql>
+	</changeSet>
+	
+	<changeSet author="msingla" id="1.58">
+		<sql>
+			ALTER TABLE caterer ADD COLUMN is_active boolean default false;
+		</sql>
+	</changeSet>
+	
+	<changeSet author="msingla" id="1.59">
+		<sql>
+			ALTER TABLE decorater ADD COLUMN is_active boolean default false;
+		</sql>
+	</changeSet>
+	
+	<changeSet author="msingla" id="1.60">
+		<sql>
+			ALTER TABLE photographer ADD COLUMN is_active boolean default false;
+		</sql>
+	</changeSet>
+	
+	<changeSet author="msingla" id="1.61">
+		<sql>
+			ALTER TABLE entertainment ADD COLUMN is_active boolean default false;
+		</sql>
+	</changeSet>
+	
+	<changeSet author="msingla" id="1.62">
+		<sql>
+			ALTER TABLE miscellaneous ADD COLUMN is_active boolean default false;
+		</sql>
+	</changeSet>
+	
+	<changeSet author="msingla" id="1.63">
+		<sql>
+			alter table venue modify column type varchar(20) null;
+			alter table venue modify column name varchar(100) not null;
+		</sql>
+	</changeSet>
+	
 </databaseChangeLog>

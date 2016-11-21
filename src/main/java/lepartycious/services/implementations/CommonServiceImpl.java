@@ -385,31 +385,37 @@ public class CommonServiceImpl implements CommonService {
 		if(VendorTypeEnum.VENUE.toString().equals(vendorType)){
 			Venue venue = new Venue();
 			venue.setName(vendorName);
+			venue.setIsActive(false);
 			commonDAO.createEntity(venue);
 		}
 		else if(VendorTypeEnum.CATERER.toString().equals(vendorType)){
 			Caterer caterer = new Caterer();
 			caterer.setName(vendorName);
+			caterer.setIsActive(false);
 			commonDAO.createEntity(caterer);
 		}
 		else if(VendorTypeEnum.PHOTOGRAPHER.toString().equals(vendorType)){
 			Photographer photographer = new Photographer();
 			photographer.setName(vendorName);
+			photographer.setIsActive(false);
 			commonDAO.createEntity(photographer);
 		}
 		else if(VendorTypeEnum.DECORATOR.toString().equals(vendorType)){
 			Decorator decorator = new Decorator();
 			decorator.setName(vendorName);
+			decorator.setIsActive(false);
 			commonDAO.createEntity(decorator);
 		}
 		else if(VendorTypeEnum.ENTERTAINMENT.toString().equals(vendorType)){
 			Entertainment entertainment = new Entertainment();
 			entertainment.setName(vendorName);
+			entertainment.setIsActive(false);
 			commonDAO.createEntity(entertainment);
 		}
 		else if(VendorTypeEnum.OTHERS.toString().equals(vendorType)){
 			Others others = new Others();
 			others.setName(vendorName);
+			others.setIsActive(false);
 			commonDAO.createEntity(others);
 		}
 		else{

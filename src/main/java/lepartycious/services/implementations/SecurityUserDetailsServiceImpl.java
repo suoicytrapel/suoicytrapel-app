@@ -151,9 +151,9 @@ public class SecurityUserDetailsServiceImpl implements SecurityUserDetailsServic
 		StringBuffer sbf = new StringBuffer();
 		BASE64Encoder encoder = new BASE64Encoder();
 		String resetToken = encoder.encode(user.getUsername().getBytes());
-		sbf.append("Hi " + user.getName() +",\n\nWe have recieved a password reset request from your end.\n");
-		sbf.append("Please click <a href=www.lepartycious.com/resetPasswprd?reset_token=" + resetToken +">Here</a> to go to the password reset page:-\n.");
-		sbf.append("\n\nCheers,\nLepartycious Team");
+		sbf.append("Hi " + user.getName() +",<br>\nWe have recieved a password reset request from your end.<br>");
+		sbf.append("Please click <a href=www.lepartycious.com/resetPasswprd?reset_token=" + resetToken +">Here</a> to go to the password reset page.<br>");
+		sbf.append("<br><br>Cheers,<br>Lepartycious Team");
 		return sbf.toString();
 	}
 

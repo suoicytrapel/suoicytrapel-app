@@ -46,9 +46,9 @@ public class UserController {
 		return user;
 	}
     
-    @RequestMapping(value="/v1/user/forgotPassword/{username}", method = RequestMethod.GET)
+    @RequestMapping(value="/v1/user/forgotPassword", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
-    public void forgotPassword(@PathVariable String username) throws Exception{
+    public void forgotPassword(@RequestParam String username) throws Exception{
     	securityuserDetailService.forgotPassword(username);
     }
     
