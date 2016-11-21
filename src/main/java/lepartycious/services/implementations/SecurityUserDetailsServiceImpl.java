@@ -113,11 +113,11 @@ public class SecurityUserDetailsServiceImpl implements SecurityUserDetailsServic
 			userDAO.saveOrUpdateUser(user);
 			if(userDTO.getIsAppUser())
 				sendActivationLink(user);
-			/*if(UserTypeEnum.VENDOR.toString().equalsIgnoreCase(userDTO.getUserRole())){
+			if(UserTypeEnum.VENDOR.toString().equalsIgnoreCase(userDTO.getUserRole())){
 				String vendorType = userDTO.getVendorType();
 				String entityName = userDTO.getEntityName();
 				commonDAO.createEntity(vendorType, entityName);
-			}*/
+			}
 		}
 	}
 
@@ -132,9 +132,9 @@ public class SecurityUserDetailsServiceImpl implements SecurityUserDetailsServic
 		StringBuffer sbf = new StringBuffer();
 		BASE64Encoder encoder = new BASE64Encoder();
 		String activationLink = encoder.encode(user.getUsername().getBytes());
-		sbf.append("Hi " + user.getName() +",\n\nWe have recieved a account activation request from your end.\n");
-		sbf.append("Please click <html><body><a href=www.lepartycious.com/activate?link=" + activationLink +">Here</a></html></body> to activate your account with LePartycious:-\n.");
-		sbf.append("\n\nCheers,\nLepartycious Team");
+		sbf.append("Hi " + user.getName() +",<br><br>We have recieved a account activation request from your end.<br>");
+		sbf.append("Please click <a href=http://localhost:9001/activate?activateLink=" + activationLink +">Here</a> to activate your account with LePartycious.<br>");
+		sbf.append("<br>Cheers,<br>Lepartycious Team");
 		return sbf.toString();
 	}
 
@@ -170,7 +170,7 @@ public class SecurityUserDetailsServiceImpl implements SecurityUserDetailsServic
 	@Override
 	public UserRequestDTO getLoggedInUser(String userType, Boolean isAppUser) throws Exception {
 		User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		if(user.getIsAppUser()==isAppUser && user.getUserRole()==userType){
+		if(user.getIsAppUser()==isAppUser && user.getUserRole().equalsIgnoreCase(userType)){
 			UserRequestDTO userRequestDTO = new UserRequestDTO();
 			userRequestDTO.setName(user.getName());
 			userRequestDTO.setUserRole(user.getUserRole());
@@ -186,7 +186,7 @@ public class SecurityUserDetailsServiceImpl implements SecurityUserDetailsServic
 	@Override
 	public void activateAccount(String activationLink) throws Exception {
 		String username = decodeUserString(activationLink);
-		User user = userDAO.loadUserByUsername(username);
+		User user = userDAO.loadInactiveUser(username);
 		if(user != null){
 			user.setIsActive(true);
 			userDAO.saveOrUpdateUser(user);

@@ -9,4 +9,6 @@ public interface UserDAO {
 	public void resetPassword(User user);
 	
 	public void saveOrUpdateUser(User user);
+
+	User loadInactiveUser(String username) throws Exception;
 }

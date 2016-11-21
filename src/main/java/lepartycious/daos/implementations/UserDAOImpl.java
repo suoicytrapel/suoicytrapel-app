@@ -45,5 +45,19 @@ public class UserDAOImpl implements UserDAO {
 		Session session = sessionFactory.getCurrentSession();
 		session.saveOrUpdate(user);
 	}
+	
+	@Override
+	public User loadInactiveUser(String username) throws Exception {
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(User.class);
+		criteria.add(Restrictions.eq("username", username.toUpperCase()));
+		criteria.add(Restrictions.eq("isActive", false));
+		List<User> userList = criteria.list();
+		if(CollectionUtils.isEmpty(userList)){
+			return null;
+		}
+		else{
+			return userList.get(0);
+		}
+	}
 
 }
