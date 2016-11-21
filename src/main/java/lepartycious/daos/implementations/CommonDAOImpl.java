@@ -161,13 +161,6 @@ public class CommonDAOImpl extends BaseDAOImpl implements CommonDAO{
 	}
 	
 	@Override
-	public void createEntity(String entityType, String entityName){
-		Session session = sessionFactory.getCurrentSession();
-		//session.save();
-		
-	}
-
-	@Override
 	public Long getVendorIdByName(String vendorName, Class dataClass, String primaryKey) throws Exception {
 		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(dataClass);
 		criteria.add(Restrictions.eq("name", vendorName));
@@ -179,5 +172,11 @@ public class CommonDAOImpl extends BaseDAOImpl implements CommonDAO{
 		else{
 			throw new Exception("Vendor with vendor name " + vendorName + "does not exist");
 		}
+	}
+
+	@Override
+	public void createEntity(Object entity) {
+		Session session = sessionFactory.getCurrentSession();
+		session.save(entity);
 	}
 }

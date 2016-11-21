@@ -380,4 +380,41 @@ public class CommonServiceImpl implements CommonService {
 		return id;
 	}
 
+	@Override
+	public void createEntity(String vendorType, String vendorName) {
+		if(VendorTypeEnum.VENUE.toString().equals(vendorType)){
+			Venue venue = new Venue();
+			venue.setName(vendorName);
+			commonDAO.createEntity(venue);
+		}
+		else if(VendorTypeEnum.CATERER.toString().equals(vendorType)){
+			Caterer caterer = new Caterer();
+			caterer.setName(vendorName);
+			commonDAO.createEntity(caterer);
+		}
+		else if(VendorTypeEnum.PHOTOGRAPHER.toString().equals(vendorType)){
+			Photographer photographer = new Photographer();
+			photographer.setName(vendorName);
+			commonDAO.createEntity(photographer);
+		}
+		else if(VendorTypeEnum.DECORATOR.toString().equals(vendorType)){
+			Decorator decorator = new Decorator();
+			decorator.setName(vendorName);
+			commonDAO.createEntity(decorator);
+		}
+		else if(VendorTypeEnum.ENTERTAINMENT.toString().equals(vendorType)){
+			Entertainment entertainment = new Entertainment();
+			entertainment.setName(vendorName);
+			commonDAO.createEntity(entertainment);
+		}
+		else if(VendorTypeEnum.OTHERS.toString().equals(vendorType)){
+			Others others = new Others();
+			others.setName(vendorName);
+			commonDAO.createEntity(others);
+		}
+		else{
+			throw new IllegalArgumentException("Invalid Category");
+		}
+
+	}
 }

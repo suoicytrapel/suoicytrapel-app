@@ -31,4 +31,5 @@ public interface SecurityUserDetailsService extends UserDetailsService{
 	
 	@Transactional(readOnly=false)
 	public void activateAccount(String activationLink) throws Exception;
+
 }

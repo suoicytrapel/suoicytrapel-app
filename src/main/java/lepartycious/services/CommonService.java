@@ -40,5 +40,7 @@ public interface CommonService {
 	public Map<String, List<FilterResponseDTO>> fetchSubCategories();
 
 	Long getVendorIdByName(String vendorType, String vendorName) throws Exception;
+	
+	void createEntity(String vendorType, String vendorName);
 
 }

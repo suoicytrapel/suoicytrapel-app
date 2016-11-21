@@ -44,7 +44,7 @@ public class SecurityUserDetailsServiceImpl implements SecurityUserDetailsServic
     private EmailService emailService;
     
     @Autowired
-    private CommonDAO commonDAO;
+    private CommonService commonService;
 
     @Override
     public User loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -95,9 +95,7 @@ public class SecurityUserDetailsServiceImpl implements SecurityUserDetailsServic
 	public void createUser(UserRequestDTO userDTO) throws Exception {
 		boolean isUsernameAvailable = true;
 		String username = userDTO.getUsername();
-		if(!userDTO.getIsAppUser()){
-			isUsernameAvailable = isUsernameAvailable(username);
-		}
+		isUsernameAvailable = isUsernameAvailable(username);
 		if(isUsernameAvailable){
 			User user = new User();
 			String rawPassword = userDTO.getPassword();
@@ -116,7 +114,7 @@ public class SecurityUserDetailsServiceImpl implements SecurityUserDetailsServic
 			if(UserTypeEnum.VENDOR.toString().equalsIgnoreCase(userDTO.getUserRole())){
 				String vendorType = userDTO.getVendorType();
 				String entityName = userDTO.getEntityName();
-				commonDAO.createEntity(vendorType, entityName);
+				commonService.createEntity(vendorType, entityName);
 			}
 		}
 	}
