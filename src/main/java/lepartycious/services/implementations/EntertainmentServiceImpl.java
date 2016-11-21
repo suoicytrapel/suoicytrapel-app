@@ -95,7 +95,7 @@ public class EntertainmentServiceImpl implements EntertainmentService {
 
 			//Code to get average vendor rating
 			SearchRequestDTO searchRequestDTO = new SearchRequestDTO();
-			searchRequestDTO.setVendorId(rental.getRentalId());
+			searchRequestDTO.setVendorId(rental.getEntertainmentId());
 			Double rating = reviewCommentDAO.getAverageRatingOfVendor(searchRequestDTO);
 			searchResponseDTO.setAverageRating(rating);
 			//code ends here 
