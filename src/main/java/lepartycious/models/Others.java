@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
@@ -37,12 +38,6 @@ public class Others implements Serializable{
 	
 	@Column(name="miscellaneous_type")
 	private String othersType;
-	
-	@Column(name = "comments")
-	private String comments;
-	
-	@Column(name = "rating")
-	private Float rating;
 	
 	@Column(name = "added_on")
 	private Date addedOn;
@@ -87,6 +82,28 @@ public class Others implements Serializable{
 	
 	@Column(name = "policies")
 	private String policies;
+	
+	@OneToMany(mappedBy="entityId")
+	private List<EntityReview> comments;
+	
+	@Column(name="created_by")
+	private Long user;
+	
+	public Long getUser() {
+		return user;
+	}
+
+	public void setUser(Long user) {
+		this.user = user;
+	}
+	
+	public List<EntityReview> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<EntityReview> comments) {
+		this.comments = comments;
+	}
 
 	public String getPolicies() {
 		return policies;
@@ -142,22 +159,6 @@ public class Others implements Serializable{
 
 	public void setOthersType(String othersType) {
 		this.othersType = othersType;
-	}
-
-	public String getComments() {
-		return comments;
-	}
-
-	public void setComments(String comments) {
-		this.comments = comments;
-	}
-
-	public Float getRating() {
-		return rating;
-	}
-
-	public void setRating(Float rating) {
-		this.rating = rating;
 	}
 
 	public Date getAddedOn() {

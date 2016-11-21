@@ -1,6 +1,6 @@
 package lepartycious.Enums;
 
-public enum SearchTypeEnum {
+public enum VendorTypeEnum {
 
 	VENUE, CATERER, DECORATOR, PHOTOGRAPHER, OTHERS, ENTERTAINMENT;
 	

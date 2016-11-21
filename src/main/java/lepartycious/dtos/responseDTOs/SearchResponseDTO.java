@@ -12,6 +12,7 @@ public class SearchResponseDTO {
 	private String maxCapacity;
 	private Boolean isPureVeg;
 	private String minCapacity;
+	private Double averageRating;
 	
 	public SearchResponseDTO() {
 		super();
@@ -69,5 +70,11 @@ public class SearchResponseDTO {
 	}
 	public void setMinCapacity(String minCapacity) {
 		this.minCapacity = minCapacity;
+	}
+	public Double getAverageRating() {
+		return averageRating;
+	}
+	public void setAverageRating(Double averageRating) {
+		this.averageRating = averageRating;
 	}
 }

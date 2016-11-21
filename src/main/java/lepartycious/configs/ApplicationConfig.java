@@ -23,6 +23,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.mail.javamail.MimeMailMessage;
 import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBean;
 import org.springframework.scheduling.annotation.EnableAsync;
@@ -91,14 +92,14 @@ public class ApplicationConfig {
 		return transactionManager;
 	}
 
-	@Bean
+	/*@Bean
 	public FilterRegistrationBean shallowEtagHeaderFilter() {
 		FilterRegistrationBean registration = new FilterRegistrationBean();
 		registration.setFilter(new CORSFilter());
 		registration.setDispatcherTypes(EnumSet.allOf(DispatcherType.class));
 		registration.addUrlPatterns("/*");
 		return registration;
-	}
+	}*/
 
 	@Bean
 	public SpringLiquibase liquibase() {
@@ -119,12 +120,6 @@ public class ApplicationConfig {
 		javaMailSender.setPassword("405423ok1");
 		javaMailSender.setJavaMailProperties(javaMailProperties());
 		return javaMailSender;
-	}
-
-	@Bean
-	public SimpleMailMessage custoMailMessage(){
-		SimpleMailMessage customMessage = new SimpleMailMessage();
-		return customMessage;
 	}
 
 	@Bean

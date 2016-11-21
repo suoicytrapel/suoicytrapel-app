@@ -15,6 +15,9 @@ public class SearchRequestDTO implements Serializable{
 	private String sortOrder;
 	private String sortField;
 	private FilterWrapperDTO filters;
+	private String vendorName;
+	private String vendorType;
+	private Long vendorId;
 	
 	public String getSearchType() {
 		return searchType;
@@ -63,5 +66,23 @@ public class SearchRequestDTO implements Serializable{
 	}
 	public void setFilters(FilterWrapperDTO filters) {
 		this.filters = filters;
+	}
+	public String getVendorName() {
+		return vendorName;
+	}
+	public void setVendorName(String vendorName) {
+		this.vendorName = vendorName;
+	}
+	public Long getVendorId() {
+		return vendorId;
+	}
+	public void setVendorId(Long vendorId) {
+		this.vendorId = vendorId;
+	}
+	public String getVendorType() {
+		return vendorType;
+	}
+	public void setVendorType(String vendorType) {
+		this.vendorType = vendorType;
 	}
 }

@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
 
-import lepartycious.Enums.SearchTypeEnum;
+import lepartycious.Enums.VendorTypeEnum;
 import lepartycious.daos.CommonDAO;
 import lepartycious.dtos.requestDTOs.DataRequestDTO;
 import lepartycious.dtos.requestDTOs.SearchRequestDTO;
@@ -64,22 +64,22 @@ public class CommonServiceImpl implements CommonService {
 
 	@Override
 	public SearchResponseDTOWrapper getEntities(SearchRequestDTO searchDTO) {
-		if(SearchTypeEnum.VENUE.toString().equals(searchDTO.getSearchType())){
+		if(VendorTypeEnum.VENUE.toString().equals(searchDTO.getSearchType())){
 			return venueService.getVenues(searchDTO);
 		}
-		else if(SearchTypeEnum.CATERER.toString().equals(searchDTO.getSearchType())){
+		else if(VendorTypeEnum.CATERER.toString().equals(searchDTO.getSearchType())){
 			return catererService.getCaterers(searchDTO);
 		}
-		else if(SearchTypeEnum.PHOTOGRAPHER.toString().equals(searchDTO.getSearchType())){
+		else if(VendorTypeEnum.PHOTOGRAPHER.toString().equals(searchDTO.getSearchType())){
 			return photographerService.getPhotographers(searchDTO);
 		}
-		else if(SearchTypeEnum.DECORATOR.toString().equals(searchDTO.getSearchType())){
+		else if(VendorTypeEnum.DECORATOR.toString().equals(searchDTO.getSearchType())){
 			return decoratorService.getDecorators(searchDTO);
 		}
-		else if(SearchTypeEnum.ENTERTAINMENT.toString().equals(searchDTO.getSearchType())){
+		else if(VendorTypeEnum.ENTERTAINMENT.toString().equals(searchDTO.getSearchType())){
 			return entertainmentService.getRentals(searchDTO);
 		}
-		else if(SearchTypeEnum.OTHERS.toString().equals(searchDTO.getSearchType())){
+		else if(VendorTypeEnum.OTHERS.toString().equals(searchDTO.getSearchType())){
 			return othersService.getOthers(searchDTO);
 		}
 		else{
@@ -90,22 +90,22 @@ public class CommonServiceImpl implements CommonService {
 
 	@Override
 	public List<String> loadList(SearchRequestDTO searchDTO) {
-		if(SearchTypeEnum.VENUE.toString().equals(searchDTO.getSearchType())){
+		if(VendorTypeEnum.VENUE.toString().equals(searchDTO.getSearchType())){
 			return venueService.loadVenueList(searchDTO);
 		}
-		else if(SearchTypeEnum.CATERER.toString().equals(searchDTO.getSearchType())){
+		else if(VendorTypeEnum.CATERER.toString().equals(searchDTO.getSearchType())){
 			return catererService.loadCatererList(searchDTO);
 		}
-		else if(SearchTypeEnum.PHOTOGRAPHER.toString().equals(searchDTO.getSearchType())){
+		else if(VendorTypeEnum.PHOTOGRAPHER.toString().equals(searchDTO.getSearchType())){
 			return photographerService.loadPhotographerList(searchDTO);
 		}
-		else if(SearchTypeEnum.DECORATOR.toString().equals(searchDTO.getSearchType())){
+		else if(VendorTypeEnum.DECORATOR.toString().equals(searchDTO.getSearchType())){
 			return decoratorService.loadDecoratorList(searchDTO);
 		}
-		else if(SearchTypeEnum.ENTERTAINMENT.toString().equals(searchDTO.getSearchType())){
+		else if(VendorTypeEnum.ENTERTAINMENT.toString().equals(searchDTO.getSearchType())){
 			return entertainmentService.loadRentalList(searchDTO);
 		}
-		else if(SearchTypeEnum.OTHERS.toString().equals(searchDTO.getSearchType())){
+		else if(VendorTypeEnum.OTHERS.toString().equals(searchDTO.getSearchType())){
 			return othersService.loadOthersList(searchDTO);
 		}
 		else{
@@ -115,22 +115,22 @@ public class CommonServiceImpl implements CommonService {
 
 	@Override
 	public DetailResponseDTO fetchDetails(DataRequestDTO dataRequestDTO) {
-		if(SearchTypeEnum.VENUE.toString().equals(dataRequestDTO.getSearchType())){
+		if(VendorTypeEnum.VENUE.toString().equals(dataRequestDTO.getSearchType())){
 			return venueService.fetchVenueDetails(dataRequestDTO.getCityId(), dataRequestDTO.getName());
 		}
-		else if(SearchTypeEnum.CATERER.toString().equals(dataRequestDTO.getSearchType())){
+		else if(VendorTypeEnum.CATERER.toString().equals(dataRequestDTO.getSearchType())){
 			return catererService.fetchCatererDetails(dataRequestDTO);
 		}
-		else if(SearchTypeEnum.ENTERTAINMENT.toString().equals(dataRequestDTO.getSearchType())){
+		else if(VendorTypeEnum.ENTERTAINMENT.toString().equals(dataRequestDTO.getSearchType())){
 			return entertainmentService.fetchRentalDetails(dataRequestDTO);
 		}
-		else if(SearchTypeEnum.PHOTOGRAPHER.toString().equals(dataRequestDTO.getSearchType())){
+		else if(VendorTypeEnum.PHOTOGRAPHER.toString().equals(dataRequestDTO.getSearchType())){
 			return photographerService.fetchPhotographerDetails(dataRequestDTO);
 		}
-		else if(SearchTypeEnum.DECORATOR.toString().equals(dataRequestDTO.getSearchType())){
+		else if(VendorTypeEnum.DECORATOR.toString().equals(dataRequestDTO.getSearchType())){
 			return decoratorService.fetchDecoratorDetails(dataRequestDTO);
 		}
-		else if(SearchTypeEnum.OTHERS.toString().equals(dataRequestDTO.getSearchType())){
+		else if(VendorTypeEnum.OTHERS.toString().equals(dataRequestDTO.getSearchType())){
 			return othersService.fetchOthersDetails(dataRequestDTO);
 		}
 		else{
@@ -140,22 +140,22 @@ public class CommonServiceImpl implements CommonService {
 
 	@Override
 	public FilterResponseWrapperDTO loadFilters(String searchType, Long cityId) {
-		if(SearchTypeEnum.VENUE.toString().equals(searchType)){
+		if(VendorTypeEnum.VENUE.toString().equals(searchType)){
 			return venueService.loadFilters(cityId);
 		}
-		else if(SearchTypeEnum.CATERER.toString().equals(searchType)){
+		else if(VendorTypeEnum.CATERER.toString().equals(searchType)){
 			return catererService.loadFilters(cityId);
 		}
-		else if(SearchTypeEnum.ENTERTAINMENT.toString().equals(searchType)){
+		else if(VendorTypeEnum.ENTERTAINMENT.toString().equals(searchType)){
 			return entertainmentService.loadFilters(cityId);
 		}
-		else if(SearchTypeEnum.PHOTOGRAPHER.toString().equals(searchType)){
+		else if(VendorTypeEnum.PHOTOGRAPHER.toString().equals(searchType)){
 			return photographerService.loadFilters(cityId);
 		}
-		else if(SearchTypeEnum.DECORATOR.toString().equals(searchType)){
+		else if(VendorTypeEnum.DECORATOR.toString().equals(searchType)){
 			return decoratorService.loadFilters(cityId);
 		}
-		else if(SearchTypeEnum.OTHERS.toString().equals(searchType)){
+		else if(VendorTypeEnum.OTHERS.toString().equals(searchType)){
 			return othersService.loadFilters(cityId);
 		}
 		else{
@@ -166,22 +166,22 @@ public class CommonServiceImpl implements CommonService {
 	@Override
 	public List<SearchResponseDTO> fetchRecomendations(String searchType,
 			Long cityId) {
-		if(SearchTypeEnum.VENUE.toString().equals(searchType)){
+		if(VendorTypeEnum.VENUE.toString().equals(searchType)){
 			return venueService.fetchRecomendations(cityId);
 		}
-		if(SearchTypeEnum.CATERER.toString().equals(searchType)){
+		if(VendorTypeEnum.CATERER.toString().equals(searchType)){
 			return catererService.fetchRecomendations(cityId);
 		}
-		if(SearchTypeEnum.ENTERTAINMENT.toString().equals(searchType)){
+		if(VendorTypeEnum.ENTERTAINMENT.toString().equals(searchType)){
 			return entertainmentService.fetchRecomendations(cityId);
 		}
-		if(SearchTypeEnum.PHOTOGRAPHER.toString().equals(searchType)){
+		if(VendorTypeEnum.PHOTOGRAPHER.toString().equals(searchType)){
 			return photographerService.fetchRecomendations(cityId);
 		}
-		if(SearchTypeEnum.DECORATOR.toString().equals(searchType)){
+		if(VendorTypeEnum.DECORATOR.toString().equals(searchType)){
 			return decoratorService.fetchRecomendations(cityId);
 		}
-		if(SearchTypeEnum.OTHERS.toString().equals(searchType)){
+		if(VendorTypeEnum.OTHERS.toString().equals(searchType)){
 			return othersService.fetchRecomendations(cityId);
 		}
 		else{
@@ -197,7 +197,7 @@ public class CommonServiceImpl implements CommonService {
 		List<AddedDTO> venueAdditions = new ArrayList<AddedDTO>();
 		List<Venue> venueList =  commonDAO.getRecentlyAddedVenues(cityId);
 		for(Venue venue : venueList){
-			AddedDTO details = new AddedDTO(venue.getName(), venue.getLocality().getName(), venue.getCity().getName(), SearchTypeEnum.VENUE.toString()); 
+			AddedDTO details = new AddedDTO(venue.getName(), venue.getLocality().getName(), venue.getCity().getName(), VendorTypeEnum.VENUE.toString()); 
 			venueAdditions.add(details);
 		}
 		if(!CollectionUtils.isEmpty(venueAdditions)){
@@ -208,7 +208,7 @@ public class CommonServiceImpl implements CommonService {
 		List<AddedDTO> catererAdditions = new ArrayList<AddedDTO>();
 		List<Caterer> catererList =  commonDAO.getRecentlyAddedCaterers(cityId);
 		for(Caterer caterer : catererList){
-			AddedDTO details = new AddedDTO(caterer.getName(), caterer.getLocality().getName(), caterer.getCity().getName(), SearchTypeEnum.CATERER.toString()); 
+			AddedDTO details = new AddedDTO(caterer.getName(), caterer.getLocality().getName(), caterer.getCity().getName(), VendorTypeEnum.CATERER.toString()); 
 			catererAdditions.add(details);
 		}
 		if(!CollectionUtils.isEmpty(catererAdditions)){
@@ -219,7 +219,7 @@ public class CommonServiceImpl implements CommonService {
 		List<AddedDTO> rentalAdditions = new ArrayList<AddedDTO>();
 		List<Entertainment> rentalList =  commonDAO.getRecentlyAddedEntertainers(cityId);
 		for(Entertainment rental : rentalList){
-			AddedDTO details = new AddedDTO(rental.getName(), rental.getLocality().getName(), rental.getCity().getName(), SearchTypeEnum.ENTERTAINMENT.toString()); 
+			AddedDTO details = new AddedDTO(rental.getName(), rental.getLocality().getName(), rental.getCity().getName(), VendorTypeEnum.ENTERTAINMENT.toString()); 
 			rentalAdditions.add(details);
 		}
 		if(!CollectionUtils.isEmpty(rentalAdditions)){
@@ -230,7 +230,7 @@ public class CommonServiceImpl implements CommonService {
 		List<AddedDTO> decoratorAdditions = new ArrayList<AddedDTO>();
 		List<Decorator> decoratorList =  commonDAO.getRecentlyAddedDecorators(cityId);
 		for(Decorator decorator : decoratorList){
-			AddedDTO details = new AddedDTO(decorator.getName(), decorator.getLocality().getName(), decorator.getCity().getName(), SearchTypeEnum.DECORATOR.toString()); 
+			AddedDTO details = new AddedDTO(decorator.getName(), decorator.getLocality().getName(), decorator.getCity().getName(), VendorTypeEnum.DECORATOR.toString()); 
 			decoratorAdditions.add(details);
 		}
 		if(!CollectionUtils.isEmpty(decoratorAdditions)){
@@ -241,7 +241,7 @@ public class CommonServiceImpl implements CommonService {
 		List<AddedDTO> photographerAdditions = new ArrayList<AddedDTO>();
 		List<Photographer> photographerList =  commonDAO.getRecentlyAddedPhotographers(cityId);
 		for(Photographer photographer : photographerList){
-			AddedDTO details = new AddedDTO(photographer.getName(), photographer.getLocality().getName(), photographer.getCity().getName(), SearchTypeEnum.PHOTOGRAPHER.toString()); 
+			AddedDTO details = new AddedDTO(photographer.getName(), photographer.getLocality().getName(), photographer.getCity().getName(), VendorTypeEnum.PHOTOGRAPHER.toString()); 
 			photographerAdditions.add(details);
 		}
 		if(!CollectionUtils.isEmpty(photographerAdditions)){
@@ -252,7 +252,7 @@ public class CommonServiceImpl implements CommonService {
 		List<AddedDTO> othersAdditions = new ArrayList<AddedDTO>();
 		List<Others> othersList =  commonDAO.getRecentlyAddedOthers(cityId);
 		for(Others other : othersList){
-			AddedDTO details = new AddedDTO(other.getName(), other.getLocality().getName(), other.getCity().getName(), SearchTypeEnum.OTHERS.toString()); 
+			AddedDTO details = new AddedDTO(other.getName(), other.getLocality().getName(), other.getCity().getName(), VendorTypeEnum.OTHERS.toString()); 
 			othersAdditions.add(details);
 		}
 		if(!CollectionUtils.isEmpty(othersAdditions)){
@@ -331,5 +331,90 @@ public class CommonServiceImpl implements CommonService {
 		// TODO Auto-generated method stub
 		return subCategoriesMap;
 	}
+	
+	private Map getDataclass(String vendorType) {
+		Map dataMap = new HashMap<String, Object>();
+		if(VendorTypeEnum.VENUE.toString().equals(vendorType)){
+			dataMap.put("class", Venue.class);
+			dataMap.put("id", "venueId");
+			dataMap.put("name", "name");
+		}
+		else if(VendorTypeEnum.CATERER.toString().equals(vendorType)){
+			dataMap.put("class", Caterer.class);
+			dataMap.put("id", "catererId");
+			dataMap.put("name", "name");
+		}
+		else if(VendorTypeEnum.PHOTOGRAPHER.toString().equals(vendorType)){
+			dataMap.put("class", Photographer.class);
+			dataMap.put("id", "photographerId");
+			dataMap.put("name", "name");
+		}
+		else if(VendorTypeEnum.DECORATOR.toString().equals(vendorType)){
+			dataMap.put("class", Decorator.class);
+			dataMap.put("id", "decoratorId");
+			dataMap.put("name", "name");
+		}
+		else if(VendorTypeEnum.ENTERTAINMENT.toString().equals(vendorType)){
+			dataMap.put("class", Entertainment.class);
+			dataMap.put("id", "entertainmentId");
+			dataMap.put("name", "name");
+		}
+		else if(VendorTypeEnum.OTHERS.toString().equals(vendorType)){
+			dataMap.put("class", Others.class);
+			dataMap.put("id", "othersId");
+			dataMap.put("name", "name");
+		}
+		else{
+			throw new IllegalArgumentException("Invalid Category");
+		}
+		return dataMap;
 
+	}
+	
+	@Override
+	public Long getVendorIdByName(String vendorType, String vendorName) throws Exception{
+		Map<String,Object> data = getDataclass(vendorType);
+		String primaryKey = (String) data.get("id");
+		Class dataClass = (Class) data.get("class");
+		Long id = commonDAO.getVendorIdByName(vendorName, dataClass, primaryKey);
+		return id;
+	}
+
+	@Override
+	public void createEntity(String vendorType, String vendorName) {
+		if(VendorTypeEnum.VENUE.toString().equals(vendorType)){
+			Venue venue = new Venue();
+			venue.setName(vendorName);
+			commonDAO.createEntity(venue);
+		}
+		else if(VendorTypeEnum.CATERER.toString().equals(vendorType)){
+			Caterer caterer = new Caterer();
+			caterer.setName(vendorName);
+			commonDAO.createEntity(caterer);
+		}
+		else if(VendorTypeEnum.PHOTOGRAPHER.toString().equals(vendorType)){
+			Photographer photographer = new Photographer();
+			photographer.setName(vendorName);
+			commonDAO.createEntity(photographer);
+		}
+		else if(VendorTypeEnum.DECORATOR.toString().equals(vendorType)){
+			Decorator decorator = new Decorator();
+			decorator.setName(vendorName);
+			commonDAO.createEntity(decorator);
+		}
+		else if(VendorTypeEnum.ENTERTAINMENT.toString().equals(vendorType)){
+			Entertainment entertainment = new Entertainment();
+			entertainment.setName(vendorName);
+			commonDAO.createEntity(entertainment);
+		}
+		else if(VendorTypeEnum.OTHERS.toString().equals(vendorType)){
+			Others others = new Others();
+			others.setName(vendorName);
+			commonDAO.createEntity(others);
+		}
+		else{
+			throw new IllegalArgumentException("Invalid Category");
+		}
+
+	}
 }

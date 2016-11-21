@@ -27,4 +27,6 @@ public interface CommonDAO {
 	public List<Room> getRooms(String room);
 	public List<Filter> getRequiredFilters(String forEntity, String ofType);
 	public List<Others> getRecentlyAddedOthers(Long cityId);
+	void createEntity(Object entity);
+	Long getVendorIdByName(String vendorName, Class dataClass, String primaryKey) throws Exception;
 }

@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
@@ -34,12 +35,6 @@ public class Decorator implements Serializable{
 	
 	@Column(name = "description")
 	private String description;
-	
-	@Column(name = "comments")
-	private String comments;
-	
-	@Column(name = "rating")
-	private Float rating;
 	
 	@Column(name = "added_on")
 	private Date addedOn;
@@ -81,6 +76,28 @@ public class Decorator implements Serializable{
 	
 	@Column(name = "min_capacity")
 	private String minCapacity;
+	
+	@OneToMany(mappedBy="entityId")
+	private List<EntityReview> comments;
+	
+	@Column(name="created_by")
+	private Long user;
+	
+	public Long getUser() {
+		return user;
+	}
+
+	public void setUser(Long user) {
+		this.user = user;
+	}
+	
+	public List<EntityReview> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<EntityReview> comments) {
+		this.comments = comments;
+	}
 	
 	public String getMinCapacity() {
 		return minCapacity;
@@ -144,22 +161,6 @@ public class Decorator implements Serializable{
 
 	public void setDescription(String description) {
 		this.description = description;
-	}
-
-	public String getComments() {
-		return comments;
-	}
-
-	public void setComments(String comments) {
-		this.comments = comments;
-	}
-
-	public Float getRating() {
-		return rating;
-	}
-
-	public void setRating(Float rating) {
-		this.rating = rating;
 	}
 
 	public Date getAddedOn() {

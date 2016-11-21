@@ -10,6 +10,7 @@ import java.util.StringTokenizer;
 import lepartycious.daos.CatererDAO;
 import lepartycious.daos.CityDAO;
 import lepartycious.daos.CommonDAO;
+import lepartycious.daos.ReviewCommentDAO;
 import lepartycious.dtos.requestDTOs.DataRequestDTO;
 import lepartycious.dtos.requestDTOs.FilterWrapperDTO;
 import lepartycious.dtos.requestDTOs.SearchRequestDTO;
@@ -49,6 +50,9 @@ public class CatererServiceImpl implements CatererService {
 	
 	@Autowired
 	private CommonService commonService;
+	
+	@Autowired
+	private ReviewCommentDAO reviewCommentDAO;
 
 	@Override
 	public SearchResponseDTOWrapper getCaterers(SearchRequestDTO searchDTO) {
@@ -88,6 +92,14 @@ public class CatererServiceImpl implements CatererService {
 			}
 			SearchResponseDTO searchResponseDTO = new SearchResponseDTO();
 			searchResponseDTO.setName(caterer.getName());
+			
+			//Code to get average vendor rating
+			SearchRequestDTO searchRequestDTO = new SearchRequestDTO();
+			searchRequestDTO.setVendorId(caterer.getCaterer_id());
+			Double rating = reviewCommentDAO.getAverageRatingOfVendor(searchRequestDTO);
+			searchResponseDTO.setAverageRating(rating);
+			//code ends here 
+			
 			searchResponseDTO.setLocality(caterer.getLocality().getDescription());
 			searchResponseDTO.setStartingPrice(caterer.getStartingPrice());
 			searchResponseDTO.setMainImagerURL(caterer.getAttachments().get(0).getImageURL());

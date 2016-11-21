@@ -11,6 +11,7 @@ import lepartycious.daos.CityDAO;
 import lepartycious.daos.CommonDAO;
 import lepartycious.daos.EntertainmentDAO;
 import lepartycious.daos.OthersDAO;
+import lepartycious.daos.ReviewCommentDAO;
 import lepartycious.dtos.requestDTOs.DataRequestDTO;
 import lepartycious.dtos.requestDTOs.FilterWrapperDTO;
 import lepartycious.dtos.requestDTOs.SearchRequestDTO;
@@ -52,6 +53,9 @@ public class OthersServiceImpl implements OthersService {
 	
 	@Autowired
 	private CommonService commonService;
+	
+	@Autowired
+	private ReviewCommentDAO reviewCommentDAO;
 
 	@Override
 	public SearchResponseDTOWrapper getOthers(SearchRequestDTO searchDTO) {
@@ -91,6 +95,14 @@ public class OthersServiceImpl implements OthersService {
 			}
 			SearchResponseDTO searchResponseDTO = new SearchResponseDTO();
 			searchResponseDTO.setName(other.getName());
+
+			//Code to get average vendor rating
+			SearchRequestDTO searchRequestDTO = new SearchRequestDTO();
+			searchRequestDTO.setVendorId(other.getOthersId());
+			Double rating = reviewCommentDAO.getAverageRatingOfVendor(searchRequestDTO);
+			searchResponseDTO.setAverageRating(rating);
+			//code ends here 
+			
 			searchResponseDTO.setLocality(other.getLocality().getDescription());
 			searchResponseDTO.setStartingPrice(other.getStartingPrice());
 			searchResponseDTO.setMainImagerURL(other.getAttachments().get(0).getImageURL());
