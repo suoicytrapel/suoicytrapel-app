@@ -37,9 +37,9 @@ public class UserController {
     @Autowired
     private SecurityUserDetailsService securityuserDetailService;
     
-   /* @Autowired
-    private TokenStore tokenStore;*/
-
+    /*@Autowired
+    private TokenStore tokenStore;
+*/
     @RequestMapping(value="/secured/v1/getUserDetails", method=RequestMethod.GET)
 	public UserRequestDTO getLoggedInUser(@RequestParam String userType, @RequestParam Boolean isAppUser) throws Exception{
     	UserRequestDTO user = securityuserDetailService.getLoggedInUser(userType, isAppUser);
@@ -53,6 +53,12 @@ public class UserController {
     }
     
     @RequestMapping(value="/v1/user/resetPassword", method = RequestMethod.POST)
+    @ResponseStatus(HttpStatus.OK)
+    public void resetForgotPassword(@RequestBody UserRequestDTO user) throws Exception{
+    	securityuserDetailService.resetPassword(user);
+    }
+    
+    @RequestMapping(value="/secured/v1/user/resetPassword", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.OK)
     public void resetPassword(@RequestBody UserRequestDTO user) throws Exception{
     	securityuserDetailService.resetPassword(user);
@@ -69,8 +75,8 @@ public class UserController {
     	return securityuserDetailService.isUsernameAvailable(username);
     }
     
-    @RequestMapping(value="/v1/user/decodeString/{username}", method = RequestMethod.GET)
-    public String decodeUserString(@PathVariable  String username) throws Exception{
+    @RequestMapping(value="/v1/user/decodeString", method = RequestMethod.GET)
+    public String decodeUserString(@RequestParam  String username) throws Exception{
     	return securityuserDetailService.decodeUserString(username);
     }
     
@@ -80,7 +86,7 @@ public class UserController {
     	securityuserDetailService.activateAccount(activationLink);
     }
     
-    /*@RequestMapping(value = "/secured/v1/logout", method = RequestMethod.GET)
+   /* @RequestMapping(value = "/secured/v1/logout", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
     public void logout(HttpServletRequest request) {
         String authHeader = request.getHeader("Authorization");

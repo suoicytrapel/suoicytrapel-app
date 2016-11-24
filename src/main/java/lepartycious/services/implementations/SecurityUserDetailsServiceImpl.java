@@ -65,7 +65,7 @@ public class SecurityUserDetailsServiceImpl implements SecurityUserDetailsServic
 		User user = userDAO.loadUserByUsername(username);
 		if(user != null){
 			String mailFrom = "no-reply@gmail.com";
-			String mailSubject = "Password Reset Request";
+			String mailSubject = "Forgot Password Request";
 			String mailContent = generateMailContent(user);
 			emailService.sendMail(user.getEmail(), mailFrom, mailSubject, mailContent);
 		}
@@ -77,10 +77,17 @@ public class SecurityUserDetailsServiceImpl implements SecurityUserDetailsServic
 
 	@Override
 	public void resetPassword(UserRequestDTO userDTO) throws Exception {
-		User user = userDAO.loadUserByUsername(userDTO.getEmail());
-		if(user != null){
+		User user = userDAO.loadUserByUsername(userDTO.getUsername());
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		boolean matched = false;
+		if(StringUtils.isNotEmpty(userDTO.getOldPassword())){
+			matched = encoder.matches(userDTO.getOldPassword(), user.getPasswordDigest());
+			if(!matched){
+				throw new Exception("Old Password did not match");
+			}
+		}
+		if(user != null || matched){
 			String rawPassword = userDTO.getPassword();
-			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 			String password = encoder.encode(rawPassword);
 			user.setPasswordDigest(password);
 			userDAO.saveOrUpdateUser(user);
@@ -151,8 +158,8 @@ public class SecurityUserDetailsServiceImpl implements SecurityUserDetailsServic
 		StringBuffer sbf = new StringBuffer();
 		BASE64Encoder encoder = new BASE64Encoder();
 		String resetToken = encoder.encode(user.getUsername().getBytes());
-		sbf.append("Hi " + user.getName() +",<br>\nWe have recieved a password reset request from your end.<br>");
-		sbf.append("Please click <a href=www.lepartycious.com/resetPasswprd?reset_token=" + resetToken +">Here</a> to go to the password reset page.<br>");
+		sbf.append("Hi " + user.getName() +",<br>\nWe have recieved a forgot password request from your end.<br>");
+		sbf.append("Please click <a href=www.lepartycious.com/resetPassword?reset_token=" + resetToken +">Here</a> to go to the password reset page.<br>");
 		sbf.append("<br><br>Cheers,<br>Lepartycious Team");
 		return sbf.toString();
 	}

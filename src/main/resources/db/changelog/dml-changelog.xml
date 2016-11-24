@@ -1290,12 +1290,12 @@
     
     <changeSet author="msingla" id="1.72">
 	    <sql>
-	    	update venue set created_by = (select id from user where username = 'LEPARTYCIOUS@GMAIL.COM');
-	    	update caterer set created_by = (select id from user where username = 'LEPARTYCIOUS@GMAIL.COM');
-	    	update photographer set created_by = (select id from user where username = 'LEPARTYCIOUS@GMAIL.COM');
-	    	update decorater set created_by = (select id from user where username = 'LEPARTYCIOUS@GMAIL.COM');
-	    	update entertainment set created_by = (select id from user where username = 'LEPARTYCIOUS@GMAIL.COM');
-	    	update miscellaneous set created_by = (select id from user where username = 'LEPARTYCIOUS@GMAIL.COM');
+	    	update venue set created_by = (select id from user where username = 'LEPARTYCIOUS@GMAIL.COM'), is_active = true;
+	    	update caterer set created_by = (select id from user where username = 'LEPARTYCIOUS@GMAIL.COM'), is_active = true;
+	    	update photographer set created_by = (select id from user where username = 'LEPARTYCIOUS@GMAIL.COM'), is_active = true;
+	    	update decorater set created_by = (select id from user where username = 'LEPARTYCIOUS@GMAIL.COM'), is_active = true;
+	    	update entertainment set created_by = (select id from user where username = 'LEPARTYCIOUS@GMAIL.COM'), is_active = true;
+	    	update miscellaneous set created_by = (select id from user where username = 'LEPARTYCIOUS@GMAIL.COM'), is_active = true;
 	    </sql>
     </changeSet>
     

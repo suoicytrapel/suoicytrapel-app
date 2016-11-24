@@ -13,6 +13,7 @@ public class UserRequestDTO implements Serializable{
 	private String vendorType;
 	private String entityName;
 	private Boolean isActive;
+	private String oldPassword;
 	
 	public String getUsername() {
 		return username;
@@ -67,5 +68,11 @@ public class UserRequestDTO implements Serializable{
 	}
 	public void setIsActive(Boolean isActive) {
 		this.isActive = isActive;
+	}
+	public String getOldPassword() {
+		return oldPassword;
+	}
+	public void setOldPassword(String oldPassword) {
+		this.oldPassword = oldPassword;
 	}
 }
