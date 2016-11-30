@@ -10,8 +10,11 @@ import lepartycious.services.SecurityUserDetailsService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.provider.token.TokenStore;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -76,8 +79,11 @@ public class UserController {
     }
     
     @RequestMapping(value="/v1/user/decodeString", method = RequestMethod.GET)
-    public String decodeUserString(@RequestParam  String username) throws Exception{
-    	return securityuserDetailService.decodeUserString(username);
+    public UserRequestDTO decodeUserString(@RequestParam  String username) throws Exception{
+    	UserRequestDTO userRequestDTO = new UserRequestDTO();
+    	String decodedName =  securityuserDetailService.decodeUserString(username);
+    	userRequestDTO.setUsername(decodedName);
+    	return userRequestDTO;
     }
     
     @RequestMapping(value="/v1/user/activate", method = RequestMethod.GET)
@@ -86,16 +92,15 @@ public class UserController {
     	securityuserDetailService.activateAccount(activationLink);
     }
     
-   /* @RequestMapping(value = "/secured/v1/logout", method = RequestMethod.GET)
+    @RequestMapping(value = "/secured/v1/logout", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.OK)
-    public void logout(HttpServletRequest request) {
-        String authHeader = request.getHeader("Authorization");
-        if (authHeader != null) {
-            String tokenValue = authHeader.replace("Bearer", "").trim();
-            OAuth2AccessToken accessToken = tokenStore.readAccessToken(tokenValue);
-            tokenStore.removeAccessToken(accessToken);
+    public void logout(HttpServletRequest request, HttpServletResponse response) {
+    	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null){    
+           new SecurityContextLogoutHandler().logout(request, response, auth);
         }
-    }*/
+      SecurityContextHolder.getContext().setAuthentication(null);
+    }
 
     @ExceptionHandler(Exception.class)
 	public Error handleGenericError(HttpServletRequest req, HttpServletResponse response, Exception exception){
