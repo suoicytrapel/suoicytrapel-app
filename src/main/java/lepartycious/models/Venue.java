@@ -100,6 +100,9 @@ public class Venue implements Serializable{
 	@Column(name="is_active")
 	private Boolean isActive;
 	
+	@Column(name = "booking_policies")
+	private String bookingPolicy;
+	
 	public Boolean getIsActive() {
 		return isActive;
 	}
@@ -291,6 +294,14 @@ public class Venue implements Serializable{
 	public void setAdditionalVenueServices(
 			List<AdditionalEntityServices> additionalVenueServices) {
 		this.additionalVenueServices = additionalVenueServices;
+	}
+
+	public String getBookingPolicy() {
+		return bookingPolicy;
+	}
+
+	public void setBookingPolicy(String bookingPolicy) {
+		this.bookingPolicy = bookingPolicy;
 	}
 	
 }

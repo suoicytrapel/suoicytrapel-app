@@ -51,6 +51,17 @@ public class Amenities implements Serializable{
 	@Column(name = "is_detailed_amenity")
 	private Boolean isDetailedAmenity;
 	
+	@Column(name = "category")
+	private String category;
+	
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
 	public Boolean getIsDetailedAmenity() {
 		return isDetailedAmenity;
 	}

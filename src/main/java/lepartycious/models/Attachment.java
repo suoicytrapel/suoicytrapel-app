@@ -42,6 +42,24 @@ public class Attachment implements Serializable{
 	
 	@Column(name = "attachment_type")
 	private String attachmentType;
+	
+	@Column(name = "image_data")
+	private byte[] imageData;
+
+	public Attachment() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public Attachment(String name, String imageURL, String helpText,
+			String attachmentType, byte[] imageData) {
+		super();
+		this.name = name;
+		this.imageURL = imageURL;
+		this.helpText = helpText;
+		this.attachmentType = attachmentType;
+		this.imageData = imageData;
+	}
 
 	public Long getEntityId() {
 		return entityId;
@@ -98,4 +116,13 @@ public class Attachment implements Serializable{
 	public void setAttachmentType(String attachmentType) {
 		this.attachmentType = attachmentType;
 	}
+
+	public byte[] getImageData() {
+		return imageData;
+	}
+
+	public void setImageData(byte[] imageData) {
+		this.imageData = imageData;
+	}
+	
 }

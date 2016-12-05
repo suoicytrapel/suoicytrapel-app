@@ -88,6 +88,31 @@ public class VenueAmenities implements Serializable{
 	@Column(name = "candles_avlbl")
 	private Boolean candlesAvlbl;
 	
+	public VenueAmenities() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public VenueAmenities(Amenities amenitiesId, Float minCost, Float maxCost,
+			String amenityName, String maxAccomodationCapacity,
+			String minAccomodation, Boolean isFullyAc, String additionalInfo,
+			String minVegCost, String maxVegCost, String minNonVegCost,
+			String maxNonVegCost) {
+		super();
+		this.amenitiesId = amenitiesId;
+		this.minCost = minCost;
+		this.maxCost = maxCost;
+		this.amenityName = amenityName;
+		this.maxAccomodationCapacity = maxAccomodationCapacity;
+		this.minAccomodation = minAccomodation;
+		this.isFullyAc = isFullyAc;
+		this.additionalInfo = additionalInfo;
+		this.minVegCost = minVegCost;
+		this.maxVegCost = maxVegCost;
+		this.minNonVegCost = minNonVegCost;
+		this.maxNonVegCost = maxNonVegCost;
+	}
+
 	public Venue getVenueId() {
 		return venueId;
 	}

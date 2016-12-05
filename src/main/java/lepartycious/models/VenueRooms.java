@@ -62,6 +62,27 @@ public class VenueRooms implements Serializable{
 	@Column(name = "number_of_rooms")
 	private Integer numberOfRooms;
 	
+	public VenueRooms() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public VenueRooms(Room roomId, Float minCost, Boolean acAvailability,
+			Boolean fridgeAvailability, Boolean lockerAvailability,
+			Boolean ledAvailability, Boolean attachedBathroomAvailability,
+			Boolean hotWaterAvailability, Integer numberOfRooms) {
+		super();
+		this.roomId = roomId;
+		this.minCost = minCost;
+		this.acAvailability = acAvailability;
+		this.fridgeAvailability = fridgeAvailability;
+		this.lockerAvailability = lockerAvailability;
+		this.ledAvailability = ledAvailability;
+		this.attachedBathroomAvailability = attachedBathroomAvailability;
+		this.hotWaterAvailability = hotWaterAvailability;
+		this.numberOfRooms = numberOfRooms;
+	}
+
 	public long getId() {
 		return id;
 	}

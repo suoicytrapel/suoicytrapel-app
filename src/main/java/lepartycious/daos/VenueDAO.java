@@ -18,4 +18,6 @@ public interface VenueDAO extends BaseDAO{
 	
 	public List<Venue> fetchRecomendations(Long cityId);
 
+	public Venue loadVenueByUserId(long userId);
+
 }

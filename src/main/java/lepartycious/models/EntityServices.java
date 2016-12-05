@@ -46,6 +46,20 @@ public class EntityServices implements Serializable{
 	@Column(name = "max_capacity")
 	private String maxCapacity;
 	
+	public EntityServices() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public EntityServices(Service serviceId, Float minCost, Float maxCost,
+			String maxCapacity) {
+		super();
+		this.serviceId = serviceId;
+		this.minCost = minCost;
+		this.maxCost = maxCost;
+		this.maxCapacity = maxCapacity;
+	}
+
 	public String getMaxCapacity() {
 		return maxCapacity;
 	}

@@ -9,6 +9,6 @@ public interface BaseDAO {
 	
 	public void update(Object object);
 	
-	public void getObjectById(Long id);
+	public Object getObjectById(Long id, Class clazz);
 
 }

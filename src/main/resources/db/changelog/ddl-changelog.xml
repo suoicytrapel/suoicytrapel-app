@@ -867,4 +867,18 @@
 		</sql>
 	</changeSet>
 	
+	<changeSet author="msingla" id="1.64">
+		<sql>
+			alter table venue add column booking_policy varchar(2500);
+			alter table attachment add column image_data LONGBLOB;
+		</sql>
+	</changeSet>
+	
+	<changeSet author="msingla" id="1.65">
+		<sql>
+			alter table amenities add column category varchar(20);
+			alter table service add column category varchar(20);
+		</sql>
+	</changeSet>
+	
 </databaseChangeLog>

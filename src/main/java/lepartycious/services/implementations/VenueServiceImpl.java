@@ -309,8 +309,8 @@ public class VenueServiceImpl implements VenueService {
 		List<FilterResponseDTO> events = new ArrayList<FilterResponseDTO>();
 		List<FilterResponseDTO> capacity = new ArrayList<FilterResponseDTO>();
 
-		List<lepartycious.models.Service> serviceList = commonDAO.getServiceFilters("VENUE", "SERVICE");
-		List<Amenities> amenityList = commonDAO.getAmenities("amenity");
+		List<lepartycious.models.Service> serviceList = commonDAO.getServiceFilters("VENUE", "SERVICE", true);
+		List<Amenities> amenityList = commonDAO.getAmenities(true);
 		List<Room> roomList = commonDAO.getRooms("room");
 		City city = cityDAO.getCityById(cityId);
 		List<Locality> localityList = city.getLocalities();

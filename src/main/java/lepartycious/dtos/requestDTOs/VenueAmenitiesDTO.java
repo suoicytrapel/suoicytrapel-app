@@ -18,6 +18,14 @@ public class VenueAmenitiesDTO implements Serializable{
 	private String maxVegCost;
 	private String minNonVegCost;
 	private String maxNonVegCost;
+	private String amenityType;
+	
+	public String getAmenityType() {
+		return amenityType;
+	}
+	public void setAmenityType(String amenityType) {
+		this.amenityType = amenityType;
+	}
 	public Float getMinCost() {
 		return minCost;
 	}

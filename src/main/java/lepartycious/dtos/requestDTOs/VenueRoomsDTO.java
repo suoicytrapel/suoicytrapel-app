@@ -13,6 +13,14 @@ public class VenueRoomsDTO implements Serializable{
 	private Boolean attachedBathroomAvailability;
 	private Boolean hotWaterAvailability;
 	private Integer numberOfRooms;
+	private String roomType;
+	
+	public String getRoomType() {
+		return roomType;
+	}
+	public void setRoomType(String roomType) {
+		this.roomType = roomType;
+	}
 	public Long getRoomId() {
 		return roomId;
 	}

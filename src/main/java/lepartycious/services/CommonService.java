@@ -12,8 +12,12 @@ import lepartycious.dtos.responseDTOs.FilterResponseDTO;
 import lepartycious.dtos.responseDTOs.FilterResponseWrapperDTO;
 import lepartycious.dtos.responseDTOs.SearchResponseDTO;
 import lepartycious.dtos.responseDTOs.SearchResponseDTOWrapper;
+import lepartycious.models.Amenities;
 import lepartycious.models.Attachment;
+import lepartycious.models.Filter;
+import lepartycious.models.Room;
 
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 

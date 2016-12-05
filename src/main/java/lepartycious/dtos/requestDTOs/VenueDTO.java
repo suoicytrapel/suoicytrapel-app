@@ -5,19 +5,19 @@ import java.util.List;
 
 public class VenueDTO implements Serializable{
 	
-	private String name;
-	private String description;
-	private String type;
-	private Long cityId;
-	private Long localityId;
+	private String venueName;
+	private String venueDescription;
+	private String venueType;
+	private Long city;
+	private Long locality;
 	private Long priority;
 	private String startingPrice;
 	private String maxCapacity;
-	private String policies;
+	private String bookingPolicy;
+	private String refundPolicy;
 	private String servingSince;
 	private String minCapacity;
 	private Long establishmentFilterid;
-	private List<AttachmentDTO> attachments;
 	private List<AddressDTO> addresses;
 	private List<VenueAmenitiesDTO> venueamenities;
 	private List<EntityServicesDTO> venueServices;
@@ -25,72 +25,39 @@ public class VenueDTO implements Serializable{
 	private List<VenuePackagesDTO> venuePackages;
 	private List<EntityFiltersDTO> venueFilters;
 	private List<AdditionalEntityServicesDTO> additionalVenueServices;
+	private Long userId;
+	private List<AttachmentDTO> vendorAttachments;
+	private List<AttachmentDTO> menuAttachments;
 	
-	public String getName() {
-		return name;
+	public String getVenueName() {
+		return venueName;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setVenueName(String venueName) {
+		this.venueName = venueName;
 	}
-	public String getDescription() {
-		return description;
+	public String getVenueDescription() {
+		return venueDescription;
 	}
-	public void setDescription(String description) {
-		this.description = description;
+	public void setVenueDescription(String venueDescription) {
+		this.venueDescription = venueDescription;
 	}
-	public String getType() {
-		return type;
+	public String getVenueType() {
+		return venueType;
 	}
-	public void setType(String type) {
-		this.type = type;
+	public void setVenueType(String venueType) {
+		this.venueType = venueType;
 	}
-	public List<AttachmentDTO> getAttachments() {
-		return attachments;
+	public Long getCity() {
+		return city;
 	}
-	public void setAttachments(List<AttachmentDTO> attachments) {
-		this.attachments = attachments;
+	public void setCity(Long city) {
+		this.city = city;
 	}
-	public List<AddressDTO> getAddresses() {
-		return addresses;
+	public Long getLocality() {
+		return locality;
 	}
-	public void setAddresses(List<AddressDTO> addresses) {
-		this.addresses = addresses;
-	}
-	public Long getCityId() {
-		return cityId;
-	}
-	public void setCityId(Long cityId) {
-		this.cityId = cityId;
-	}
-	public Long getLocalityId() {
-		return localityId;
-	}
-	public void setLocalityId(Long localityId) {
-		this.localityId = localityId;
-	}
-	public List<VenueAmenitiesDTO> getVenueamenities() {
-		return venueamenities;
-	}
-	public void setVenueamenities(List<VenueAmenitiesDTO> venueamenities) {
-		this.venueamenities = venueamenities;
-	}
-	public List<EntityServicesDTO> getVenueServices() {
-		return venueServices;
-	}
-	public void setVenueServices(List<EntityServicesDTO> venueServices) {
-		this.venueServices = venueServices;
-	}
-	public List<EntityFiltersDTO> getVenueFilters() {
-		return venueFilters;
-	}
-	public void setVenueFilters(List<EntityFiltersDTO> venueFilters) {
-		this.venueFilters = venueFilters;
-	}
-	public List<VenueRoomsDTO> getVenueRooms() {
-		return venueRooms;
-	}
-	public void setVenueRooms(List<VenueRoomsDTO> venueRooms) {
-		this.venueRooms = venueRooms;
+	public void setLocality(Long locality) {
+		this.locality = locality;
 	}
 	public Long getPriority() {
 		return priority;
@@ -110,11 +77,17 @@ public class VenueDTO implements Serializable{
 	public void setMaxCapacity(String maxCapacity) {
 		this.maxCapacity = maxCapacity;
 	}
-	public String getPolicies() {
-		return policies;
+	public String getBookingPolicy() {
+		return bookingPolicy;
 	}
-	public void setPolicies(String policies) {
-		this.policies = policies;
+	public void setBookingPolicy(String bookingPolicy) {
+		this.bookingPolicy = bookingPolicy;
+	}
+	public String getRefundPolicy() {
+		return refundPolicy;
+	}
+	public void setRefundPolicy(String refundPolicy) {
+		this.refundPolicy = refundPolicy;
 	}
 	public String getServingSince() {
 		return servingSince;
@@ -128,11 +101,47 @@ public class VenueDTO implements Serializable{
 	public void setMinCapacity(String minCapacity) {
 		this.minCapacity = minCapacity;
 	}
+	public Long getEstablishmentFilterid() {
+		return establishmentFilterid;
+	}
+	public void setEstablishmentFilterid(Long establishmentFilterid) {
+		this.establishmentFilterid = establishmentFilterid;
+	}
+	public List<AddressDTO> getAddresses() {
+		return addresses;
+	}
+	public void setAddresses(List<AddressDTO> addresses) {
+		this.addresses = addresses;
+	}
+	public List<VenueAmenitiesDTO> getVenueamenities() {
+		return venueamenities;
+	}
+	public void setVenueamenities(List<VenueAmenitiesDTO> venueamenities) {
+		this.venueamenities = venueamenities;
+	}
+	public List<EntityServicesDTO> getVenueServices() {
+		return venueServices;
+	}
+	public void setVenueServices(List<EntityServicesDTO> venueServices) {
+		this.venueServices = venueServices;
+	}
+	public List<VenueRoomsDTO> getVenueRooms() {
+		return venueRooms;
+	}
+	public void setVenueRooms(List<VenueRoomsDTO> venueRooms) {
+		this.venueRooms = venueRooms;
+	}
 	public List<VenuePackagesDTO> getVenuePackages() {
 		return venuePackages;
 	}
 	public void setVenuePackages(List<VenuePackagesDTO> venuePackages) {
 		this.venuePackages = venuePackages;
+	}
+	public List<EntityFiltersDTO> getVenueFilters() {
+		return venueFilters;
+	}
+	public void setVenueFilters(List<EntityFiltersDTO> venueFilters) {
+		this.venueFilters = venueFilters;
 	}
 	public List<AdditionalEntityServicesDTO> getAdditionalVenueServices() {
 		return additionalVenueServices;
@@ -141,10 +150,22 @@ public class VenueDTO implements Serializable{
 			List<AdditionalEntityServicesDTO> additionalVenueServices) {
 		this.additionalVenueServices = additionalVenueServices;
 	}
-	public Long getEstablishmentFilterid() {
-		return establishmentFilterid;
+	public Long getUserId() {
+		return userId;
 	}
-	public void setEstablishmentFilterid(Long establishmentFilterid) {
-		this.establishmentFilterid = establishmentFilterid;
+	public void setUserId(Long userId) {
+		this.userId = userId;
+	}
+	public List<AttachmentDTO> getVendorAttachments() {
+		return vendorAttachments;
+	}
+	public void setVendorAttachments(List<AttachmentDTO> vendorAttachments) {
+		this.vendorAttachments = vendorAttachments;
+	}
+	public List<AttachmentDTO> getMenuAttachments() {
+		return menuAttachments;
+	}
+	public void setMenuAttachments(List<AttachmentDTO> menuAttachments) {
+		this.menuAttachments = menuAttachments;
 	}
 }

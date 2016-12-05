@@ -45,6 +45,20 @@ public class AdditionalEntityServices implements Serializable{
 	
 	@Column(name = "max_capacity")
 	private String maxCapacity;
+	
+	public AdditionalEntityServices() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public AdditionalEntityServices(AdditionalService additionalServiceId,
+			Long minCost, Long maxCost, String maxCapacity) {
+		super();
+		this.additionalServiceId = additionalServiceId;
+		this.minCost = minCost;
+		this.maxCost = maxCost;
+		this.maxCapacity = maxCapacity;
+	}
 
 	public long getId() {
 		return id;

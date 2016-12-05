@@ -8,6 +8,14 @@ public class EntityServicesDTO implements Serializable{
 	private Float minCost;
 	private Float maxCost;
 	private String maxCapacity;
+	private String tabDataName;
+	
+	public String getTabDataName() {
+		return tabDataName;
+	}
+	public void setTabDataName(String tabDataName) {
+		this.tabDataName = tabDataName;
+	}
 	public Long getServiceId() {
 		return serviceId;
 	}

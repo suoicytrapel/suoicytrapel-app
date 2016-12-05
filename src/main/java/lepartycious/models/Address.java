@@ -56,6 +56,24 @@ public class Address implements Serializable{
 	
 	@Column(name="longitude")
 	private Float longitude;
+	
+	public Address() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public Address(String addressLine1, String addressLine2, String city,
+			String email, Long pincode, String primaryPhone,
+			String secondaryPhone) {
+		super();
+		this.addressLine1 = addressLine1;
+		this.addressLine2 = addressLine2;
+		this.city = city;
+		this.email = email;
+		this.pincode = pincode;
+		this.primaryPhone = primaryPhone;
+		this.secondaryPhone = secondaryPhone;
+	}
 
 	public long getAddressId() {
 		return addressId;

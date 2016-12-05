@@ -53,6 +53,17 @@ public class Service implements Serializable{
 	
 	@Column(name = "is_additional_service")
 	private Boolean isAdditionalService;
+	
+	@Column(name = "category")
+	private String category;
+	
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
 
 	public long getServiceId() {
 		return serviceId;

@@ -18,6 +18,7 @@ import lepartycious.dtos.responseDTOs.FilterResponseDTO;
 import lepartycious.dtos.responseDTOs.FilterResponseWrapperDTO;
 import lepartycious.dtos.responseDTOs.SearchResponseDTO;
 import lepartycious.dtos.responseDTOs.SearchResponseDTOWrapper;
+import lepartycious.models.Amenities;
 import lepartycious.models.Attachment;
 import lepartycious.models.Caterer;
 import lepartycious.models.Decorator;
@@ -25,6 +26,7 @@ import lepartycious.models.Entertainment;
 import lepartycious.models.Filter;
 import lepartycious.models.Others;
 import lepartycious.models.Photographer;
+import lepartycious.models.Room;
 import lepartycious.models.Venue;
 import lepartycious.services.CatererService;
 import lepartycious.services.CommonService;
@@ -291,7 +293,7 @@ public class CommonServiceImpl implements CommonService {
 		
 		List<Filter> establishmentList = commonDAO.getRequiredFilters("VENUE", "ESTABLISHMENT");
 		List<Filter> typeFilters = commonDAO.getRequiredFilters("CATERER", "TYPE");
-		List<lepartycious.models.Service> serviceList = commonDAO.getServiceFilters("DECORATOR", "SERVICE");
+		List<lepartycious.models.Service> serviceList = commonDAO.getServiceFilters("DECORATOR", "SERVICE", true);
 		List<Filter> entertainmentTypeList = commonDAO.getRequiredFilters("ENTERTAINMENT", "ENTERTAINMENT");
 		List<Filter> otherTypeList = commonDAO.getRequiredFilters("OTHERS", "OTHERS");
 		List<Filter> photographerTypeList = commonDAO.getRequiredFilters("PHOTOGRAPHER", "TYPE");

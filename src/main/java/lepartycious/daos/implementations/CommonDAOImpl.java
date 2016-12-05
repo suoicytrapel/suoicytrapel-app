@@ -12,6 +12,7 @@ import lepartycious.models.Amenities;
 import lepartycious.models.Caterer;
 import lepartycious.models.Decorator;
 import lepartycious.models.Filter;
+import lepartycious.models.Locality;
 import lepartycious.models.Others;
 import lepartycious.models.Photographer;
 import lepartycious.models.Entertainment;
@@ -116,9 +117,9 @@ public class CommonDAOImpl extends BaseDAOImpl implements CommonDAO{
 
 	@Override
 	@Cacheable
-	public List<Service> getServiceFilters(String forEntity, String ofType) {
+	public List<Service> getServiceFilters(String forEntity, String ofType, boolean isFilter) {
 		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Service.class);
-		criteria.add(Restrictions.eq("isFilter", true));
+		criteria.add(Restrictions.eq("isFilter", isFilter));
 		criteria.add(Restrictions.eq("serviceForEntity", forEntity));
 		criteria.add(Restrictions.eq("serviceType", ofType));
 		List<Service> serviceList = criteria.list();
@@ -127,9 +128,9 @@ public class CommonDAOImpl extends BaseDAOImpl implements CommonDAO{
 	
 	@Override
 	@Cacheable
-	public List<Amenities> getAmenities(String amenity) {
+	public List<Amenities> getAmenities(boolean isFilter) {
 		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Amenities.class);
-		criteria.add(Restrictions.eq("isFilter", true));
+		criteria.add(Restrictions.eq("isFilter", isFilter));
 		List<Amenities> amenities = criteria.list();
 		return amenities;
 	}
@@ -178,5 +179,12 @@ public class CommonDAOImpl extends BaseDAOImpl implements CommonDAO{
 	public void createEntity(Object entity) {
 		Session session = sessionFactory.getCurrentSession();
 		session.save(entity);
+	}
+
+	@Override
+	public List<Locality> getLocalities(Long cityId) {
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Locality.class);
+		criteria.add(Restrictions.eq("city.cityId", cityId));
+		return criteria.list();
 	}
 }

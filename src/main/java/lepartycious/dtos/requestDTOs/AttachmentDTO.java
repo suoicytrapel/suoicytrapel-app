@@ -8,6 +8,8 @@ public class AttachmentDTO implements Serializable{
 	private String imageURL;
 	private String helpText;
 	private String attachmentType;
+	private byte[] imageData;
+	
 	public String getName() {
 		return name;
 	}
@@ -32,5 +34,10 @@ public class AttachmentDTO implements Serializable{
 	public void setAttachmentType(String attachmentType) {
 		this.attachmentType = attachmentType;
 	}
-
+	public byte[] getImageData() {
+		return imageData;
+	}
+	public void setImageData(byte[] imageData) {
+		this.imageData = imageData;
+	}
 }
