@@ -20,6 +20,30 @@ public class VenueAmenitiesDTO implements Serializable{
 	private String maxNonVegCost;
 	private String amenityType;
 	
+	public VenueAmenitiesDTO() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	public VenueAmenitiesDTO(Long amenitiesId, Float minCost, Float maxCost,
+			String amenityName, String maxAccomodationCapacity,
+			String minAccomodation, Boolean isFullyAc, String additionalInfo,
+			String minVegCost, String maxVegCost, String minNonVegCost,
+			String maxNonVegCost, String amenityType) {
+		super();
+		this.amenitiesId = amenitiesId;
+		this.minCost = minCost;
+		this.maxCost = maxCost;
+		this.amenityName = amenityName;
+		this.maxAccomodationCapacity = maxAccomodationCapacity;
+		this.minAccomodation = minAccomodation;
+		this.isFullyAc = isFullyAc;
+		this.additionalInfo = additionalInfo;
+		this.minVegCost = minVegCost;
+		this.maxVegCost = maxVegCost;
+		this.minNonVegCost = minNonVegCost;
+		this.maxNonVegCost = maxNonVegCost;
+		this.amenityType = amenityType;
+	}
 	public String getAmenityType() {
 		return amenityType;
 	}

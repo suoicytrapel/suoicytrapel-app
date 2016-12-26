@@ -3,7 +3,7 @@ package lepartycious.daos;
 
 public interface BaseDAO {
 
-	public void save(Object object);
+	public Long save(Object object);
 
 	public void delete(Object object);
 	

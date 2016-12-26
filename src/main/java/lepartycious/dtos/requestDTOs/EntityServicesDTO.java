@@ -10,6 +10,19 @@ public class EntityServicesDTO implements Serializable{
 	private String maxCapacity;
 	private String tabDataName;
 	
+	public EntityServicesDTO() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	public EntityServicesDTO(Long serviceId, Float minCost, Float maxCost,
+			String maxCapacity, String tabDataName) {
+		super();
+		this.serviceId = serviceId;
+		this.minCost = minCost;
+		this.maxCost = maxCost;
+		this.maxCapacity = maxCapacity;
+		this.tabDataName = tabDataName;
+	}
 	public String getTabDataName() {
 		return tabDataName;
 	}

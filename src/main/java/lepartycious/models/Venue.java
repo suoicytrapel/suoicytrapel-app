@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -41,10 +42,10 @@ public class Venue implements Serializable{
 	@Column(name = "added_on")
 	private Date addedOn;
 	
-	@OneToMany(mappedBy="entityId")
+	@OneToMany(mappedBy="entityId", cascade=CascadeType.ALL)
 	private List<Attachment> attachments;
 	
-	@OneToMany(mappedBy="entityId")
+	@OneToMany(mappedBy="entityId", cascade=CascadeType.ALL)
 	private List<Address> addresses;
 	
 	@ManyToOne
@@ -55,16 +56,16 @@ public class Venue implements Serializable{
 	@JoinColumn(name = "locality_id")
 	private Locality locality;
 	
-	@OneToMany(mappedBy="venueId")
+	@OneToMany(mappedBy="venueId", cascade=CascadeType.ALL)
 	private List<VenueAmenities> venueamenities;
 	
-	@OneToMany(mappedBy="entityId")
+	@OneToMany(mappedBy="entityId", cascade=CascadeType.ALL)
 	private List<EntityServices> venueServices;
 	
-	@OneToMany(mappedBy="entityId")
+	@OneToMany(mappedBy="entityId", cascade=CascadeType.ALL)
 	private List<EntityFilters> venueFilters;
 	
-	@OneToMany(mappedBy="venueId")
+	@OneToMany(mappedBy="venueId", cascade=CascadeType.ALL)
 	private List<VenueRooms> venueRooms;
 	
 	@Column(name="priority")
@@ -100,8 +101,49 @@ public class Venue implements Serializable{
 	@Column(name="is_active")
 	private Boolean isActive;
 	
-	@Column(name = "booking_policies")
+	@Column(name = "booking_policy")
 	private String bookingPolicy;
+	
+	@Column(name = "info_provider_contact")
+	private String infoProviderContact;
+	
+	@Column(name = "info_provider_name")
+	private String infoProviderName;
+	
+	@Column(name = "website")
+	private String websiteName;
+	
+	public String getWebsiteName() {
+		return websiteName;
+	}
+
+	public void setWebsiteName(String websiteName) {
+		this.websiteName = websiteName;
+	}
+	
+	public String getBookingPolicy() {
+		return bookingPolicy;
+	}
+
+	public void setBookingPolicy(String bookingPolicy) {
+		this.bookingPolicy = bookingPolicy;
+	}
+
+	public String getInfoProviderContact() {
+		return infoProviderContact;
+	}
+
+	public void setInfoProviderContact(String infoProviderContact) {
+		this.infoProviderContact = infoProviderContact;
+	}
+
+	public String getInfoProviderName() {
+		return infoProviderName;
+	}
+
+	public void setInfoProviderName(String infoProviderName) {
+		this.infoProviderName = infoProviderName;
+	}
 	
 	public Boolean getIsActive() {
 		return isActive;
@@ -296,12 +338,4 @@ public class Venue implements Serializable{
 		this.additionalVenueServices = additionalVenueServices;
 	}
 
-	public String getBookingPolicy() {
-		return bookingPolicy;
-	}
-
-	public void setBookingPolicy(String bookingPolicy) {
-		this.bookingPolicy = bookingPolicy;
-	}
-	
 }

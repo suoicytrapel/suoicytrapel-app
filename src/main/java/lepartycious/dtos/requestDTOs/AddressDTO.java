@@ -13,6 +13,26 @@ public class AddressDTO implements Serializable{
 	private String secondaryPhone;
 	private Float latitude;
 	private Float longitude;
+	
+	public AddressDTO(String addressLine1, String addressLine2, String city,
+			String state, String email, Long pincode, String primaryPhone,
+			String secondaryPhone, Float latitude, Float longitude) {
+		super();
+		this.addressLine1 = addressLine1;
+		this.addressLine2 = addressLine2;
+		this.city = city;
+		this.state = state;
+		this.email = email;
+		this.pincode = pincode;
+		this.primaryPhone = primaryPhone;
+		this.secondaryPhone = secondaryPhone;
+		this.latitude = latitude;
+		this.longitude = longitude;
+	}
+	public AddressDTO() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 	public String getAddressLine1() {
 		return addressLine1;
 	}

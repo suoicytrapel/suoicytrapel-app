@@ -1112,9 +1112,15 @@
     
     <changeSet author="msingla" id="1.63">
 	    <sql>
-	    	insert into additional_service (service_type, service_for_entity, tab_data_name, filter_data_name, is_filter, added_on) values ('ADDITIONAL_SERVICE', 'VENUE', 'Corkage per bottle', 'Corkage', false, now());
-			insert into additional_service (service_type, service_for_entity, tab_data_name, filter_data_name, is_filter, added_on) values ('ADDITIONAL_SERVICE', 'VENUE', 'DJ cost starts at', 'DJ cost', false, now());
-			insert into additional_service (service_type, service_for_entity, tab_data_name, filter_data_name, is_filter, added_on) values ('ADDITIONAL_SERVICE', 'VENUE', 'Decoration starts at', 'Decoration', false, now());
+	    	insert into service (service_type, service_for_entity, tab_data_name, filter_data_name, is_filter, added_on, category) values ('ADDITIONAL_SERVICE', 'VENUE', 'Corkage per bottle', 'Corkage', false, now(), 'ADITIONAL');
+			insert into service (service_type, service_for_entity, tab_data_name, filter_data_name, is_filter, added_on, category) values ('ADDITIONAL_SERVICE', 'VENUE', 'DJ cost starts at', 'DJ cost', false, now(), 'ADITIONAL');
+			insert into service (service_type, service_for_entity, tab_data_name, filter_data_name, is_filter, added_on, category) values ('ADDITIONAL_SERVICE', 'VENUE', 'Decoration starts at', 'Decoration', false, now(), 'ADITIONAL');
+	    	insert into service (service_type, service_for_entity, tab_data_name, filter_data_name, is_filter, added_on, category) values ('ADDITIONAL_SERVICE', 'VENUE', 'Indian', '', false, now(), 'CUISINE');
+			insert into service (service_type, service_for_entity, tab_data_name, filter_data_name, is_filter, added_on, category) values ('ADDITIONAL_SERVICE', 'VENUE', 'Italian', '', false, now(), 'CUISINE');
+			insert into service (service_type, service_for_entity, tab_data_name, filter_data_name, is_filter, added_on, category) values ('ADDITIONAL_SERVICE', 'VENUE', 'Mexican', '', false, now(), 'CUISINE');
+            insert into service (service_type, service_for_entity, tab_data_name, filter_data_name, is_filter, added_on, category) values ('ADDITIONAL_SERVICE', 'VENUE', 'Chinese', '', false, now(), 'CUISINE');
+			insert into service (service_type, service_for_entity, tab_data_name, filter_data_name, is_filter, added_on, category) values ('ADDITIONAL_SERVICE', 'VENUE', 'Continental', '', false, now(), 'CUISINE');
+			insert into service (service_type, service_for_entity, tab_data_name, filter_data_name, is_filter, added_on, category) values ('ADDITIONAL_SERVICE', 'VENUE', 'Thai', '', false, now(), 'CUISINE');
 	    </sql>
     </changeSet>
     
@@ -1296,7 +1302,17 @@
 	    	update decorater set created_by = (select id from user where username = 'LEPARTYCIOUS@GMAIL.COM'), is_active = true;
 	    	update entertainment set created_by = (select id from user where username = 'LEPARTYCIOUS@GMAIL.COM'), is_active = true;
 	    	update miscellaneous set created_by = (select id from user where username = 'LEPARTYCIOUS@GMAIL.COM'), is_active = true;
+	    	update service set category = 'BASIC' where service_for_entity = 'VENUE' and tab_data_name IN 
+				('Dine In', 'High-speed Wi-Fi Internet', 'CCTV Surveillance', 'Drinks Available', 'Smoking Zone',
+				'Vallet Parking', 'Alcohol Served', 'Buffet', 'Pure Veg', 'Outdoor Seating', 'Inhouse Catering',
+				'Open Sand Dine In', 'Camel Cart', 'Laundry','Bar','Medical','Room Service','Pool', 'Spa');
+			update service set category = 'POLICY' where service_for_entity = 'VENUE' and tab_data_name IN 
+				('Outhouse Catering Allowed', 'Outhouse alocohol Allowed', 'Outhouse DJ Allowed', 'Outhouse Decor Allowed');
+	    	update amenities set category = 'EVENT' where amenity_type IN ('BNQTHALL','CLUBROOM', 'LOBBY', 'CONFERENCE', 'DESERTGRND');
+	    	update amenities set category = 'CATERDECOR' where amenity_type IN ('INHOUSECATERING','INHOUSEDECOR');
 	    </sql>
     </changeSet>
+    
+    
     
 </databaseChangeLog>

@@ -10,6 +10,19 @@ public class AttachmentDTO implements Serializable{
 	private String attachmentType;
 	private byte[] imageData;
 	
+	public AttachmentDTO() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	public AttachmentDTO(String name, String imageURL, String helpText,
+			String attachmentType, byte[] imageData) {
+		super();
+		this.name = name;
+		this.imageURL = imageURL;
+		this.helpText = helpText;
+		this.attachmentType = attachmentType;
+		this.imageData = imageData;
+	}
 	public String getName() {
 		return name;
 	}

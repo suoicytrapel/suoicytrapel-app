@@ -140,4 +140,17 @@ public class VenueDAOImpl extends BaseDAOImpl implements VenueDAO {
 			return venues.get(0);
 		}
 	}
+	
+	@Override
+	public Venue loadVenueByName(String name) {
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Venue.class);
+		criteria.add(Restrictions.eq("name", name));
+		List<Venue> venues = criteria.list();
+		if(CollectionUtils.isEmpty(venues)){
+			return null;
+		}
+		else {
+			return venues.get(0);
+		}
+	}
 }

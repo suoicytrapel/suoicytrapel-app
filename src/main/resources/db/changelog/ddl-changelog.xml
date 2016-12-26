@@ -881,4 +881,40 @@
 		</sql>
 	</changeSet>
 	
+	<changeSet author="msingla" id="1.64">
+		<sql>
+			alter table venue add column info_provider_name varchar(2500);
+			alter table venue add column info_provider_contact varchar(2500);
+			alter table venue add column website varchar(250);
+			
+			alter table caterer add column booking_policy varchar(2500);
+			alter table caterer add column info_provider_name varchar(250);
+			alter table caterer add column info_provider_contact varchar(50);
+			alter table caterer add column website varchar(250);
+			
+			alter table decorater add column booking_policy varchar(2500);
+			alter table decorater add column info_provider_name varchar(250);
+			alter table decorater add column info_provider_contact varchar(50);
+			alter table decorater add column website varchar(250);
+			
+			alter table photographer add column booking_policy varchar(2500);
+			alter table photographer add column info_provider_name varchar(250);
+			alter table photographer add column info_provider_contact varchar(50);
+			alter table photographer add column website varchar(250);
+			
+			alter table entertainment add column booking_policy varchar(2500);
+			alter table entertainment add column info_provider_name varchar(250);
+			alter table entertainment add column info_provider_contact varchar(50);
+			alter table entertainment add column website varchar(250);
+			
+			alter table miscellaneous add column booking_policy varchar(2500);
+			alter table miscellaneous add column info_provider_name varchar(250);
+			alter table miscellaneous add column info_provider_contact varchar(50);
+			alter table miscellaneous add column website varchar(250);
+			
+			alter table user add column vendor_type varchar(50);
+			alter table user add column vendor_name varchar(250);
+		</sql>
+	</changeSet>
+	
 </databaseChangeLog>

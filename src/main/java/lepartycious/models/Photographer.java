@@ -89,6 +89,50 @@ public class Photographer implements Serializable{
 	@Column(name="is_active")
 	private Boolean isActive;
 	
+	@Column(name = "booking_policy")
+	private String bookingPolicy;
+	
+	@Column(name = "info_provider_contact")
+	private String infoProviderContact;
+	
+	@Column(name = "info_provider_name")
+	private String infoProviderName;
+	
+	@Column(name = "website")
+	private String websiteName;
+	
+	public String getWebsiteName() {
+		return websiteName;
+	}
+
+	public void setWebsiteName(String websiteName) {
+		this.websiteName = websiteName;
+	}
+
+	public String getBookingPolicy() {
+		return bookingPolicy;
+	}
+
+	public void setBookingPolicy(String bookingPolicy) {
+		this.bookingPolicy = bookingPolicy;
+	}
+
+	public String getInfoProviderContact() {
+		return infoProviderContact;
+	}
+
+	public void setInfoProviderContact(String infoProviderContact) {
+		this.infoProviderContact = infoProviderContact;
+	}
+
+	public String getInfoProviderName() {
+		return infoProviderName;
+	}
+
+	public void setInfoProviderName(String infoProviderName) {
+		this.infoProviderName = infoProviderName;
+	}
+	
 	public Boolean getIsActive() {
 		return isActive;
 	}

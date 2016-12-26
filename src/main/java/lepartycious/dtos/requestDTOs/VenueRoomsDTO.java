@@ -15,6 +15,26 @@ public class VenueRoomsDTO implements Serializable{
 	private Integer numberOfRooms;
 	private String roomType;
 	
+	public VenueRoomsDTO() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	public VenueRoomsDTO(Long roomId, Float minCost, Boolean acAvailability,
+			Boolean fridgeAvailability, Boolean lockerAvailability,
+			Boolean ledAvailability, Boolean attachedBathroomAvailability,
+			Boolean hotWaterAvailability, Integer numberOfRooms, String roomType) {
+		super();
+		this.roomId = roomId;
+		this.minCost = minCost;
+		this.acAvailability = acAvailability;
+		this.fridgeAvailability = fridgeAvailability;
+		this.lockerAvailability = lockerAvailability;
+		this.ledAvailability = ledAvailability;
+		this.attachedBathroomAvailability = attachedBathroomAvailability;
+		this.hotWaterAvailability = hotWaterAvailability;
+		this.numberOfRooms = numberOfRooms;
+		this.roomType = roomType;
+	}
 	public String getRoomType() {
 		return roomType;
 	}

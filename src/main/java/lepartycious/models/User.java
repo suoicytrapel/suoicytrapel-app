@@ -53,6 +53,12 @@ public class User implements UserDetails{
 	@Column(name = "is_active")
 	private Boolean isActive;
 	
+	@Column(name = "vendor_type")
+	private String vendorType;
+	
+	@Column(name = "vendor_name")
+	private String vendorName;
+	
 	public long getUserId() {
 		return userId;
 	}
@@ -154,5 +160,20 @@ public class User implements UserDetails{
 	public void setIsActive(Boolean isActive) {
 		this.isActive = isActive;
 	}
-	
+
+	public String getVendorType() {
+		return vendorType;
+	}
+
+	public void setVendorType(String vendorType) {
+		this.vendorType = vendorType;
+	}
+
+	public String getVendorName() {
+		return vendorName;
+	}
+
+	public void setVendorName(String vendorName) {
+		this.vendorName = vendorName;
+	}
 }

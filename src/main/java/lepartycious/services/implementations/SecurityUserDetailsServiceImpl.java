@@ -115,14 +115,16 @@ public class SecurityUserDetailsServiceImpl implements SecurityUserDetailsServic
 			user.setIsAppUser(userDTO.getIsAppUser());
 			user.setUserRole(userDTO.getUserRole());
 			user.setIsActive(!userDTO.getIsAppUser());
+			if(UserTypeEnum.VENDOR.toString().equalsIgnoreCase(userDTO.getUserRole())){
+				/*String vendorType = userDTO.getVendorType();
+				String entityName = userDTO.getEntityName();
+				commonService.createEntity(vendorType, entityName);*/
+				user.setVendorName(userDTO.getEntityName());
+				user.setVendorType(userDTO.getVendorType());
+			}
 			userDAO.saveOrUpdateUser(user);
 			if(userDTO.getIsAppUser())
 				sendActivationLink(user);
-			if(UserTypeEnum.VENDOR.toString().equalsIgnoreCase(userDTO.getUserRole())){
-				String vendorType = userDTO.getVendorType();
-				String entityName = userDTO.getEntityName();
-				commonService.createEntity(vendorType, entityName);
-			}
 		}
 	}
 
@@ -180,6 +182,8 @@ public class SecurityUserDetailsServiceImpl implements SecurityUserDetailsServic
 			userRequestDTO.setName(user.getName());
 			userRequestDTO.setUserRole(user.getUserRole());
 			userRequestDTO.setEmail(user.getEmail());
+			userRequestDTO.setVendorType(user.getVendorType());
+			userRequestDTO.setEntityName(user.getVendorName());
 			return userRequestDTO;
 		}
 		else{

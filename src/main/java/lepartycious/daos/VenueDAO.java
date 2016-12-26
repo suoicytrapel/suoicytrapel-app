@@ -20,4 +20,6 @@ public interface VenueDAO extends BaseDAO{
 
 	public Venue loadVenueByUserId(long userId);
 
+	Venue loadVenueByName(String name);
+
 }

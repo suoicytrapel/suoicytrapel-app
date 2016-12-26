@@ -1,4 +1,4 @@
-package lepartycious.controllers;
+package lepartycious.controllers.common;
 
 import java.util.ArrayList;
 import java.util.HashMap;

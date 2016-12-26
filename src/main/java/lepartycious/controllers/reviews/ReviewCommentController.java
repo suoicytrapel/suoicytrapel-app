@@ -1,4 +1,4 @@
-package lepartycious.controllers;
+package lepartycious.controllers.reviews;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

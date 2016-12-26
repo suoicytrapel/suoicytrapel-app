@@ -183,7 +183,7 @@ public class DecoratorServiceImpl implements DecoratorService {
 		City city = cityDAO.getCityById(cityId);
 		List<Locality> localityList = city.getLocalities();
 
-		List<lepartycious.models.Service> serviceList = commonDAO.getServiceFilters("DECORATOR", "SERVICE");
+		List<lepartycious.models.Service> serviceList = commonDAO.getServiceFilters("DECORATOR", "SERVICE", true);
 		List<Filter> eventList = commonDAO.getRequiredFilters("ALL", "EVENT");
 
 		for(lepartycious.models.Service service : serviceList){

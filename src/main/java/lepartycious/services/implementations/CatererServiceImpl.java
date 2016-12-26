@@ -210,7 +210,7 @@ public class CatererServiceImpl implements CatererService {
 		List<FilterResponseDTO> capacity = new ArrayList<FilterResponseDTO>();
 		List<FilterResponseDTO> catererType = new ArrayList<FilterResponseDTO>();
 		
-		List<lepartycious.models.Service> serviceList = commonDAO.getServiceFilters("CATERER", "SERVICE");
+		List<lepartycious.models.Service> serviceList = commonDAO.getServiceFilters("CATERER", "SERVICE", true);
 		List<Filter> eventList = commonDAO.getRequiredFilters("ALL", "EVENT");
 		List<Filter> priceRangeList = commonDAO.getRequiredFilters("CATERER", "PRICE");
 		List<Filter> capacityFilters = commonDAO.getRequiredFilters("CATERER", "CAPACITY");

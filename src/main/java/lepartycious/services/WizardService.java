@@ -16,10 +16,9 @@ public interface WizardService {
 
 	LookUpDTO getVenuelookUp();
 
-	VenueDTO getVenueDetails(String entityName) throws Exception;
-
 	Map<Long, String> getLocalities(Long cityId) throws Exception;
 
-	WizardDTO getWizardDetails(String username) throws Exception;
+	VenueDTO loadVenueWizard(String wizardName)
+			throws Exception;
 
 }

@@ -1,7 +1,4 @@
-package lepartycious.controllers;
-
-import java.util.HashMap;
-import java.util.Map;
+package lepartycious.controllers.wizard.venue;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -9,7 +6,6 @@ import javax.servlet.http.HttpServletResponse;
 import lepartycious.Error.Error;
 import lepartycious.dtos.requestDTOs.VenueDTO;
 import lepartycious.dtos.responseDTOs.LookUpDTO;
-import lepartycious.dtos.responseDTOs.WizardDTO;
 import lepartycious.services.WizardService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,39 +19,29 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/rest/secured/v1")
-public class WizardController {
+@RequestMapping("/api/rest/v1/wizard/venue")
+public class VenueWizardController {
 	
 	@Autowired
 	private WizardService wizardService;
 
-	@RequestMapping(value="/wizard/venue/save", method=RequestMethod.POST)
+	@RequestMapping(value="/save", method=RequestMethod.POST)
 	@ResponseStatus(HttpStatus.OK)
 	public void saveVenueDetails(@RequestBody VenueDTO venueDTO) throws Exception{
 		wizardService.saveVenueDetails(venueDTO);
 	}
 
-	@RequestMapping(value="/wizard/venue/lookup", method=RequestMethod.GET)
+	@RequestMapping(value="/lookup", method=RequestMethod.GET)
 	public LookUpDTO getVenuelookUp() throws Exception{
 		return wizardService.getVenuelookUp();
 
 	}
 	
-	@RequestMapping(value="/wizard/details", method=RequestMethod.GET)
-	public WizardDTO getWizardDetails(@RequestParam String username) throws Exception{
-		return wizardService.getWizardDetails(username);
+	@RequestMapping(value="/load", method=RequestMethod.GET)
+	public VenueDTO loadVenueWizard(@RequestParam String wizardName) throws Exception{
+		return wizardService.loadVenueWizard(wizardName);
 	}
 	
-	@RequestMapping(value="/wizard/populate", method=RequestMethod.GET)
-	public WizardDTO populateWizard(@RequestParam String wizardName, @RequestParam String wizardType) throws Exception{
-		return wizardService.populateWizard(wizardName, wizardType);
-	}
-	
-	@RequestMapping(value="/wizard/loadLocalities", method=RequestMethod.GET)
-	public Map<Long, String> getLocalities(@RequestParam Long cityId) throws Exception{
-		return wizardService.getLocalities(cityId);
-	}
-
 	@ExceptionHandler(Exception.class)
 	public Error handleGenericError(HttpServletRequest req, HttpServletResponse response, Exception exception){
 		Error error = new Error();
