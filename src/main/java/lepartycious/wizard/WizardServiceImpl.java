@@ -1,4 +1,4 @@
-package lepartycious.services.implementations;
+package lepartycious.wizard;
 
 import java.util.HashMap;
 import java.util.List;
@@ -6,7 +6,6 @@ import java.util.Map;
 
 import lepartycious.daos.CommonDAO;
 import lepartycious.models.Locality;
-import lepartycious.services.WizardService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 

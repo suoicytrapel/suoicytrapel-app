@@ -120,4 +120,17 @@ public class CatererDAOImpl extends BaseDAOImpl implements CatererDAO {
 		return catererList;
 	}
 
+	@Override
+	public Caterer loadCatererByName(String wizardName) {
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Caterer.class);
+		criteria.add(Restrictions.eq("name", wizardName));
+		List<Caterer> caterers = criteria.list();
+		if(CollectionUtils.isEmpty(caterers)){
+			return null;
+		}
+		else {
+			return caterers.get(0);
+		}
+	}
+
 }

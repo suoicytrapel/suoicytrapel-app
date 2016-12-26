@@ -1,4 +1,4 @@
-package lepartycious.services;
+package lepartycious.wizard;
 
 import java.util.Map;
 

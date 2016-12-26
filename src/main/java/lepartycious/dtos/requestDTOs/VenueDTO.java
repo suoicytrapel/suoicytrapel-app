@@ -22,7 +22,7 @@ public class VenueDTO implements Serializable{
 	private List<Long> basicVenueServices;
 	private List<VenueRoomsDTO> venueRooms;
 	private List<VenuePackagesDTO> venuePackages;
-	private List<EntityFiltersDTO> venueEstTypeFilters;
+	private List<Long> venueEstTypeFilters;
 	private Long userId;
 	private long establishmentFilterId;
 	private List<AttachmentDTO> vendorAttachments;
@@ -221,12 +221,6 @@ public class VenueDTO implements Serializable{
 			List<EntityServicesDTO> additionalVenueServices) {
 		this.additionalVenueServices = additionalVenueServices;
 	}
-	public List<EntityFiltersDTO> getVenueEstTypeFilters() {
-		return venueEstTypeFilters;
-	}
-	public void setVenueEstTypeFilters(List<EntityFiltersDTO> venueEstTypeFilters) {
-		this.venueEstTypeFilters = venueEstTypeFilters;
-	}
 	public List<Long> getBasicCateringServices() {
 		return basicCateringServices;
 	}
@@ -250,5 +244,11 @@ public class VenueDTO implements Serializable{
 	}
 	public void setVenueId(Long venueId) {
 		this.venueId = venueId;
+	}
+	public List<Long> getVenueEstTypeFilters() {
+		return venueEstTypeFilters;
+	}
+	public void setVenueEstTypeFilters(List<Long> venueEstTypeFilters) {
+		this.venueEstTypeFilters = venueEstTypeFilters;
 	}
 }

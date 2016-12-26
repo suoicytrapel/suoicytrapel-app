@@ -1,4 +1,4 @@
-package lepartycious.services;
+package lepartycious.wizard.entertainment;
 
 import lepartycious.dtos.requestDTOs.VenueDTO;
 import lepartycious.dtos.responseDTOs.LookUpDTO;
@@ -6,7 +6,7 @@ import lepartycious.dtos.responseDTOs.LookUpDTO;
 import org.springframework.transaction.annotation.Transactional;
 
 @Transactional(readOnly=true)
-public interface VenueWizardService {
+public interface EntertainmentWizardService {
 
 	@Transactional(readOnly=false)
 	void saveVenueDetails(VenueDTO venueDTO);

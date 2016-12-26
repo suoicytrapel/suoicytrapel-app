@@ -18,7 +18,7 @@ public class CatererDTO implements Serializable{
 	private String refundPolicy;
 	private String servingSince;
 	private Boolean isPureVeg;
-	private String startingPrice;
+	private String startingPriceVeg;
 	private String maxCapacity;
 	private String minCapacity;
 	private String startingPriceNonVeg;
@@ -30,8 +30,47 @@ public class CatererDTO implements Serializable{
 	private String informationProviderContactNo;
 	private String informationProviderName;
 	private List<Long> cuisines;
+	private List<Long> catererType;
+	private List<Long> catererPrice;
+	private List<Long> catererEvent;
+	private List<Long> catererCapacity;
 	private String website;
+	private Long catererId;
 	
+	public CatererDTO() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	public CatererDTO(String name, String description, Long city,
+			Long locality, Long priority, String bookingPolicy,
+			String refundPolicy, String servingSince, String startingPriceVeg,
+			String maxCapacity, String minCapacity, String startingPriceNonVeg,
+			String informationProviderContactNo,
+			String informationProviderName, String website, Long catererId) {
+		super();
+		this.name = name;
+		this.description = description;
+		this.city = city;
+		this.locality = locality;
+		this.priority = priority;
+		this.bookingPolicy = bookingPolicy;
+		this.refundPolicy = refundPolicy;
+		this.servingSince = servingSince;
+		this.startingPriceVeg = startingPriceVeg;
+		this.maxCapacity = maxCapacity;
+		this.minCapacity = minCapacity;
+		this.startingPriceNonVeg = startingPriceNonVeg;
+		this.informationProviderContactNo = informationProviderContactNo;
+		this.informationProviderName = informationProviderName;
+		this.website = website;
+		this.catererId = catererId;
+	}
+	public Long getCatererId() {
+		return catererId;
+	}
+	public void setCatererId(Long catererId) {
+		this.catererId = catererId;
+	}
 	public String getWebsite() {
 		return website;
 	}
@@ -112,12 +151,6 @@ public class CatererDTO implements Serializable{
 	public void setIsPureVeg(Boolean isPureVeg) {
 		this.isPureVeg = isPureVeg;
 	}
-	public String getStartingPrice() {
-		return startingPrice;
-	}
-	public void setStartingPrice(String startingPrice) {
-		this.startingPrice = startingPrice;
-	}
 	public String getMaxCapacity() {
 		return maxCapacity;
 	}
@@ -165,5 +198,35 @@ public class CatererDTO implements Serializable{
 	}
 	public void setCatererServices(List<Long> catererServices) {
 		this.catererServices = catererServices;
+	}
+	public String getStartingPriceVeg() {
+		return startingPriceVeg;
+	}
+	public void setStartingPriceVeg(String startingPriceVeg) {
+		this.startingPriceVeg = startingPriceVeg;
+	}
+	public List<Long> getCatererType() {
+		return catererType;
+	}
+	public void setCatererType(List<Long> catererType) {
+		this.catererType = catererType;
+	}
+	public List<Long> getCatererPrice() {
+		return catererPrice;
+	}
+	public void setCatererPrice(List<Long> catererPrice) {
+		this.catererPrice = catererPrice;
+	}
+	public List<Long> getCatererEvent() {
+		return catererEvent;
+	}
+	public void setCatererEvent(List<Long> catererEvent) {
+		this.catererEvent = catererEvent;
+	}
+	public List<Long> getCatererCapacity() {
+		return catererCapacity;
+	}
+	public void setCatererCapacity(List<Long> catererCapacity) {
+		this.catererCapacity = catererCapacity;
 	}
 }

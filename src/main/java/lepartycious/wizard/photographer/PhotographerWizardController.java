@@ -1,16 +1,12 @@
-package lepartycious.controllers.wizard.venue;
+package lepartycious.wizard.photographer;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import lepartycious.Enums.UserTypeEnum;
 import lepartycious.Error.Error;
 import lepartycious.dtos.requestDTOs.VenueDTO;
 import lepartycious.dtos.responseDTOs.LookUpDTO;
 import lepartycious.models.User;
-import lepartycious.services.VenueWizardService;
-import lepartycious.services.WizardService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -24,10 +20,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/rest/secured/v1/wizard/venue")
-public class VenueWizardController {
+public class PhotographerWizardController {
 	
 	@Autowired
-	private VenueWizardService venueWizardService;
+	private PhotographerWizardService venueWizardService;
 
 	@RequestMapping(value="/save", method=RequestMethod.POST)
 	@ResponseStatus(HttpStatus.OK)

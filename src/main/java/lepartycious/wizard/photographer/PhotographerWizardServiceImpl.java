@@ -1,4 +1,4 @@
-package lepartycious.services.implementations;
+package lepartycious.wizard.photographer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,14 +33,14 @@ import lepartycious.models.VenueAmenities;
 import lepartycious.models.VenueRooms;
 import lepartycious.services.EmailService;
 import lepartycious.services.SecurityUserDetailsService;
-import lepartycious.services.VenueWizardService;
+import lepartycious.util.EmailTemplateUtil;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 @org.springframework.stereotype.Service
-public class VenueWizardServiceImpl implements VenueWizardService {
+public class PhotographerWizardServiceImpl implements PhotographerWizardService {
 
 	@Autowired
 	private WizardDAO wizardDAO;
@@ -56,7 +56,7 @@ public class VenueWizardServiceImpl implements VenueWizardService {
 	
 	@Autowired
     private EmailService emailService;
-
+	
 	@Override
 	public void saveVenueDetails(VenueDTO venueDTO) {
 		User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -81,7 +81,6 @@ public class VenueWizardServiceImpl implements VenueWizardService {
 		List<EntityServicesDTO> venueServiceDTOList = new ArrayList<EntityServicesDTO>();
 		venueServiceDTOList.addAll(venueDTO.getAdditionalVenueServices());
 		List<EntityFiltersDTO> entityFilterDTOList = new ArrayList<EntityFiltersDTO>();
-		entityFilterDTOList.addAll(venueDTO.getVenueEstTypeFilters());
 
 		City city = (City) wizardDAO.getObjectById(venueDTO.getCity(), City.class);
 		Locality locality = (Locality) wizardDAO.getObjectById(venueDTO.getLocality(), Locality.class);
@@ -254,7 +253,6 @@ public class VenueWizardServiceImpl implements VenueWizardService {
 		data.setPolicyServiceLookUp(policyServicelookUp);
 		data.setCuisinesLookUp(cuisinesLookUp);
 		data.setRoomLookUpMap(roomLookUpMap);
-		data.setTypeLookUp(typeLookUp);
 		return data;
 	}
 
@@ -365,7 +363,6 @@ public class VenueWizardServiceImpl implements VenueWizardService {
 		venueDTO.setAddresses(addressesDTO);
 		venueDTO.setVendorAttachments(vendorAttachments);
 		venueDTO.setMenuAttachments(menuAttachments);
-		venueDTO.setVenueEstTypeFilters(venueEstTypeFilters);
 		venueDTO.setBasicVenueServices(basicVenueServices);
 		venueDTO.setBasicCateringServices(basicCateringServices);
 		venueDTO.setPolicyVenueServices(policyVenueServices);
@@ -380,36 +377,17 @@ public class VenueWizardServiceImpl implements VenueWizardService {
 	private void sendApprovalMailToAdmin(Venue savedVenue, User user) {
 		String mailFrom = "no-reply@gmail.com";
 		String mailSubject = "Approval Request:New Vendor Registeration";
-		String mailContent = generateMailContentForAdmin(savedVenue);
+		String mailContent = EmailTemplateUtil.generateMailContentForAdmin(savedVenue.getName(), "Venue");
 		emailService.sendMail("mohitsingla2256@gmail.com", mailFrom, mailSubject, mailContent);
 	}
 
 	private void sendNotificationMailToUser(Venue savedVenue, User user) {
 		String mailFrom = "no-reply@gmail.com";
 		String mailSubject = "Vendor Registeration Request";
-		String mailContent = generateMailContentForUser(savedVenue, user);
+		String mailContent = EmailTemplateUtil.generateMailContentForUser(user);
 		emailService.sendMail(user.getEmail(), mailFrom, mailSubject, mailContent);
 	}
 	
-	private String generateMailContentForUser(Venue savedVenue,User user){
-		StringBuffer sbf = new StringBuffer();
-		sbf.append("Hi " + user.getName() +",<br>We have recieved a new registeration request from your end.<br>");
-		sbf.append("Please sit back and relax while Lepartycious team review this request. We will notify you once the request is approved.<br>");
-		sbf.append("<br><br>Cheers,<br>Lepartycious Team");
-		return sbf.toString();
-	}
-	
-	private String generateMailContentForAdmin(Venue savedVenue){
-		StringBuffer sbf = new StringBuffer();
-		sbf.append("Hi Admin,<br>A new vendor request for approval has reached to your dashboard.<br>");
-		sbf.append("Vendor Name:" + savedVenue.getName() + "<br>");
-		sbf.append("Vendor Type: Venue <br>");
-		sbf.append("Venue Category:" + savedVenue.getType() + "<br>");
-		sbf.append("Please login to the application and visit dashboard for more details.<br>");
-		sbf.append("<br><br>Cheers,<br>Lepartycious Team");
-		return sbf.toString();
-	}
-
 	@Override
 	public void updateVenueActivationStatus(String action, Long venueId,
 			String actionComments) throws Exception {
@@ -443,23 +421,9 @@ public class VenueWizardServiceImpl implements VenueWizardService {
 		else{
 			mailSubject = "Alas! Venor Registeration Request has been Rejected";
 		}
-		String mailContent = generateMailContentForAction(actionComments, user, action);
+		String mailContent = EmailTemplateUtil.generateMailContentForAction(actionComments, user, action);
 		emailService.sendMail(user.getEmail(), mailFrom, mailSubject, mailContent);
 		
-	}
-
-	private String generateMailContentForAction(String actionComments, User user, String action) {
-		StringBuffer sbf = new StringBuffer();
-		if("APPROVED".equalsIgnoreCase(action)){
-			sbf.append("Hi " + user.getName() +",<br>\nYour Vendor has been added Successfully.<br>");
-		}
-		else{
-			sbf.append("Hi " + user.getName() +",<br>\nYour Vendor registeration request has been rejected because of below reason :-<br>");
-			sbf.append("Rejection Reason:" + actionComments);
-			sbf.append("Please visit the application, rectify the details and re-submit the registeration");
-			sbf.append("<br><br>Cheers,<br>Lepartycious Team");
-		}
-		return sbf.toString();
 	}
 
 }

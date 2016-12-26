@@ -1,13 +1,10 @@
-package lepartycious.controllers.wizard;
+package lepartycious.wizard;
 
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import lepartycious.Error.Error;
-import lepartycious.services.WizardService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;

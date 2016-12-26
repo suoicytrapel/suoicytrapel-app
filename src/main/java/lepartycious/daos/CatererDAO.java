@@ -18,4 +18,6 @@ public interface CatererDAO extends BaseDAO{
 	
 	public List<Caterer> fetchRecomendations(Long cityId);
 
+	public Caterer loadCatererByName(String wizardName);
+
 }

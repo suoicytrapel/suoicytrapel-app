@@ -91,6 +91,16 @@
 			insert into service (service_type, service_for_entity, tab_data_name, filter_data_name, is_filter, added_on) values ('SERVICE', 'DECORATOR', 'Event Lighting', null, false, now());
 			insert into service (service_type, service_for_entity, tab_data_name, filter_data_name, is_filter, added_on) values ('SERVICE', 'DECORATOR', 'Ground Lighting', null, false, now());
 			insert into service (service_type, service_for_entity, tab_data_name, filter_data_name, is_filter, added_on) values ('SERVICE', 'DECORATOR', 'Backdrops', null, false, now());
+			insert into service (service_type, service_for_entity, tab_data_name, filter_data_name, is_filter, added_on, category) values ('SERVICE', 'VENUE', 'Indian', null, false, now(), 'CUISINE');
+			insert into service (service_type, service_for_entity, tab_data_name, filter_data_name, is_filter, added_on, category) values ('SERVICE', 'VENUE', 'Continental', null, false, now(), 'CUISINE');
+			insert into service (service_type, service_for_entity, tab_data_name, filter_data_name, is_filter, added_on, category) values ('SERVICE', 'VENUE', 'Chinese', null, false, now(), 'CUISINE');
+			insert into service (service_type, service_for_entity, tab_data_name, filter_data_name, is_filter, added_on, category) values ('SERVICE', 'VENUE', 'Mexican', null, false, now(), 'CUISINE');
+			insert into service (service_type, service_for_entity, tab_data_name, filter_data_name, is_filter, added_on, category) values ('SERVICE', 'VENUE', 'Thai', null, false, now(), 'CUISINE');
+			insert into service (service_type, service_for_entity, tab_data_name, filter_data_name, is_filter, added_on, category) values ('SERVICE', 'CATERER', 'Indian', null, false, now(), 'CUISINE');
+			insert into service (service_type, service_for_entity, tab_data_name, filter_data_name, is_filter, added_on, category) values ('SERVICE', 'CATERER', 'Continental', null, false, now(), 'CUISINE');
+			insert into service (service_type, service_for_entity, tab_data_name, filter_data_name, is_filter, added_on, category) values ('SERVICE', 'CATERER', 'Chinese', null, false, now(), 'CUISINE');
+			insert into service (service_type, service_for_entity, tab_data_name, filter_data_name, is_filter, added_on, category) values ('SERVICE', 'CATERER', 'Mexican', null, false, now(), 'CUISINE');
+			insert into service (service_type, service_for_entity, tab_data_name, filter_data_name, is_filter, added_on, category) values ('SERVICE', 'CATERER', 'Thai', null, false, now(), 'CUISINE');
 		</sql>
     </changeSet>
     
