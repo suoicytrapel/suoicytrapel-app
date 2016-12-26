@@ -8,9 +8,12 @@ import lepartycious.Enums.UserTypeEnum;
 import lepartycious.Enums.VendorTypeEnum;
 import lepartycious.daos.CommonDAO;
 import lepartycious.daos.UserDAO;
+import lepartycious.daos.VenueDAO;
+import lepartycious.daos.implementations.VenueDAOImpl;
 import lepartycious.dtos.requestDTOs.ContactRequestDTO;
 import lepartycious.dtos.requestDTOs.UserRequestDTO;
 import lepartycious.models.User;
+import lepartycious.models.Venue;
 import lepartycious.services.CommonService;
 import lepartycious.services.EmailService;
 import lepartycious.services.SecurityUserDetailsService;
@@ -45,6 +48,9 @@ public class SecurityUserDetailsServiceImpl implements SecurityUserDetailsServic
     
     @Autowired
     private CommonService commonService;
+    
+    @Autowired
+    private VenueDAO venueDAO;
 
     @Override
     public User loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -177,13 +183,15 @@ public class SecurityUserDetailsServiceImpl implements SecurityUserDetailsServic
 	@Override
 	public UserRequestDTO getLoggedInUser(String userType, Boolean isAppUser) throws Exception {
 		User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		Venue venue = venueDAO.loadVenueByUserId(user.getUserId());
+		String vendorName = venue != null ? venue.getName() : user.getVendorName();
 		if(user.getIsAppUser()==isAppUser && user.getUserRole().equalsIgnoreCase(userType)){
 			UserRequestDTO userRequestDTO = new UserRequestDTO();
 			userRequestDTO.setName(user.getName());
 			userRequestDTO.setUserRole(user.getUserRole());
 			userRequestDTO.setEmail(user.getEmail());
 			userRequestDTO.setVendorType(user.getVendorType());
-			userRequestDTO.setEntityName(user.getVendorName());
+			userRequestDTO.setEntityName(vendorName);
 			return userRequestDTO;
 		}
 		else{

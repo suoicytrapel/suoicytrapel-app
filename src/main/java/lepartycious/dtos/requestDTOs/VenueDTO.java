@@ -35,6 +35,7 @@ public class VenueDTO implements Serializable{
 	private String informationProviderContactNo;
 	private String informationProviderName;
 	private String website;
+	private Long venueId;
 	
 	public VenueDTO(String venueName, String venueDescription,
 			String venueType, Long city, Long locality, Long priority,
@@ -243,5 +244,11 @@ public class VenueDTO implements Serializable{
 	}
 	public void setEstablishmentFilterId(long establishmentFilterId) {
 		this.establishmentFilterId = establishmentFilterId;
+	}
+	public Long getVenueId() {
+		return venueId;
+	}
+	public void setVenueId(Long venueId) {
+		this.venueId = venueId;
 	}
 }
